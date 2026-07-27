@@ -32,22 +32,22 @@ class LargeLeadingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: .circular(borderRadius),
       onTap: disabled ? null : onTap,
       child: Container(
         decoration: BoxDecoration(
           color: selected
               ? selectedTileColor ?? Theme.of(context).primaryColor.withAlpha(30)
               : tileColor ?? Colors.transparent,
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: .circular(borderRadius),
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: .center,
           children: [
             Padding(padding: leadingPadding, child: leading),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   SizedBox(width: context.width * 0.6, child: title),
                   subtitle ?? const SizedBox.shrink(),

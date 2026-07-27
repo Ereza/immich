@@ -131,19 +131,13 @@ class DriftRemoteAlbumOption extends ConsumerWidget {
         backgroundColor: WidgetStatePropertyAll(theme.scaffoldBackgroundColor),
         surfaceTintColor: const WidgetStatePropertyAll(Colors.grey),
         elevation: const WidgetStatePropertyAll(4),
-        shape: const WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-        ),
+        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: .all(.circular(12)))),
         padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 6)),
       ),
       menuChildren: [
         ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 150),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: menuChildren,
-          ),
+          child: Column(mainAxisSize: .min, crossAxisAlignment: .stretch, children: menuChildren),
         ),
       ],
       builder: (context, controller, child) {

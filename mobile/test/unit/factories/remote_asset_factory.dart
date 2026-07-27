@@ -10,7 +10,7 @@ class RemoteAssetFactory {
     String? name,
     String? ownerId,
     bool isFavorite = false,
-    AssetVisibility visibility = AssetVisibility.timeline,
+    AssetVisibility visibility = .timeline,
     String? stackId,
   }) {
     id = TestUtils.uuid(id);

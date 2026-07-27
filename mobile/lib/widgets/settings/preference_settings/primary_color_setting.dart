@@ -47,20 +47,20 @@ class PrimaryColorSetting extends HookConsumerWidget {
       required bool showSelector,
     }) {
       return Container(
-        margin: const EdgeInsets.all(4.0),
+        margin: const .all(4.0),
         child: Stack(
           children: [
             Container(
               height: tileSize,
               width: tileSize,
-              decoration: BoxDecoration(color: bottomColor, borderRadius: const BorderRadius.all(Radius.circular(100))),
+              decoration: BoxDecoration(color: bottomColor, borderRadius: const .all(.circular(100))),
             ),
             Container(
               height: tileSize / 2,
               width: tileSize,
               decoration: BoxDecoration(
                 color: topColor,
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
+                borderRadius: const .only(topLeft: .circular(100), topRight: .circular(100)),
               ),
             ),
             if (showSelector)
@@ -71,11 +71,11 @@ class PrimaryColorSetting extends HookConsumerWidget {
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(100)),
+                    borderRadius: const .all(.circular(100)),
                     color: Colors.grey[900]?.withValues(alpha: .4),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.all(3),
+                    padding: .all(3),
                     child: Icon(Icons.check_rounded, color: Colors.white, size: 25),
                   ),
                 ),
@@ -87,25 +87,25 @@ class PrimaryColorSetting extends HookConsumerWidget {
 
     bottomSheetContent() {
       return Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Align(
-            alignment: Alignment.center,
+            alignment: .center,
             child: Text("theme_setting_primary_color_title".tr(), style: context.textTheme.titleLarge),
           ),
           if (DynamicTheme.isAvailable)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.only(top: 10),
+              padding: const .symmetric(horizontal: 20),
+              margin: const .only(top: 10),
               child: SwitchListTile.adaptive(
-                contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                contentPadding: const .symmetric(vertical: 6, horizontal: 20),
                 dense: true,
                 activeThumbColor: context.primaryColor,
                 tileColor: context.colorScheme.surfaceContainerHigh,
-                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+                shape: const RoundedRectangleBorder(borderRadius: .all(.circular(15))),
                 title: Text(
                   'theme_setting_system_primary_color_title'.tr(),
-                  style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500, height: 1.5),
+                  style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500, height: 1.5),
                 ),
                 value: themeConfig.dynamicTheme,
                 onChanged: onUseSystemColorChange,
@@ -113,9 +113,9 @@ class PrimaryColorSetting extends HookConsumerWidget {
             ),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const .symmetric(horizontal: 20),
             child: Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
+              crossAxisAlignment: .center,
               children: ImmichColorPreset.values.map((preset) {
                 final theme = preset.themeOfPreset;
 
@@ -140,19 +140,19 @@ class PrimaryColorSetting extends HookConsumerWidget {
         context: context,
         isScrollControlled: true,
         builder: (BuildContext ctx) {
-          return Padding(padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0), child: bottomSheetContent());
+          return Padding(padding: const .symmetric(vertical: 30, horizontal: 0), child: bottomSheetContent());
         },
       ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: const .symmetric(horizontal: 20),
       title: Row(
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: .start,
               children: [
                 Text(
                   "theme_setting_primary_color_title".tr(),
-                  style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+                  style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500),
                 ),
                 Text(
                   "theme_setting_primary_color_subtitle".tr(),
@@ -162,7 +162,7 @@ class PrimaryColorSetting extends HookConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+            padding: const .symmetric(vertical: 5.0, horizontal: 8.0),
             child: buildPrimaryColorTile(
               topColor: themeProvider.light.primary,
               bottomColor: themeProvider.dark.primary,

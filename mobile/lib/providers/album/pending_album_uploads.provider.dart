@@ -9,7 +9,7 @@ class PendingAlbumUpload {
   const PendingAlbumUpload({required this.asset, this.progress = 0.0, this.failed = false});
 
   PendingAlbumUpload copyWith({double? progress, bool? failed}) =>
-      PendingAlbumUpload(asset: asset, progress: progress ?? this.progress, failed: failed ?? this.failed);
+      .new(asset: asset, progress: progress ?? this.progress, failed: failed ?? this.failed);
 }
 
 class AlbumPendingUploadsNotifier extends AutoDisposeFamilyNotifier<List<PendingAlbumUpload>, String> {

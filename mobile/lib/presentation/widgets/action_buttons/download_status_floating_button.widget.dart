@@ -25,7 +25,7 @@ class DownloadStatusFloatingButton extends ConsumerWidget {
             backgroundColor: context.colorScheme.primary,
             child: FloatingActionButton(
               shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                borderRadius: const .all(.circular(20)),
                 side: BorderSide(color: context.colorScheme.outlineVariant, width: 1),
               ),
               backgroundColor: context.isDarkTheme
@@ -36,7 +36,7 @@ class DownloadStatusFloatingButton extends ConsumerWidget {
                 context.pushRoute(const DownloadInfoRoute());
               },
               child: Stack(
-                alignment: AlignmentDirectional.center,
+                alignment: .center,
                 children: [
                   isDownloading
                       ? Icon(Icons.downloading_rounded, color: context.colorScheme.primary, size: 28)

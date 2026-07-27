@@ -18,20 +18,20 @@ class DriftMemoryBottomInfo extends StatelessWidget {
     final df = DateFormat.yMMMMd();
     final fileCreatedDate = memory.assets.first.createdAt;
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const .all(16.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: .spaceBetween,
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Text(
                 title,
-                style: TextStyle(color: Colors.grey[400], fontSize: 13.0, fontWeight: FontWeight.w500),
+                style: TextStyle(color: Colors.grey[400], fontSize: 13.0, fontWeight: .w500),
               ),
               Text(
                 df.format(fileCreatedDate.toLocal()),
-                style: const TextStyle(color: Colors.white, fontSize: 15.0, fontWeight: FontWeight.w500),
+                style: const TextStyle(color: Colors.white, fontSize: 15.0, fontWeight: .w500),
               ),
             ],
           ),

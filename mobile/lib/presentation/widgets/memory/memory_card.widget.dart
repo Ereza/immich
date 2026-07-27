@@ -30,10 +30,10 @@ class DriftMemoryCard extends StatelessWidget {
     return Card(
       color: Colors.black,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+        borderRadius: .all(.circular(25.0)),
         side: BorderSide(color: Colors.black, width: 1.0),
       ),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: .hardEdge,
       child: Stack(
         children: [
           SizedBox.expand(child: _BlurredBackdrop(asset: asset)),
@@ -44,18 +44,18 @@ class DriftMemoryCard extends StatelessWidget {
                   : constraints.maxWidth / constraints.maxHeight;
 
               // Determine the fit using the aspect ratio
-              BoxFit fit = BoxFit.contain;
+              BoxFit fit = .contain;
               if (asset.width != null && asset.height != null) {
                 final phoneAspectRatio = constraints.maxWidth / constraints.maxHeight;
                 // Look for a 25% difference in either direction
                 if (phoneAspectRatio * .75 < r && phoneAspectRatio * 1.25 > r) {
                   // Cover to look nice if we have nearly the same aspect ratio
-                  fit = BoxFit.cover;
+                  fit = .cover;
                 }
               }
 
               if (asset.isImage) {
-                return FullImage(asset, fit: fit, size: const Size(double.infinity, double.infinity));
+                return FullImage(asset, fit: fit, size: const Size(.infinity, .infinity));
               }
 
               return Center(
@@ -66,7 +66,7 @@ class DriftMemoryCard extends StatelessWidget {
                     asset: asset,
                     isCurrent: isCurrent,
                     showControls: false,
-                    image: FullImage(asset, size: context.sizeData, fit: BoxFit.contain),
+                    image: FullImage(asset, size: context.sizeData, fit: .contain),
                   ),
                 ),
               );
@@ -78,7 +78,7 @@ class DriftMemoryCard extends StatelessWidget {
               bottom: 18.0,
               child: Text(
                 title,
-                style: context.textTheme.headlineMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.w500),
+                style: context.textTheme.headlineMedium?.copyWith(color: Colors.white, fontWeight: .w500),
               ),
             ),
         ],
@@ -99,7 +99,7 @@ class _BlurredBackdrop extends HookWidget {
       // Use a nice cheap blur hash image decoration
       return Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: MemoryImage(blurhash), fit: BoxFit.cover),
+          image: DecorationImage(image: MemoryImage(blurhash), fit: .cover),
         ),
         child: Container(color: Colors.black.withValues(alpha: 0.2)),
       );
@@ -113,7 +113,7 @@ class _BlurredBackdrop extends HookWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: getFullImageProvider(asset, size: Size(context.width, context.height)),
-              fit: BoxFit.cover,
+              fit: .cover,
             ),
           ),
           child: Container(color: Colors.black.withValues(alpha: 0.2)),

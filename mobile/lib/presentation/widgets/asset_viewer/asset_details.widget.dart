@@ -25,7 +25,7 @@ class AssetDetails extends ConsumerWidget {
       constraints: BoxConstraints(minHeight: minHeight),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: const .vertical(top: .circular(20)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.2),
@@ -38,7 +38,7 @@ class AssetDetails extends ConsumerWidget {
       child: SafeArea(
         top: false,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             const DragHandle(),
             DateTimeDetails(asset: asset, exifInfo: exifInfo),

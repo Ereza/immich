@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/events.model.dart';
-import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/domain/utils/event_stream.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/scroll_extensions.dart';
@@ -55,7 +54,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
   double _snapOffset = 0.0;
 
   DragStartDetails? _dragStart;
-  _DragIntent _dragIntent = _DragIntent.none;
+  _DragIntent _dragIntent = .none;
   Drag? _drag;
 
   BaseAsset? _asset;
@@ -139,7 +138,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
     }
 
     if (_showingDetails) {
-      _dragIntent = _DragIntent.scroll;
+      _dragIntent = .scroll;
       _startProxyDrag();
     }
   }
@@ -155,24 +154,24 @@ class _AssetPageState extends ConsumerState<AssetPage> {
       return;
     }
 
-    if (_dragIntent == _DragIntent.none) {
+    if (_dragIntent == .none) {
       _dragIntent = switch ((details.globalPosition - _dragStart!.globalPosition).dy) {
-        < 0 => _DragIntent.scroll,
-        > 0 => _DragIntent.dismiss,
-        _ => _DragIntent.none,
+        < 0 => .scroll,
+        > 0 => .dismiss,
+        _ => .none,
       };
     }
 
     switch (_dragIntent) {
-      case _DragIntent.none:
-      case _DragIntent.scroll:
+      case .none:
+      case .scroll:
         if (_drag == null) {
           _startProxyDrag();
         }
         _drag?.update(details);
 
         _syncShowingDetails();
-      case _DragIntent.dismiss:
+      case .dismiss:
         _handleDragDown(context, details.localPosition - _dragStart!.localPosition);
     }
   }
@@ -186,17 +185,17 @@ class _AssetPageState extends ConsumerState<AssetPage> {
     _dragStart = null;
 
     final intent = _dragIntent;
-    _dragIntent = _DragIntent.none;
+    _dragIntent = .none;
 
     switch (intent) {
-      case _DragIntent.none:
-      case _DragIntent.scroll:
+      case .none:
+      case .scroll:
         final scrollVelocity = -(details.primaryVelocity ?? 0.0);
         _viewer.setShowingDetails(!_willClose(scrollVelocity));
 
         _drag?.end(details);
         _drag = null;
-      case _DragIntent.dismiss:
+      case .dismiss:
         const popThreshold = 75.0;
         if (details.localPosition.dy - start!.localPosition.dy > popThreshold) {
           context.maybePop();
@@ -276,10 +275,10 @@ class _AssetPageState extends ConsumerState<AssetPage> {
       ref.read(isPlayingMotionVideoProvider.notifier).playing = true;
 
   void _onScaleStateChanged(PhotoViewScaleState scaleState) {
-    _isZoomed = scaleState == PhotoViewScaleState.zoomedIn || scaleState == PhotoViewScaleState.covering;
+    _isZoomed = scaleState == .zoomedIn || scaleState == .covering;
     _viewer.setZoomed(_isZoomed);
 
-    if (scaleState != PhotoViewScaleState.initial) {
+    if (scaleState != .initial) {
       if (_dragStart == null) {
         _viewer.setControls(false);
       }
@@ -345,7 +344,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
         heroAttributes: heroAttributes,
         loadingBuilder: (context, progress, index) => const Center(child: ImmichLoadingIndicator()),
         gaplessPlayback: true,
-        filterQuality: FilterQuality.high,
+        filterQuality: .high,
         tightMode: true,
         enablePanAlways: true,
         disableScaleGestures: _showingDetails,
@@ -360,7 +359,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
         errorBuilder: (_, __, ___) => SizedBox(
           width: size.width,
           height: size.height,
-          child: Thumbnail.fromAsset(asset: asset, fit: BoxFit.contain),
+          child: Thumbnail.fromAsset(asset: asset, fit: .contain),
         ),
       );
     }
@@ -377,8 +376,8 @@ class _AssetPageState extends ConsumerState<AssetPage> {
       onTapUp: _onTapUp,
       scaleStateChangedCallback: _onScaleStateChanged,
       heroAttributes: heroAttributes,
-      filterQuality: FilterQuality.high,
-      basePosition: Alignment.center,
+      filterQuality: .high,
+      basePosition: .center,
       disableScaleGestures: _showingDetails,
       minScale: PhotoViewComputedScale.contained,
       initialScale: PhotoViewComputedScale.contained,
@@ -390,7 +389,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
         asset: asset,
         localFilePath: localFilePath,
         isCurrent: isCurrent,
-        image: Image(image: imageProvider, fit: BoxFit.contain, alignment: Alignment.center),
+        image: Image(image: imageProvider, fit: .contain, alignment: .center),
       ),
     );
   }
@@ -410,7 +409,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
     }
 
     BaseAsset displayAsset = asset;
-    final showAssetStack = ref.watch(timelineServiceProvider.select((s) => s.origin != TimelineOrigin.trash));
+    final showAssetStack = ref.watch(timelineServiceProvider.select((s) => s.origin != .trash));
     final stackChildren = showAssetStack ? ref.watch(stackChildrenNotifier(asset)).valueOrNull : null;
     if (stackChildren != null && stackChildren.isNotEmpty) {
       final safeStackIndex = stackIndex.clamp(0, stackChildren.length - 1);
@@ -432,7 +431,7 @@ class _AssetPageState extends ConsumerState<AssetPage> {
       _scrollController.snapPosition.snapOffset = _snapOffset;
     }
 
-    final viewIntentFilePath = timelineOrigin == TimelineOrigin.deepLink ? ref.watch(viewIntentFilePathProvider) : null;
+    final viewIntentFilePath = timelineOrigin == .deepLink ? ref.watch(viewIntentFilePathProvider) : null;
 
     return Stack(
       children: [

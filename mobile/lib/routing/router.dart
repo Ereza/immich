@@ -112,7 +112,7 @@ class AppRouter extends RootStackRouter {
   }
 
   @override
-  RouteType get defaultRouteType => const RouteType.material();
+  RouteType get defaultRouteType => const .material();
 
   @override
   late final List<AutoRoute> routes = [

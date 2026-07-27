@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/domain/models/user.model.dart';
@@ -38,8 +37,8 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: "shared_album_section_people_action_error".t(context: context),
-        toastType: ToastType.error,
-        gravity: ToastGravity.BOTTOM,
+        toastType: .error,
+        gravity: .BOTTOM,
       );
     }
 
@@ -77,17 +76,13 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
           ImmichToast.show(
             context: context,
             msg: "users_added_to_album_count".t(context: context, args: {'count': newUsers.length}),
-            toastType: ToastType.success,
+            toastType: .success,
           );
         }
 
         ref.invalidate(remoteAlbumSharedUsersProvider(album.id));
       } catch (e) {
-        ImmichToast.show(
-          context: context,
-          msg: "Failed to add users to album: ${e.toString()}",
-          toastType: ToastType.error,
-        );
+        ImmichToast.show(context: context, msg: "Failed to add users to album: ${e.toString()}", toastType: .error);
       }
     }
 
@@ -121,8 +116,8 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
         builder: (context) {
           return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(top: 24.0),
-              child: Column(mainAxisSize: MainAxisSize.min, children: [...actions]),
+              padding: const .only(top: 24.0),
+              child: Column(mainAxisSize: .min, children: [...actions]),
             ),
           );
         },
@@ -134,7 +129,7 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
         final owner = ref.watch(currentUserProvider);
         return ListTile(
           leading: owner != null ? UserCircleAvatar(user: owner) : const SizedBox(),
-          title: Text(album.ownerName, style: const TextStyle(fontWeight: FontWeight.w500)),
+          title: Text(album.ownerName, style: const TextStyle(fontWeight: .w500)),
           subtitle: Text(owner?.email ?? "", style: TextStyle(color: context.colorScheme.onSurfaceSecondary)),
           trailing: Text("owner", style: context.textTheme.labelLarge).t(context: context),
         );
@@ -150,7 +145,7 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
 
             return ListTile(
               leading: UserCircleAvatar(user: user),
-              title: Text(user.name, style: const TextStyle(fontWeight: FontWeight.w500)),
+              title: Text(user.name, style: const TextStyle(fontWeight: .w500)),
               subtitle: Text(user.email, style: TextStyle(color: context.colorScheme.onSurfaceSecondary)),
               trailing: Text("owner", style: context.textTheme.labelLarge).t(context: context),
             );
@@ -170,7 +165,7 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
             final user = sharedUsers[index];
             return ListTile(
               leading: UserCircleAvatar(user: user),
-              title: Text(user.name, style: const TextStyle(fontWeight: FontWeight.w500)),
+              title: Text(user.name, style: const TextStyle(fontWeight: .w500)),
               subtitle: Text(user.email, style: TextStyle(color: context.colorScheme.onSurfaceSecondary)),
               trailing: userId == user.id || isOwner ? const Icon(Icons.more_horiz_rounded) : const SizedBox(),
               onTap: userId == user.id || isOwner ? () => handleUserClick(user) : null,
@@ -183,7 +178,7 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
 
     buildSectionTitle(String text) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const .all(16.0),
         child: Text(text, style: context.textTheme.bodySmall),
       );
     }
@@ -213,7 +208,7 @@ class DriftAlbumOptionsPage extends HookConsumerWidget {
                 dense: true,
                 title: Text(
                   "comments_and_likes",
-                  style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
+                  style: context.textTheme.titleMedium?.copyWith(fontWeight: .w500),
                 ).t(context: context),
                 subtitle: Text(
                   "let_others_respond",

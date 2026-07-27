@@ -39,7 +39,7 @@ class EditorProvider extends Notifier<EditorState> {
       flipVertical: transform.mirrorVertical,
     );
 
-    _animateRotation(transform.rotation.toInt(), duration: Duration.zero);
+    _animateRotation(transform.rotation.toInt(), duration: .zero);
   }
 
   void _animateRotation(int angle, {Duration duration = const Duration(milliseconds: 300)}) {
@@ -49,7 +49,7 @@ class EditorProvider extends Notifier<EditorState> {
   void normalizeRotation() {
     final normalizedAngle = ((state.rotationAngle % 360) + 360) % 360;
     if (normalizedAngle != state.rotationAngle) {
-      state = state.copyWith(rotationAngle: normalizedAngle, animationDuration: Duration.zero);
+      state = state.copyWith(rotationAngle: normalizedAngle, animationDuration: .zero);
     }
   }
 
@@ -72,7 +72,7 @@ class EditorProvider extends Notifier<EditorState> {
       flipHorizontal: false,
       flipVertical: false,
       crop: const Rect.fromLTRB(0, 0, 1, 1),
-      aspectRatio: CropAspectRatio.free,
+      aspectRatio: .free,
       hasUnsavedEdits: true,
     );
   }
@@ -137,11 +137,11 @@ class EditorState {
        rotationAngle = rotationAngle ?? 0,
        flipHorizontal = flipHorizontal ?? false,
        flipVertical = flipVertical ?? false,
-       animationDuration = animationDuration ?? Duration.zero,
+       animationDuration = animationDuration ?? .zero,
        originalWidth = originalWidth ?? 0,
        originalHeight = originalHeight ?? 0,
        crop = crop ?? const Rect.fromLTRB(0, 0, 1, 1),
-       aspectRatio = aspectRatio ?? CropAspectRatio.free,
+       aspectRatio = aspectRatio ?? .free,
        hasUnsavedEdits = hasUnsavedEdits ?? false;
 
   EditorState copyWith({

@@ -16,7 +16,7 @@ class WhatsNewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(centerTitle: false, title: Text(context.t.whats_new)),
       body: ListView.separated(
-        padding: const EdgeInsets.only(top: 16, bottom: 64),
+        padding: const .only(top: 16, bottom: 64),
         itemCount: highlights.length,
         separatorBuilder: (_, __) => const SizedBox(height: 24),
         itemBuilder: (_, index) => _HighlightCard(highlight: highlights[index]),
@@ -34,33 +34,33 @@ class _HighlightCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const .symmetric(horizontal: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           DecoratedBox(
             decoration: BoxDecoration(
               color: scheme.surfaceContainerHighest,
-              borderRadius: const BorderRadius.all(Radius.circular(18)),
-              border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.5)),
+              borderRadius: const .all(.circular(18)),
+              border: .all(color: scheme.outlineVariant.withValues(alpha: 0.5)),
             ),
             child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(18)),
+              borderRadius: const .all(.circular(18)),
               child: SizedBox(
-                width: double.infinity,
+                width: .infinity,
                 height: 256,
                 child: highlight.image == null
                     ? const FeatureMessagePlaceholder()
                     : Image.asset(
                         highlight.image!,
-                        fit: BoxFit.contain,
+                        fit: .contain,
                         errorBuilder: (context, _, __) => const FeatureMessagePlaceholder(),
                       ),
               ),
             ),
           ),
           const SizedBox(height: 12),
-          Text(highlight.titleKey.tr(), style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+          Text(highlight.titleKey.tr(), style: context.textTheme.titleMedium?.copyWith(fontWeight: .w600)),
           const SizedBox(height: 4),
           Text(
             highlight.bodyKey.tr(),

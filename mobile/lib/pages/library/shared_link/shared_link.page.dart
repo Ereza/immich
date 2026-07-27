@@ -29,8 +29,8 @@ class SharedLinkPage extends HookConsumerWidget {
     Widget buildNoShares() {
       return Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: .center,
+          mainAxisAlignment: .center,
           children: [
             Icon(Icons.link_off, size: 100, color: Theme.of(context).colorScheme.onSurface.withAlpha(128)),
             const SizedBox(height: 20),
@@ -51,13 +51,13 @@ class SharedLinkPage extends HookConsumerWidget {
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                 ),
-                padding: const EdgeInsets.all(12),
+                padding: const .all(12),
                 itemCount: links.length,
                 itemBuilder: (context, index) => SharedLinkItem(links[index]),
               )
             : ListView.separated(
                 key: const PageStorageKey('shared-links-list'),
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const .symmetric(vertical: 8),
                 itemCount: links.length,
                 itemBuilder: (context, index) => SharedLinkItem(links[index]),
                 separatorBuilder: (context, index) => const Divider(height: 1),

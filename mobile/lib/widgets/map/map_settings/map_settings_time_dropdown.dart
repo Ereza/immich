@@ -14,14 +14,14 @@ class MapTimeDropDown extends StatelessWidget {
     final now = DateTime.now();
 
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 28.0),
+      padding: const .only(left: 16, right: 28.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: .center,
+        mainAxisAlignment: .spaceBetween,
         children: [
           Text(
             "date_range".t(context: context),
-            style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, height: 1.5),
+            style: context.textTheme.bodyLarge!.copyWith(fontWeight: .w500, height: 1.5),
           ),
           Flexible(
             child: DropdownMenu(

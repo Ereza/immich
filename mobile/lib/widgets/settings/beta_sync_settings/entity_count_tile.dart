@@ -22,26 +22,26 @@ class EntityCountTile extends StatelessWidget {
     final maxDigits = ((availableWidth - 32) / charWidth).floor().clamp(1, 8);
 
     return Container(
-      height: double.infinity,
-      padding: const EdgeInsets.all(16),
+      height: .infinity,
+      padding: const .all(16),
       decoration: BoxDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-        border: Border.all(width: 0.5, color: context.colorScheme.outline.withAlpha(25)),
+        borderRadius: const .all(.circular(16)),
+        border: .all(width: 0.5, color: context.colorScheme.outline.withAlpha(25)),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: .center,
         children: [
           // Icon and Label
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: .center,
             children: [
               Icon(icon, color: context.primaryColor, size: 14),
               const SizedBox(width: 4),
               Flexible(
                 child: Text(
                   label,
-                  style: TextStyle(color: context.primaryColor, fontWeight: FontWeight.w500),
+                  style: TextStyle(color: context.primaryColor, fontWeight: .w500),
                 ),
               ),
             ],
@@ -49,7 +49,7 @@ class EntityCountTile extends StatelessWidget {
           // Number
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const .only(top: 8.0),
             child: RichText(
               text: TextSpan(
                 style: const TextStyle(fontSize: 18, fontFamily: 'GoogleSansCode'),

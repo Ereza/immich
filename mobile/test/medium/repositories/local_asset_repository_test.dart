@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/infrastructure/repositories/local_asset.repository.dart';
 import 'package:immich_mobile/utils/option.dart';
@@ -117,10 +116,10 @@ void main() {
       final videoLocalAsset = await ctx.newLocalAsset(
         checksum: videoRemoteAsset.checksum,
         createdAt: beforeCutoff,
-        type: AssetType.video,
+        type: .video,
       );
 
-      final result = await sut.getRemovalCandidates(userId, cutoffDate, keepMediaType: AssetKeepType.photosOnly);
+      final result = await sut.getRemovalCandidates(userId, cutoffDate, keepMediaType: .photosOnly);
       expect(result.assets.length, 1);
       expect(result.assets.first.id, videoLocalAsset.id);
       expect(result.assets.first.type, AssetType.video);
@@ -133,9 +132,9 @@ void main() {
 
       // Video - should be kept
       final videoRemoteAsset = await ctx.newRemoteAsset(ownerId: userId);
-      await ctx.newLocalAsset(checksum: videoRemoteAsset.checksum, createdAt: beforeCutoff, type: AssetType.video);
+      await ctx.newLocalAsset(checksum: videoRemoteAsset.checksum, createdAt: beforeCutoff, type: .video);
 
-      final result = await sut.getRemovalCandidates(userId, cutoffDate, keepMediaType: AssetKeepType.videosOnly);
+      final result = await sut.getRemovalCandidates(userId, cutoffDate, keepMediaType: .videosOnly);
       expect(result.assets.length, 1);
       expect(result.assets.first.id, photoAsset.id);
       expect(result.assets.first.type, AssetType.image);
@@ -151,10 +150,10 @@ void main() {
       final videoAsset = await ctx.newLocalAsset(
         checksum: videoRemoteAsset.checksum,
         createdAt: beforeCutoff,
-        type: AssetType.video,
+        type: .video,
       );
 
-      final result = await sut.getRemovalCandidates(userId, cutoffDate, keepMediaType: AssetKeepType.none);
+      final result = await sut.getRemovalCandidates(userId, cutoffDate, keepMediaType: .none);
       expect(result.assets.length, 2);
       final ids = result.assets.map((a) => a.id).toSet();
       expect(ids, containsAll([photoAsset.id, videoAsset.id]));
@@ -353,11 +352,7 @@ void main() {
 
       // Video in regular album - should be included (keepMediaType photosOnly = delete videos)
       final videoRemote = await ctx.newRemoteAsset(ownerId: userId);
-      final videoAsset = await ctx.newLocalAsset(
-        checksum: videoRemote.checksum,
-        createdAt: beforeCutoff,
-        type: AssetType.video,
-      );
+      final videoAsset = await ctx.newLocalAsset(checksum: videoRemote.checksum, createdAt: beforeCutoff, type: .video);
       await ctx.newLocalAlbumAsset(albumId: regularAlbum.id, assetId: videoAsset.id);
 
       // Photo in regular album - should NOT be included (keepMediaType photosOnly = keep photos)
@@ -368,7 +363,7 @@ void main() {
       final result = await sut.getRemovalCandidates(
         userId,
         cutoffDate,
-        keepMediaType: AssetKeepType.photosOnly,
+        keepMediaType: .photosOnly,
         keepAlbumIds: {excludedAlbum.id},
       );
 

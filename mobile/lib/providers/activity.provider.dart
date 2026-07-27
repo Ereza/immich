@@ -34,7 +34,7 @@ class AlbumActivity extends AutoDisposeFamilyAsyncNotifier<List<Activity>, (Stri
   }
 
   Future<void> addLike() async {
-    final activity = await ref.watch(activityServiceProvider).addActivity(albumId, ActivityType.like, assetId: assetId);
+    final activity = await ref.watch(activityServiceProvider).addActivity(albumId, .like, assetId: assetId);
     if (activity.hasValue) {
       _addToState(activity.requireValue);
       if (assetId != null) {
@@ -46,7 +46,7 @@ class AlbumActivity extends AutoDisposeFamilyAsyncNotifier<List<Activity>, (Stri
   Future<void> addComment(String comment) async {
     final activity = await ref
         .watch(activityServiceProvider)
-        .addActivity(albumId, ActivityType.comment, assetId: assetId, comment: comment);
+        .addActivity(albumId, .comment, assetId: assetId, comment: comment);
 
     if (activity.hasValue) {
       _addToState(activity.requireValue);

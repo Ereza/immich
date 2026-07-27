@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -26,8 +25,8 @@ class RestoreTrashActionButton extends ConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: result.success ? ToastType.success : ToastType.error,
+        gravity: .BOTTOM,
+        toastType: result.success ? .success : .error,
       );
     }
   }
@@ -36,7 +35,7 @@ class RestoreTrashActionButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return TextButton.icon(
       icon: const Icon(Icons.history_rounded),
-      label: Text('restore'.t(), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+      label: Text('restore'.t(), style: const TextStyle(fontSize: 14, fontWeight: .bold)),
       onPressed: () => _onTap(context, ref),
     );
   }

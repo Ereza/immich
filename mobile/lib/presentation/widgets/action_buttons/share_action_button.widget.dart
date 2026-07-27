@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
@@ -25,9 +24,9 @@ class _SharePreparingDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
-          Container(margin: const EdgeInsets.only(bottom: 12), child: const Text('share_dialog_preparing').tr()),
+          Container(margin: const .only(bottom: 12), child: const Text('share_dialog_preparing').tr()),
           SizedBox(
             width: 240,
             child: ValueListenableBuilder<double?>(
@@ -35,11 +34,11 @@ class _SharePreparingDialog extends StatelessWidget {
               builder: (context, value, _) {
                 final percent = value == null ? null : (value * 100).clamp(0, 100);
                 return Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
                     LinearProgressIndicator(value: value, minHeight: 8.0),
                     if (percent != null)
-                      Container(margin: const EdgeInsets.only(top: 8), child: Text('${percent.toStringAsFixed(0)}%')),
+                      Container(margin: const .only(top: 8), child: Text('${percent.toStringAsFixed(0)}%')),
                   ],
                 );
               },
@@ -60,9 +59,9 @@ class _ShareFileTypeDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(context.t.select_quality),
-      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+      contentPadding: const .symmetric(vertical: 8),
       content: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           ListTile(
             leading: const Icon(Icons.high_quality_rounded),
@@ -91,8 +90,8 @@ class ShareActionButton extends ConsumerWidget {
 
   Set<BaseAsset> _getSelectedAssets(WidgetRef ref) {
     return switch (source) {
-      ActionSource.timeline => ref.read(multiSelectProvider).selectedAssets,
-      ActionSource.viewer => switch (ref.read(assetViewerProvider).currentAsset) {
+      .timeline => ref.read(multiSelectProvider).selectedAssets,
+      .viewer => switch (ref.read(assetViewerProvider).currentAsset) {
         BaseAsset asset => {asset},
         null => const {},
       },
@@ -156,8 +155,8 @@ class ShareActionButton extends ConsumerWidget {
                 ImmichToast.show(
                   context: context,
                   msg: context.t.scaffold_body_error_occurred,
-                  gravity: ToastGravity.BOTTOM,
-                  toastType: ToastType.error,
+                  gravity: .BOTTOM,
+                  toastType: .error,
                 );
               }
 

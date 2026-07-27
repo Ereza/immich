@@ -10,7 +10,6 @@ import 'package:immich_mobile/repositories/gcast.repository.dart';
 import 'package:immich_mobile/repositories/sessions_api.repository.dart';
 import 'package:immich_mobile/utils/image_url_builder.dart';
 // ignore: import_rule_openapi, we are only using the AssetMediaSize enum
-import 'package:openapi/api.dart';
 
 final gCastServiceProvider = Provider(
   (ref) => GCastService(
@@ -47,10 +46,10 @@ class GCastService {
   }
 
   void _onCastStatusCallback(CastSessionState state) {
-    if (state == CastSessionState.connected) {
+    if (state == .connected) {
       onConnectionState?.call(true);
       isConnected = true;
-    } else if (state == CastSessionState.closed) {
+    } else if (state == .closed) {
       onConnectionState?.call(false);
       isConnected = false;
       onReceiverName?.call("");
@@ -76,16 +75,16 @@ class GCastService {
     final status = statusList[0];
     switch (status['playerState']) {
       case "PLAYING":
-        onCastState?.call(CastState.playing);
+        onCastState?.call(.playing);
         break;
       case "PAUSED":
-        onCastState?.call(CastState.paused);
+        onCastState?.call(.paused);
         break;
       case "BUFFERING":
-        onCastState?.call(CastState.buffering);
+        onCastState?.call(.buffering);
         break;
       case "IDLE":
-        onCastState?.call(CastState.idle);
+        onCastState?.call(.idle);
 
         // stop polling for media status if the video finished playing
         if (status["idleReason"] == "FINISHED") {
@@ -117,7 +116,7 @@ class GCastService {
   }
 
   CastDestinationType getType() {
-    return CastDestinationType.googleCast;
+    return .googleCast;
   }
 
   Future<bool> initialize() async {
@@ -165,7 +164,7 @@ class GCastService {
 
     final unauthenticatedUrl = asset.isVideo
         ? getPlaybackUrlForRemoteId(asset.id)
-        : getThumbnailUrlForRemoteId(asset.id, type: AssetMediaSize.fullsize);
+        : getThumbnailUrlForRemoteId(asset.id, type: .fullsize);
 
     final authenticatedURL = "$unauthenticatedUrl&sessionKey=${sessionKey?.token}";
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ Future<Uint8List> imageToUint8List(Image image) async {
       .resolve(const ImageConfiguration())
       .addListener(
         ImageStreamListener((ImageInfo info, bool _) {
-          info.image.toByteData(format: ImageByteFormat.png).then((byteData) {
+          info.image.toByteData(format: .png).then((byteData) {
             if (byteData != null) {
               completer.complete(byteData.buffer.asUint8List());
             } else {

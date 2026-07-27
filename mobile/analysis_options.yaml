@@ -82,3 +82,15 @@ dart_code_metrics:
     - prefer-const-border-radius
     - prefer-declaring-const-constructor
     - prefer-switch-expression
+    # Dot shorthands
+    - prefer-shorthands-with-enums
+    - prefer-shorthands-with-static-fields
+    - prefer-returning-shorthands
+    - prefer-shorthands-with-constructors:
+        entries:
+          - EdgeInsets
+          - BorderRadius
+          - Radius
+          - Border
+        ignore-nested: false
+    - avoid-nested-shorthands

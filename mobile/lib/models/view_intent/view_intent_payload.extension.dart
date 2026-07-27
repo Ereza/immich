@@ -17,19 +17,19 @@ extension ViewIntentPayloadX on ViewIntentPayload {
 
   AssetPlaybackStyle get playbackStyle {
     if (isVideo) {
-      return AssetPlaybackStyle.video;
+      return .video;
     }
 
     final normalizedMimeType = mimeType.toLowerCase();
     if (normalizedMimeType == 'image/gif' || normalizedMimeType == 'image/webp') {
-      return AssetPlaybackStyle.imageAnimated;
+      return .imageAnimated;
     }
 
     final normalizedPath = path?.toLowerCase();
     if (normalizedPath != null && (normalizedPath.endsWith('.gif') || normalizedPath.endsWith('.webp'))) {
-      return AssetPlaybackStyle.imageAnimated;
+      return .imageAnimated;
     }
 
-    return AssetPlaybackStyle.image;
+    return .image;
   }
 }

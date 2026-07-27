@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/constants.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/infrastructure/repositories/network.repository.dart';
 import 'package:logging/logging.dart';
@@ -68,11 +67,11 @@ class UploadRepository {
 
   Future<void> getUploadInfo() async {
     final [enqueuedTasks, runningTasks, canceledTasks, waitingTasks, pausedTasks] = await Future.wait([
-      FileDownloader().database.allRecordsWithStatus(TaskStatus.enqueued, group: kBackupGroup),
-      FileDownloader().database.allRecordsWithStatus(TaskStatus.running, group: kBackupGroup),
-      FileDownloader().database.allRecordsWithStatus(TaskStatus.canceled, group: kBackupGroup),
-      FileDownloader().database.allRecordsWithStatus(TaskStatus.waitingToRetry, group: kBackupGroup),
-      FileDownloader().database.allRecordsWithStatus(TaskStatus.paused, group: kBackupGroup),
+      FileDownloader().database.allRecordsWithStatus(.enqueued, group: kBackupGroup),
+      FileDownloader().database.allRecordsWithStatus(.running, group: kBackupGroup),
+      FileDownloader().database.allRecordsWithStatus(.canceled, group: kBackupGroup),
+      FileDownloader().database.allRecordsWithStatus(.waitingToRetry, group: kBackupGroup),
+      FileDownloader().database.allRecordsWithStatus(.paused, group: kBackupGroup),
     ]);
 
     dPrint(
@@ -96,7 +95,7 @@ class UploadRepository {
     void Function(int bytes, int totalBytes)? onProgress,
     required String logContext,
   }) async {
-    final String savedEndpoint = Store.get(StoreKey.serverEndpoint);
+    final String savedEndpoint = Store.get(.serverEndpoint);
     final baseRequest = ProgressMultipartRequest(
       'POST',
       Uri.parse('$savedEndpoint/assets'),

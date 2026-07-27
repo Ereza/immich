@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/platform_extensions.dart';
 import 'package:immich_mobile/infrastructure/repositories/storage.repository.dart';
@@ -85,11 +84,11 @@ class _NativeVideoViewerState extends ConsumerState<NativeVideoViewer> with Widg
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     switch (state) {
-      case AppLifecycleState.resumed:
+      case .resumed:
         if (_shouldPlayOnForeground) {
           await _notifier.play();
         }
-      case AppLifecycleState.paused:
+      case .paused:
         _shouldPlayOnForeground = await _controller?.isPlaying() ?? true;
         if (_shouldPlayOnForeground && mounted) {
           await _notifier.pause();
@@ -116,10 +115,7 @@ class _NativeVideoViewerState extends ConsumerState<NativeVideoViewer> with Widg
           throw Exception('No file found for the video');
         }
 
-        return VideoSource.init(
-          path: CurrentPlatform.isAndroid ? file.uri.toString() : file.path,
-          type: VideoSourceType.file,
-        );
+        return VideoSource.init(path: CurrentPlatform.isAndroid ? file.uri.toString() : file.path, type: .file);
       }
 
       // Attempt to retrieve LocalAsset, falling back to remote if it cannot be found
@@ -140,21 +136,18 @@ class _NativeVideoViewerState extends ConsumerState<NativeVideoViewer> with Widg
 
         // Pass a file:// URI so Android's Uri.parse doesn't
         // interpret characters like '#' as fragment identifiers.
-        return VideoSource.init(
-          path: CurrentPlatform.isAndroid ? file.uri.toString() : file.path,
-          type: VideoSourceType.file,
-        );
+        return VideoSource.init(path: CurrentPlatform.isAndroid ? file.uri.toString() : file.path, type: .file);
       }
 
       final remoteAsset = videoAsset as RemoteAsset;
 
-      final serverEndpoint = Store.get(StoreKey.serverEndpoint);
+      final serverEndpoint = Store.get(.serverEndpoint);
       final isOriginalVideo = ref.read(appConfigProvider).viewer.loadOriginalVideo;
       final String postfixUrl = isOriginalVideo ? 'original' : 'video/playback';
       final String assetId = remoteAsset.livePhotoVideoId ?? remoteAsset.id;
       final String videoUrl = '$serverEndpoint/assets/$assetId/$postfixUrl';
 
-      return VideoSource.init(path: videoUrl, type: VideoSourceType.network, headers: ApiService.getRequestHeaders());
+      return VideoSource.init(path: videoUrl, type: .network, headers: ApiService.getRequestHeaders());
     } catch (error) {
       _log.severe('Error creating video source for asset ${videoAsset.name}: $error');
       return null;
@@ -231,7 +224,7 @@ class _NativeVideoViewerState extends ConsumerState<NativeVideoViewer> with Widg
 
     _notifier.onNativePlaybackEnded();
 
-    if (_controller?.playbackInfo?.status == PlaybackStatus.stopped) {
+    if (_controller?.playbackInfo?.status == .stopped) {
       ref.read(isPlayingMotionVideoProvider.notifier).playing = false;
     }
   }
@@ -312,7 +305,7 @@ class _NativeVideoViewerState extends ConsumerState<NativeVideoViewer> with Widg
             ),
             Center(
               child: AnimatedOpacity(
-                opacity: status == VideoPlaybackStatus.buffering ? 1.0 : 0.0,
+                opacity: status == .buffering ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 400),
                 child: const CircularProgressIndicator(),
               ),

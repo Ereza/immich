@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/settings_key.dart';
 import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/utils/background_sync.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
@@ -100,7 +99,7 @@ class AuthService {
         _log.severe("Error clearing local data", error, stackTrace);
       });
 
-      await SettingsRepository.instance.write(SettingsKey.backupEnabled, false);
+      await SettingsRepository.instance.write(.backupEnabled, false);
     }
   }
 
@@ -118,8 +117,8 @@ class AuthService {
     await _backgroundSyncManager.cancel();
     await Future.wait([
       _authRepository.clearLocalData(),
-      Store.delete(StoreKey.currentUser),
-      Store.delete(StoreKey.accessToken),
+      Store.delete(.currentUser),
+      Store.delete(.accessToken),
       SettingsRepository.instance.clear(const [
         .networkAutoEndpointSwitching,
         .networkPreferredWifiName,

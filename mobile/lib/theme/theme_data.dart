@@ -11,7 +11,7 @@ class ImmichTheme {
 }
 
 ThemeData getThemeData({required ColorScheme colorScheme, required Locale locale}) {
-  final isDark = colorScheme.brightness == Brightness.dark;
+  final isDark = colorScheme.brightness == .dark;
 
   return ThemeData(
     useMaterial3: true,
@@ -29,7 +29,7 @@ ThemeData getThemeData({required ColorScheme colorScheme, required Locale locale
       contentTextStyle: TextStyle(
         fontFamily: _getFontFamilyFromLocale(locale),
         color: colorScheme.primary,
-        fontWeight: FontWeight.bold,
+        fontWeight: .bold,
       ),
       backgroundColor: colorScheme.surfaceContainerHighest,
     ),
@@ -37,7 +37,7 @@ ThemeData getThemeData({required ColorScheme colorScheme, required Locale locale
       titleTextStyle: TextStyle(
         color: colorScheme.primary,
         fontFamily: _getFontFamilyFromLocale(locale),
-        fontWeight: FontWeight.w600,
+        fontWeight: .w600,
         fontSize: 18,
       ),
       backgroundColor: colorScheme.surface,
@@ -47,12 +47,12 @@ ThemeData getThemeData({required ColorScheme colorScheme, required Locale locale
       centerTitle: true,
     ),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-      displayMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-      displaySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-      titleSmall: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
-      titleMedium: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-      titleLarge: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w600),
+      displayLarge: TextStyle(fontSize: 18, fontWeight: .w600),
+      displayMedium: TextStyle(fontSize: 14, fontWeight: .w600),
+      displaySmall: TextStyle(fontSize: 12, fontWeight: .w600),
+      titleSmall: TextStyle(fontSize: 16.0, fontWeight: .w600),
+      titleMedium: TextStyle(fontSize: 18.0, fontWeight: .w600),
+      titleLarge: TextStyle(fontSize: 26.0, fontWeight: .w600),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -60,49 +60,43 @@ ThemeData getThemeData({required ColorScheme colorScheme, required Locale locale
         foregroundColor: isDark ? Colors.black87 : Colors.white,
       ),
     ),
-    chipTheme: const ChipThemeData(side: BorderSide.none),
+    chipTheme: const ChipThemeData(side: .none),
     sliderTheme: const SliderThemeData(
       trackHeight: 12,
       // ignore: deprecated_member_use
       year2023: false,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(type: BottomNavigationBarType.fixed),
-    popupMenuTheme: const PopupMenuThemeData(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(type: .fixed),
+    popupMenuTheme: const PopupMenuThemeData(shape: RoundedRectangleBorder(borderRadius: .all(.circular(10)))),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: isDark ? colorScheme.surfaceContainer : colorScheme.surface,
-      labelTextStyle: const WidgetStatePropertyAll(
-        TextStyle(fontSize: 14, fontWeight: FontWeight.w500, overflow: TextOverflow.ellipsis),
-      ),
+      labelTextStyle: const WidgetStatePropertyAll(TextStyle(fontSize: 14, fontWeight: .w500, overflow: .ellipsis)),
     ),
     inputDecorationTheme: InputDecorationTheme(
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: colorScheme.primary),
-        borderRadius: const BorderRadius.all(Radius.circular(15)),
+        borderRadius: const .all(.circular(15)),
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: colorScheme.outlineVariant),
-        borderRadius: const BorderRadius.all(Radius.circular(15)),
+        borderRadius: const .all(.circular(15)),
       ),
       labelStyle: TextStyle(color: colorScheme.primary),
-      hintStyle: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
+      hintStyle: const TextStyle(fontSize: 14.0, fontWeight: .normal),
     ),
     textSelectionTheme: TextSelectionThemeData(cursorColor: colorScheme.primary),
     dropdownMenuTheme: DropdownMenuThemeData(
       menuStyle: const MenuStyle(
-        shape: WidgetStatePropertyAll<OutlinedBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-        ),
+        shape: WidgetStatePropertyAll<OutlinedBorder>(RoundedRectangleBorder(borderRadius: .all(.circular(15)))),
       ),
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: colorScheme.primary)),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: colorScheme.outlineVariant),
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const .all(.circular(15)),
         ),
         labelStyle: TextStyle(color: colorScheme.primary),
-        hintStyle: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
+        hintStyle: const TextStyle(fontSize: 14.0, fontWeight: .normal),
       ),
     ),
     dialogTheme: DialogThemeData(backgroundColor: colorScheme.surfaceContainer),

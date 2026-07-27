@@ -7,7 +7,7 @@ class TimelineConfig {
 
   const TimelineConfig({this.tilesPerRow = 4, this.groupAssetsBy = GroupAssetsBy.day, this.storageIndicator = true});
 
-  TimelineConfig copyWith({int? tilesPerRow, GroupAssetsBy? groupAssetsBy, bool? storageIndicator}) => TimelineConfig(
+  TimelineConfig copyWith({int? tilesPerRow, GroupAssetsBy? groupAssetsBy, bool? storageIndicator}) => .new(
     tilesPerRow: tilesPerRow ?? this.tilesPerRow,
     groupAssetsBy: groupAssetsBy ?? this.groupAssetsBy,
     storageIndicator: storageIndicator ?? this.storageIndicator,

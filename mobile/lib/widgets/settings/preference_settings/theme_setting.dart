@@ -14,29 +14,29 @@ class ThemeSetting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = useState(ref.read(appConfigProvider.select((config) => config.theme.mode)));
-    final isDarkTheme = useValueNotifier(currentTheme.value == ThemeMode.dark);
-    final isSystemTheme = useValueNotifier(currentTheme.value == ThemeMode.system);
+    final isDarkTheme = useValueNotifier(currentTheme.value == .dark);
+    final isSystemTheme = useValueNotifier(currentTheme.value == .system);
     final colorfulInterface = useValueNotifier(
       ref.watch(appConfigProvider.select((config) => config.theme.colorfulInterface)),
     );
 
     void onThemeChange(bool isDark) {
-      currentTheme.value = isDark ? ThemeMode.dark : ThemeMode.light;
+      currentTheme.value = isDark ? .dark : .light;
       ref.read(settingsProvider).write(.themeMode, currentTheme.value);
     }
 
     void onSystemThemeChange(bool isSystem) {
       if (isSystem) {
-        currentTheme.value = ThemeMode.system;
+        currentTheme.value = .system;
         isSystemTheme.value = true;
       } else {
         final currentSystemBrightness = context.platformBrightness;
         isSystemTheme.value = false;
-        isDarkTheme.value = currentSystemBrightness == Brightness.dark;
-        if (currentSystemBrightness == Brightness.light) {
-          currentTheme.value = ThemeMode.light;
-        } else if (currentSystemBrightness == Brightness.dark) {
-          currentTheme.value = ThemeMode.dark;
+        isDarkTheme.value = currentSystemBrightness == .dark;
+        if (currentSystemBrightness == .light) {
+          currentTheme.value = .light;
+        } else if (currentSystemBrightness == .dark) {
+          currentTheme.value = .dark;
         }
       }
       ref.read(settingsProvider).write(.themeMode, currentTheme.value);
@@ -48,7 +48,7 @@ class ThemeSetting extends HookConsumerWidget {
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingGroupTitle(
           title: "theme".t(context: context),
@@ -59,7 +59,7 @@ class ThemeSetting extends HookConsumerWidget {
           title: 'theme_setting_system_theme_switch'.t(context: context),
           onChanged: onSystemThemeChange,
         ),
-        if (currentTheme.value != ThemeMode.system)
+        if (currentTheme.value != .system)
           SettingsSwitchListTile(
             valueNotifier: isDarkTheme,
             title: 'map_settings_dark_mode'.t(context: context),

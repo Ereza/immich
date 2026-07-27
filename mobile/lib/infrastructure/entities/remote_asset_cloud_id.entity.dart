@@ -4,7 +4,7 @@ import 'package:immich_mobile/infrastructure/utils/drift_default.mixin.dart';
 
 @TableIndex.sql('CREATE INDEX IF NOT EXISTS idx_remote_asset_cloud_id ON remote_asset_cloud_id_entity (cloud_id)')
 class RemoteAssetCloudIdEntity extends Table with DriftDefaultsMixin {
-  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: .cascade)();
 
   TextColumn get cloudId => text().nullable()();
 

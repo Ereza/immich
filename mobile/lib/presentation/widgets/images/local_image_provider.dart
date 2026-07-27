@@ -121,7 +121,7 @@ class LocalFullImageProvider extends CancellableImageProvider<LocalFullImageProv
       return;
     }
 
-    request = this.request = LocalImageRequest(localId: key.id, assetType: key.assetType, size: Size.zero);
+    request = this.request = LocalImageRequest(localId: key.id, assetType: key.assetType, size: .zero);
 
     yield* loadRequest(request, decode, isFinal: true);
   }
@@ -146,7 +146,7 @@ class LocalFullImageProvider extends CancellableImageProvider<LocalFullImageProv
     }
 
     // always try original for animated, since previews don't support animation
-    final originalRequest = request = LocalImageRequest(localId: key.id, size: Size.zero, assetType: key.assetType);
+    final originalRequest = request = LocalImageRequest(localId: key.id, size: .zero, assetType: key.assetType);
     final codec = await loadCodecRequest(originalRequest, isFinal: true);
     if (codec == null) {
       if (isCancelled) {

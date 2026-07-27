@@ -22,7 +22,7 @@ class ActivityApiRepository extends ApiRepository {
   Future<Activity> create(String albumId, ActivityType type, {String? assetId, String? comment}) async {
     final dto = ActivityCreateDto(
       albumId: albumId,
-      type: type == ActivityType.comment ? ReactionType.comment : ReactionType.like,
+      type: type == .comment ? .comment : .like,
       assetId: assetId == null ? const Optional.absent() : Optional.present(assetId),
       comment: comment == null ? const Optional.absent() : Optional.present(comment),
     );
@@ -39,10 +39,10 @@ class ActivityApiRepository extends ApiRepository {
     return ActivityStats(comments: response.comments);
   }
 
-  static Activity _toActivity(ActivityResponseDto dto) => Activity(
+  static Activity _toActivity(ActivityResponseDto dto) => .new(
     id: dto.id,
     createdAt: dto.createdAt,
-    type: dto.type == ReactionType.comment ? ActivityType.comment : ActivityType.like,
+    type: dto.type == .comment ? .comment : .like,
     user: UserConverter.fromSimpleUserDto(dto.user),
     assetId: dto.assetId,
     comment: dto.comment.orElse(null),

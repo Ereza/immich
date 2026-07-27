@@ -17,15 +17,15 @@ class LocalAlbumThumbnail extends ConsumerWidget {
           return Container(
             decoration: BoxDecoration(
               color: context.colorScheme.surfaceContainer,
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              border: Border.all(color: context.colorScheme.outline.withAlpha(50), width: 1),
+              borderRadius: const .all(.circular(16)),
+              border: .all(color: context.colorScheme.outline.withAlpha(50), width: 1),
             ),
             child: Icon(Icons.collections, size: 24, color: context.primaryColor),
           );
         }
 
         return ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          borderRadius: const .all(.circular(16)),
           child: Thumbnail.fromAsset(asset: data),
         );
       },

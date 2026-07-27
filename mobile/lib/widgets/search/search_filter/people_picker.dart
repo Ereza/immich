@@ -29,7 +29,7 @@ class PeoplePicker extends HookConsumerWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const .all(8),
           child: SearchField(
             focusNode: formFocus,
             onChanged: (value) => searchQuery.value = value,
@@ -39,7 +39,7 @@ class PeoplePicker extends HookConsumerWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 0),
+          padding: const .only(left: 16.0, right: 16.0, bottom: 0),
           child: Divider(color: context.colorScheme.surfaceContainerHighest, thickness: 1),
         ),
         Expanded(
@@ -55,27 +55,27 @@ class PeoplePicker extends HookConsumerWidget {
               return ListView.builder(
                 shrinkWrap: true,
                 itemCount: filtered.length,
-                padding: const EdgeInsets.all(8),
+                padding: const .all(8),
                 itemBuilder: (context, index) {
                   final person = filtered[index];
                   final isSelected = selectedPeople.value.contains(person);
 
                   return Padding(
                     key: ValueKey(person.id),
-                    padding: const EdgeInsets.only(bottom: 2.0),
+                    padding: const .only(bottom: 2.0),
                     child: LargeLeadingTile(
                       title: Text(
                         person.name,
                         style: context.textTheme.bodyLarge?.copyWith(
                           fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: .w500,
                           color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
                         ),
                       ),
                       leading: SizedBox(
                         height: imageSize,
                         child: Material(
-                          shape: const CircleBorder(side: BorderSide.none),
+                          shape: const CircleBorder(side: .none),
                           elevation: 3,
                           child: CircleAvatar(
                             key: ValueKey(person.id),

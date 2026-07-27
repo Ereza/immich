@@ -74,14 +74,14 @@ class MapThumbnail extends HookConsumerWidget {
         curve: Curves.easeOut,
         foregroundDecoration: BoxDecoration(
           color: context.colorScheme.inverseSurface.withAlpha(styleLoaded.value ? 0 : 200),
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const .all(.circular(15)),
         ),
         height: height,
         width: width,
         child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const .all(.circular(15)),
           child: Stack(
-            alignment: AlignmentGeometry.topCenter,
+            alignment: .topCenter,
             children: [
               style.widgetWhen(
                 onData: (style) => MapLibreMap(
@@ -104,7 +104,7 @@ class MapThumbnail extends HookConsumerWidget {
                 Container(
                   width: width,
                   height: height / 2,
-                  alignment: Alignment.bottomCenter,
+                  alignment: .bottomCenter,
                   child: SizedBox.square(
                     dimension: height / 2.5,
                     child: AssetMarkerIcon(id: assetMarkerRemoteId!, thumbhash: assetThumbhash!),

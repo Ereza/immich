@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
-import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/providers/asset_viewer/asset_viewer.provider.dart';
 import 'package:immich_mobile/presentation/widgets/images/thumbnail.widget.dart';
 import 'package:immich_mobile/providers/infrastructure/timeline.provider.dart';
@@ -17,7 +16,7 @@ class AssetStackRow extends ConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    final hideAssetStack = ref.read(timelineServiceProvider).origin == TimelineOrigin.trash;
+    final hideAssetStack = ref.read(timelineServiceProvider).origin == .trash;
     if (hideAssetStack) {
       return const SizedBox.shrink();
     }
@@ -32,11 +31,11 @@ class AssetStackRow extends ConsumerWidget {
         duration: Durations.short2,
         child: Center(
           child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: .horizontal,
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 20.0),
+              padding: const .only(left: 10.0, right: 10.0, bottom: 20.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: .center,
                 spacing: 5.0,
                 children: List.generate(stack.length, (i) {
                   final asset = stack[i];
@@ -79,19 +78,19 @@ class _StackItemState extends ConsumerState<_StackItem> {
       ),
     );
     const selectedDecoration = BoxDecoration(
-      border: Border.fromBorderSide(BorderSide(color: Colors.white, width: 2)),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
+      border: .fromBorderSide(BorderSide(color: Colors.white, width: 2)),
+      borderRadius: .all(.circular(10)),
     );
     const unselectedDecoration = BoxDecoration(
-      border: Border.fromBorderSide(BorderSide(color: Colors.grey, width: 0.5)),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
+      border: .fromBorderSide(BorderSide(color: Colors.grey, width: 0.5)),
+      borderRadius: .all(.circular(10)),
     );
 
     Widget thumbnail = Thumbnail.fromAsset(asset: widget.asset, size: const Size(60, 40));
     if (widget.asset.isVideo) {
       thumbnail = Stack(children: [thumbnail, playIcon]);
     }
-    thumbnail = ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)), child: thumbnail);
+    thumbnail = ClipRRect(borderRadius: const .all(.circular(10)), child: thumbnail);
     final isSelected = ref.watch(assetViewerProvider.select((s) => s.stackIndex == widget.index));
     return SizedBox(
       width: 60,
@@ -100,7 +99,7 @@ class _StackItemState extends ConsumerState<_StackItem> {
         onTap: _onTap,
         child: DecoratedBox(
           decoration: isSelected ? selectedDecoration : unselectedDecoration,
-          position: DecorationPosition.foreground,
+          position: .foreground,
           child: thumbnail,
         ),
       ),

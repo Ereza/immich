@@ -201,7 +201,7 @@ class DriftBackupNotifier extends StateNotifier<DriftBackupState> {
           processingCount: 0,
           isSyncing: false,
           uploadItems: {},
-          error: BackupError.none,
+          error: .none,
         ),
       );
 
@@ -262,7 +262,7 @@ class DriftBackupNotifier extends StateNotifier<DriftBackupState> {
       stopForegroundBackup();
     }
 
-    state = state.copyWith(error: BackupError.none);
+    state = state.copyWith(error: .none);
 
     _cancelToken = Completer<void>();
 
@@ -379,7 +379,7 @@ class DriftBackupNotifier extends StateNotifier<DriftBackupState> {
       return;
     }
     _logger.info("Start background backup sequence");
-    state = state.copyWith(error: BackupError.none);
+    state = state.copyWith(error: .none);
     final tasks = await _backgroundUploadService.getActiveTasks(kBackupGroup);
     if (!mounted) {
       _logger.warning("Skip handleBackupResume (post-call): notifier disposed");
@@ -410,5 +410,5 @@ final driftCandidateBackupAlbumInfoProvider = FutureProvider.autoDispose.family<
   ref,
   assetId,
 ) {
-  return ref.read(localAssetRepository).getSourceAlbums(assetId, backupSelection: BackupSelection.selected);
+  return ref.read(localAssetRepository).getSourceAlbums(assetId, backupSelection: .selected);
 });

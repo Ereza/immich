@@ -26,7 +26,7 @@ class DriftBackupRepository extends DriftDatabaseRepository {
           useColumns: false,
         ),
       ])
-      ..where(_db.localAlbumEntity.backupSelection.equalsValue(BackupSelection.excluded));
+      ..where(_db.localAlbumEntity.backupSelection.equalsValue(.excluded));
   }
 
   /// Returns all backup-related counts in a single query.
@@ -84,7 +84,7 @@ class DriftBackupRepository extends DriftDatabaseRepository {
   Future<List<LocalAsset>> getCandidates(String userId, {bool onlyHashed = true}) async {
     final selectedAlbumIds = _db.localAlbumEntity.selectOnly(distinct: true)
       ..addColumns([_db.localAlbumEntity.id])
-      ..where(_db.localAlbumEntity.backupSelection.equalsValue(BackupSelection.selected));
+      ..where(_db.localAlbumEntity.backupSelection.equalsValue(.selected));
 
     final query = _db.localAssetEntity.select()
       ..where(

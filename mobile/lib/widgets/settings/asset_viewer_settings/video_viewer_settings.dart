@@ -27,7 +27,7 @@ class VideoViewerSettings extends HookConsumerWidget {
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingGroupTitle(
           title: "videos".t(context: context),

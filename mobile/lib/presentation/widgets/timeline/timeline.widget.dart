@@ -337,7 +337,7 @@ class _SliverTimelineState extends ConsumerState<_SliverTimeline> with WidgetsBi
 
   void _dragScroll(ScrollDirection direction) {
     _scrollController.animateTo(
-      _scrollController.offset + (direction == ScrollDirection.forward ? 175 : -175),
+      _scrollController.offset + (direction == .forward ? 175 : -175),
       duration: const Duration(milliseconds: 125),
       curve: Curves.easeOut,
     );
@@ -438,7 +438,7 @@ class _SliverTimelineState extends ConsumerState<_SliverTimeline> with WidgetsBi
                     ),
                   ),
                   if (widget.bottomSliverWidget != null) widget.bottomSliverWidget!,
-                  SliverPadding(padding: EdgeInsets.only(bottom: contentBottomPadding)),
+                  SliverPadding(padding: .only(bottom: contentBottomPadding)),
                 ],
               );
 
@@ -495,7 +495,7 @@ class _SliverTimelineState extends ConsumerState<_SliverTimeline> with WidgetsBi
                     ref.read(timelineStateProvider.notifier).setScrolling(true);
                   },
                   child: Stack(
-                    clipBehavior: Clip.none,
+                    clipBehavior: .none,
                     children: [
                       timeline,
                       if (isBottomWidgetVisible)
@@ -527,7 +527,7 @@ class _SliverSegmentedList extends SliverMultiBoxAdaptorWidget {
 
   @override
   _RenderSliverTimelineBoxAdaptor createRenderObject(BuildContext context) =>
-      _RenderSliverTimelineBoxAdaptor(childManager: context as SliverMultiBoxAdaptorElement, segments: _segments);
+      .new(childManager: context as SliverMultiBoxAdaptorElement, segments: _segments);
 
   @override
   void updateRenderObject(BuildContext context, _RenderSliverTimelineBoxAdaptor renderObject) {
@@ -650,7 +650,7 @@ class _RenderSliverTimelineBoxAdaptor extends RenderSliverMultiBoxAdaptor {
 
     // Starting from the child after [mostRecentlyLaidOutChild], layout subsequent children
     // until we reach the [lastRequiredChildIndex] or run out of children.
-    double calculatedMaxScrollOffset = double.infinity;
+    double calculatedMaxScrollOffset = .infinity;
 
     for (
       int currentIndex = indexOf(mostRecentlyLaidOutChild!) + 1;

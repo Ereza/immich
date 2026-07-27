@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/exif.model.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/theme_extensions.dart';
@@ -25,10 +24,10 @@ class RatingDetails extends ConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+      padding: const .only(left: 16.0, top: 16.0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
         spacing: 8,
         children: [
           Text(
@@ -41,10 +40,10 @@ class RatingDetails extends ConsumerWidget {
             unfilledColor: context.themeData.colorScheme.onSurface.withAlpha(100),
             itemSize: 40,
             onRatingUpdate: (rating) async {
-              await ref.read(actionProvider.notifier).updateRating(ActionSource.viewer, rating.round());
+              await ref.read(actionProvider.notifier).updateRating(.viewer, rating.round());
             },
             onClearRating: () async {
-              await ref.read(actionProvider.notifier).updateRating(ActionSource.viewer, null);
+              await ref.read(actionProvider.notifier).updateRating(.viewer, null);
             },
           ),
         ],

@@ -21,23 +21,23 @@ class ThumbnailWithInfoContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Stack(
-        alignment: Alignment.bottomLeft,
+        alignment: .bottomLeft,
         children: [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: .circular(borderRadius),
               gradient: LinearGradient(
                 colors: [context.colorScheme.surfaceContainer, context.colorScheme.surfaceContainer.darken(amount: .1)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: .topCenter,
+                end: .bottomCenter,
               ),
             ),
             foregroundDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: .circular(borderRadius),
               color: Colors.white,
               gradient: LinearGradient(
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
+                begin: .topCenter,
+                end: .bottomCenter,
                 colors: [
                   Colors.transparent,
                   label == '' ? Colors.black.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.5),
@@ -48,13 +48,13 @@ class ThumbnailWithInfoContainer extends StatelessWidget {
             child: child,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8) + const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8) + const .only(bottom: 8),
             child: Text(
               label,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+              style: const TextStyle(color: Colors.white, fontWeight: .bold, fontSize: 14),
               maxLines: 2,
               softWrap: false,
-              overflow: TextOverflow.ellipsis,
+              overflow: .ellipsis,
             ),
           ),
         ],

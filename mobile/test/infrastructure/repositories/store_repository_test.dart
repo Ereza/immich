@@ -60,34 +60,34 @@ void main() {
 
   group('Store Repository converters:', () {
     test('converts int', () async {
-      int? version = await sut.tryGet(StoreKey.version);
+      int? version = await sut.tryGet(.version);
       expect(version, isNull);
-      await sut.upsert(StoreKey.version, _kTestVersion);
-      version = await sut.tryGet(StoreKey.version);
+      await sut.upsert(.version, _kTestVersion);
+      version = await sut.tryGet(.version);
       expect(version, _kTestVersion);
     });
 
     test('converts string', () async {
-      String? accessToken = await sut.tryGet(StoreKey.accessToken);
+      String? accessToken = await sut.tryGet(.accessToken);
       expect(accessToken, isNull);
-      await sut.upsert(StoreKey.accessToken, _kTestAccessToken);
-      accessToken = await sut.tryGet(StoreKey.accessToken);
+      await sut.upsert(.accessToken, _kTestAccessToken);
+      accessToken = await sut.tryGet(.accessToken);
       expect(accessToken, _kTestAccessToken);
     });
 
     test('converts bool', () async {
-      bool? advancedTroubleshooting = await sut.tryGet(StoreKey.advancedTroubleshooting);
+      bool? advancedTroubleshooting = await sut.tryGet(.advancedTroubleshooting);
       expect(advancedTroubleshooting, isNull);
-      await sut.upsert(StoreKey.advancedTroubleshooting, _kTestAdvancedTroubleshooting);
-      advancedTroubleshooting = await sut.tryGet(StoreKey.advancedTroubleshooting);
+      await sut.upsert(.advancedTroubleshooting, _kTestAdvancedTroubleshooting);
+      advancedTroubleshooting = await sut.tryGet(.advancedTroubleshooting);
       expect(advancedTroubleshooting, _kTestAdvancedTroubleshooting);
     });
 
     test('converts user', () async {
-      UserDto? user = await sut.tryGet(StoreKey.currentUser);
+      UserDto? user = await sut.tryGet(.currentUser);
       expect(user, isNull);
-      await sut.upsert(StoreKey.currentUser, _kTestUser);
-      user = await sut.tryGet(StoreKey.currentUser);
+      await sut.upsert(.currentUser, _kTestUser);
+      user = await sut.tryGet(.currentUser);
       expect(user, _kTestUser);
     });
   });
@@ -98,10 +98,10 @@ void main() {
     });
 
     test('delete()', () async {
-      bool? advancedTroubleshooting = await sut.tryGet(StoreKey.advancedTroubleshooting);
+      bool? advancedTroubleshooting = await sut.tryGet(.advancedTroubleshooting);
       expect(advancedTroubleshooting, isFalse);
-      await sut.delete(StoreKey.advancedTroubleshooting);
-      advancedTroubleshooting = await sut.tryGet(StoreKey.advancedTroubleshooting);
+      await sut.delete(.advancedTroubleshooting);
+      advancedTroubleshooting = await sut.tryGet(.advancedTroubleshooting);
       expect(advancedTroubleshooting, isNull);
     });
 
@@ -119,10 +119,10 @@ void main() {
     });
 
     test('upsert()', () async {
-      int? version = await sut.tryGet(StoreKey.version);
+      int? version = await sut.tryGet(.version);
       expect(version, _kTestVersion);
-      await sut.upsert(StoreKey.version, _kTestVersion + 10);
-      version = await sut.tryGet(StoreKey.version);
+      await sut.upsert(.version, _kTestVersion + 10);
+      version = await sut.tryGet(.version);
       expect(version, _kTestVersion + 10);
     });
   });
@@ -133,10 +133,10 @@ void main() {
     });
 
     test('watch()', () async {
-      final stream = sut.watch(StoreKey.version);
+      final stream = sut.watch(.version);
       unawaited(expectLater(stream, emitsInOrder([_kTestVersion, _kTestVersion + 10])));
       await pumpEventQueue();
-      await sut.upsert(StoreKey.version, _kTestVersion + 10);
+      await sut.upsert(.version, _kTestVersion + 10);
     });
 
     test('watchAll()', () async {
@@ -146,19 +146,19 @@ void main() {
           stream,
           emitsInOrder([
             [
-              const StoreDto<Object>(StoreKey.version, _kTestVersion),
-              const StoreDto<Object>(StoreKey.accessToken, _kTestAccessToken),
-              const StoreDto<Object>(StoreKey.advancedTroubleshooting, _kTestAdvancedTroubleshooting),
+              const StoreDto<Object>(.version, _kTestVersion),
+              const StoreDto<Object>(.accessToken, _kTestAccessToken),
+              const StoreDto<Object>(.advancedTroubleshooting, _kTestAdvancedTroubleshooting),
             ],
             [
-              const StoreDto<Object>(StoreKey.version, _kTestVersion + 10),
-              const StoreDto<Object>(StoreKey.accessToken, _kTestAccessToken),
-              const StoreDto<Object>(StoreKey.advancedTroubleshooting, _kTestAdvancedTroubleshooting),
+              const StoreDto<Object>(.version, _kTestVersion + 10),
+              const StoreDto<Object>(.accessToken, _kTestAccessToken),
+              const StoreDto<Object>(.advancedTroubleshooting, _kTestAdvancedTroubleshooting),
             ],
           ]),
         ),
       );
-      await sut.upsert(StoreKey.version, _kTestVersion + 10);
+      await sut.upsert(.version, _kTestVersion + 10);
     });
   });
 }

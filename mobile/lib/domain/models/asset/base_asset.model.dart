@@ -42,11 +42,11 @@ sealed class BaseAsset {
     required this.isEdited,
   });
 
-  bool get isImage => type == AssetType.image;
-  bool get isVideo => type == AssetType.video;
+  bool get isImage => type == .image;
+  bool get isVideo => type == .video;
 
-  bool get isMotionPhoto => playbackStyle == AssetPlaybackStyle.livePhoto;
-  bool get isAnimatedImage => playbackStyle == AssetPlaybackStyle.imageAnimated;
+  bool get isMotionPhoto => playbackStyle == .livePhoto;
+  bool get isAnimatedImage => playbackStyle == .imageAnimated;
 
   Duration get duration {
     final durationMs = this.durationMs;
@@ -56,10 +56,10 @@ sealed class BaseAsset {
     return const Duration();
   }
 
-  bool get hasRemote => storage == AssetState.remote || storage == AssetState.merged;
-  bool get hasLocal => storage == AssetState.local || storage == AssetState.merged;
-  bool get isLocalOnly => storage == AssetState.local;
-  bool get isRemoteOnly => storage == AssetState.remote;
+  bool get hasRemote => storage == .remote || storage == .merged;
+  bool get hasLocal => storage == .local || storage == .merged;
+  bool get isLocalOnly => storage == .local;
+  bool get isRemoteOnly => storage == .remote;
 
   // Same asset even if localId is known on one side but not the other (heroTag isn't stable then)
   bool refersToSameAsset(BaseAsset other) {

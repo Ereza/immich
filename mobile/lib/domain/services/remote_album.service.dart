@@ -70,23 +70,23 @@ class RemoteAlbumService {
   }) async {
     // list of albums sorted ascendingly according to the selected sort mode
     final List<RemoteAlbum> sorted = switch (sortMode) {
-      AlbumSortMode.created => albums.sortedBy((album) => album.createdAt),
-      AlbumSortMode.title => albums.sortedBy((album) => album.name),
-      AlbumSortMode.lastModified => albums.sortedBy((album) => album.updatedAt),
-      AlbumSortMode.assetCount => albums.sortedBy((album) => album.assetCount),
-      AlbumSortMode.mostRecent => await _sortByAssetDate(albums, aggregation: AssetDateAggregation.end),
-      AlbumSortMode.mostOldest => await _sortByAssetDate(albums, aggregation: AssetDateAggregation.start),
+      .created => albums.sortedBy((album) => album.createdAt),
+      .title => albums.sortedBy((album) => album.name),
+      .lastModified => albums.sortedBy((album) => album.updatedAt),
+      .assetCount => albums.sortedBy((album) => album.assetCount),
+      .mostRecent => await _sortByAssetDate(albums, aggregation: .end),
+      .mostOldest => await _sortByAssetDate(albums, aggregation: .start),
     };
     final effectiveOrder = isReverse ? sortMode.defaultOrder.reverse() : sortMode.defaultOrder;
 
-    return (effectiveOrder == SortOrder.asc ? sorted : sorted.reversed).toList();
+    return (effectiveOrder == .asc ? sorted : sorted.reversed).toList();
   }
 
   List<RemoteAlbum> searchAlbums(
     List<RemoteAlbum> albums,
     String query,
     String? userId, [
-    QuickFilterMode filterMode = QuickFilterMode.all,
+    QuickFilterMode filterMode = .all,
   ]) {
     final lowerQuery = query.toLowerCase();
     List<RemoteAlbum> filtered = albums;
@@ -103,13 +103,13 @@ class RemoteAlbumService {
 
     if (userId != null) {
       switch (filterMode) {
-        case QuickFilterMode.myAlbums:
+        case .myAlbums:
           filtered = filtered.where((album) => album.ownerId == userId).toList();
           break;
-        case QuickFilterMode.sharedWithMe:
+        case .sharedWithMe:
           filtered = filtered.where((album) => album.ownerId != userId).toList();
           break;
-        case QuickFilterMode.all:
+        case .all:
           break;
       }
     }

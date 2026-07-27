@@ -31,13 +31,13 @@ class _AlbumList extends ConsumerWidget {
     return albums.when(
       loading: () => const SliverToBoxAdapter(
         child: Center(
-          child: Padding(padding: EdgeInsets.all(20.0), child: CircularProgressIndicator()),
+          child: Padding(padding: .all(20.0), child: CircularProgressIndicator()),
         ),
       ),
       error: (error, stack) => SliverToBoxAdapter(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const .all(20.0),
             child: Text(
               'Error loading albums: $error, stack: $stack',
               style: TextStyle(color: context.colorScheme.error),
@@ -49,23 +49,23 @@ class _AlbumList extends ConsumerWidget {
         if (albums.isEmpty) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Padding(padding: const EdgeInsets.all(20.0), child: Text('no_albums_yet'.tr())),
+              child: Padding(padding: const .all(20.0), child: Text('no_albums_yet'.tr())),
             ),
           );
         }
 
         return SliverPadding(
-          padding: const EdgeInsets.all(18.0),
+          padding: const .all(18.0),
           sliver: SliverList.builder(
             itemBuilder: (_, index) {
               final album = albums[index];
 
               return Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const .only(bottom: 8.0),
                 child: LargeLeadingTile(
-                  leadingPadding: const EdgeInsets.only(right: 16),
+                  leadingPadding: const .only(right: 16),
                   leading: SizedBox(width: 80, height: 80, child: LocalAlbumThumbnail(albumId: album.id)),
-                  title: Text(album.name, style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+                  title: Text(album.name, style: context.textTheme.titleSmall?.copyWith(fontWeight: .w600)),
                   subtitle: Text(
                     'items_count'.t(context: context, args: {'count': album.assetCount}),
                     style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceSecondary),

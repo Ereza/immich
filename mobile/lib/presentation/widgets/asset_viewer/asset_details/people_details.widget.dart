@@ -45,10 +45,10 @@ class PeopleDetails extends ConsumerWidget {
         return AnimatedCrossFade(
           firstChild: const SizedBox.shrink(),
           secondChild: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
+                padding: const .only(left: 16, top: 16, bottom: 16),
                 child: Text(
                   "people".t(context: context),
                   style: context.textTheme.labelLarge?.copyWith(color: context.colorScheme.onSurfaceSecondary),
@@ -57,8 +57,8 @@ class PeopleDetails extends ConsumerWidget {
               SizedBox(
                 height: 160,
                 child: ListView(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  scrollDirection: Axis.horizontal,
+                  padding: const .only(left: 16.0),
+                  scrollDirection: .horizontal,
                   children: [
                     for (final person in people)
                       _Avatar(
@@ -83,7 +83,7 @@ class PeopleDetails extends ConsumerWidget {
               ),
             ],
           ),
-          crossFadeState: people.isEmpty ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          crossFadeState: people.isEmpty ? .showFirst : .showSecond,
           duration: Durations.short4,
         );
       },
@@ -107,9 +107,9 @@ class _Avatar extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 96),
       child: Padding(
-        padding: const EdgeInsets.only(right: 16.0),
+        padding: const .only(right: 16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: .center,
           children: [
             GestureDetector(
               onTap: onTap,
@@ -134,27 +134,27 @@ class _Avatar extends StatelessWidget {
                   "add_a_name".t(context: context),
                   style: context.textTheme.labelLarge?.copyWith(color: context.primaryColor),
                   maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
+                  overflow: .ellipsis,
+                  textAlign: .center,
                 ),
               )
             else
               Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: .min,
                 children: [
                   Text(
                     person.name,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
+                    textAlign: .center,
+                    overflow: .ellipsis,
                     style: context.textTheme.labelLarge,
                     maxLines: 1,
                   ),
                   if (person.birthDate != null)
                     FittedBox(
-                      fit: BoxFit.scaleDown,
+                      fit: .scaleDown,
                       child: Text(
                         formatAge(person.birthDate!, assetFileCreatedAt),
-                        textAlign: TextAlign.center,
+                        textAlign: .center,
                         style: context.textTheme.bodyMedium?.copyWith(
                           color: context.textTheme.bodyMedium?.color?.withAlpha(175),
                         ),

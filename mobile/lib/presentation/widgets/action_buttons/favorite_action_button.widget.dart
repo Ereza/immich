@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
@@ -24,7 +23,7 @@ class FavoriteActionButton extends ConsumerWidget {
 
     final result = await ref.read(actionProvider.notifier).favorite(source);
 
-    if (source == ActionSource.viewer) {
+    if (source == .viewer) {
       if (result.success) {
         final currentAsset = ref.read(assetViewerProvider).currentAsset;
         if (currentAsset is RemoteAsset && !currentAsset.isFavorite) {
@@ -42,8 +41,8 @@ class FavoriteActionButton extends ConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: result.success ? ToastType.success : ToastType.error,
+        gravity: .BOTTOM,
+        toastType: result.success ? .success : .error,
       );
     }
   }

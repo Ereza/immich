@@ -34,9 +34,7 @@ class ShareHandlerRepository {
         continue;
       }
 
-      final type = attachment.type == SharedAttachmentType.image
-          ? ShareIntentAttachmentType.image
-          : ShareIntentAttachmentType.video;
+      final type = attachment.type == .image ? ShareIntentAttachmentType.image : ShareIntentAttachmentType.video;
 
       final fileLength = File(attachment.path).lengthSync();
 
@@ -44,7 +42,7 @@ class ShareHandlerRepository {
         ShareIntentAttachment(
           path: attachment.path,
           type: type,
-          status: UploadStatus.enqueued,
+          status: .enqueued,
           uploadProgress: 0.0,
           fileLength: fileLength,
         ),

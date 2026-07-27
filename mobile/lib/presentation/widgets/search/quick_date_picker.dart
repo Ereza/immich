@@ -108,21 +108,21 @@ class QuickDatePicker extends HookWidget {
   static _QuickPickerType? _selectionFromModel(DateFilterInputModel? model) {
     if (model is RecentMonthRangeFilter) {
       return switch (model.monthDelta) {
-        1 => _QuickPickerType.last1Month,
-        3 => _QuickPickerType.last3Months,
-        9 => _QuickPickerType.last9Months,
-        _ => _QuickPickerType.custom,
+        1 => .last1Month,
+        3 => .last3Months,
+        9 => .last9Months,
+        _ => .custom,
       };
     } else if (model is YearFilter) {
-      return _QuickPickerType.year;
+      return .year;
     } else if (model is CustomDateFilter) {
-      return _QuickPickerType.custom;
+      return .custom;
     }
     return null;
   }
 
   Text _monthLabel(BuildContext context, int monthsFromNow) =>
-      const Text('last_months').t(context: context, args: {"count": monthsFromNow.toString()});
+      .new('last_months'.t(context: context, args: {"count": monthsFromNow.toString()}));
 
   Widget _yearPicker(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -171,7 +171,7 @@ class QuickDatePicker extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding: .only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Scrollbar(
         // Depending on the screen size the last option might get cut off
         // Add a clear visual cue that there are more options when scrolling
@@ -185,13 +185,13 @@ class QuickDatePicker extends HookWidget {
                 return;
               }
               final _ = switch (value) {
-                _QuickPickerType.custom => onRequestPicker(),
-                _QuickPickerType.last1Month => onSelect(RecentMonthRangeFilter(1)),
-                _QuickPickerType.last3Months => onSelect(RecentMonthRangeFilter(3)),
-                _QuickPickerType.last9Months => onSelect(RecentMonthRangeFilter(9)),
+                .custom => onRequestPicker(),
+                .last1Month => onSelect(RecentMonthRangeFilter(1)),
+                .last3Months => onSelect(RecentMonthRangeFilter(3)),
+                .last9Months => onSelect(RecentMonthRangeFilter(9)),
                 // When a year is selected the combobox triggers onSelect() on its own.
                 // Here we handle the radio button being selected which can only ever be the initial year
-                _QuickPickerType.year => onSelect(YearFilter(_initialYear)),
+                .year => onSelect(YearFilter(_initialYear)),
               };
             },
             groupValue: _selection,

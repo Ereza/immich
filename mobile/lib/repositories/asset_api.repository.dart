@@ -80,10 +80,10 @@ class AssetApiRepository extends ApiRepository {
   }
 
   api.AssetVisibility _mapVisibility(AssetVisibility visibility) => switch (visibility) {
-    AssetVisibility.timeline => api.AssetVisibility.timeline,
-    AssetVisibility.hidden => api.AssetVisibility.hidden,
-    AssetVisibility.locked => api.AssetVisibility.locked,
-    AssetVisibility.archive => api.AssetVisibility.archive,
+    .timeline => api.AssetVisibility.timeline,
+    .hidden => api.AssetVisibility.hidden,
+    .locked => api.AssetVisibility.locked,
+    .archive => api.AssetVisibility.archive,
   };
 
   Future<String?> getAssetMIMEType(String assetId) async {
@@ -133,18 +133,9 @@ extension on StackResponseDto {
 extension on AssetEdit {
   AssetEditActionItemDto toApi() {
     return switch (this) {
-      CropEdit(:final parameters) => AssetEditActionItemDto(
-        action: AssetEditAction.crop,
-        parameters: parameters.toJson(),
-      ),
-      RotateEdit(:final parameters) => AssetEditActionItemDto(
-        action: AssetEditAction.rotate,
-        parameters: parameters.toJson(),
-      ),
-      MirrorEdit(:final parameters) => AssetEditActionItemDto(
-        action: AssetEditAction.mirror,
-        parameters: parameters.toJson(),
-      ),
+      CropEdit(:final parameters) => AssetEditActionItemDto(action: .crop, parameters: parameters.toJson()),
+      RotateEdit(:final parameters) => AssetEditActionItemDto(action: .rotate, parameters: parameters.toJson()),
+      MirrorEdit(:final parameters) => AssetEditActionItemDto(action: .mirror, parameters: parameters.toJson()),
     };
   }
 }

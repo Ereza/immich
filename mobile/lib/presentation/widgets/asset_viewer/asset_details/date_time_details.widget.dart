@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/exif.model.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
@@ -35,7 +34,7 @@ class DateTimeDetails extends ConsumerWidget {
           titleStyle: context.textTheme.labelLarge,
           trailing: asset.hasRemote && isOwner ? const Icon(Icons.edit, size: 18) : null,
           onTap: asset.hasRemote && isOwner
-              ? () async => await ref.read(actionProvider.notifier).editDateTime(ActionSource.viewer, context)
+              ? () async => await ref.read(actionProvider.notifier).editDateTime(.viewer, context)
               : null,
         ),
         if (exifInfo != null) _SheetAssetDescription(exif: exifInfo, isEditable: isOwner),
@@ -89,7 +88,7 @@ class _SheetAssetDescriptionState extends ConsumerState<_SheetAssetDescription> 
       return;
     }
 
-    final editAction = await ref.read(actionProvider.notifier).updateDescription(ActionSource.viewer, newDescription);
+    final editAction = await ref.read(actionProvider.notifier).updateDescription(.viewer, newDescription);
 
     if (!editAction.success) {
       _controller.text = previousDescription ?? '';
@@ -97,7 +96,7 @@ class _SheetAssetDescriptionState extends ConsumerState<_SheetAssetDescription> 
       ImmichToast.show(
         context: context,
         msg: 'exif_bottom_sheet_description_error'.t(context: context),
-        toastType: ToastType.error,
+        toastType: .error,
       );
     }
 
@@ -115,22 +114,22 @@ class _SheetAssetDescriptionState extends ConsumerState<_SheetAssetDescription> 
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const .symmetric(horizontal: 16.0, vertical: 8),
       child: IgnorePointer(
         ignoring: !widget.isEditable,
         child: TextField(
           controller: _controller,
-          keyboardType: TextInputType.multiline,
+          keyboardType: .multiline,
           maxLines: null,
           focusNode: _descriptionFocus,
           decoration: InputDecoration(
             hintText: hintText,
-            border: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            focusedErrorBorder: InputBorder.none,
+            border: .none,
+            enabledBorder: .none,
+            focusedBorder: .none,
+            disabledBorder: .none,
+            errorBorder: .none,
+            focusedErrorBorder: .none,
           ),
           onTapOutside: (_) => saveDescription(widget.exif.description),
         ),

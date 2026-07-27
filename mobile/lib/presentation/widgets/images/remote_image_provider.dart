@@ -7,7 +7,6 @@ import 'package:immich_mobile/presentation/widgets/images/animated_image_stream_
 import 'package:immich_mobile/presentation/widgets/images/image_provider.dart';
 import 'package:immich_mobile/presentation/widgets/images/one_frame_multi_image_stream_completer.dart';
 import 'package:immich_mobile/utils/image_url_builder.dart';
-import 'package:openapi/api.dart';
 
 class RemoteImageProvider extends CancellableImageProvider<RemoteImageProvider>
     with CancellableImageProviderMixin<RemoteImageProvider> {
@@ -115,14 +114,9 @@ class RemoteFullImageProvider extends CancellableImageProvider<RemoteFullImagePr
     }
 
     final previewRequest = request = RemoteImageRequest(
-      uri: getThumbnailUrlForRemoteId(
-        key.assetId,
-        type: AssetMediaSize.preview,
-        thumbhash: key.thumbhash,
-        edited: key.edited,
-      ),
+      uri: getThumbnailUrlForRemoteId(key.assetId, type: .preview, thumbhash: key.thumbhash, edited: key.edited),
     );
-    final loadOriginal = assetType == AssetType.image && SettingsRepository.instance.appConfig.image.loadOriginal;
+    final loadOriginal = assetType == .image && SettingsRepository.instance.appConfig.image.loadOriginal;
     yield* loadRequest(previewRequest, decode, isFinal: !loadOriginal);
 
     if (!loadOriginal) {
@@ -147,12 +141,7 @@ class RemoteFullImageProvider extends CancellableImageProvider<RemoteFullImagePr
     }
 
     final previewRequest = request = RemoteImageRequest(
-      uri: getThumbnailUrlForRemoteId(
-        key.assetId,
-        type: AssetMediaSize.preview,
-        thumbhash: key.thumbhash,
-        edited: key.edited,
-      ),
+      uri: getThumbnailUrlForRemoteId(key.assetId, type: .preview, thumbhash: key.thumbhash, edited: key.edited),
     );
     yield* loadRequest(previewRequest, decode, isFinal: false);
 

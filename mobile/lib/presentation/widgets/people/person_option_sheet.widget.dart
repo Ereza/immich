@@ -11,11 +11,11 @@ class PersonOptionSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextStyle textStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w600);
+    TextStyle textStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: .w600);
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24.0),
+        padding: const .symmetric(vertical: 24.0),
         child: ListView(
           shrinkWrap: true,
           children: [

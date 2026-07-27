@@ -32,13 +32,13 @@ class ShareIntentAttachment {
 
   int get id => hash(path);
 
-  File get file => File(path);
+  File get file => .new(path);
 
   String get fileName => basename(file.path);
 
-  bool get isImage => type == ShareIntentAttachmentType.image;
+  bool get isImage => type == .image;
 
-  bool get isVideo => type == ShareIntentAttachmentType.video;
+  bool get isVideo => type == .video;
 
   String? _fileSize;
 
@@ -70,8 +70,8 @@ class ShareIntentAttachment {
   factory ShareIntentAttachment.fromMap(Map<String, dynamic> map) {
     return ShareIntentAttachment(
       path: map['path'] as String,
-      type: ShareIntentAttachmentType.values[map['type'] as int],
-      status: UploadStatus.values[map['status'] as int],
+      type: .values[map['type'] as int],
+      status: .values[map['status'] as int],
       uploadProgress: map['uploadProgress'] as double,
     );
   }

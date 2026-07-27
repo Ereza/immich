@@ -20,12 +20,10 @@ class ShareIntentPage extends ConsumerWidget {
     final currentEndpoint = getServerUrl() ?? '--';
     final candidates = ref.watch(shareIntentUploadProvider);
 
-    final isUploading = candidates.any((candidate) => candidate.status == UploadStatus.running);
+    final isUploading = candidates.any((candidate) => candidate.status == .running);
     final isUploaded =
         candidates.isNotEmpty &&
-        candidates.every(
-          (candidate) => candidate.status == UploadStatus.complete || candidate.status == UploadStatus.failed,
-        );
+        candidates.every((candidate) => candidate.status == .complete || candidate.status == .failed);
 
     void removeAttachment(ShareIntentAttachment attachment) {
       ref.read(shareIntentUploadProvider.notifier).removeAttachment(attachment);
@@ -77,7 +75,7 @@ class ShareIntentPage extends ConsumerWidget {
           final target = candidates.firstWhere((element) => element.id == attachment.id, orElse: () => attachment);
 
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
+            padding: const .symmetric(vertical: 4.0, horizontal: 16),
             child: LargeLeadingTile(
               onTap: () => toggleSelection(attachment),
               disabled: isUploading || isUploaded,
@@ -85,9 +83,9 @@ class ShareIntentPage extends ConsumerWidget {
               leading: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    borderRadius: const .all(.circular(16)),
                     child: attachment.isImage
-                        ? Image.file(attachment.file, width: 64, height: 64, fit: BoxFit.cover)
+                        ? Image.file(attachment.file, width: 64, height: 64, fit: .cover)
                         : const SizedBox(
                             width: 64,
                             height: 64,
@@ -110,7 +108,7 @@ class ShareIntentPage extends ConsumerWidget {
               title: Text(attachment.fileName, style: context.textTheme.titleSmall),
               subtitle: Text(attachment.fileSize, style: context.textTheme.labelLarge),
               trailing: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const .symmetric(horizontal: 16.0),
                 child: UploadStatusIcon(
                   selected: isSelected(attachment),
                   status: target.status,
@@ -123,7 +121,7 @@ class ShareIntentPage extends ConsumerWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const .all(16.0),
           child: SizedBox(
             height: 48,
             child: ElevatedButton(
@@ -144,7 +142,7 @@ class UploadingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uploadedCount = candidates.where((element) {
-      return element.status == UploadStatus.complete;
+      return element.status == .complete;
     }).length;
 
     return const Text(
@@ -171,13 +169,9 @@ class UploadStatusIcon extends StatelessWidget {
     }
 
     final statusIcon = switch (status) {
-      UploadStatus.enqueued => Icon(
-        Icons.check_circle_rounded,
-        color: context.primaryColor,
-        semanticLabel: 'enqueued'.tr(),
-      ),
-      UploadStatus.running => Stack(
-        alignment: AlignmentDirectional.center,
+      .enqueued => Icon(Icons.check_circle_rounded, color: context.primaryColor, semanticLabel: 'enqueued'.tr()),
+      .running => Stack(
+        alignment: .center,
         children: [
           SizedBox(
             width: 40,
@@ -193,14 +187,11 @@ class UploadStatusIcon extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            (progress * 100).toStringAsFixed(0),
-            style: context.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold),
-          ),
+          Text((progress * 100).toStringAsFixed(0), style: context.textTheme.labelSmall?.copyWith(fontWeight: .bold)),
         ],
       ),
-      UploadStatus.complete => Icon(Icons.check_circle_rounded, color: Colors.green, semanticLabel: 'completed'.tr()),
-      UploadStatus.failed => Icon(Icons.error_rounded, color: Colors.red, semanticLabel: 'failed'.tr()),
+      .complete => Icon(Icons.check_circle_rounded, color: Colors.green, semanticLabel: 'completed'.tr()),
+      .failed => Icon(Icons.error_rounded, color: Colors.red, semanticLabel: 'failed'.tr()),
     };
 
     return statusIcon;

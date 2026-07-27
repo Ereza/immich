@@ -48,7 +48,7 @@ class DownloadService {
   }
 
   void _onImageDownloadCallback(TaskStatusUpdate update) {
-    if (update.status == TaskStatus.complete) {
+    if (update.status == .complete) {
       unawaited(_saveImageWithPath(update.task));
     }
 
@@ -56,7 +56,7 @@ class DownloadService {
   }
 
   void _onVideoDownloadCallback(TaskStatusUpdate update) {
-    if (update.status == TaskStatus.complete) {
+    if (update.status == .complete) {
       unawaited(_saveVideo(update.task));
     }
 
@@ -109,8 +109,8 @@ class DownloadService {
 
   Future<bool> _saveLivePhotos(String livePhotosId) async {
     final records = await _downloadRepository.getLiveVideoTasks();
-    final imageRecord = _findTaskRecord(records, livePhotosId, LivePhotosPart.image);
-    final videoRecord = _findTaskRecord(records, livePhotosId, LivePhotosPart.video);
+    final imageRecord = _findTaskRecord(records, livePhotosId, .image);
+    final videoRecord = _findTaskRecord(records, livePhotosId, .video);
 
     if (imageRecord == null || videoRecord == null) {
       return false;

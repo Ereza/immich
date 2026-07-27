@@ -37,18 +37,18 @@ class GalleryPermissionNotifier extends StateNotifier<PermissionStatus> {
         // Return the joint result of those two permissions
         final PermissionStatus status;
         if ((photos.isGranted && videos.isGranted) || (photos.isLimited && videos.isLimited)) {
-          status = PermissionStatus.granted;
+          status = .granted;
         } else if (photos.isDenied || videos.isDenied) {
-          status = PermissionStatus.denied;
+          status = .denied;
         } else if (photos.isPermanentlyDenied || videos.isPermanentlyDenied) {
-          status = PermissionStatus.permanentlyDenied;
+          status = .permanentlyDenied;
         } else {
-          status = PermissionStatus.denied;
+          status = .denied;
         }
 
         result = status;
       }
-      if (result == PermissionStatus.granted && androidInfo.version.sdkInt >= 29) {
+      if (result == .granted && androidInfo.version.sdkInt >= 29) {
         result = await Permission.accessMediaLocation.request();
       }
     } else {
@@ -79,18 +79,18 @@ class GalleryPermissionNotifier extends StateNotifier<PermissionStatus> {
         // Return the joint result of those two permissions
         final PermissionStatus status;
         if ((photos.isGranted && videos.isGranted) || (photos.isLimited && videos.isLimited)) {
-          status = PermissionStatus.granted;
+          status = .granted;
         } else if (photos.isDenied || videos.isDenied) {
-          status = PermissionStatus.denied;
+          status = .denied;
         } else if (photos.isPermanentlyDenied || videos.isPermanentlyDenied) {
-          status = PermissionStatus.permanentlyDenied;
+          status = .permanentlyDenied;
         } else {
-          status = PermissionStatus.denied;
+          status = .denied;
         }
 
         result = status;
       }
-      if (state == PermissionStatus.granted && androidInfo.version.sdkInt >= 29) {
+      if (state == .granted && androidInfo.version.sdkInt >= 29) {
         result = await Permission.accessMediaLocation.status;
       }
     } else {

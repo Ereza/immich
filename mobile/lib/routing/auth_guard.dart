@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/services/store.service.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/routing/router.dart';
@@ -24,7 +23,7 @@ class AuthGuard extends AutoRouteGuard {
     // the background — otherwise a slow validateAccessToken() request would
     // block the route transition for as long as the OS-level HTTP timeout.
     try {
-      Store.get(StoreKey.accessToken);
+      Store.get(.accessToken);
     } on StoreKeyNotFoundException catch (_) {
       _log.warning('No access token in the store.');
       resolver.next(false);
@@ -40,7 +39,7 @@ class AuthGuard extends AutoRouteGuard {
     if (_validateInFlight) {
       return;
     }
-    final token = Store.tryGet(StoreKey.accessToken);
+    final token = Store.tryGet(.accessToken);
     if (token == null) {
       return;
     }
@@ -50,7 +49,7 @@ class AuthGuard extends AutoRouteGuard {
       if (res == null || res.authStatus != true) {
         // Token may have changed during validation (user logged out + logged in
         // again); only act if it still applies to the current session.
-        if (Store.tryGet(StoreKey.accessToken) != token) {
+        if (Store.tryGet(.accessToken) != token) {
           return;
         }
         _log.fine('User token is invalid. Redirecting to login');
@@ -61,7 +60,7 @@ class AuthGuard extends AutoRouteGuard {
       if (e.code != HttpStatus.unauthorized) {
         return;
       }
-      if (Store.tryGet(StoreKey.accessToken) != token) {
+      if (Store.tryGet(.accessToken) != token) {
         return;
       }
       _log.warning("Unauthorized access token.");

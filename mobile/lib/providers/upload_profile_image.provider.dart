@@ -32,7 +32,7 @@ class UploadProfileImageState {
 
   factory UploadProfileImageState.fromMap(Map<String, dynamic> map) {
     return UploadProfileImageState(
-      status: UploadProfileStatus.values[map['status'] ?? 0],
+      status: .values[map['status'] ?? 0],
       profileImagePath: map['profileImagePath'] ?? '',
     );
   }
@@ -59,22 +59,22 @@ class UploadProfileImageState {
 
 class UploadProfileImageNotifier extends StateNotifier<UploadProfileImageState> {
   UploadProfileImageNotifier(this._userService)
-    : super(const UploadProfileImageState(profileImagePath: '', status: UploadProfileStatus.idle));
+    : super(const UploadProfileImageState(profileImagePath: '', status: .idle));
 
   final UserService _userService;
 
   Future<bool> upload(XFile file, {String? fileName}) async {
-    state = state.copyWith(status: UploadProfileStatus.loading);
+    state = state.copyWith(status: .loading);
 
     var profileImagePath = await _userService.createProfileImage(fileName ?? file.name, await file.readAsBytes());
 
     if (profileImagePath != null) {
       dPrint(() => "Successfully upload profile image");
-      state = state.copyWith(status: UploadProfileStatus.success, profileImagePath: profileImagePath);
+      state = state.copyWith(status: .success, profileImagePath: profileImagePath);
       return true;
     }
 
-    state = state.copyWith(status: UploadProfileStatus.failure);
+    state = state.copyWith(status: .failure);
     return false;
   }
 }

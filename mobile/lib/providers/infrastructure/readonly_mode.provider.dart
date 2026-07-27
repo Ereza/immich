@@ -10,13 +10,13 @@ class ReadOnlyModeNotifier extends Notifier<bool> {
   @override
   bool build() {
     _appSettingService = ref.read(appSettingsServiceProvider);
-    final readonlyMode = _appSettingService.getSetting(AppSettingsEnum.readonlyModeEnabled);
+    final readonlyMode = _appSettingService.getSetting(.readonlyModeEnabled);
     return readonlyMode;
   }
 
   void setMode(bool value) {
     final isLoggedIn = ref.read(authProvider).isAuthenticated;
-    _appSettingService.setSetting(AppSettingsEnum.readonlyModeEnabled, value);
+    _appSettingService.setSetting(.readonlyModeEnabled, value);
     state = value;
 
     if (value && isLoggedIn) {

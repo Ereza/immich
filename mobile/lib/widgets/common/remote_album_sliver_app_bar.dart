@@ -111,7 +111,7 @@ class _MesmerizingSliverAppBarState extends ConsumerState<RemoteAlbumSliverAppBa
             child: scrollProgress > 0.95
                 ? Text(
                     currentAlbum.name,
-                    style: TextStyle(color: context.primaryColor, fontWeight: FontWeight.w600, fontSize: 18),
+                    style: TextStyle(color: context.primaryColor, fontWeight: .w600, fontSize: 18),
                   )
                 : null,
           );
@@ -167,7 +167,7 @@ class _ExpandedBackgroundState extends ConsumerState<_ExpandedBackground> with S
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 1.5),
-      end: Offset.zero,
+      end: .zero,
     ).animate(CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic));
 
     Future.delayed(const Duration(milliseconds: 100), () {
@@ -194,7 +194,7 @@ class _ExpandedBackgroundState extends ConsumerState<_ExpandedBackground> with S
 
     final dateRange = ref.watch(remoteAlbumDateRangeProvider(currentAlbum.id));
     return Stack(
-      fit: StackFit.expand,
+      fit: .expand,
       children: [
         Transform.translate(
           offset: Offset(0, widget.scrollProgress * 50),
@@ -209,8 +209,8 @@ class _ExpandedBackgroundState extends ConsumerState<_ExpandedBackground> with S
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                  begin: .topCenter,
+                  end: .bottomCenter,
                   colors: [
                     Colors.black.withValues(alpha: 0.05),
                     Colors.transparent,
@@ -230,8 +230,8 @@ class _ExpandedBackgroundState extends ConsumerState<_ExpandedBackground> with S
           child: SlideTransition(
             position: _slideAnimation,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: .start,
+              mainAxisSize: .min,
               children: [
                 Row(
                   children: [
@@ -281,7 +281,7 @@ class _ExpandedBackgroundState extends ConsumerState<_ExpandedBackground> with S
                       ),
                     ),
                   ),
-                const Padding(padding: EdgeInsets.only(top: 8.0), child: RemoteAlbumSharedUserIcons()),
+                const Padding(padding: .only(top: 8.0), child: RemoteAlbumSharedUserIcons()),
               ],
             ),
           ),
@@ -354,13 +354,13 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
     _zoomController = AnimationController(
       duration: const Duration(seconds: 12),
       vsync: this,
-      animationBehavior: AnimationBehavior.preserve,
+      animationBehavior: .preserve,
     );
 
     _crossFadeController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
-      animationBehavior: AnimationBehavior.preserve,
+      animationBehavior: .preserve,
     );
 
     _zoomAnimation = Tween<double>(
@@ -369,7 +369,7 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
     ).animate(CurvedAnimation(parent: _zoomController, curve: Curves.easeInOut));
 
     _panAnimation = Tween<Offset>(
-      begin: Offset.zero,
+      begin: .zero,
       end: const Offset(0.5, -0.5),
     ).animate(CurvedAnimation(parent: _zoomController, curve: Curves.easeInOut));
 
@@ -419,7 +419,7 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
 
     await _crossFadeController.forward();
 
-    if (_zoomController.status == AnimationStatus.dismissed) {
+    if (_zoomController.status == .dismissed) {
       if (_isZoomingIn) {
         _zoomController.reset();
       } else {
@@ -475,19 +475,19 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
           child: Transform.translate(
             offset: _panAnimation.value,
             child: Stack(
-              fit: StackFit.expand,
+              fit: .expand,
               children: [
                 // Current image
                 if (_currentAsset != null)
                   Opacity(
                     opacity: _crossFadeAnimation.value,
                     child: SizedBox(
-                      width: double.infinity,
-                      height: double.infinity,
+                      width: .infinity,
+                      height: .infinity,
                       child: Image(
-                        alignment: Alignment.topRight,
+                        alignment: .topRight,
                         image: getFullImageProvider(_currentAsset!),
-                        fit: BoxFit.cover,
+                        fit: .cover,
                         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
                           if (wasSynchronouslyLoaded || frame != null) {
                             return child;
@@ -496,8 +496,8 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
                         },
                         errorBuilder: (context, error, stackTrace) {
                           return SizedBox(
-                            width: double.infinity,
-                            height: double.infinity,
+                            width: .infinity,
+                            height: .infinity,
                             child: Icon(Icons.error_outline_rounded, size: 24, color: Colors.red[300]),
                           );
                         },
@@ -509,12 +509,12 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
                   Opacity(
                     opacity: 1.0 - _crossFadeAnimation.value,
                     child: SizedBox(
-                      width: double.infinity,
-                      height: double.infinity,
+                      width: .infinity,
+                      height: .infinity,
                       child: Image(
-                        alignment: Alignment.topRight,
+                        alignment: .topRight,
                         image: getFullImageProvider(_nextAsset!),
-                        fit: BoxFit.cover,
+                        fit: .cover,
                         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
                           if (wasSynchronouslyLoaded || frame != null) {
                             return child;
@@ -523,8 +523,8 @@ class _RandomAssetBackgroundState extends State<_RandomAssetBackground> with Tic
                         },
                         errorBuilder: (context, error, stackTrace) {
                           return SizedBox(
-                            width: double.infinity,
-                            height: double.infinity,
+                            width: .infinity,
+                            height: .infinity,
                             child: Icon(Icons.error_outline_rounded, size: 24, color: Colors.red[300]),
                           );
                         },
@@ -548,10 +548,10 @@ class _DynamicText extends StatelessWidget {
 
   static const _baseTextStyle = TextStyle(
     color: Colors.white,
-    fontWeight: FontWeight.bold,
+    fontWeight: .bold,
     letterSpacing: 0.5,
     shadows: [Shadow(offset: Offset(0, 2), blurRadius: 12, color: Colors.black54)],
-    overflow: TextOverflow.ellipsis,
+    overflow: .ellipsis,
   );
 
   int _lineCount(double fontSize) {
@@ -561,7 +561,7 @@ class _DynamicText extends StatelessWidget {
         style: _baseTextStyle.copyWith(fontSize: fontSize),
       ),
       maxLines: 3,
-      textDirection: TextDirection.ltr,
+      textDirection: .ltr,
     )..layout(maxWidth: maxWidth);
     return textPainter.computeLineMetrics().length;
   }

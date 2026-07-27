@@ -73,10 +73,10 @@ class _FeatureMessageDialogState extends State<_FeatureMessageDialog> with Singl
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 64),
-      clipBehavior: Clip.antiAlias,
+      insetPadding: const .symmetric(horizontal: 8, vertical: 64),
+      clipBehavior: .antiAlias,
       backgroundColor: context.isDarkTheme ? context.colorScheme.surfaceContainerLow : Colors.white,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(_radius))),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(_radius))),
       child: AnimatedBuilder(
         animation: _borderController,
         builder: (context, child) => CustomPaint(
@@ -91,20 +91,17 @@ class _FeatureMessageDialogState extends State<_FeatureMessageDialog> with Singl
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: context.height * 0.9, maxWidth: 480),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: .min,
+            mainAxisAlignment: .start,
+            crossAxisAlignment: .start,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 20, 24, 4),
+                padding: const .fromLTRB(24, 20, 24, 4),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: .start,
+                  mainAxisSize: .min,
                   children: [
-                    Text(
-                      context.t.whats_new,
-                      style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
-                    ),
+                    Text(context.t.whats_new, style: context.textTheme.titleLarge?.copyWith(fontWeight: .w700)),
                     const SizedBox(height: 2),
                     Text(
                       context.t.whats_new_version(version: featureMessageRelease.toString()),
@@ -126,19 +123,19 @@ class _FeatureMessageDialogState extends State<_FeatureMessageDialog> with Singl
               const SizedBox(height: 8),
               _PageDots(controller: _controller, index: _index, count: _highlights.length),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 18, 20, 26),
+                padding: const .fromLTRB(20, 18, 20, 26),
                 child: Row(
                   children: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      style: TextButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14)),
+                      style: TextButton.styleFrom(padding: const .symmetric(horizontal: 12, vertical: 14)),
                       child: Text(context.t.skip),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(100)),
+                          borderRadius: const .all(.circular(100)),
                           boxShadow: [
                             // Soft wide primary glow.
                             BoxShadow(
@@ -158,12 +155,9 @@ class _FeatureMessageDialogState extends State<_FeatureMessageDialog> with Singl
                         child: FilledButton(
                           onPressed: _advance,
                           style: FilledButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: const .symmetric(vertical: 16),
                             elevation: 0,
-                            textStyle: context.textTheme.labelLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                            ),
+                            textStyle: context.textTheme.labelLarge?.copyWith(fontWeight: .w700, fontSize: 16),
                           ),
                           child: AnimatedSwitcher(
                             duration: const Duration(milliseconds: 200),
@@ -200,7 +194,7 @@ class _GradientBorderPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final inset = strokeWidth / 2;
     final rect = (Offset.zero & size).deflate(inset);
-    final rrect = RRect.fromRectAndRadius(rect, Radius.circular(radius - inset));
+    final rrect = RRect.fromRectAndRadius(rect, .circular(radius - inset));
 
     final shader = SweepGradient(
       transform: GradientRotation(rotation * 2 * math.pi),
@@ -209,7 +203,7 @@ class _GradientBorderPainter extends CustomPainter {
 
     final paint = Paint()
       ..shader = shader
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = strokeWidth;
     canvas.drawRRect(rrect, paint);
   }
@@ -232,23 +226,23 @@ class _FeaturePage extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+            padding: const .fromLTRB(20, 8, 20, 0),
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: scheme.surfaceContainerHighest,
-                borderRadius: const BorderRadius.all(Radius.circular(18)),
-                border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.5)),
+                borderRadius: const .all(.circular(18)),
+                border: .all(color: scheme.outlineVariant.withValues(alpha: 0.5)),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(18)),
+                borderRadius: const .all(.circular(18)),
                 child: SizedBox(
-                  width: double.infinity,
+                  width: .infinity,
                   height: 256,
                   child: highlight.image == null
                       ? const FeatureMessagePlaceholder()
                       : Image.asset(
                           highlight.image!,
-                          fit: BoxFit.contain,
+                          fit: .contain,
                           errorBuilder: (context, _, __) => const FeatureMessagePlaceholder(),
                         ),
                 ),
@@ -256,14 +250,14 @@ class _FeaturePage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(24, 18, 24, 8),
+            padding: const .fromLTRB(24, 18, 24, 8),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: .start,
+              mainAxisSize: .min,
               children: [
                 Text(
                   highlight.titleKey.tr(),
-                  style: context.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700, fontSize: 24),
+                  style: context.textTheme.titleLarge?.copyWith(fontWeight: .w700, fontSize: 24),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -295,17 +289,17 @@ class _PageDots extends StatelessWidget {
       builder: (context, _) {
         final page = controller.hasClients ? (controller.page ?? index.toDouble()) : index.toDouble();
         return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: List.generate(count, (i) {
             final activeness = (1 - (page - i).abs()).clamp(0.0, 1.0);
             return AnimatedContainer(
               duration: const Duration(milliseconds: 150),
-              margin: const EdgeInsets.symmetric(horizontal: 3),
+              margin: const .symmetric(horizontal: 3),
               height: 7,
               width: 7 + 16 * activeness,
               decoration: BoxDecoration(
                 color: Color.lerp(context.colorScheme.surfaceContainerHighest, primary, activeness),
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                borderRadius: const .all(.circular(8)),
               ),
             );
           }),

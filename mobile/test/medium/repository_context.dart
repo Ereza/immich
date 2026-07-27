@@ -331,7 +331,7 @@ class MediumRepositoryContext {
           MemoryEntityCompanion(
             id: .new(id),
             ownerId: .new(TestUtils.uuid(ownerId)),
-            type: .new(type ?? MemoryTypeEnum.onThisDay),
+            type: .new(type ?? .onThisDay),
             data: .new(MemoryData(year: year ?? 2020).toJson()),
             isSaved: .new(isSaved ?? false),
             memoryAt: .new(TestUtils.date(memoryAt)),

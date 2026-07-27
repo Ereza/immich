@@ -131,8 +131,7 @@ class DriftLocalAssetRepository extends DriftDatabaseRepository {
                   useColumns: false,
                 ),
               ])..where(
-                _db.localAlbumEntity.backupSelection.equalsValue(BackupSelection.selected) &
-                    _db.remoteAssetEntity.id.isIn(slice),
+                _db.localAlbumEntity.backupSelection.equalsValue(.selected) & _db.remoteAssetEntity.id.isIn(slice),
               ))
               .get();
 
@@ -149,7 +148,7 @@ class DriftLocalAssetRepository extends DriftDatabaseRepository {
   Future<RemovalCandidatesResult> getRemovalCandidates(
     String userId,
     DateTime cutoffDate, {
-    AssetKeepType keepMediaType = AssetKeepType.none,
+    AssetKeepType keepMediaType = .none,
     bool keepFavorites = true,
     Set<String> keepAlbumIds = const {},
   }) async {
@@ -184,12 +183,12 @@ class DriftLocalAssetRepository extends DriftDatabaseRepository {
       whereClause = whereClause & _db.localAssetEntity.id.isNotInQuery(keepAlbumAssets);
     }
 
-    if (keepMediaType == AssetKeepType.photosOnly) {
+    if (keepMediaType == .photosOnly) {
       // Keep photos = delete only videos
-      whereClause = whereClause & _db.localAssetEntity.type.equalsValue(AssetType.video);
-    } else if (keepMediaType == AssetKeepType.videosOnly) {
+      whereClause = whereClause & _db.localAssetEntity.type.equalsValue(.video);
+    } else if (keepMediaType == .videosOnly) {
       // Keep videos = delete only photos
-      whereClause = whereClause & _db.localAssetEntity.type.equalsValue(AssetType.image);
+      whereClause = whereClause & _db.localAssetEntity.type.equalsValue(.image);
     }
 
     if (keepFavorites) {
@@ -230,7 +229,7 @@ class DriftLocalAssetRepository extends DriftDatabaseRepository {
         AND remote_asset_cloud_id_entity.created_at IS local_asset_entity.created_at
       ''',
       updates: {_db.localAssetEntity},
-      updateKind: UpdateKind.update,
+      updateKind: .update,
     );
   }
 }

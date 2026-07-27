@@ -45,7 +45,7 @@ class FakeTimelineService extends Fake implements TimelineService {}
 
 class FakeAssetService extends Fake implements AssetService {
   @override
-  Stream<BaseAsset?> watchAsset(BaseAsset asset) => const Stream.empty();
+  Stream<BaseAsset?> watchAsset(BaseAsset asset) => const .empty();
 }
 
 class TestViewIntentService extends ViewIntentService {
@@ -123,7 +123,7 @@ void main() {
     router = MockAppRouter();
     payload = ViewIntentPayload(path: '/tmp/incoming.jpg', mimeType: 'image/jpeg', localAssetId: 'local-1');
     deepLinkAsset = _localAsset(id: 'local-1');
-    deepLinkTimelineService = await _createReadyTimelineService([deepLinkAsset], TimelineOrigin.deepLink);
+    deepLinkTimelineService = await _createReadyTimelineService([deepLinkAsset], .deepLink);
 
     when(() => router.replaceAll(any())).thenAnswer((_) async {});
 
@@ -242,10 +242,10 @@ LocalAsset _localAsset({required String id}) {
     id: id,
     name: '$id.jpg',
     checksum: 'checksum-1',
-    type: AssetType.image,
+    type: .image,
     createdAt: DateTime(2026, 4, 20),
     updatedAt: DateTime(2026, 4, 20),
-    playbackStyle: AssetPlaybackStyle.image,
+    playbackStyle: .image,
     isEdited: false,
   );
 }
@@ -263,7 +263,7 @@ Future<TimelineService> _createReadyTimelineService(List<BaseAsset> assets, Time
   // Spin a few async ticks so the internal bucket subscription has populated
   // the buffer before tests start asserting against totalAssets.
   for (var i = 0; i < 20 && timelineService.totalAssets != assets.length; i++) {
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(.zero);
   }
   return timelineService;
 }

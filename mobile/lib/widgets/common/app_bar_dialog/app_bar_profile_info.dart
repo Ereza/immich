@@ -35,7 +35,7 @@ class AppBarProfileInfoBox extends HookConsumerWidget {
 
       final userImage = UserCircleAvatar(size: 44, user: user, hasBorder: true);
 
-      if (uploadProfileImageStatus == UploadProfileStatus.loading) {
+      if (uploadProfileImageStatus == .loading) {
         return const SizedBox(height: 40, width: 40, child: ImmichLoadingIndicator(borderRadius: 20));
       }
 
@@ -43,7 +43,7 @@ class AppBarProfileInfoBox extends HookConsumerWidget {
     }
 
     pickUserProfileImage() async {
-      final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery, maxHeight: 1024, maxWidth: 1024);
+      final XFile? image = await ImagePicker().pickImage(source: .gallery, maxHeight: 1024, maxWidth: 1024);
 
       if (image != null) {
         var success = await ref.watch(uploadProfileImageProvider.notifier).upload(image);
@@ -81,7 +81,7 @@ class AppBarProfileInfoBox extends HookConsumerWidget {
         onTap: pickUserProfileImage,
         onLongPress: toggleReadonlyMode,
         child: Stack(
-          clipBehavior: Clip.none,
+          clipBehavior: .none,
           children: [
             AbsorbPointer(child: buildUserProfileImage()),
             if (!isReadonlyModeEnabled)
@@ -91,9 +91,9 @@ class AppBarProfileInfoBox extends HookConsumerWidget {
                 child: Material(
                   color: context.colorScheme.surfaceContainerHighest,
                   elevation: 3,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50.0))),
+                  shape: const RoundedRectangleBorder(borderRadius: .all(.circular(50.0))),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const .all(5.0),
                     child: Icon(Icons.camera_alt_outlined, color: context.primaryColor, size: 14),
                   ),
                 ),
@@ -103,7 +103,7 @@ class AppBarProfileInfoBox extends HookConsumerWidget {
       ),
       title: Text(
         authState.name,
-        style: context.textTheme.titleMedium?.copyWith(color: context.primaryColor, fontWeight: FontWeight.w500),
+        style: context.textTheme.titleMedium?.copyWith(color: context.primaryColor, fontWeight: .w500),
       ),
       subtitle: Text(
         authState.userEmail,

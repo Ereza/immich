@@ -35,7 +35,7 @@ class SlideshowSettings extends HookConsumerWidget {
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingGroupTitle(
           title: 'slideshow'.t(context: context),
@@ -54,7 +54,7 @@ class SlideshowSettings extends HookConsumerWidget {
           maxValue: 30,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const .only(top: 20),
           child: SettingsSubTitle(title: 'look'.t(context: context)),
         ),
         SettingsRadioListTile(
@@ -80,11 +80,11 @@ class SlideshowSettings extends HookConsumerWidget {
           },
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const .only(top: 20),
           child: SettingsSubTitle(title: 'direction'.t(context: context)),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 32),
+          padding: const .only(bottom: 32),
           child: SettingsRadioListTile(
             groups: [
               SettingsRadioGroup(

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  Logger.root.level = Level.OFF;
+  Logger.root.level = .OFF;
   EasyLocalization.logger.enableBuildModes = [];
   // ignore: banned-usage
   debugPrint = (String? message, {int? wrapWidth}) {};

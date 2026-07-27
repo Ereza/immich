@@ -17,7 +17,6 @@ import 'package:immich_mobile/providers/infrastructure/storage.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/trash_sync.provider.dart';
 import 'package:immich_mobile/providers/server_info.provider.dart';
 import 'package:immich_mobile/providers/sync_status.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
 import 'package:immich_mobile/widgets/settings/beta_sync_settings/entity_count_tile.dart';
 import 'package:immich_mobile/widgets/settings/setting_group_title.dart';
 import 'package:immich_mobile/widgets/settings/setting_list_tile.dart';
@@ -57,7 +56,7 @@ class SyncStatusAndActions extends HookConsumerWidget {
         await Share.shareXFiles(
           [XFile(exportFile.path)],
           text: 'Immich Database Export',
-          sharePositionOrigin: Rect.fromPoints(Offset.zero, Offset(size.width / 3, size.height)),
+          sharePositionOrigin: Rect.fromPoints(.zero, Offset(size.width / 3, size.height)),
         );
 
         Future.delayed(const Duration(seconds: 30), () async {
@@ -118,7 +117,7 @@ class SyncStatusAndActions extends HookConsumerWidget {
     }
 
     return ListView(
-      padding: const EdgeInsets.only(top: 16, bottom: 96),
+      padding: const .only(top: 16, bottom: 96),
       children: [
         const _SyncStatsCounts(),
         const Divider(height: 10),
@@ -165,7 +164,7 @@ class SyncStatusAndActions extends HookConsumerWidget {
         ListTile(
           title: Text(
             "clear_file_cache".t(context: context),
-            style: const TextStyle(fontWeight: FontWeight.w500),
+            style: const TextStyle(fontWeight: .w500),
           ),
           leading: const Icon(Icons.playlist_remove_rounded),
           onTap: clearFileCache,
@@ -173,7 +172,7 @@ class SyncStatusAndActions extends HookConsumerWidget {
         ListTile(
           title: Text(
             "export_database".t(context: context),
-            style: const TextStyle(fontWeight: FontWeight.w500),
+            style: const TextStyle(fontWeight: .w500),
           ),
           subtitle: Text("export_database_description".t(context: context)),
           leading: const Icon(Icons.download),
@@ -182,7 +181,7 @@ class SyncStatusAndActions extends HookConsumerWidget {
         ListTile(
           title: Text(
             "reset_sqlite".t(context: context),
-            style: TextStyle(color: context.colorScheme.error, fontWeight: FontWeight.w500),
+            style: TextStyle(color: context.colorScheme.error, fontWeight: .w500),
           ),
           leading: Icon(Icons.settings_backup_restore_rounded, color: context.colorScheme.error),
           onTap: () async {
@@ -202,10 +201,10 @@ class _SyncStatusIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (status) {
-      SyncStatus.idle => const SizedBox.shrink(),
-      SyncStatus.syncing => const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(strokeWidth: 2)),
-      SyncStatus.success => const Icon(Icons.check_circle_outline, color: Colors.green),
-      SyncStatus.error => Icon(Icons.error_outline, color: context.colorScheme.error),
+      .idle => const SizedBox.shrink(),
+      .syncing => const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(strokeWidth: 2)),
+      .success => const Icon(Icons.check_circle_outline, color: Colors.green),
+      .error => Icon(Icons.error_outline, color: context.colorScheme.error),
     };
   }
 }
@@ -234,7 +233,7 @@ class _SyncStatsCounts extends ConsumerWidget {
     return FutureBuilder(
       future: loadCounts(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
+        if (snapshot.connectionState != .done) {
           return const Center(child: SizedBox(height: 48, width: 48, child: CircularProgressIndicator()));
         }
 
@@ -242,7 +241,7 @@ class _SyncStatsCounts extends ConsumerWidget {
           return ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const .all(16.0),
                 child: Center(
                   child: Text(
                     "Error occur, reset the local database by tapping the button below",
@@ -264,19 +263,19 @@ class _SyncStatsCounts extends ConsumerWidget {
         final localHashedCount = snapshot.data![4]! as int;
 
         return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: .start,
+          crossAxisAlignment: .start,
           children: [
             SettingGroupTitle(title: "assets".t(context: context)),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const .fromLTRB(16, 0, 16, 16),
               // 1. Wrap in IntrinsicHeight
               child: IntrinsicHeight(
                 child: Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  direction: .horizontal,
+                  mainAxisAlignment: .spaceBetween,
                   // 2. Stretch children vertically to fill the IntrinsicHeight
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: .stretch,
                   spacing: 8.0,
                   children: [
                     Expanded(
@@ -299,12 +298,12 @@ class _SyncStatsCounts extends ConsumerWidget {
             ),
             SettingGroupTitle(title: "albums".t(context: context)),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const .fromLTRB(16, 0, 16, 16),
               child: IntrinsicHeight(
                 child: Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch, // Added
+                  direction: .horizontal,
+                  mainAxisAlignment: .spaceBetween,
+                  crossAxisAlignment: .stretch, // Added
                   spacing: 8.0,
                   children: [
                     Expanded(
@@ -327,12 +326,12 @@ class _SyncStatsCounts extends ConsumerWidget {
             ),
             SettingGroupTitle(title: "other".t(context: context)),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const .fromLTRB(16, 0, 16, 16),
               child: IntrinsicHeight(
                 child: Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch, // Added
+                  direction: .horizontal,
+                  mainAxisAlignment: .spaceBetween,
+                  crossAxisAlignment: .stretch, // Added
                   spacing: 8.0,
                   children: [
                     Expanded(
@@ -354,20 +353,19 @@ class _SyncStatsCounts extends ConsumerWidget {
               ),
             ),
             // To be removed once the experimental feature is stable
-            if (CurrentPlatform.isAndroid &&
-                appSettingsService.getSetting<bool>(AppSettingsEnum.manageLocalMediaAndroid)) ...[
+            if (CurrentPlatform.isAndroid && appSettingsService.getSetting<bool>(.manageLocalMediaAndroid)) ...[
               SettingGroupTitle(title: "trash".t(context: context)),
               Consumer(
                 builder: (context, ref, _) {
                   final counts = ref.watch(trashedAssetsCountProvider);
                   return counts.when(
                     data: (c) => Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                      padding: const .fromLTRB(16, 8, 16, 16),
                       child: IntrinsicHeight(
                         child: Flex(
-                          direction: Axis.horizontal,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.stretch, // Added
+                          direction: .horizontal,
+                          mainAxisAlignment: .spaceBetween,
+                          crossAxisAlignment: .stretch, // Added
                           spacing: 8.0,
                           children: [
                             Expanded(

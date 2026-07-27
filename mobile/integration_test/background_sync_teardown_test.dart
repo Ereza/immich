@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/utils/background_sync.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/infrastructure/entities/user.entity.drift.dart';
@@ -19,7 +18,7 @@ import 'test_utils/fake_immich_server.dart';
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   // These tests do real I/O without pumping a widget tree, so disable the fake async clock
-  binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
+  binding.framePolicy = .fullyLive;
 
   late Drift drift;
   late FakeImmichServer server;
@@ -34,14 +33,14 @@ void main() {
     server = await FakeImmichServer.start();
     await ApiService().resolveAndSetEndpoint(server.endpoint);
     await drift.delete(drift.userEntity).go();
-    await Store.delete(StoreKey.syncMigrationStatus);
+    await Store.delete(.syncMigrationStatus);
   });
 
   tearDown(() async {
     await workerManagerPatch.dispose();
     await server.close();
-    await Store.delete(StoreKey.serverEndpoint);
-    await Store.delete(StoreKey.syncMigrationStatus);
+    await Store.delete(.serverEndpoint);
+    await Store.delete(.syncMigrationStatus);
   });
 
   void sendUser(SyncStream stream, String id, String name) {
@@ -119,7 +118,9 @@ void main() {
     final releaseTxn = Completer<void>();
     final txnHeld = Completer<void>();
     final txn = drift.transaction(() async {
-      await drift.into(drift.userEntity).insert(
+      await drift
+          .into(drift.userEntity)
+          .insert(
             UserEntityCompanion.insert(
               id: 'holder',
               name: 'holder',

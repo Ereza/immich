@@ -8,7 +8,7 @@ class AssetOcrEntity extends Table with DriftDefaultsMixin {
 
   TextColumn get id => text()();
 
-  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: .cascade)();
 
   RealColumn get x1 => real()();
   RealColumn get y1 => real()();

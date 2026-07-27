@@ -35,7 +35,7 @@ void main() {
   testWidgets('status bar icons are light while the asset viewer is open in light mode', (tester) async {
     // Emulate arriving from a light-themed page whose AppBar set dark status
     // bar icons (the state the viewer is opened from in light mode).
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle(.dark);
 
     await tester.pumpWidget(
       EasyLocalization(

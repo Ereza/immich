@@ -61,9 +61,9 @@ class MapLocationPickerPage extends HookConsumerWidget {
           primary: true,
           body: style.widgetWhen(
             onData: (style) => Container(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
+              clipBehavior: .antiAliasWithSaveLayer,
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40)),
+                borderRadius: .only(bottomLeft: .circular(40), bottomRight: .circular(40)),
               ),
               child: MapLibreMap(
                 initialCameraPosition: CameraPosition(
@@ -100,9 +100,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 25),
+      padding: const .only(top: 25),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: .centerLeft,
         child: ElevatedButton(
           onPressed: onClose,
           style: ElevatedButton.styleFrom(shape: const CircleBorder()),
@@ -113,7 +113,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const .fromHeight(100);
 }
 
 class _BottomBar extends StatelessWidget {
@@ -128,13 +128,13 @@ class _BottomBar extends StatelessWidget {
     return SizedBox(
       height: 150 + context.padding.bottom,
       child: Padding(
-        padding: EdgeInsets.only(bottom: context.padding.bottom),
+        padding: .only(bottom: context.padding.bottom),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: .spaceEvenly,
+          crossAxisAlignment: .start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 const Icon(Icons.public, size: 18),
                 const SizedBox(width: 15),
@@ -146,7 +146,7 @@ class _BottomBar extends StatelessWidget {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: .spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: onUseLocation,

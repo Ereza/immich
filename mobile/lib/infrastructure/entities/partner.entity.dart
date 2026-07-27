@@ -6,9 +6,9 @@ import 'package:immich_mobile/infrastructure/utils/drift_default.mixin.dart';
 class PartnerEntity extends Table with DriftDefaultsMixin {
   const PartnerEntity();
 
-  TextColumn get sharedById => text().references(UserEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get sharedById => text().references(UserEntity, #id, onDelete: .cascade)();
 
-  TextColumn get sharedWithId => text().references(UserEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get sharedWithId => text().references(UserEntity, #id, onDelete: .cascade)();
 
   BoolColumn get inTimeline => boolean().withDefault(const Constant(false))();
 

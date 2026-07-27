@@ -6,13 +6,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/config/slideshow_config.dart';
 import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/scroll_extensions.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
-import 'package:immich_mobile/pages/common/settings.page.dart';
 import 'package:immich_mobile/presentation/widgets/asset_viewer/video_viewer.widget.dart';
 import 'package:immich_mobile/presentation/widgets/images/image_provider.dart';
 import 'package:immich_mobile/providers/asset_viewer/asset_viewer.provider.dart';
@@ -67,7 +65,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
     _updateNextIndex();
     ref.listenManual(appConfigProvider.select((s) => s.slideshow), _onConfigChanged);
 
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    SystemChrome.setEnabledSystemUIMode(.immersive);
     unawaited(WakelockPlus.enable());
   }
 
@@ -93,7 +91,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
 
     if (asset.isImage) {
       _createTimer();
-    } else if (ref.read(videoPlayerProvider(asset.heroTag)).status == VideoPlaybackStatus.paused) {
+    } else if (ref.read(videoPlayerProvider(asset.heroTag)).status == .paused) {
       ref.read(videoPlayerProvider(asset.heroTag).notifier).play();
     } else {
       _nextPage();
@@ -141,9 +139,9 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
 
   void _updateNextIndex() {
     _nextIndex = switch (_config.direction) {
-      SlideshowDirection.forward => _index + 1,
-      SlideshowDirection.backward => _index - 1,
-      SlideshowDirection.shuffle => widget.timeline.getIndex(widget.timeline.getRandomAsset().heroTag)!,
+      .forward => _index + 1,
+      .backward => _index - 1,
+      .shuffle => widget.timeline.getIndex(widget.timeline.getRandomAsset().heroTag)!,
     };
 
     if (!widget.timeline.hasRange(_nextIndex, 1)) {
@@ -154,7 +152,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
   void _nextPage() async {
     if (_nextIndex < 0 || _nextIndex >= widget.timeline.totalAssets) {
       if (_config.repeat) {
-        final wrapped = _config.direction == SlideshowDirection.forward ? 0 : widget.timeline.totalAssets - 1;
+        final wrapped = _config.direction == .forward ? 0 : widget.timeline.totalAssets - 1;
         await widget.timeline.preloadAssets(wrapped);
         _pageController.jumpToPage(wrapped);
       } else {
@@ -206,10 +204,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
       child = _getCrossfadeChild(context, index, zoom);
     }
 
-    return Stack(
-      fit: StackFit.expand,
-      children: [if (_config.look == SlideshowLook.blurredBackground) _getBlur(context, index), child],
-    );
+    return Stack(fit: .expand, children: [if (_config.look == .blurredBackground) _getBlur(context, index), child]);
   }
 
   Widget _getCrossfadeChild(BuildContext context, int index, double zoom) {
@@ -219,16 +214,14 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
       return const SizedBox.shrink();
     }
 
-    final scale = _config.look == SlideshowLook.cover
-        ? PhotoViewComputedScale.covered
-        : PhotoViewComputedScale.contained;
+    final scale = _config.look == .cover ? PhotoViewComputedScale.covered : PhotoViewComputedScale.contained;
 
     return PhotoView(
       imageProvider: getFullImageProvider(asset, size: context.sizeData),
       index: index,
       disableScaleGestures: true,
       gaplessPlayback: true,
-      filterQuality: FilterQuality.high,
+      filterQuality: .high,
       initialScale: scale * (1.0 + zoom * _kenBurnsZoom),
       controller: PhotoViewController(),
     );
@@ -268,7 +261,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
   }
 
   void _onTapUp() async {
-    await (_showAppBar ? SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive) : restoreEdgeToEdge());
+    await (_showAppBar ? SystemChrome.setEnabledSystemUIMode(.immersive) : restoreEdgeToEdge());
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -295,7 +288,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
     } else {
       return LinearProgressIndicator(
         color: context.colorScheme.primary,
-        borderRadius: const BorderRadius.all(Radius.zero),
+        borderRadius: const .all(.zero),
         minHeight: 5,
         value:
             ref.watch(videoPlayerProvider(asset.heroTag).select((s) => s.position)).inMilliseconds /
@@ -317,7 +310,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
         decoration: BoxDecoration(
           image: DecorationImage(
             image: getFullImageProvider(asset, size: Size(context.width, context.height)),
-            fit: BoxFit.cover,
+            fit: .cover,
           ),
         ),
         child: Container(color: Colors.black.withValues(alpha: 0.2)),
@@ -332,19 +325,17 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
       return const Center(child: ImmichLoadingIndicator());
     }
 
-    final scale = _config.look == SlideshowLook.cover
-        ? PhotoViewComputedScale.covered
-        : PhotoViewComputedScale.contained;
+    final scale = _config.look == .cover ? PhotoViewComputedScale.covered : PhotoViewComputedScale.contained;
     final isCurrent = _index == index;
     final imageProvider = getFullImageProvider(asset, size: context.sizeData);
 
     if (asset.isImage) {
-      PhotoView buildPhotoView(PhotoViewComputedScale initialScale) => PhotoView(
+      PhotoView buildPhotoView(PhotoViewComputedScale initialScale) => .new(
         imageProvider: imageProvider,
         index: index,
         disableScaleGestures: true,
         gaplessPlayback: true,
-        filterQuality: FilterQuality.high,
+        filterQuality: .high,
         initialScale: initialScale,
         controller: PhotoViewController(),
         onTapUp: (_, _, _) => _onTapUp(),
@@ -375,21 +366,21 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
       final status = ref.watch(videoPlayerProvider(asset.heroTag).select((s) => s.status));
       final position = ref.read(videoPlayerProvider(asset.heroTag)).position;
 
-      if (status == VideoPlaybackStatus.completed && isCurrent && position.inMicroseconds > 0) {
+      if (status == .completed && isCurrent && position.inMicroseconds > 0) {
         _nextPage();
-      } else if (status == VideoPlaybackStatus.playing) {
+      } else if (status == .playing) {
         ref.read(videoPlayerProvider(asset.heroTag).notifier).setLoop(false);
       }
 
       return PhotoView.customChild(
         onTapUp: (_, _, _) => _onTapUp(),
         disableScaleGestures: true,
-        filterQuality: FilterQuality.high,
+        filterQuality: .high,
         initialScale: scale,
         child: NativeVideoViewer(
           asset: asset,
           isCurrent: isCurrent,
-          image: Image(image: imageProvider, fit: BoxFit.contain, alignment: Alignment.center),
+          image: Image(image: imageProvider, fit: .contain, alignment: .center),
         ),
       );
     }
@@ -418,7 +409,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
                     IconButton(
                       onPressed: () {
                         _pause();
-                        context.pushRoute(SettingsSubRoute(section: SettingSection.assetViewer));
+                        context.pushRoute(SettingsSubRoute(section: .assetViewer));
                       },
                       icon: const Icon(Icons.settings),
                     ),
@@ -436,7 +427,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
       body: Stack(
         children: [
           PhotoViewGestureDetectorScope(
-            axis: Axis.horizontal,
+            axis: .horizontal,
             child: PageView.builder(
               controller: _pageController,
               physics: const FastClampingScrollPhysics(),
@@ -444,7 +435,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
               onPageChanged: _pageChanged,
               itemBuilder: (context, index) => Stack(
                 children: [
-                  if (_config.look == SlideshowLook.blurredBackground) _getBlur(context, index),
+                  if (_config.look == .blurredBackground) _getBlur(context, index),
                   _getPhotoView(context, index),
                 ],
               ),
@@ -454,7 +445,7 @@ class _DriftSlideshowPageState extends ConsumerState<DriftSlideshowPage> with Si
             Positioned.fill(
               child: IgnorePointer(
                 child: Stack(
-                  fit: StackFit.expand,
+                  fit: .expand,
                   children: [
                     const ColoredBox(color: Colors.black),
                     FadeTransition(
@@ -509,7 +500,7 @@ class _SlideshowProgressBarState extends State<_SlideshowProgressBar> with Singl
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: widget.durationMs),
-      animationBehavior: AnimationBehavior.preserve,
+      animationBehavior: .preserve,
     )..value = (widget.elapsedMs / widget.durationMs).clamp(0.0, 1.0);
     if (!widget.paused) {
       _controller.forward();
@@ -539,7 +530,7 @@ class _SlideshowProgressBarState extends State<_SlideshowProgressBar> with Singl
       animation: _controller,
       builder: (context, _) => LinearProgressIndicator(
         color: widget.color,
-        borderRadius: const BorderRadius.all(Radius.zero),
+        borderRadius: const .all(.zero),
         minHeight: 5,
         value: _controller.value,
       ),

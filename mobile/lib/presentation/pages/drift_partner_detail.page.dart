@@ -74,7 +74,7 @@ class _InfoBoxState extends ConsumerState<_InfoBox> {
       dPrint(() => "Failed to toggle in timeline: $error $stack");
       ImmichToast.show(
         context: context,
-        toastType: ToastType.error,
+        toastType: .error,
         durationInSecond: 1,
         msg: "Failed to toggle the timeline setting",
       );
@@ -88,19 +88,19 @@ class _InfoBoxState extends ConsumerState<_InfoBox> {
       child: SizedBox(
         height: 110,
         child: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
+          padding: const .only(left: 8.0, right: 8.0, top: 16.0),
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: context.colorScheme.onSurface.withAlpha(10), width: 1),
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              border: .all(color: context.colorScheme.onSurface.withAlpha(10), width: 1),
+              borderRadius: const .all(.circular(20)),
               gradient: LinearGradient(
                 colors: [context.colorScheme.primary.withAlpha(10), context.colorScheme.primary.withAlpha(15)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: .topCenter,
+                end: .bottomCenter,
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: ListTile(
                 title: Text(
                   "Show in timeline",

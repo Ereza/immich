@@ -19,7 +19,7 @@ class DownloadRepository {
     url: '',
     filename: 'dummy',
     group: '',
-    updates: Updates.statusAndProgress,
+    updates: .statusAndProgress,
   );
   static final _dummyMetadata = {'part': LivePhotosPart.image.index, 'id': ''};
 
@@ -52,7 +52,7 @@ class DownloadRepository {
     );
 
     _downloader.database.updates
-        .where((record) => record.group == kDownloadGroupLivePhoto && record.status == TaskStatus.complete)
+        .where((record) => record.group == kDownloadGroupLivePhoto && record.status == .complete)
         .listen((record) => onLivePhotoRecordComplete?.call(record));
   }
 
@@ -69,7 +69,7 @@ class DownloadRepository {
   }
 
   Future<List<TaskRecord>> getLiveVideoTasks() {
-    return _downloader.database.allRecordsWithStatus(TaskStatus.complete, group: kDownloadGroupLivePhoto);
+    return _downloader.database.allRecordsWithStatus(.complete, group: kDownloadGroupLivePhoto);
   }
 
   Future<void> deleteRecordsWithIds(List<String> ids) {
@@ -105,7 +105,7 @@ class DownloadRepository {
           url: url,
           headers: headers,
           filename: asset.name,
-          updates: Updates.statusAndProgress,
+          updates: .statusAndProgress,
           group: isVideo ? kDownloadGroupVideo : kDownloadGroupImage,
         );
         continue;
@@ -118,7 +118,7 @@ class DownloadRepository {
         url: url,
         headers: headers,
         filename: asset.name,
-        updates: Updates.statusAndProgress,
+        updates: .statusAndProgress,
         group: kDownloadGroupLivePhoto,
         metaData: json.encode(_dummyMetadata),
       );
@@ -129,7 +129,7 @@ class DownloadRepository {
         url: getOriginalUrlForRemoteId(livePhotoVideoId),
         headers: headers,
         filename: asset.name.toUpperCase().replaceAll(RegExp(r"\.(JPG|HEIC)$"), '.MOV'),
-        updates: Updates.statusAndProgress,
+        updates: .statusAndProgress,
         group: kDownloadGroupLivePhoto,
         metaData: json.encode(_dummyMetadata),
       );

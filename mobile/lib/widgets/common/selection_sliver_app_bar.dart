@@ -33,7 +33,7 @@ class _SelectionSliverAppBarState extends ConsumerState<SelectionSliverAppBar> {
       pinned: true,
       snap: false,
       backgroundColor: context.colorScheme.surfaceContainer,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(5))),
       automaticallyImplyLeading: false,
       leading: IconButton(
         icon: const Icon(Icons.close_rounded),

@@ -42,25 +42,25 @@ class RemoteAsset extends BaseAsset {
   @override
   AssetPlaybackStyle get playbackStyle {
     if (isVideo) {
-      return AssetPlaybackStyle.video;
+      return .video;
     }
     if (livePhotoVideoId != null) {
-      return AssetPlaybackStyle.livePhoto;
+      return .livePhoto;
     }
     if (isImage && durationMs != null && durationMs! > 0) {
-      return AssetPlaybackStyle.imageAnimated;
+      return .imageAnimated;
     }
     if (isImage) {
-      return AssetPlaybackStyle.image;
+      return .image;
     }
-    return AssetPlaybackStyle.unknown;
+    return .unknown;
   }
 
   @override
   String? get remoteId => id;
 
   @override
-  AssetState get storage => localId == null ? AssetState.remote : AssetState.merged;
+  AssetState get storage => localId == null ? .remote : .merged;
 
   @override
   String get heroTag => '${localId ?? checksum}_$id';

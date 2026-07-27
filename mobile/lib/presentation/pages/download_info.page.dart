@@ -30,7 +30,7 @@ class DownloadInfoPage extends ConsumerWidget {
         itemBuilder: (context, index) {
           final task = tasks[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: const .symmetric(horizontal: 8.0, vertical: 4.0),
             child: DownloadTaskTile(
               progress: task.value.progress,
               fileName: task.value.fileName,

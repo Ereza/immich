@@ -33,7 +33,7 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    debugDefaultTargetPlatformOverride = .android;
 
     db = Drift(drift.DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
     await StoreService.init(storeRepository: DriftStoreRepository(db));
@@ -111,8 +111,8 @@ void main() {
     });
 
     test('skips syncTrashedAssets on non-Android platforms', () async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-      addTearDown(() => debugDefaultTargetPlatformOverride = TargetPlatform.android);
+      debugDefaultTargetPlatformOverride = .iOS;
+      addTearDown(() => debugDefaultTargetPlatformOverride = .android);
 
       await Store.put(StoreKey.manageLocalMediaAndroid, true);
       when(() => mockPermissionRepository.hasManageMediaPermission()).thenAnswer((_) async => true);
@@ -132,7 +132,7 @@ void main() {
         durationMs: 0,
         orientation: 0,
         isFavorite: false,
-        playbackStyle: PlatformAssetPlaybackStyle.image,
+        playbackStyle: .image,
       );
 
       final assetsToRestore = [LocalAssetStub.image1];
@@ -231,7 +231,7 @@ void main() {
         isFavorite: false,
         createdAt: 1700000000,
         updatedAt: 1732000000,
-        playbackStyle: PlatformAssetPlaybackStyle.image,
+        playbackStyle: .image,
       );
 
       final localAsset = platformAsset.toLocalAsset();

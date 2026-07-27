@@ -21,11 +21,11 @@ class _NewAlbumNameModalState extends State<NewAlbumNameModal> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("album_name", style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+      title: const Text("album_name", style: TextStyle(fontWeight: .bold)).tr(),
       content: SingleChildScrollView(
         child: TextFormField(
           controller: nameController,
-          textCapitalization: TextCapitalization.words,
+          textCapitalization: .words,
           autofocus: true,
           decoration: InputDecoration(hintText: 'name'.tr(), border: const OutlineInputBorder()),
         ),
@@ -35,7 +35,7 @@ class _NewAlbumNameModalState extends State<NewAlbumNameModal> {
           onPressed: () => context.pop(null),
           child: Text(
             "cancel",
-            style: TextStyle(color: Colors.red[300], fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.red[300], fontWeight: .bold),
           ).tr(),
         ),
         TextButton(
@@ -44,7 +44,7 @@ class _NewAlbumNameModalState extends State<NewAlbumNameModal> {
           },
           child: Text(
             "create_album",
-            style: TextStyle(color: context.primaryColor, fontWeight: FontWeight.bold),
+            style: TextStyle(color: context.primaryColor, fontWeight: .bold),
           ).tr(),
         ),
       ],

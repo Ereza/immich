@@ -11,7 +11,7 @@ class ImmichLogo extends StatelessWidget {
     return Image(
       image: const AssetImage('assets/immich-logo.png'),
       width: size,
-      filterQuality: FilterQuality.high,
+      filterQuality: .high,
       isAntiAlias: true,
     );
   }

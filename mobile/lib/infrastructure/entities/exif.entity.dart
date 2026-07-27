@@ -13,7 +13,7 @@ ON remote_exif_entity (city) WHERE city IS NOT NULL
 class RemoteExifEntity extends Table with DriftDefaultsMixin {
   const RemoteExifEntity();
 
-  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: .cascade)();
 
   TextColumn get city => text().nullable()();
 

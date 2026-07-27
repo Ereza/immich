@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/services/log.service.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/platform_extensions.dart';
@@ -36,7 +35,7 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
   }
 
   void handleAppResume() async {
-    state = AppLifeCycleEnum.resumed;
+    state = .resumed;
 
     // Prevent overlapping resume operations
     if (_resumeOperation != null && !_resumeOperation!.isCompleted) {
@@ -142,7 +141,7 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
     final isEnableBackup = _ref.read(appConfigProvider).backup.enabled;
 
     if (isEnableBackup) {
-      final currentUser = Store.tryGet(StoreKey.currentUser);
+      final currentUser = Store.tryGet(.currentUser);
       if (currentUser != null) {
         await _safeRun(
           _ref.read(driftBackupProvider.notifier).startForegroundBackup(currentUser.id),
@@ -159,12 +158,12 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
   }
 
   void handleAppInactivity() {
-    state = AppLifeCycleEnum.inactive;
+    state = .inactive;
     // do not stop/clean up anything on inactivity: issued on every orientation change
   }
 
   Future<void> handleAppPause() async {
-    state = AppLifeCycleEnum.paused;
+    state = .paused;
     _wasPaused = true;
 
     // Prevent overlapping pause operations
@@ -204,7 +203,7 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
   }
 
   Future<void> handleAppDetached() async {
-    state = AppLifeCycleEnum.detached;
+    state = .detached;
 
     unawaited(_ref.read(backgroundWorkerLockServiceProvider).unlock());
 
@@ -215,7 +214,7 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
   }
 
   void handleAppHidden() {
-    state = AppLifeCycleEnum.hidden;
+    state = .hidden;
     // do not stop/clean up anything on inactivity: issued on every orientation change
   }
 }

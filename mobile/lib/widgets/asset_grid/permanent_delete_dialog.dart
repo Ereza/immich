@@ -11,12 +11,12 @@ class PermanentDeleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
       title: Text(context.t.permanently_delete),
       content: ImmichFormattedText(context.t.permanently_delete_assets_prompt(count: count)),
       actions: [
         SizedBox(
-          width: double.infinity,
+          width: .infinity,
           height: 48,
           child: FilledButton(
             onPressed: () => context.pop(false),
@@ -24,12 +24,12 @@ class PermanentDeleteDialog extends StatelessWidget {
               backgroundColor: context.colorScheme.surfaceDim,
               foregroundColor: context.primaryColor,
             ),
-            child: Text(context.t.cancel, style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(context.t.cancel, style: const TextStyle(fontWeight: .bold)),
           ),
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: double.infinity,
+          width: .infinity,
           height: 48,
 
           child: FilledButton(
@@ -38,7 +38,7 @@ class PermanentDeleteDialog extends StatelessWidget {
               backgroundColor: context.colorScheme.errorContainer,
               foregroundColor: context.colorScheme.onErrorContainer,
             ),
-            child: Text(context.t.delete, style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(context.t.delete, style: const TextStyle(fontWeight: .bold)),
           ),
         ),
       ],

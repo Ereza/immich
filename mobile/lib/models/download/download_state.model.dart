@@ -28,7 +28,7 @@ class DownloadInfo {
     return DownloadInfo(
       fileName: map['fileName'] as String,
       progress: map['progress'] as double,
-      status: TaskStatus.values[map['status'] as int],
+      status: .values[map['status'] as int],
     );
   }
 

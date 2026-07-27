@@ -26,7 +26,7 @@ class PersonApiRepository extends ApiRepository {
     return _toPerson(response);
   }
 
-  static PersonDto _toPerson(PersonResponseDto dto) => PersonDto(
+  static PersonDto _toPerson(PersonResponseDto dto) => .new(
     birthDate: dto.birthDate,
     id: dto.id,
     isHidden: dto.isHidden,

@@ -67,7 +67,7 @@ class _DriftAlbumsPageState extends ConsumerState<DriftAlbumsPage> {
               controller: _scrollController,
               interactive: true,
               thickness: 8,
-              radius: const Radius.circular(4),
+              radius: const .circular(4),
               thumbVisibility: false,
               thumbColor: context.colorScheme.primary,
               crossAxisMargin: 4,

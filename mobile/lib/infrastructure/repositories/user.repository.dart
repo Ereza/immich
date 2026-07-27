@@ -54,7 +54,7 @@ extension on AuthUserEntityData {
 
     if (metadata != null) {
       for (final meta in metadata) {
-        if (meta.key == UserMetadataKey.preferences && meta.preferences != null) {
+        if (meta.key == .preferences && meta.preferences != null) {
           memoryEnabled = meta.preferences?.memoriesEnabled ?? true;
         }
       }

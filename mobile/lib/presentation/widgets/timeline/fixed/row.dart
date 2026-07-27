@@ -169,7 +169,7 @@ class RenderFixedRow extends RenderBox
     // Use the entire width of the parent for the row.
     size = Size(constraints.maxWidth, height);
 
-    final flipMainAxis = textDirection == TextDirection.rtl;
+    final flipMainAxis = textDirection == .rtl;
     int childIndex = 0;
     double currentX = flipMainAxis ? size.width - (widths.firstOrNull ?? 0) : 0;
     // Layout each child horizontally.

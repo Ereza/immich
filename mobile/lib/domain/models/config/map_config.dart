@@ -28,7 +28,7 @@ class MapConfig {
     bool? withPartners,
     Option<DateTime>? customFrom,
     Option<DateTime>? customTo,
-  }) => MapConfig(
+  }) => .new(
     relativeDays: relativeDays ?? this.relativeDays,
     favoritesOnly: favoritesOnly ?? this.favoritesOnly,
     includeArchived: includeArchived ?? this.includeArchived,

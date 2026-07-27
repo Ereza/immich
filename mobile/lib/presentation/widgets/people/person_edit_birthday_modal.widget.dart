@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/person.model.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
@@ -46,8 +45,8 @@ class _DriftPersonNameEditFormState extends ConsumerState<DriftPersonBirthdayEdi
       ImmichToast.show(
         context: context,
         msg: 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: ToastType.error,
+        gravity: .BOTTOM,
+        toastType: .error,
       );
     }
   }
@@ -57,13 +56,13 @@ class _DriftPersonNameEditFormState extends ConsumerState<DriftPersonBirthdayEdi
     return AlertDialog(
       title: Text(
         "edit_birthday".t(context: context),
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: .bold),
       ),
       content: SizedBox(
-        width: double.maxFinite,
+        width: .maxFinite,
         height: 300,
         child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const .all(.circular(16.0)),
           child: ScrollDatePicker(
             viewType: datePickerColumnOrder(DateFormat.yMd(context.locale.toLanguageTag()).pattern),
             options: DatePickerOptions(
@@ -74,18 +73,18 @@ class _DriftPersonNameEditFormState extends ConsumerState<DriftPersonBirthdayEdi
             scrollViewOptions: DatePickerScrollViewOptions(
               day: ScrollViewDetailOptions(
                 isLoop: false,
-                margin: const EdgeInsets.all(12),
-                selectedTextStyle: TextStyle(color: context.primaryColor, fontWeight: FontWeight.bold, fontSize: 16),
+                margin: const .all(12),
+                selectedTextStyle: TextStyle(color: context.primaryColor, fontWeight: .bold, fontSize: 16),
               ),
               month: ScrollViewDetailOptions(
                 isLoop: false,
-                margin: const EdgeInsets.all(12),
-                selectedTextStyle: TextStyle(color: context.primaryColor, fontWeight: FontWeight.bold, fontSize: 16),
+                margin: const .all(12),
+                selectedTextStyle: TextStyle(color: context.primaryColor, fontWeight: .bold, fontSize: 16),
               ),
               year: ScrollViewDetailOptions(
                 isLoop: false,
-                margin: const EdgeInsets.all(12),
-                selectedTextStyle: TextStyle(color: context.primaryColor, fontWeight: FontWeight.bold, fontSize: 16),
+                margin: const .all(12),
+                selectedTextStyle: TextStyle(color: context.primaryColor, fontWeight: .bold, fontSize: 16),
               ),
             ),
             selectedDate: _selectedDate,
@@ -105,14 +104,14 @@ class _DriftPersonNameEditFormState extends ConsumerState<DriftPersonBirthdayEdi
           onPressed: () => context.pop(null),
           child: Text(
             "cancel",
-            style: TextStyle(color: Colors.red[300], fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.red[300], fontWeight: .bold),
           ).tr(),
         ),
         TextButton(
           onPressed: () => saveBirthday(),
           child: Text(
             "save",
-            style: TextStyle(color: context.primaryColor, fontWeight: FontWeight.bold),
+            style: TextStyle(color: context.primaryColor, fontWeight: .bold),
           ).tr(),
         ),
       ],

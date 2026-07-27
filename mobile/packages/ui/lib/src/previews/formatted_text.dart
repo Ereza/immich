@@ -20,10 +20,12 @@ class _PreviewFormattedTextLinks extends StatelessWidget {
       'Read the <docs-link>documentation</docs-link> or visit <github-link>GitHub</github-link>.',
       spanBuilder: (tag) => FormattedSpan(
         onTap: switch (tag) {
-          'docs-link' =>
-            () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Docs link clicked!'))),
-          'github-link' =>
-            () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('GitHub link clicked!'))),
+          'docs-link' => () => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Docs link clicked!'))),
+          'github-link' => () => ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('GitHub link clicked!'))),
           _ => null,
         },
       ),
@@ -39,11 +41,10 @@ class _PreviewFormattedTextMixed extends StatelessWidget {
     return ImmichFormattedText(
       'You can use <b>bold text</b> and <link>links</link> together.',
       spanBuilder: (tag) => switch (tag) {
-        'b' => const FormattedSpan(style: TextStyle(fontWeight: FontWeight.bold)),
+        'b' => const FormattedSpan(style: TextStyle(fontWeight: .bold)),
         _ => FormattedSpan(
-            onTap: () =>
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link clicked!'))),
-          ),
+          onTap: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Link clicked!'))),
+        ),
       },
     );
   }

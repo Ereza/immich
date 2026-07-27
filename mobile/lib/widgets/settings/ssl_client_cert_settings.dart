@@ -41,12 +41,12 @@ class _SslClientCertSettingsState extends State<SslClientCertSettings> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: const .symmetric(horizontal: 20),
       horizontalTitleGap: 20,
       isThreeLine: true,
-      title: Text("client_cert_title".tr(), style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500)),
+      title: Text("client_cert_title".tr(), style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500)),
       subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           Text(
             "client_cert_subtitle".tr(),
@@ -54,9 +54,9 @@ class _SslClientCertSettingsState extends State<SslClientCertSettings> {
           ),
           const SizedBox(height: 6),
           Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: .max,
+            mainAxisAlignment: .spaceEvenly,
+            crossAxisAlignment: .center,
             children: [
               ElevatedButton(onPressed: importCert, child: Text("client_cert_import".tr())),
               ElevatedButton(onPressed: !isCertExist ? null : removeCert, child: Text("remove".tr())),

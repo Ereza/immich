@@ -34,7 +34,7 @@ sealed class Option<T> {
 
   Option<U> flatMap<U>(Option<U> Function(T value) f) => switch (this) {
     Some(:final value) => f(value),
-    None() => const Option.none(),
+    None() => const .none(),
   };
 
   void ifPresent(void Function(T value) f) {
@@ -78,14 +78,14 @@ extension NullableOptionExtension<T> on Option<T>? {
 
 extension OptionToOptional<T> on Option<T> {
   Optional<T> toOptional() => switch (this) {
-    None() => const Optional.absent(),
-    Some(:final value) => Optional.present(value),
+    None() => const .absent(),
+    Some(:final value) => .present(value),
   };
 }
 
 extension OptionToDriftValue<T> on Option<T> {
   Value<T> toDriftValue() => switch (this) {
-    Some(:final value) => Value(value),
-    None() => const Value.absent(),
+    Some(:final value) => .new(value),
+    None() => const .absent(),
   };
 }

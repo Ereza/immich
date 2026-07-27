@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -62,7 +61,7 @@ class FavoriteBottomSheet extends ConsumerWidget {
         ImmichToast.show(
           context: context,
           msg: 'assets_cannot_be_added_to_album_count'.t(context: context, args: {'count': result.failed}),
-          toastType: ToastType.error,
+          toastType: .error,
         );
       } else {
         ImmichToast.show(
@@ -82,22 +81,22 @@ class FavoriteBottomSheet extends ConsumerWidget {
       maxChildSize: 0.7,
       shouldCloseOnMinExtent: false,
       actions: [
-        const ShareActionButton(source: ActionSource.timeline),
+        const ShareActionButton(source: .timeline),
         if (multiselect.hasRemote) ...[
-          const ShareLinkActionButton(source: ActionSource.timeline),
+          const ShareLinkActionButton(source: .timeline),
           ...actions.map((action) => ActionColumnButtonWidget(action: TimelineAction(action: action))),
-          const ArchiveActionButton(source: ActionSource.timeline),
-          if (multiselect.onlyRemote) const DownloadActionButton(source: ActionSource.timeline),
+          const ArchiveActionButton(source: .timeline),
+          if (multiselect.onlyRemote) const DownloadActionButton(source: .timeline),
           isTrashEnable
-              ? const TrashActionButton(source: ActionSource.timeline)
-              : const DeletePermanentActionButton(source: ActionSource.timeline),
-          const EditDateTimeActionButton(source: ActionSource.timeline),
-          const EditLocationActionButton(source: ActionSource.timeline),
-          const MoveToLockFolderActionButton(source: ActionSource.timeline),
-          if (multiselect.selectedAssets.length > 1) const StackActionButton(source: ActionSource.timeline),
-          if (multiselect.hasStacked) const UnStackActionButton(source: ActionSource.timeline),
+              ? const TrashActionButton(source: .timeline)
+              : const DeletePermanentActionButton(source: .timeline),
+          const EditDateTimeActionButton(source: .timeline),
+          const EditLocationActionButton(source: .timeline),
+          const MoveToLockFolderActionButton(source: .timeline),
+          if (multiselect.selectedAssets.length > 1) const StackActionButton(source: .timeline),
+          if (multiselect.hasStacked) const UnStackActionButton(source: .timeline),
         ],
-        if (multiselect.hasMerged) const DeleteLocalActionButton(source: ActionSource.timeline),
+        if (multiselect.hasMerged) const DeleteLocalActionButton(source: .timeline),
       ],
       slivers: multiselect.hasRemote
           ? [const AddToAlbumHeader(), AlbumSelector(onAlbumSelected: addAssetsToAlbum)]

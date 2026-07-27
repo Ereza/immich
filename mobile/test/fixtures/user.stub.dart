@@ -10,6 +10,6 @@ abstract final class UserStub {
     isAdmin: true,
     updatedAt: DateTime(2021),
     profileChangedAt: DateTime(2021),
-    avatarColor: AvatarColor.green,
+    avatarColor: .green,
   );
 }

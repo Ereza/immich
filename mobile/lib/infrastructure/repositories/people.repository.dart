@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart';
-import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/person.model.dart';
 import 'package:immich_mobile/infrastructure/entities/person.entity.drift.dart';
 import 'package:immich_mobile/infrastructure/repositories/db.repository.dart';
@@ -46,14 +45,14 @@ class DriftPeopleRepository extends DriftDatabaseRepository {
           ..where(
             people.isHidden.equals(false) &
                 assets.deletedAt.isNull() &
-                assets.visibility.equalsValue(AssetVisibility.timeline) &
+                assets.visibility.equalsValue(.timeline) &
                 faces.isVisible.equals(true) &
                 faces.deletedAt.isNull(),
           )
           ..groupBy([people.id], having: faces.id.count().isBiggerOrEqualValue(minFaces) | people.name.equals('').not())
           ..orderBy([
-            OrderingTerm(expression: people.name.equals('').not(), mode: OrderingMode.desc),
-            OrderingTerm(expression: faces.id.count(), mode: OrderingMode.desc),
+            OrderingTerm(expression: people.name.equals('').not(), mode: .desc),
+            OrderingTerm(expression: faces.id.count(), mode: .desc),
           ]);
 
     return query.map((row) {

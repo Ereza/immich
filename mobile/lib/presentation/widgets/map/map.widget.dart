@@ -3,8 +3,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/events.model.dart';
 import 'package:immich_mobile/domain/utils/event_stream.dart';
@@ -159,11 +157,11 @@ class _DriftMapState extends ConsumerState<DriftMap> {
   Future<void> onZoomToLocation() async {
     final (location, error) = await MapUtils.checkPermAndGetLocation(context: context);
     if (error != null) {
-      if (error == LocationPermission.unableToDetermine && context.mounted) {
+      if (error == .unableToDetermine && context.mounted) {
         ImmichToast.show(
           context: context,
-          gravity: ToastGravity.BOTTOM,
-          toastType: ToastType.error,
+          gravity: .BOTTOM,
+          toastType: .error,
           msg: "map_cannot_get_user_location".t(context: context),
         );
       }
@@ -219,7 +217,7 @@ class _Map extends StatelessWidget {
           styleString: style,
           onMapCreated: onMapCreated,
           onStyleLoadedCallback: onMapReady,
-          attributionButtonPosition: AttributionButtonPosition.topRight,
+          attributionButtonPosition: .topRight,
           attributionButtonMargins: const Point(8, kToolbarHeight),
         ),
       ),

@@ -36,23 +36,20 @@ class _TagPickerModal extends HookConsumerWidget {
     }
 
     return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+      contentPadding: const .symmetric(vertical: 16, horizontal: 0),
       actions: [
         TextButton(
           onPressed: () => context.pop(),
           child: Text(
             "cancel",
-            style: context.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colorScheme.error,
-            ),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.colorScheme.error),
           ).tr(),
         ),
         TextButton(
           onPressed: () => context.pop((selectedTagIds.value, newTagValues.value)),
           child: Text(
             "action_common_update",
-            style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: context.primaryColor),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.primaryColor),
           ).tr(),
         ),
       ],
@@ -86,13 +83,13 @@ class TagPicker extends HookConsumerWidget {
     final searchQuery = useState('');
     final tags = ref.watch(tagProvider);
     final selectedTagIds = useState<Set<String>>(filter);
-    final borderRadius = const BorderRadius.all(Radius.circular(10));
+    final borderRadius = const BorderRadius.all(.circular(10));
     final selectedNewTagValues = useState<Set<String>>({});
 
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const .all(8),
           child: SearchField(
             focusNode: formFocus,
             onChanged: (value) => searchQuery.value = value,
@@ -102,7 +99,7 @@ class TagPicker extends HookConsumerWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 0),
+          padding: const .only(left: 16.0, right: 16.0, bottom: 0),
           child: Divider(color: context.colorScheme.surfaceContainerHighest, thickness: 1),
         ),
         Expanded(
@@ -119,16 +116,16 @@ class TagPicker extends HookConsumerWidget {
               final isCreateSelected = selectedNewTagValues.value.contains(trimmedQuery);
               return ListView.builder(
                 itemCount: queryResult.length + (showCreateTile ? 1 : 0),
-                padding: const EdgeInsets.all(8),
+                padding: const .all(8),
                 itemBuilder: (context, index) {
                   if (showCreateTile && index == queryResult.length) {
                     // Create new tag tile
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 2.0),
+                      padding: const .only(bottom: 2.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isCreateSelected ? context.primaryColor : context.primaryColor.withAlpha(25),
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: const .all(.circular(10)),
                         ),
                         child: ListTile(
                           title: Text(
@@ -159,7 +156,7 @@ class TagPicker extends HookConsumerWidget {
                   final isSelected = selectedTagIds.value.any((id) => id == tag.id);
 
                   return Padding(
-                    padding: const EdgeInsets.only(bottom: 2.0),
+                    padding: const .only(bottom: 2.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: isSelected ? context.primaryColor : context.primaryColor.withAlpha(25),

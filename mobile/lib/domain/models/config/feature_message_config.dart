@@ -5,8 +5,7 @@ class FeatureMessageConfig {
 
   const FeatureMessageConfig({this.seenRelease = const SemVer(major: 0, minor: 0, patch: 0)});
 
-  FeatureMessageConfig copyWith({SemVer? seenRelease}) =>
-      FeatureMessageConfig(seenRelease: seenRelease ?? this.seenRelease);
+  FeatureMessageConfig copyWith({SemVer? seenRelease}) => .new(seenRelease: seenRelease ?? this.seenRelease);
 
   @override
   bool operator ==(Object other) =>

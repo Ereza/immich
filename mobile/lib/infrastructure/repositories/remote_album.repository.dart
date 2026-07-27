@@ -46,7 +46,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
         _db.userEntity,
         _db.userEntity.id.equalsExp(_db.remoteAlbumUserEntity.userId) &
             _db.remoteAlbumUserEntity.albumId.equalsExp(_db.remoteAlbumEntity.id) &
-            _db.remoteAlbumUserEntity.role.equalsValue(AlbumUserRole.owner),
+            _db.remoteAlbumUserEntity.role.equalsValue(.owner),
         useColumns: false,
       ),
     ]);
@@ -60,8 +60,8 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
       final orderings = <OrderingTerm>[];
       for (final sort in sortBy) {
         orderings.add(switch (sort) {
-          SortRemoteAlbumsBy.id => OrderingTerm.asc(_db.remoteAlbumEntity.id),
-          SortRemoteAlbumsBy.updatedAt => OrderingTerm.desc(_db.remoteAlbumEntity.updatedAt),
+          .id => OrderingTerm.asc(_db.remoteAlbumEntity.id),
+          .updatedAt => OrderingTerm.desc(_db.remoteAlbumEntity.updatedAt),
         });
       }
       query.orderBy(orderings);
@@ -106,7 +106,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
               _db.userEntity,
               _db.userEntity.id.equalsExp(_db.remoteAlbumUserEntity.userId) &
                   _db.remoteAlbumUserEntity.albumId.equalsExp(_db.remoteAlbumEntity.id) &
-                  _db.remoteAlbumUserEntity.role.equalsValue(AlbumUserRole.owner),
+                  _db.remoteAlbumUserEntity.role.equalsValue(.owner),
               useColumns: false,
             ),
           ])
@@ -136,7 +136,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
         _db.remoteAlbumUserEntity,
         _db.remoteAlbumUserEntity.albumId.equalsExp(_db.remoteAlbumEntity.id) &
             _db.remoteAlbumUserEntity.userId.equals(ownerId) &
-            _db.remoteAlbumUserEntity.role.equalsValue(AlbumUserRole.owner),
+            _db.remoteAlbumUserEntity.role.equalsValue(.owner),
         useColumns: false,
       ),
     ]);
@@ -328,7 +328,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
             visibility: const Value(AssetVisibility.timeline),
             isEdited: Value(source.isEdited),
           ),
-          mode: InsertMode.insertOrIgnore,
+          mode: .insertOrIgnore,
         );
   }
 
@@ -384,7 +384,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
               _db.userEntity,
               _db.userEntity.id.equalsExp(_db.remoteAlbumUserEntity.userId) &
                   _db.remoteAlbumUserEntity.albumId.equalsExp(_db.remoteAlbumEntity.id) &
-                  _db.remoteAlbumUserEntity.role.equalsValue(AlbumUserRole.owner),
+                  _db.remoteAlbumUserEntity.role.equalsValue(.owner),
               useColumns: false,
             ),
           ])
@@ -412,7 +412,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
     }
 
     final jsonIds = jsonEncode(albumIds);
-    final sqlAgg = aggregation == AssetDateAggregation.start ? 'MIN' : 'MAX';
+    final sqlAgg = aggregation == .start ? 'MIN' : 'MAX';
 
     final rows = await _db
         .customSelect(
@@ -441,17 +441,13 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
   }
 
   Future<UserDto> getOwner(String albumId) {
-    final query =
-        _db.userEntity.select().join([
-          innerJoin(
-            _db.remoteAlbumUserEntity,
-            _db.userEntity.id.equalsExp(_db.remoteAlbumUserEntity.userId),
-            useColumns: false,
-          ),
-        ])..where(
-          _db.remoteAlbumUserEntity.albumId.equals(albumId) &
-              _db.remoteAlbumUserEntity.role.equalsValue(AlbumUserRole.owner),
-        );
+    final query = _db.userEntity.select().join([
+      innerJoin(
+        _db.remoteAlbumUserEntity,
+        _db.userEntity.id.equalsExp(_db.remoteAlbumUserEntity.userId),
+        useColumns: false,
+      ),
+    ])..where(_db.remoteAlbumUserEntity.albumId.equals(albumId) & _db.remoteAlbumUserEntity.role.equalsValue(.owner));
 
     return query
         .map(
@@ -465,7 +461,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
             isPartnerSharedWith: false,
             profileChangedAt: row.read(_db.userEntity.profileChangedAt)!,
             hasProfileImage: row.read(_db.userEntity.hasProfileImage)!,
-            avatarColor: AvatarColor.values[row.read(_db.userEntity.avatarColor)!],
+            avatarColor: .values[row.read(_db.userEntity.avatarColor)!],
           ),
         )
         .getSingle();
@@ -542,7 +538,7 @@ class DriftRemoteAlbumRepository extends DriftDatabaseRepository {
               _db.userEntity,
               _db.userEntity.id.equalsExp(_db.remoteAlbumUserEntity.userId) &
                   _db.remoteAlbumUserEntity.albumId.equalsExp(_db.remoteAlbumEntity.id) &
-                  _db.remoteAlbumUserEntity.role.equalsValue(AlbumUserRole.owner),
+                  _db.remoteAlbumUserEntity.role.equalsValue(.owner),
               useColumns: false,
             ),
           ])

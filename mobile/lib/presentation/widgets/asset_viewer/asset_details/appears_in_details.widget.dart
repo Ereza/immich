@@ -46,7 +46,7 @@ class AppearsInDetails extends ConsumerWidget {
         albums.sortBy((a) => a.name);
 
         return Padding(
-          padding: const EdgeInsets.only(top: 16.0),
+          padding: const .only(top: 16.0),
           child: Column(
             spacing: 12,
             children: [
@@ -55,7 +55,7 @@ class AppearsInDetails extends ConsumerWidget {
                 titleStyle: context.textTheme.labelLarge?.copyWith(color: context.colorScheme.onSurfaceSecondary),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 12),
+                padding: const .only(left: 12),
                 child: Column(
                   spacing: 12,
                   children: albums.map((album) {

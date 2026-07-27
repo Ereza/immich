@@ -35,7 +35,7 @@ class TrashedLocalAssetEntity extends Table with DriftDefaultsMixin, AssetEntity
 }
 
 extension TrashedLocalAssetEntityDataDomainExtension on TrashedLocalAssetEntityData {
-  LocalAsset toLocalAsset() => LocalAsset(
+  LocalAsset toLocalAsset() => .new(
     id: id,
     name: name,
     checksum: checksum,

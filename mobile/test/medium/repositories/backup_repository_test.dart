@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/infrastructure/repositories/backup.repository.dart';
 import 'package:immich_mobile/utils/option.dart';
 
@@ -34,7 +33,7 @@ void main() {
     });
 
     test('returns zeros when no selected albums exist', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.none);
+      final album = await ctx.newLocalAlbum(backupSelection: .none);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -45,7 +44,7 @@ void main() {
     });
 
     test('counts asset in selected album as total and remainder', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -56,7 +55,7 @@ void main() {
     });
 
     test('backed up asset reduces remainder', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final remote = await ctx.newRemoteAsset(ownerId: userId);
       final local = await ctx.newLocalAsset(checksum: remote.checksum);
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: local.id);
@@ -68,7 +67,7 @@ void main() {
     });
 
     test('asset with null checksum is counted as processing', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset(checksumOption: const Option.none());
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -79,8 +78,8 @@ void main() {
     });
 
     test('asset in excluded album is not counted even if also in selected album', () async {
-      final selectedAlbum = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
-      final excludedAlbum = await ctx.newLocalAlbum(backupSelection: BackupSelection.excluded);
+      final selectedAlbum = await ctx.newLocalAlbum(backupSelection: .selected);
+      final excludedAlbum = await ctx.newLocalAlbum(backupSelection: .excluded);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: selectedAlbum.id, assetId: asset.id);
       await ctx.newLocalAlbumAsset(albumId: excludedAlbum.id, assetId: asset.id);
@@ -91,8 +90,8 @@ void main() {
     });
 
     test('counts assets across multiple selected albums without duplicates', () async {
-      final album1 = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
-      final album2 = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album1 = await ctx.newLocalAlbum(backupSelection: .selected);
+      final album2 = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset();
       // Same asset in two selected albums
       await ctx.newLocalAlbumAsset(albumId: album1.id, assetId: asset.id);
@@ -104,7 +103,7 @@ void main() {
 
     test('backed up asset for different user is still counted as remainder', () async {
       final otherUser = await ctx.newUser();
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final remote = await ctx.newRemoteAsset(ownerId: otherUser.id);
       final local = await ctx.newLocalAsset(checksum: remote.checksum);
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: local.id);
@@ -115,7 +114,7 @@ void main() {
     });
 
     test('mixed assets produce correct combined counts', () async {
-      final selectedAlbum = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final selectedAlbum = await ctx.newLocalAlbum(backupSelection: .selected);
 
       // backed up
       final remote1 = await ctx.newRemoteAsset(ownerId: userId);
@@ -146,7 +145,7 @@ void main() {
     });
 
     test('returns empty list when no selected albums exist', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.none);
+      final album = await ctx.newLocalAlbum(backupSelection: .none);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -155,7 +154,7 @@ void main() {
     });
 
     test('returns asset in selected album that is not backed up', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -165,7 +164,7 @@ void main() {
     });
 
     test('excludes asset already backed up for the same user', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final remote = await ctx.newRemoteAsset(ownerId: userId);
       final local = await ctx.newLocalAsset(checksum: remote.checksum);
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: local.id);
@@ -176,7 +175,7 @@ void main() {
 
     test('includes asset backed up for a different user', () async {
       final otherUser = await ctx.newUser();
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final remote = await ctx.newRemoteAsset(ownerId: otherUser.id);
       final local = await ctx.newLocalAsset(checksum: remote.checksum);
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: local.id);
@@ -187,8 +186,8 @@ void main() {
     });
 
     test('excludes asset in excluded album even if also in selected album', () async {
-      final selectedAlbum = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
-      final excludedAlbum = await ctx.newLocalAlbum(backupSelection: BackupSelection.excluded);
+      final selectedAlbum = await ctx.newLocalAlbum(backupSelection: .selected);
+      final excludedAlbum = await ctx.newLocalAlbum(backupSelection: .excluded);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: selectedAlbum.id, assetId: asset.id);
       await ctx.newLocalAlbumAsset(albumId: excludedAlbum.id, assetId: asset.id);
@@ -198,7 +197,7 @@ void main() {
     });
 
     test('excludes asset with null checksum when onlyHashed is true', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset(checksumOption: const Option.none());
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -207,7 +206,7 @@ void main() {
     });
 
     test('includes asset with null checksum when onlyHashed is false', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset(checksumOption: const Option.none());
       await ctx.newLocalAlbumAsset(albumId: album.id, assetId: asset.id);
 
@@ -217,7 +216,7 @@ void main() {
     });
 
     test('returns assets ordered by createdAt descending', () async {
-      final album = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset1 = await ctx.newLocalAsset(createdAt: DateTime(2024, 1, 1));
       final asset2 = await ctx.newLocalAsset(createdAt: DateTime(2024, 3, 1));
       final asset3 = await ctx.newLocalAsset(createdAt: DateTime(2024, 2, 1));
@@ -230,8 +229,8 @@ void main() {
     });
 
     test('does not return duplicate when asset is in multiple selected albums', () async {
-      final album1 = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
-      final album2 = await ctx.newLocalAlbum(backupSelection: BackupSelection.selected);
+      final album1 = await ctx.newLocalAlbum(backupSelection: .selected);
+      final album2 = await ctx.newLocalAlbum(backupSelection: .selected);
       final asset = await ctx.newLocalAsset();
       await ctx.newLocalAlbumAsset(albumId: album1.id, assetId: asset.id);
       await ctx.newLocalAlbumAsset(albumId: album2.id, assetId: asset.id);

@@ -30,7 +30,7 @@ void main() {
   });
 
   setUp(() async {
-    mapState = const MapState(themeMode: ThemeMode.dark);
+    mapState = const MapState(themeMode: .dark);
     mapStateNotifier = MockMapStateNotifier(mapState);
     await StoreService.init(storeRepository: DriftStoreRepository(db));
     overrides = [
@@ -85,7 +85,7 @@ void main() {
       overrides: overrides,
     );
 
-    mapStateNotifier.state = mapState.copyWith(themeMode: ThemeMode.light, lightStyleFetched: const AsyncData("light"));
+    mapStateNotifier.state = mapState.copyWith(themeMode: .light, lightStyleFetched: const AsyncData("light"));
     await tester.pumpAndSettle();
     expect(mapStyle?.valueOrNull, "light");
   });
@@ -103,11 +103,8 @@ void main() {
         overrides: overrides,
       );
 
-      tester.binding.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
-      mapStateNotifier.state = mapState.copyWith(
-        themeMode: ThemeMode.system,
-        darkStyleFetched: const AsyncData("dark"),
-      );
+      tester.binding.platformDispatcher.platformBrightnessTestValue = .dark;
+      mapStateNotifier.state = mapState.copyWith(themeMode: .system, darkStyleFetched: const AsyncData("dark"));
       await tester.pumpAndSettle();
 
       expect(mapStyle?.valueOrNull, "dark");
@@ -125,11 +122,8 @@ void main() {
         overrides: overrides,
       );
 
-      tester.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-      mapStateNotifier.state = mapState.copyWith(
-        themeMode: ThemeMode.system,
-        lightStyleFetched: const AsyncData("light"),
-      );
+      tester.binding.platformDispatcher.platformBrightnessTestValue = .light;
+      mapStateNotifier.state = mapState.copyWith(themeMode: .system, lightStyleFetched: const AsyncData("light"));
       await tester.pumpAndSettle();
 
       expect(mapStyle?.valueOrNull, "light");
@@ -147,16 +141,16 @@ void main() {
         overrides: overrides,
       );
 
-      tester.binding.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+      tester.binding.platformDispatcher.platformBrightnessTestValue = .light;
       mapStateNotifier.state = mapState.copyWith(
-        themeMode: ThemeMode.system,
+        themeMode: .system,
         lightStyleFetched: const AsyncData("light"),
         darkStyleFetched: const AsyncData("dark"),
       );
       await tester.pumpAndSettle();
       expect(mapStyle?.valueOrNull, "light");
 
-      tester.binding.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+      tester.binding.platformDispatcher.platformBrightnessTestValue = .dark;
       await tester.pumpAndSettle();
       expect(mapStyle?.valueOrNull, "dark");
     });

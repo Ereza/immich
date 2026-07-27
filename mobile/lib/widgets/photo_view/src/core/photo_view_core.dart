@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:immich_mobile/widgets/photo_view/photo_view.dart'
     show
-        PhotoViewScaleState,
         PhotoViewHeroAttributes,
         PhotoViewImageTapDownCallback,
         PhotoViewImageTapUpCallback,
@@ -160,7 +159,7 @@ class PhotoViewCoreState extends State<PhotoViewCore>
   }
 
   bool _shouldAllowPanRotate() => switch (scaleStateController.scaleState) {
-    PhotoViewScaleState.zoomedIn => scaleStateController.hasZoomedOutManually,
+    .zoomedIn => scaleStateController.hasZoomedOutManually,
     _ => true,
   };
 
@@ -196,12 +195,12 @@ class PhotoViewCoreState extends State<PhotoViewCore>
     widget.onScaleEnd?.call(context, details, controller.value);
 
     final scaleState = getScaleStateFromNewScale(scale);
-    if (scaleState == PhotoViewScaleState.zoomedOut) {
-      scaleStateController.scaleState = PhotoViewScaleState.initial;
-    } else if (scaleState == PhotoViewScaleState.zoomedIn) {
+    if (scaleState == .zoomedOut) {
+      scaleStateController.scaleState = .initial;
+    } else if (scaleState == .zoomedIn) {
       animateRotation(controller.rotation, 0);
       if (_shouldAllowPanRotate()) {
-        animatePosition(controller.position, Offset.zero);
+        animatePosition(controller.position, .zero);
       }
     }
 
@@ -266,15 +265,15 @@ class PhotoViewCoreState extends State<PhotoViewCore>
   }
 
   void onAnimationStatus(AnimationStatus status) {
-    if (status == AnimationStatus.completed) {
+    if (status == .completed) {
       onAnimationStatusCompleted();
     }
   }
 
   /// Check if scale is equal to initial after scale animation update
   void onAnimationStatusCompleted() {
-    if (scaleStateController.scaleState != PhotoViewScaleState.initial && scale == scaleBoundaries.initialScale) {
-      scaleStateController.setInvisibly(PhotoViewScaleState.initial);
+    if (scaleStateController.scaleState != .initial && scale == scaleBoundaries.initialScale) {
+      scaleStateController.setInvisibly(.initial);
     }
   }
 
@@ -311,7 +310,7 @@ class PhotoViewCoreState extends State<PhotoViewCore>
 
   void animateOnScaleStateUpdate(double prevScale, double nextScale) {
     animateScale(prevScale, nextScale);
-    animatePosition(controller.position, Offset.zero);
+    animatePosition(controller.position, .zero);
     animateRotation(controller.rotation, 0.0);
   }
 
@@ -361,7 +360,7 @@ class PhotoViewCoreState extends State<PhotoViewCore>
       builder: (BuildContext context, AsyncSnapshot<PhotoViewControllerValue> snapshot) {
         if (snapshot.hasData) {
           final PhotoViewControllerValue value = snapshot.data!;
-          final useImageScale = widget.filterQuality != FilterQuality.none;
+          final useImageScale = widget.filterQuality != .none;
 
           final computedScale = useImageScale ? 1.0 : scale;
 
@@ -445,8 +444,8 @@ class PhotoViewCoreState extends State<PhotoViewCore>
             gaplessPlayback: widget.gaplessPlayback ?? false,
             filterQuality: widget.filterQuality,
             width: scaleBoundaries.childSize.width * scale,
-            fit: BoxFit.contain,
-            isAntiAlias: widget.filterQuality == FilterQuality.high,
+            fit: .contain,
+            isAntiAlias: widget.filterQuality == .high,
           );
   }
 }

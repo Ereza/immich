@@ -16,8 +16,8 @@ class DismissibleActivity extends StatelessWidget {
 
     return Dismissible(
       key: Key(activityId),
-      dismissThresholds: const {DismissDirection.horizontal: 0.7},
-      direction: DismissDirection.horizontal,
+      dismissThresholds: const {.horizontal: 0.7},
+      direction: .horizontal,
       confirmDismiss: (direction) => onDismiss != null
           ? showDialog(
               context: context,
@@ -33,10 +33,7 @@ class DismissibleActivity extends StatelessWidget {
       // LTR
       background: _DismissBackground(withDeleteIcon: onDismiss != null),
       // RTL
-      secondaryBackground: _DismissBackground(
-        withDeleteIcon: onDismiss != null,
-        alignment: AlignmentDirectional.centerEnd,
-      ),
+      secondaryBackground: _DismissBackground(withDeleteIcon: onDismiss != null, alignment: .centerEnd),
       child: body,
     );
   }
@@ -55,7 +52,7 @@ class _DismissBackground extends StatelessWidget {
       color: withDeleteIcon ? Colors.red[400] : Colors.grey[600],
       child: withDeleteIcon
           ? const Padding(
-              padding: EdgeInsets.all(15),
+              padding: .all(15),
               child: Icon(Icons.delete_sweep_rounded, color: Colors.black),
             )
           : null,

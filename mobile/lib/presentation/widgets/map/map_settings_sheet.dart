@@ -40,9 +40,9 @@ class _DriftMapSettingsSheetState extends ConsumerState<DriftMapSettingsSheet> {
           elevation: 0.0,
           shadowColor: Colors.transparent,
           color: Colors.transparent,
-          margin: EdgeInsets.zero,
+          margin: .zero,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: .max,
             children: [
               MapThemePicker(
                 themeMode: mapState.themeMode,
@@ -73,7 +73,7 @@ class _DriftMapSettingsSheetState extends ConsumerState<DriftMapSettingsSheet> {
                   },
                 ),
                 Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: .centerLeft,
                   child: TextButton(
                     onPressed: () => setState(() {
                       useCustomRange = false;
@@ -89,7 +89,7 @@ class _DriftMapSettingsSheetState extends ConsumerState<DriftMapSettingsSheet> {
                   onTimeChange: (time) => ref.read(mapStateProvider.notifier).setRelativeTime(time),
                 ),
                 Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: .centerLeft,
                   child: TextButton(
                     onPressed: () => setState(() {
                       useCustomRange = true;

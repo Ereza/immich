@@ -71,11 +71,11 @@ class SharedLink {
       key = dto.key,
       showMetadata = dto.showMetadata,
       slug = dto.slug,
-      type = dto.type == SharedLinkType.ALBUM ? SharedLinkSource.album : SharedLinkSource.individual,
-      title = dto.type == SharedLinkType.ALBUM
+      type = dto.type == .ALBUM ? SharedLinkSource.album : SharedLinkSource.individual,
+      title = dto.type == .ALBUM
           ? dto.album.orElse(null)?.albumName.toUpperCase() ?? "UNKNOWN SHARE"
           : "INDIVIDUAL SHARE",
-      thumbAssetId = dto.type == SharedLinkType.ALBUM
+      thumbAssetId = dto.type == .ALBUM
           ? dto.album.orElse(null)?.albumThumbnailAssetId
           : dto.assets.isNotEmpty
           ? dto.assets[0].id

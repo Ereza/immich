@@ -20,7 +20,7 @@ class DriftMemoryRepository extends DriftDatabaseRepository {
               _db.remoteAssetEntity,
               _db.remoteAssetEntity.id.equalsExp(_db.memoryAssetEntity.assetId) &
                   _db.remoteAssetEntity.deletedAt.isNull() &
-                  _db.remoteAssetEntity.visibility.equalsValue(AssetVisibility.timeline),
+                  _db.remoteAssetEntity.visibility.equalsValue(.timeline),
             ),
           ])
           ..where(_db.memoryEntity.ownerId.equals(ownerId))
@@ -60,7 +60,7 @@ class DriftMemoryRepository extends DriftDatabaseRepository {
               _db.remoteAssetEntity,
               _db.remoteAssetEntity.id.equalsExp(_db.memoryAssetEntity.assetId) &
                   _db.remoteAssetEntity.deletedAt.isNull() &
-                  _db.remoteAssetEntity.visibility.equalsValue(AssetVisibility.timeline),
+                  _db.remoteAssetEntity.visibility.equalsValue(.timeline),
             ),
           ])
           ..where(_db.memoryEntity.id.equals(memoryId))

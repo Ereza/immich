@@ -72,22 +72,22 @@ class _DriftActivityTextFieldState extends ConsumerState<DriftActivityTextField>
     }
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: widget.isBottomSheet ? 0 : 10),
+      padding: .symmetric(vertical: widget.isBottomSheet ? 0 : 10),
       child: TextField(
         controller: inputController,
         enabled: widget.isEnabled,
         focusNode: inputFocusNode,
-        textInputAction: TextInputAction.send,
+        textInputAction: .send,
         autofocus: false,
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: const EdgeInsets.symmetric(vertical: 12), // Adjust as needed
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
+          contentPadding: const .symmetric(vertical: 12), // Adjust as needed
+          border: .none,
+          focusedBorder: .none,
+          enabledBorder: .none,
           prefixIcon: user != null
               ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const .symmetric(horizontal: 15),
                   child: UserCircleAvatar(user: user, size: 30),
                 )
               : null,
@@ -99,7 +99,7 @@ class _DriftActivityTextFieldState extends ConsumerState<DriftActivityTextField>
             disabledColor: context.colorScheme.secondaryContainer,
           ),
           hintText: !widget.isEnabled ? 'shared_album_activities_input_disable'.tr() : 'say_something'.tr(),
-          hintStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 14, color: Colors.grey[600]),
+          hintStyle: TextStyle(fontWeight: .normal, fontSize: 14, color: Colors.grey[600]),
         ),
         onEditingComplete: onEditingComplete,
         onTapOutside: (_) => inputFocusNode.unfocus(),

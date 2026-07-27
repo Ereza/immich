@@ -80,14 +80,14 @@ class _ImmichTextButtonState extends State<ImmichTextButton> {
     final style = ElevatedButton.styleFrom(padding: const .symmetric(vertical: ImmichSpacing.md));
 
     final button = switch (widget.variant) {
-      ImmichVariant.filled => ElevatedButton.icon(
+      .filled => ElevatedButton.icon(
         style: style,
         onPressed: _onPressed,
         onLongPress: _onLongPress,
         icon: icon,
         label: label,
       ),
-      ImmichVariant.ghost => TextButton.icon(
+      .ghost => TextButton.icon(
         style: style,
         onPressed: _onPressed,
         onLongPress: _onLongPress,
@@ -97,7 +97,7 @@ class _ImmichTextButtonState extends State<ImmichTextButton> {
     };
 
     if (widget.expanded) {
-      return SizedBox(width: double.infinity, child: button);
+      return SizedBox(width: .infinity, child: button);
     }
     return button;
   }

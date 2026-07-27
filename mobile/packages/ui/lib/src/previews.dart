@@ -34,10 +34,10 @@ const ColorScheme _darkColorScheme = ColorScheme.dark(
   outlineVariant: Color(0xFF43464F),
 );
 
-PreviewThemeData immichPreviewTheme() => PreviewThemeData(
-      materialLight: ThemeData(colorScheme: _lightColorScheme, useMaterial3: true),
-      materialDark: ThemeData(colorScheme: _darkColorScheme, useMaterial3: true),
-    );
+PreviewThemeData immichPreviewTheme() => .new(
+  materialLight: ThemeData(colorScheme: _lightColorScheme, useMaterial3: true),
+  materialDark: ThemeData(colorScheme: _darkColorScheme, useMaterial3: true),
+);
 
 Widget immichPreviewWrapper(Widget child) {
   return Builder(
@@ -46,7 +46,7 @@ Widget immichPreviewWrapper(Widget child) {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const .all(16),
           child: Align(alignment: Alignment.topLeft, child: child),
         ),
       ),
@@ -56,5 +56,5 @@ Widget immichPreviewWrapper(Widget child) {
 
 final class ImmichPreview extends Preview {
   const ImmichPreview({super.name, super.group, super.size, super.textScaleFactor})
-      : super(theme: immichPreviewTheme, wrapper: immichPreviewWrapper);
+    : super(theme: immichPreviewTheme, wrapper: immichPreviewWrapper);
 }

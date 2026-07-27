@@ -38,7 +38,7 @@ final _asset = RemoteAsset(
   name: 'photo.jpg',
   ownerId: 'user-1',
   checksum: 'checksum-1',
-  type: AssetType.image,
+  type: .image,
   createdAt: DateTime(2026, 6, 12),
   updatedAt: DateTime(2026, 6, 12),
   isEdited: false,
@@ -53,7 +53,7 @@ final _album = RemoteAlbum(
   updatedAt: DateTime(2026, 6, 12),
   isActivityEnabled: true,
   isShared: true,
-  order: AlbumAssetOrder.asc,
+  order: .asc,
   assetCount: 1,
   ownerName: 'Owner',
 );
@@ -73,7 +73,7 @@ void main() {
     ref = MockWidgetRef();
     createdTimelineServices = [];
 
-    when(() => timelineFactory.fromAssets(any(), TimelineOrigin.deepLink)).thenAnswer((invocation) {
+    when(() => timelineFactory.fromAssets(any(), .deepLink)).thenAnswer((invocation) {
       final assets = List<BaseAsset>.from(invocation.positionalArguments[0] as List<BaseAsset>);
       final timelineService = TimelineService((
         assetSource: (index, count) async => assets.skip(index).take(count).toList(),

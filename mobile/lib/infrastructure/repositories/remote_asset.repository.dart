@@ -25,7 +25,7 @@ class RemoteAssetRepository extends DriftDatabaseRepository {
         (row) =>
             _db.remoteAssetEntity.ownerId.equals(userId) &
             _db.remoteAssetEntity.deletedAt.isNull() &
-            _db.remoteAssetEntity.visibility.equalsValue(AssetVisibility.timeline),
+            _db.remoteAssetEntity.visibility.equalsValue(.timeline),
       )
       ..orderBy([(row) => OrderingTerm.desc(row.createdAt)])
       ..limit(10);
@@ -77,7 +77,7 @@ class RemoteAssetRepository extends DriftDatabaseRepository {
             row.stackId.equals(stackId) &
             row.id.equals(asset.id).not() &
             row.deletedAt.isNull() &
-            row.visibility.equalsValue(AssetVisibility.timeline),
+            row.visibility.equalsValue(.timeline),
       )
       ..orderBy([(row) => OrderingTerm.desc(row.createdAt)]);
 

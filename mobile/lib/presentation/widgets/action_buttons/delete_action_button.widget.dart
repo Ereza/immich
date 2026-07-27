@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
@@ -67,7 +66,7 @@ class DeleteActionButton extends ConsumerWidget {
     final result = await ref.read(actionProvider.notifier).trashRemoteAndDeleteLocal(source);
     ref.read(multiSelectProvider.notifier).reset();
 
-    if (source == ActionSource.viewer && result.success) {
+    if (source == .viewer && result.success) {
       final shouldRefreshStack = currentAsset is RemoteAsset && currentAsset.stackId != null;
       EventStream.shared.emit(
         shouldRefreshStack ? ViewerStackAssetDeletedEvent(stackIndex: stackIndex) : const ViewerReloadAssetEvent(),
@@ -80,8 +79,8 @@ class DeleteActionButton extends ConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: result.success ? ToastType.success : ToastType.error,
+        gravity: .BOTTOM,
+        toastType: result.success ? .success : .error,
       );
     }
   }

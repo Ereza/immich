@@ -61,7 +61,7 @@ class ShareIntentUploadStateNotifier extends StateNotifier<List<ShareIntentAttac
   Future<void> uploadAll(List<File> files) async {
     for (final file in files) {
       final fileId = p.hash(file.path).toString();
-      _updateStatus(fileId, UploadStatus.running);
+      _updateStatus(fileId, .running);
     }
 
     await _foregroundUploadService.uploadShareIntent(
@@ -71,11 +71,11 @@ class ShareIntentUploadStateNotifier extends StateNotifier<List<ShareIntentAttac
         _updateProgress(fileId, progress);
       },
       onSuccess: (fileId, _) {
-        _updateStatus(fileId, UploadStatus.complete, progress: 1.0);
+        _updateStatus(fileId, .complete, progress: 1.0);
       },
       onError: (fileId, errorMessage) {
         _logger.warning("Upload failed for file: $fileId, error: $errorMessage");
-        _updateStatus(fileId, UploadStatus.failed);
+        _updateStatus(fileId, .failed);
       },
     );
   }

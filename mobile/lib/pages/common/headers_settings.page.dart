@@ -71,11 +71,11 @@ class HeaderSettingsPage extends HookConsumerWidget {
       body: PopScope(
         onPopInvokedWithResult: (didPop, _) => saveHeaders(ref, headers.value),
         child: ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+          padding: const .symmetric(horizontal: 8.0, vertical: 16.0),
           itemCount: list.length,
           itemBuilder: (ctx, index) => list[index],
           separatorBuilder: (context, index) =>
-              const Padding(padding: EdgeInsets.only(bottom: 16.0, left: 8, right: 8), child: Divider()),
+              const Padding(padding: .only(bottom: 16.0, left: 8, right: 8), child: Divider()),
         ),
       ),
     );
@@ -121,7 +121,7 @@ class HeaderKeyValueSettings extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 12.0),
+          padding: const .only(left: 8, right: 8, bottom: 12.0),
           child: Row(
             children: [
               Expanded(
@@ -136,13 +136,13 @@ class HeaderKeyValueSettings extends StatelessWidget {
                     header.key = headerKey;
                   },
                   validator: emptyFieldValidator,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: .next,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const .only(left: 8),
                 child: IconButton(
-                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 12)),
+                  style: ElevatedButton.styleFrom(padding: const .symmetric(vertical: 12)),
                   color: Colors.red[400],
                   onPressed: onRemove,
                   icon: const Icon(Icons.delete_outline),
@@ -152,7 +152,7 @@ class HeaderKeyValueSettings extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 12.0),
+          padding: const .only(left: 8, right: 8, bottom: 12.0),
           child: TextFormField(
             controller: valueController,
             decoration: InputDecoration(
@@ -164,7 +164,7 @@ class HeaderKeyValueSettings extends StatelessWidget {
               header.value = headerValue;
             },
             validator: emptyFieldValidator,
-            textInputAction: TextInputAction.done,
+            textInputAction: .done,
           ),
         ),
       ],

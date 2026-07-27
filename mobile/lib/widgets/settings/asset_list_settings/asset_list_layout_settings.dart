@@ -19,7 +19,7 @@ class LayoutSettings extends HookConsumerWidget {
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingGroupTitle(
           title: "asset_list_layout_sub_title".t(context: context),

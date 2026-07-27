@@ -12,14 +12,14 @@ class ScaffoldErrorBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: .center,
+      mainAxisAlignment: .center,
       children: [
-        Text("scaffold_body_error_occurred", style: context.textTheme.displayMedium, textAlign: TextAlign.center).tr(),
+        Text("scaffold_body_error_occurred", style: context.textTheme.displayMedium, textAlign: .center).tr(),
         if (withIcon)
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 15),
+              padding: const .only(top: 15),
               child: Icon(
                 Icons.error_outline,
                 size: 100,
@@ -29,8 +29,8 @@ class ScaffoldErrorBody extends StatelessWidget {
           ),
         if (withIcon && errorMsg != null)
           Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text(errorMsg!, style: context.textTheme.displaySmall, textAlign: TextAlign.center),
+            padding: const .all(20),
+            child: Text(errorMsg!, style: context.textTheme.displaySmall, textAlign: .center),
           ),
       ],
     );

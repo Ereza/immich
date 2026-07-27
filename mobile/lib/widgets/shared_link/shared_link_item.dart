@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/generated/translations.g.dart';
@@ -78,8 +77,8 @@ class SharedLinkItem extends ConsumerWidget {
       if (shareUrl == null) {
         ImmichToast.show(
           context: context,
-          gravity: ToastGravity.BOTTOM,
-          toastType: ToastType.error,
+          gravity: .BOTTOM,
+          toastType: .error,
           msg: context.t.shared_link_error_server_url_fetch,
         );
         return;
@@ -106,7 +105,7 @@ class SharedLinkItem extends ConsumerWidget {
         width: imageSize,
         child: thumbnailUrl == null
             ? const Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                shape: RoundedRectangleBorder(borderRadius: .all(.circular(10))),
                 child: Icon(Icons.image_not_supported_outlined),
               )
             : ThumbnailWithInfo(
@@ -122,7 +121,7 @@ class SharedLinkItem extends ConsumerWidget {
     Widget buildInfoChip(String labelText) {
       return Card.outlined(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          padding: const .symmetric(horizontal: 10, vertical: 6),
           child: Text(labelText, style: const TextStyle(fontSize: 11)),
         ),
       );
@@ -141,19 +140,14 @@ class SharedLinkItem extends ConsumerWidget {
 
     Widget buildSharedLinkDetails() {
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: .stretch,
         children: [
           const SizedBox(height: 5),
           Text(
             sharedLink.title,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.bold,
-              overflow: TextOverflow.ellipsis,
-            ),
+            style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: .bold, overflow: .ellipsis),
           ),
-          if (sharedLink.description?.isNotEmpty ?? false)
-            Text(sharedLink.description!, overflow: TextOverflow.ellipsis),
+          if (sharedLink.description?.isNotEmpty ?? false) Text(sharedLink.description!, overflow: .ellipsis),
           buildExpiryDuration(context),
           buildShareParameterInfos(),
         ],
@@ -162,11 +156,11 @@ class SharedLinkItem extends ConsumerWidget {
 
     return Dismissible(
       key: ValueKey(sharedLink.id),
-      direction: DismissDirection.endToStart,
+      direction: .endToStart,
       background: Container(
         color: Theme.of(context).colorScheme.error,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
+        alignment: .centerRight,
+        padding: const .only(right: 20),
         child: Icon(Icons.delete, color: Theme.of(context).colorScheme.onError),
       ),
       confirmDismiss: (_) async {
@@ -190,9 +184,9 @@ class SharedLinkItem extends ConsumerWidget {
         onTap: () => context.pushRoute(SharedLinkEditRoute(existingLink: sharedLink)),
         onLongPress: copyShareLinkToClipboard,
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const .all(12),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               buildThumbnail(),
               const SizedBox(width: 12),

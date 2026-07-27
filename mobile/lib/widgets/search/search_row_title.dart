@@ -11,9 +11,9 @@ class SearchRowTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: .spaceBetween,
       children: [
-        Text(title, style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500)),
+        Text(title, style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500)),
         TextButton(
           onPressed: onViewAllPressed,
           child: Text(

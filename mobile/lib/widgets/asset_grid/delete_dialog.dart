@@ -20,12 +20,12 @@ class DeleteLocalOnlyDialog extends StatelessWidget {
     }
 
     return AlertDialog(
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
       title: const Text("delete_dialog_title").tr(),
       content: const Text("delete_dialog_alert_local_non_backed_up").tr(),
       actions: [
         SizedBox(
-          width: double.infinity,
+          width: .infinity,
           height: 48,
           child: FilledButton(
             onPressed: () => context.pop(),
@@ -33,12 +33,12 @@ class DeleteLocalOnlyDialog extends StatelessWidget {
               backgroundColor: context.colorScheme.surfaceDim,
               foregroundColor: context.primaryColor,
             ),
-            child: const Text("cancel", style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+            child: const Text("cancel", style: TextStyle(fontWeight: .bold)).tr(),
           ),
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: double.infinity,
+          width: .infinity,
           height: 48,
 
           child: FilledButton(
@@ -47,20 +47,17 @@ class DeleteLocalOnlyDialog extends StatelessWidget {
               backgroundColor: context.colorScheme.errorContainer,
               foregroundColor: context.colorScheme.onErrorContainer,
             ),
-            child: const Text(
-              "delete_local_dialog_ok_backed_up_only",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ).tr(),
+            child: const Text("delete_local_dialog_ok_backed_up_only", style: TextStyle(fontWeight: .bold)).tr(),
           ),
         ),
         const SizedBox(height: 8),
         SizedBox(
-          width: double.infinity,
+          width: .infinity,
           height: 48,
           child: FilledButton(
             onPressed: onForceDelete,
             style: FilledButton.styleFrom(backgroundColor: Colors.red[400], foregroundColor: Colors.white),
-            child: const Text("delete_local_dialog_ok_force", style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+            child: const Text("delete_local_dialog_ok_force", style: TextStyle(fontWeight: .bold)).tr(),
           ),
         ),
       ],

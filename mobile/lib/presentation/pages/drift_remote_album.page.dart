@@ -57,7 +57,7 @@ class _RemoteAlbumPageState extends ConsumerState<RemoteAlbumPage> {
       ImmichToast.show(
         context: context,
         msg: "assets_added_to_album_count".t(context: context, args: {'count': added.toString()}),
-        toastType: ToastType.success,
+        toastType: .success,
       );
     }
   }
@@ -76,17 +76,13 @@ class _RemoteAlbumPageState extends ConsumerState<RemoteAlbumPage> {
         ImmichToast.show(
           context: context,
           msg: "users_added_to_album_count".t(context: context, args: {'count': newUsers.length}),
-          toastType: ToastType.success,
+          toastType: .success,
         );
       }
 
       ref.invalidate(remoteAlbumSharedUsersProvider(_album.id));
     } catch (e) {
-      ImmichToast.show(
-        context: context,
-        msg: "Failed to add users to album: ${e.toString()}",
-        toastType: ToastType.error,
-      );
+      ImmichToast.show(context: context, msg: "Failed to add users to album: ${e.toString()}", toastType: .error);
     }
   }
 
@@ -103,7 +99,7 @@ class _RemoteAlbumPageState extends ConsumerState<RemoteAlbumPage> {
         return AlertDialog(
           title: Text('delete_album'.t(context: context)),
           content: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Text('album_delete_confirmation'.t(context: context, args: {'album': _album.name})),
               const SizedBox(height: 8),
@@ -132,7 +128,7 @@ class _RemoteAlbumPageState extends ConsumerState<RemoteAlbumPage> {
         ImmichToast.show(
           context: context,
           msg: 'album_deleted'.t(context: context),
-          toastType: ToastType.success,
+          toastType: .success,
         );
 
         unawaited(context.pushRoute(const DriftAlbumsRoute()));
@@ -140,7 +136,7 @@ class _RemoteAlbumPageState extends ConsumerState<RemoteAlbumPage> {
         ImmichToast.show(
           context: context,
           msg: 'album_viewer_appbar_share_err_delete'.t(context: context),
-          toastType: ToastType.error,
+          toastType: .error,
         );
       }
     }
@@ -262,7 +258,7 @@ class _EditAlbumDialogState extends ConsumerState<_EditAlbumDialog> {
         ImmichToast.show(
           context: context,
           msg: 'album_update_error'.t(context: context),
-          toastType: ToastType.error,
+          toastType: .error,
         );
       }
     }
@@ -271,17 +267,17 @@ class _EditAlbumDialogState extends ConsumerState<_EditAlbumDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.all(24),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+      insetPadding: const .all(24),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(16))),
       child: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const .all(16),
           constraints: const BoxConstraints(maxWidth: 550),
           child: Form(
             key: formKey,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: .min,
+              crossAxisAlignment: .stretch,
               children: [
                 Row(
                   children: [
@@ -295,15 +291,15 @@ class _EditAlbumDialogState extends ConsumerState<_EditAlbumDialog> {
                 // Album Name
                 Text(
                   'album_name'.t(context: context).toUpperCase(),
-                  style: context.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600),
+                  style: context.textTheme.labelSmall?.copyWith(fontWeight: .w600),
                 ),
                 const SizedBox(height: 4),
                 TextFormField(
                   controller: titleController,
                   maxLines: 1,
-                  textCapitalization: TextCapitalization.sentences,
+                  textCapitalization: .sentences,
                   decoration: InputDecoration(
-                    border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+                    border: const OutlineInputBorder(borderRadius: .all(.circular(12))),
                     filled: true,
                     fillColor: context.colorScheme.surface,
                   ),
@@ -320,15 +316,15 @@ class _EditAlbumDialogState extends ConsumerState<_EditAlbumDialog> {
                 // Description
                 Text(
                   'description'.t(context: context).toUpperCase(),
-                  style: context.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600),
+                  style: context.textTheme.labelSmall?.copyWith(fontWeight: .w600),
                 ),
                 const SizedBox(height: 4),
                 TextFormField(
                   controller: descriptionController,
                   maxLines: 4,
-                  textCapitalization: TextCapitalization.sentences,
+                  textCapitalization: .sentences,
                   decoration: InputDecoration(
-                    border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+                    border: const OutlineInputBorder(borderRadius: .all(.circular(12))),
                     filled: true,
                     fillColor: context.colorScheme.surface,
                   ),
@@ -337,7 +333,7 @@ class _EditAlbumDialogState extends ConsumerState<_EditAlbumDialog> {
 
                 // Action Buttons
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: .end,
                   children: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(null),
@@ -413,7 +409,7 @@ class _AlbumKebabMenu extends ConsumerWidget {
       future: ref
           .read(remoteAlbumServiceProvider)
           .getUserRole(album.id, user?.id ?? '')
-          .then((role) => role == AlbumUserRole.editor),
+          .then((role) => role == .editor),
       builder: (context, snapshot) {
         final canAddPhotos = snapshot.data ?? false;
 

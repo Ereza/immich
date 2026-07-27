@@ -24,7 +24,7 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
             mapDarkStyleUrl: 'https://tiles.immich.cloud/v1/style/dark.json',
           ),
           serverDiskInfo: ServerDiskInfo(diskAvailable: "0", diskSize: "0", diskUse: "0", diskUsagePercentage: 0),
-          versionStatus: VersionStatus.upToDate,
+          versionStatus: .upToDate,
         ),
       );
 
@@ -44,14 +44,14 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
 
       // using isClientOutOfDate since that will show to users regardless of if they are an admin
       if (serverVersion == null) {
-        state = state.copyWith(versionStatus: VersionStatus.error);
+        state = state.copyWith(versionStatus: .error);
         return;
       }
 
       await _checkServerVersionMismatch(serverVersion);
     } catch (e, stackTrace) {
       _log.severe("Failed to get server version", e, stackTrace);
-      state = state.copyWith(versionStatus: VersionStatus.error);
+      state = state.copyWith(versionStatus: .error);
       return;
     }
   }
@@ -63,16 +63,16 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
     SemVer clientVersion = SemVer.fromString(packageInfo.version);
 
     if (serverVersion < clientVersion || (latestVersion != null && serverVersion < latestVersion)) {
-      state = state.copyWith(versionStatus: VersionStatus.serverOutOfDate);
+      state = state.copyWith(versionStatus: .serverOutOfDate);
       return;
     }
 
-    if (clientVersion < serverVersion && clientVersion.differenceType(serverVersion) != SemVerType.patch) {
-      state = state.copyWith(versionStatus: VersionStatus.clientOutOfDate);
+    if (clientVersion < serverVersion && clientVersion.differenceType(serverVersion) != .patch) {
+      state = state.copyWith(versionStatus: .clientOutOfDate);
       return;
     }
 
-    state = state.copyWith(versionStatus: VersionStatus.upToDate);
+    state = state.copyWith(versionStatus: .upToDate);
   }
 
   handleReleaseInfo(ServerVersion serverVersion, ServerVersion? latestVersion) {
@@ -104,8 +104,8 @@ final serverInfoProvider = StateNotifierProvider<ServerInfoNotifier, ServerInfo>
 final versionWarningPresentProvider = Provider.family<bool, UserDto?>((ref, user) {
   final serverInfo = ref.watch(serverInfoProvider);
   return switch (serverInfo.versionStatus) {
-    VersionStatus.clientOutOfDate || VersionStatus.error => true,
-    VersionStatus.serverOutOfDate => serverInfo.latestVersion != null && (user?.isAdmin ?? false),
-    VersionStatus.upToDate => false,
+    .clientOutOfDate || .error => true,
+    .serverOutOfDate => serverInfo.latestVersion != null && (user?.isAdmin ?? false),
+    .upToDate => false,
   };
 });

@@ -102,10 +102,7 @@ class LocalNetworkPreference extends HookConsumerWidget {
           SnackBar(
             content: Text(
               "get_wifiname_error".tr(),
-              style: context.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: context.colorScheme.onSecondary,
-              ),
+              style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w500, color: context.colorScheme.onSecondary),
             ),
             backgroundColor: context.colorScheme.secondary,
           ),
@@ -122,15 +119,15 @@ class LocalNetworkPreference extends HookConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const .symmetric(horizontal: 16.0),
       child: Stack(
         children: [
           Container(
-            clipBehavior: Clip.antiAlias,
+            clipBehavior: .antiAlias,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const .all(.circular(16)),
               color: context.colorScheme.surfaceContainerLow,
-              border: Border.all(color: context.colorScheme.surfaceContainerHighest, width: 1),
+              border: .all(color: context.colorScheme.surfaceContainerHighest, width: 1),
             ),
             child: Stack(
               children: [
@@ -140,19 +137,19 @@ class LocalNetworkPreference extends HookConsumerWidget {
                   child: Icon(Icons.home_outlined, size: 120, color: context.primaryColor.withValues(alpha: 0.05)),
                 ),
                 ListView(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  padding: const .symmetric(vertical: 16.0),
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 24),
+                      padding: const .symmetric(vertical: 4.0, horizontal: 24),
                       child: Text("local_network_sheet_info".tr(), style: context.textTheme.bodyMedium),
                     ),
                     const SizedBox(height: 4),
                     Divider(color: context.colorScheme.surfaceContainerHighest),
                     ListTile(
                       enabled: enabled,
-                      contentPadding: const EdgeInsets.only(left: 24, right: 8),
+                      contentPadding: const .only(left: 24, right: 8),
                       leading: const Icon(Icons.wifi_rounded),
                       title: Text("wifi_name".tr()),
                       subtitle: wifiNameText.value.isEmpty
@@ -160,7 +157,7 @@ class LocalNetworkPreference extends HookConsumerWidget {
                           : Text(
                               wifiNameText.value,
                               style: context.textTheme.labelLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: .bold,
                                 color: enabled ? context.primaryColor : context.colorScheme.onSurface.withAlpha(100),
                                 fontFamily: 'GoogleSansCode',
                               ),
@@ -172,7 +169,7 @@ class LocalNetworkPreference extends HookConsumerWidget {
                     ),
                     ListTile(
                       enabled: enabled,
-                      contentPadding: const EdgeInsets.only(left: 24, right: 8),
+                      contentPadding: const .only(left: 24, right: 8),
                       leading: const Icon(Icons.lan_rounded),
                       title: Text("server_endpoint".t(context: context)),
                       subtitle: localEndpointText.value.isEmpty
@@ -191,7 +188,7 @@ class LocalNetworkPreference extends HookConsumerWidget {
                     ),
                     const SizedBox(height: 16),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      padding: const .symmetric(horizontal: 24.0),
                       child: SizedBox(
                         height: 48,
                         child: OutlinedButton.icon(

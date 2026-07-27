@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
 import 'package:immich_mobile/presentation/actions/action.widget.dart';
@@ -58,7 +57,7 @@ class _RemoteAlbumBottomSheetState extends ConsumerState<RemoteAlbumBottomSheet>
     final ownsAlbum = ref.watch(currentUserProvider)?.id == widget.album.ownerId;
 
     Future<void> addToAlbum(RemoteAlbum album) async {
-      final result = await ref.read(actionProvider.notifier).addToAlbum(ActionSource.timeline, album);
+      final result = await ref.read(actionProvider.notifier).addToAlbum(.timeline, album);
 
       if (!context.mounted) {
         return;
@@ -68,7 +67,7 @@ class _RemoteAlbumBottomSheetState extends ConsumerState<RemoteAlbumBottomSheet>
         ImmichToast.show(
           context: context,
           msg: 'scaffold_body_error_occurred'.t(context: context),
-          toastType: ToastType.error,
+          toastType: .error,
         );
         return;
       }
@@ -95,30 +94,30 @@ class _RemoteAlbumBottomSheetState extends ConsumerState<RemoteAlbumBottomSheet>
       maxChildSize: 0.85,
       shouldCloseOnMinExtent: false,
       actions: [
-        const ShareActionButton(source: ActionSource.timeline),
+        const ShareActionButton(source: .timeline),
         if (multiselect.hasRemote) ...[
-          const ShareLinkActionButton(source: ActionSource.timeline),
+          const ShareLinkActionButton(source: .timeline),
 
           if (ownsAlbum) ...[
-            const ArchiveActionButton(source: ActionSource.timeline),
+            const ArchiveActionButton(source: .timeline),
             ...actions.map((action) => ActionColumnButtonWidget(action: TimelineAction(action: action))),
           ],
-          const DownloadActionButton(source: ActionSource.timeline),
+          const DownloadActionButton(source: .timeline),
           if (ownsAlbum) ...[
             isTrashEnable
-                ? const TrashActionButton(source: ActionSource.timeline)
-                : const DeletePermanentActionButton(source: ActionSource.timeline),
-            const EditDateTimeActionButton(source: ActionSource.timeline),
-            const EditLocationActionButton(source: ActionSource.timeline),
-            const MoveToLockFolderActionButton(source: ActionSource.timeline),
-            if (multiselect.selectedAssets.length > 1) const StackActionButton(source: ActionSource.timeline),
-            if (multiselect.hasStacked) const UnStackActionButton(source: ActionSource.timeline),
+                ? const TrashActionButton(source: .timeline)
+                : const DeletePermanentActionButton(source: .timeline),
+            const EditDateTimeActionButton(source: .timeline),
+            const EditLocationActionButton(source: .timeline),
+            const MoveToLockFolderActionButton(source: .timeline),
+            if (multiselect.selectedAssets.length > 1) const StackActionButton(source: .timeline),
+            if (multiselect.hasStacked) const UnStackActionButton(source: .timeline),
           ],
         ],
-        if (multiselect.hasMerged) const DeleteLocalActionButton(source: ActionSource.timeline),
-        if (ownsAlbum) RemoveFromAlbumActionButton(source: ActionSource.timeline, albumId: widget.album.id),
+        if (multiselect.hasMerged) const DeleteLocalActionButton(source: .timeline),
+        if (ownsAlbum) RemoveFromAlbumActionButton(source: .timeline, albumId: widget.album.id),
         if (ownsAlbum && multiselect.selectedAssets.length == 1)
-          SetAlbumCoverActionButton(source: ActionSource.timeline, albumId: widget.album.id),
+          SetAlbumCoverActionButton(source: .timeline, albumId: widget.album.id),
       ],
       slivers: ownsAlbum
           ? [const AddToAlbumHeader(), AlbumSelector(onAlbumSelected: addToAlbum, onKeyboardExpanded: onKeyboardExpand)]

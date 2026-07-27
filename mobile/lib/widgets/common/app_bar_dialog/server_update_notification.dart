@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/constants.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/server_info/server_info.model.dart';
 import 'package:immich_mobile/providers/server_info.provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -20,7 +19,7 @@ class ServerUpdateNotification extends HookConsumerWidget {
     Color infoColor = context.isDarkTheme ? context.primaryColor.withAlpha(55) : context.primaryColor.withAlpha(25);
     void openUpdateLink() {
       String url;
-      if (serverInfoState.versionStatus == VersionStatus.serverOutOfDate) {
+      if (serverInfoState.versionStatus == .serverOutOfDate) {
         url = kImmichLatestRelease;
       } else {
         if (Platform.isIOS) {
@@ -33,46 +32,44 @@ class ServerUpdateNotification extends HookConsumerWidget {
         }
       }
 
-      launchUrlString(url, mode: LaunchMode.externalApplication);
+      launchUrlString(url, mode: .externalApplication);
     }
 
     return SizedBox(
-      width: double.infinity,
+      width: .infinity,
       child: Container(
         decoration: BoxDecoration(
-          color: serverInfoState.versionStatus == VersionStatus.error ? errorColor : infoColor,
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          border: Border.all(
-            color: serverInfoState.versionStatus == VersionStatus.error
-                ? errorColor
-                : context.primaryColor.withAlpha(50),
+          color: serverInfoState.versionStatus == .error ? errorColor : infoColor,
+          borderRadius: const .all(.circular(8)),
+          border: .all(
+            color: serverInfoState.versionStatus == .error ? errorColor : context.primaryColor.withAlpha(50),
             width: 0.75,
           ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const .symmetric(horizontal: 12, vertical: 8),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             Expanded(
               child: Text(
                 serverInfoState.versionStatus.message,
-                textAlign: TextAlign.start,
+                textAlign: .start,
                 maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+                overflow: .ellipsis,
                 style: context.textTheme.labelLarge,
               ),
             ),
-            if (serverInfoState.versionStatus == VersionStatus.serverOutOfDate ||
-                serverInfoState.versionStatus == VersionStatus.clientOutOfDate) ...[
+            if (serverInfoState.versionStatus == .serverOutOfDate ||
+                serverInfoState.versionStatus == .clientOutOfDate) ...[
               const SizedBox(width: 8),
               TextButton(
                 onPressed: openUpdateLink,
                 style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(4),
+                  padding: const .all(4),
                   minimumSize: const Size(0, 0),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  tapTargetSize: .shrinkWrap,
                 ),
-                child: serverInfoState.versionStatus == VersionStatus.clientOutOfDate
+                child: serverInfoState.versionStatus == .clientOutOfDate
                     ? Text("action_common_update".tr(context: context))
                     : Text("view".tr()),
               ),

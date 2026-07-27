@@ -49,7 +49,7 @@ class DriftTrashPage extends StatelessWidget {
             final trashDays = ref.watch(serverInfoProvider.select((v) => v.serverConfig.trashDays));
 
             return SliverPadding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const .all(16.0),
               sliver: SliverToBoxAdapter(child: Text(context.t.trash_page_info(days: trashDays))),
             );
           },
@@ -88,7 +88,7 @@ class _TrashKebabMenu extends ConsumerWidget {
           ImmichToast.show(
             context: context,
             msg: result.success ? successMsg(result.count) : context.t.scaffold_body_error_occurred,
-            toastType: result.success ? ToastType.success : ToastType.error,
+            toastType: result.success ? .success : .error,
           );
         },
       ),
@@ -103,9 +103,7 @@ class _TrashKebabMenu extends ConsumerWidget {
         backgroundColor: WidgetStatePropertyAll(context.themeData.scaffoldBackgroundColor),
         surfaceTintColor: const WidgetStatePropertyAll(Colors.grey),
         elevation: const WidgetStatePropertyAll(4),
-        shape: const WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-        ),
+        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: .all(.circular(12)))),
         padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 6)),
       ),
       menuChildren: [

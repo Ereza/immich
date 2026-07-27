@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/providers/asset_viewer/asset_viewer.provider.dart';
@@ -33,7 +32,7 @@ class ViewerKebabMenu extends ConsumerWidget {
     final isTrashEnable = ref.watch(serverInfoProvider.select((state) => state.serverFeatures.trash));
     final isInLockedView = ref.watch(inLockedViewProvider);
     final currentAlbum = ref.watch(currentRemoteAlbumProvider);
-    final isArchived = asset is RemoteAsset && asset.visibility == AssetVisibility.archive;
+    final isArchived = asset is RemoteAsset && asset.visibility == .archive;
     final advancedTroubleshooting = ref.watch(settingsProvider.notifier).get(.advancedTroubleshooting);
 
     final actionContext = ActionButtonContext(
@@ -45,7 +44,7 @@ class ViewerKebabMenu extends ConsumerWidget {
       isInLockedView: isInLockedView,
       currentAlbum: currentAlbum,
       advancedTroubleshooting: advancedTroubleshooting,
-      source: ActionSource.viewer,
+      source: .viewer,
       isCasting: isCasting,
       timelineOrigin: timelineOrigin,
     );
@@ -58,9 +57,7 @@ class ViewerKebabMenu extends ConsumerWidget {
         backgroundColor: WidgetStatePropertyAll(context.themeData.scaffoldBackgroundColor),
         surfaceTintColor: const WidgetStatePropertyAll(Colors.grey),
         elevation: const WidgetStatePropertyAll(4),
-        shape: const WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-        ),
+        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: .all(.circular(12)))),
         padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 6)),
       ),
       children: [
@@ -68,11 +65,7 @@ class ViewerKebabMenu extends ConsumerWidget {
           constraints: const BoxConstraints(minWidth: 150),
           child: Theme(
             data: originalTheme ?? context.themeData,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: menuChildren,
-            ),
+            child: Column(mainAxisSize: .min, crossAxisAlignment: .stretch, children: menuChildren),
           ),
         ),
       ],

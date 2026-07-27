@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:immich_mobile/constants/constants.dart';
-import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/infrastructure/entities/local_asset.entity.dart';
 import 'package:immich_mobile/infrastructure/entities/local_asset.entity.drift.dart';
@@ -39,7 +38,7 @@ class DriftTrashedLocalAssetRepository extends DriftDatabaseRepository {
   Future<Iterable<LocalAsset>> getToRestore() async {
     final selectedAlbumIds = (_db.selectOnly(_db.localAlbumEntity)
       ..addColumns([_db.localAlbumEntity.id])
-      ..where(_db.localAlbumEntity.backupSelection.equalsValue(BackupSelection.selected)));
+      ..where(_db.localAlbumEntity.backupSelection.equalsValue(.selected)));
 
     final rows =
         await (_db.select(_db.trashedLocalAssetEntity).join([
@@ -48,7 +47,7 @@ class DriftTrashedLocalAssetRepository extends DriftDatabaseRepository {
                 _db.remoteAssetEntity.checksum.equalsExp(_db.trashedLocalAssetEntity.checksum),
               ),
             ])..where(
-              _db.trashedLocalAssetEntity.source.equalsValue(TrashOrigin.remoteSync) &
+              _db.trashedLocalAssetEntity.source.equalsValue(.remoteSync) &
                   _db.trashedLocalAssetEntity.albumId.isInQuery(selectedAlbumIds) &
                   _db.remoteAssetEntity.deletedAt.isNull(),
             ))
@@ -86,7 +85,7 @@ class DriftTrashedLocalAssetRepository extends DriftDatabaseRepository {
             isFavorite: Value(item.asset.isFavorite),
             orientation: Value(item.asset.orientation),
             playbackStyle: Value(item.asset.playbackStyle),
-            source: TrashOrigin.localSync,
+            source: .localSync,
           );
 
           batch.insert<$TrashedLocalAssetEntityTable, TrashedLocalAssetEntityData>(
@@ -249,7 +248,7 @@ class DriftTrashedLocalAssetRepository extends DriftDatabaseRepository {
         isFavorite: Value(e.asset.isFavorite),
         orientation: Value(e.asset.orientation),
         playbackStyle: Value(e.asset.playbackStyle),
-        source: TrashOrigin.localUser,
+        source: .localUser,
         albumId: e.albumId,
       );
     });
@@ -276,8 +275,7 @@ class DriftTrashedLocalAssetRepository extends DriftDatabaseRepository {
                 _db.remoteAssetEntity.checksum.equalsExp(_db.localAssetEntity.checksum),
               ),
             ])..where(
-              _db.localAlbumEntity.backupSelection.equalsValue(BackupSelection.selected) &
-                  _db.remoteAssetEntity.deletedAt.isNotNull(),
+              _db.localAlbumEntity.backupSelection.equalsValue(.selected) & _db.remoteAssetEntity.deletedAt.isNotNull(),
             ))
             .get();
 

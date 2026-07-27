@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/models/search/search_filter.model.dart';
 import 'package:immich_mobile/providers/search/search_filter.provider.dart';
 import 'package:immich_mobile/widgets/search/search_filter/common/dropdown.dart';
-import 'package:openapi/api.dart';
 
 class LocationPicker extends HookConsumerWidget {
   const LocationPicker({super.key, required this.onSelected, this.filter});
@@ -26,7 +25,7 @@ class LocationPicker extends HookConsumerWidget {
     final countries = ref.watch(
       getSearchSuggestionsProvider(
         SearchSuggestionArgs(
-          type: SearchSuggestionType.country,
+          type: .country,
           locationCountry: selectedCountry.value,
           locationState: selectedState.value,
         ),
@@ -35,21 +34,13 @@ class LocationPicker extends HookConsumerWidget {
 
     final states = ref.watch(
       getSearchSuggestionsProvider(
-        SearchSuggestionArgs(
-          type: SearchSuggestionType.state,
-          locationCountry: selectedCountry.value,
-          locationState: selectedState.value,
-        ),
+        SearchSuggestionArgs(type: .state, locationCountry: selectedCountry.value, locationState: selectedState.value),
       ),
     );
 
     final cities = ref.watch(
       getSearchSuggestionsProvider(
-        SearchSuggestionArgs(
-          type: SearchSuggestionType.city,
-          locationCountry: selectedCountry.value,
-          locationState: selectedState.value,
-        ),
+        SearchSuggestionArgs(type: .city, locationCountry: selectedCountry.value, locationState: selectedState.value),
       ),
     );
 
@@ -68,8 +59,8 @@ class LocationPicker extends HookConsumerWidget {
               return;
             }
             selectedCountry.value = value.toString();
-            stateTextController.value = TextEditingValue.empty;
-            cityTextController.value = TextEditingValue.empty;
+            stateTextController.value = .empty;
+            cityTextController.value = .empty;
             onSelected({'country': selectedCountry.value, 'state': null, 'city': null});
           },
         ),
@@ -87,7 +78,7 @@ class LocationPicker extends HookConsumerWidget {
               return;
             }
             selectedState.value = value.toString();
-            cityTextController.value = TextEditingValue.empty;
+            cityTextController.value = .empty;
             onSelected({'country': selectedCountry.value, 'state': selectedState.value, 'city': null});
           },
         ),

@@ -11,7 +11,7 @@ class MediaTypePicker extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedMediaType = useState(filter ?? AssetType.other);
+    final selectedMediaType = useState(filter ?? .other);
 
     return RadioGroup(
       onChanged: (value) {

@@ -24,12 +24,12 @@ class SettingsRadioListTile<T> extends StatelessWidget {
         children: groups
             .map(
               (g) => RadioListTile<T>(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                contentPadding: const .symmetric(horizontal: 20),
                 dense: true,
                 activeColor: context.primaryColor,
-                title: Text(g.title, style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500)),
+                title: Text(g.title, style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500)),
                 value: g.value,
-                controlAffinity: ListTileControlAffinity.trailing,
+                controlAffinity: .trailing,
               ),
             )
             .toList(),

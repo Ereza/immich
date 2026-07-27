@@ -18,7 +18,7 @@ extension PumpConsumerWidget on WidgetTester {
   Future<void> pumpConsumerWidget(
     Widget widget, {
     Duration? duration,
-    EnginePhase phase = EnginePhase.sendSemanticsUpdate,
+    EnginePhase phase = .sendSemanticsUpdate,
     List<Override> overrides = const [],
   }) async {
     await pumpWidget(

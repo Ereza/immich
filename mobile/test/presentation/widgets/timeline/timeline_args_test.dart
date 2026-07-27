@@ -56,7 +56,7 @@ void main() {
   testWidgets('timeline args follow constraints after a zero-sized first frame while buckets are still loading', (
     tester,
   ) async {
-    tester.view.physicalSize = Size.zero;
+    tester.view.physicalSize = .zero;
     tester.view.devicePixelRatio = 3.0;
     addTearDown(tester.view.reset);
 
@@ -94,7 +94,7 @@ void main() {
   });
 
   testWidgets('timeline args follow constraints after a zero-sized first frame once buckets resolve', (tester) async {
-    tester.view.physicalSize = Size.zero;
+    tester.view.physicalSize = .zero;
     tester.view.devicePixelRatio = 3.0;
     addTearDown(tester.view.reset);
 

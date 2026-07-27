@@ -91,7 +91,7 @@ void main() {
       });
 
       test('visibility keeps only assets with the given visibility', () {
-        final locked = RemoteAssetFactory.create(visibility: AssetVisibility.locked);
+        final locked = RemoteAssetFactory.create(visibility: .locked);
         final onTimeline = RemoteAssetFactory.create(ownerId: locked.ownerId);
 
         final lockedPhotos = AssetFilter([locked, onTimeline]).visibility(.locked);
@@ -100,7 +100,7 @@ void main() {
       });
 
       test('archived keeps only archived assets', () {
-        final archived = RemoteAssetFactory.create(visibility: AssetVisibility.archive);
+        final archived = RemoteAssetFactory.create(visibility: .archive);
         final onTimeline = RemoteAssetFactory.create(ownerId: archived.ownerId);
 
         final archivedPhotos = AssetFilter([archived, onTimeline]).archived();
@@ -120,10 +120,10 @@ void main() {
 
     group('inversion', () {
       test('notArchived keeps every non-archived visibility', () {
-        final archived = RemoteAssetFactory.create(visibility: AssetVisibility.archive);
-        final onTimeline = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: AssetVisibility.timeline);
-        final hidden = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: AssetVisibility.hidden);
-        final locked = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: AssetVisibility.locked);
+        final archived = RemoteAssetFactory.create(visibility: .archive);
+        final onTimeline = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: .timeline);
+        final hidden = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: .hidden);
+        final locked = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: .locked);
 
         final visiblePhotos = AssetFilter([archived, onTimeline, hidden, locked]).archived(isArchived: false);
 
@@ -131,9 +131,9 @@ void main() {
       });
 
       test('notVisibility keeps every asset not at the target visibility', () {
-        final archived = RemoteAssetFactory.create(visibility: AssetVisibility.archive);
-        final onTimeline = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: AssetVisibility.timeline);
-        final locked = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: AssetVisibility.locked);
+        final archived = RemoteAssetFactory.create(visibility: .archive);
+        final onTimeline = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: .timeline);
+        final locked = RemoteAssetFactory.create(ownerId: archived.ownerId, visibility: .locked);
 
         final toArchive = AssetFilter([archived, onTimeline, locked]).notVisibility(.archive);
 
@@ -172,7 +172,7 @@ void main() {
       test('combines predicates across owner, visibility and stack', () {
         final asset = RemoteAssetFactory.create();
         final wrongOwner = RemoteAssetFactory.create();
-        final archived = RemoteAssetFactory.create(ownerId: asset.ownerId, visibility: AssetVisibility.archive);
+        final archived = RemoteAssetFactory.create(ownerId: asset.ownerId, visibility: .archive);
         final stacked = RemoteAssetFactory.create(ownerId: asset.ownerId, stackId: 'stack-1');
         final localPhoto = LocalAssetFactory.create();
 

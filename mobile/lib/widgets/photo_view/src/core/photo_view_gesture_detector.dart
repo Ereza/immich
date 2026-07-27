@@ -96,7 +96,7 @@ class PhotoViewGestureDetector extends StatelessWidget {
       ),
       (PhotoViewGestureRecognizer instance) {
         instance
-          ..dragStartBehavior = DragStartBehavior.start
+          ..dragStartBehavior = .start
           ..onStart = onScaleStart
           ..onUpdate = onScaleUpdate
           ..onEnd = onScaleEnd
@@ -187,11 +187,11 @@ class PhotoViewGestureRecognizer extends ScaleGestureRecognizer {
     final int count = _pointerLocations.keys.length;
 
     // Compute the focal point
-    Offset focalPoint = Offset.zero;
+    Offset focalPoint = .zero;
     for (final int pointer in _pointerLocations.keys) {
       focalPoint += _pointerLocations[pointer]!;
     }
-    _currentFocalPoint = count > 0 ? focalPoint / count.toDouble() : Offset.zero;
+    _currentFocalPoint = count > 0 ? focalPoint / count.toDouble() : .zero;
 
     // Span is the average deviation from focal point. Horizontal and vertical
     // spans are the average deviations from the focal point's horizontal and
@@ -209,8 +209,8 @@ class PhotoViewGestureRecognizer extends ScaleGestureRecognizer {
     // Accept gesture if movement is possible in the direction the user is swiping
     final bool isHorizontalGesture = move.dx.abs() > move.dy.abs();
     final bool shouldMove = isHorizontalGesture
-        ? hitDetector!.shouldMove(move, Axis.horizontal)
-        : hitDetector!.shouldMove(move, Axis.vertical);
+        ? hitDetector!.shouldMove(move, .horizontal)
+        : hitDetector!.shouldMove(move, .vertical);
 
     if (shouldMove || _pointerLocations.keys.length > 1) {
       final double spanDelta = (_currentSpan! - _initialSpan!).abs();

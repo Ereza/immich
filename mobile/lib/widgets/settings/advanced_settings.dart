@@ -11,7 +11,6 @@ import 'package:immich_mobile/providers/infrastructure/settings.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/platform.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/readonly_mode.provider.dart';
 import 'package:immich_mobile/repositories/permission.repository.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
 import 'package:immich_mobile/utils/bytes_units.dart';
 import 'package:immich_mobile/utils/hooks/app_settings_update_hook.dart';
 import 'package:immich_mobile/widgets/settings/custom_proxy_headers_settings/custom_proxy_headers_settings.dart';
@@ -27,8 +26,8 @@ class AdvancedSettings extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final advancedTroubleshooting = useAppSettingsState(AppSettingsEnum.advancedTroubleshooting);
-    final manageLocalMediaAndroid = useAppSettingsState(AppSettingsEnum.manageLocalMediaAndroid);
+    final advancedTroubleshooting = useAppSettingsState(.advancedTroubleshooting);
+    final manageLocalMediaAndroid = useAppSettingsState(.manageLocalMediaAndroid);
     final isManageMediaSupported = useState(false);
     final manageMediaAndroidPermission = useState(false);
     final levelId = useState<int>(ref.read(appConfigProvider).logLevel.index);
@@ -37,7 +36,7 @@ class AdvancedSettings extends HookConsumerWidget {
       preferRemote.value,
       (_, __) => ref.read(settingsProvider).write(.imagePreferRemote, preferRemote.value),
     );
-    final readonlyModeEnabled = useAppSettingsState(AppSettingsEnum.readonlyModeEnabled);
+    final readonlyModeEnabled = useAppSettingsState(.readonlyModeEnabled);
 
     final logLevel = Level.LEVELS[levelId.value].name;
 
@@ -134,7 +133,7 @@ class AdvancedSettings extends HookConsumerWidget {
         },
       ),
       ListTile(
-        title: Text("advanced_settings_clear_image_cache".tr(), style: const TextStyle(fontWeight: FontWeight.w500)),
+        title: Text("advanced_settings_clear_image_cache".tr(), style: const TextStyle(fontWeight: .w500)),
         leading: const Icon(Icons.playlist_remove_rounded),
         onTap: () async {
           final int clearedBytes;

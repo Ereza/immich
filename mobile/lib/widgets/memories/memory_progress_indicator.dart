@@ -16,17 +16,17 @@ class MemoryProgressIndicator extends StatelessWidget {
       builder: (context, constraints) {
         final tickWidth = constraints.maxWidth / ticks;
         return ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(2.0)),
+          borderRadius: const .all(.circular(2.0)),
           child: Stack(
             children: [
               LinearProgressIndicator(
                 value: value,
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: const .all(.circular(10.0)),
                 backgroundColor: Colors.grey[800],
                 color: context.isDarkTheme ? context.colorScheme.primary : context.colorScheme.inversePrimary,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: .spaceEvenly,
                 children: List.generate(
                   ticks,
                   (i) => Container(

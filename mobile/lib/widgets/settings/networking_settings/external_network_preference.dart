@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/settings_key.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
 import 'package:immich_mobile/models/auth/auxilary_endpoint.model.dart';
@@ -16,25 +15,22 @@ class ExternalNetworkPreference extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final entries = useState([const AuxilaryEndpoint(url: '', status: AuxCheckStatus.unknown)]);
+    final entries = useState([const AuxilaryEndpoint(url: '', status: .unknown)]);
     final canSave = useState(false);
 
     saveEndpointList() {
-      canSave.value = entries.value.every((e) => e.status == AuxCheckStatus.valid);
+      canSave.value = entries.value.every((e) => e.status == .valid);
 
-      final urls = entries.value
-          .where((e) => e.status == AuxCheckStatus.valid && e.url.isNotEmpty)
-          .map((e) => e.url)
-          .toList();
+      final urls = entries.value.where((e) => e.status == .valid && e.url.isNotEmpty).map((e) => e.url).toList();
 
-      return ref.read(settingsProvider).write(SettingsKey.networkExternalEndpointList, urls);
+      return ref.read(settingsProvider).write(.networkExternalEndpointList, urls);
     }
 
     updateValidationStatus(String url, int index, AuxCheckStatus status) async {
       entries.value[index] = entries.value[index].copyWith(url: url, status: status);
 
       await saveEndpointList();
-      if (status == AuxCheckStatus.valid) {
+      if (status == .valid) {
         await ref.read(apiServiceProvider).updateHeaders();
       }
     }
@@ -79,13 +75,13 @@ class ExternalNetworkPreference extends HookConsumerWidget {
     }, const []);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const .symmetric(horizontal: 16.0),
       child: Container(
-        clipBehavior: Clip.antiAlias,
+        clipBehavior: .antiAlias,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          borderRadius: const .all(.circular(16)),
           color: context.colorScheme.surfaceContainerLow,
-          border: Border.all(color: context.colorScheme.surfaceContainerHighest, width: 1),
+          border: .all(color: context.colorScheme.surfaceContainerHighest, width: 1),
         ),
         child: Stack(
           children: [
@@ -95,12 +91,12 @@ class ExternalNetworkPreference extends HookConsumerWidget {
               child: Icon(Icons.dns_rounded, size: 120, color: context.primaryColor.withValues(alpha: 0.05)),
             ),
             ListView(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const .symmetric(vertical: 16.0),
               physics: const ClampingScrollPhysics(),
               shrinkWrap: true,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 24),
+                  padding: const .symmetric(vertical: 4.0, horizontal: 24),
                   child: Text("external_network_sheet_info".t(context: context), style: context.textTheme.bodyMedium),
                 ),
                 const SizedBox(height: 4),
@@ -128,7 +124,7 @@ class ExternalNetworkPreference extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 24),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  padding: const .symmetric(horizontal: 24.0),
                   child: SizedBox(
                     height: 48,
                     child: OutlinedButton.icon(
@@ -136,10 +132,7 @@ class ExternalNetworkPreference extends HookConsumerWidget {
                       label: Text('add_endpoint'.t(context: context)),
                       onPressed: enabled
                           ? () {
-                              entries.value = [
-                                ...entries.value,
-                                const AuxilaryEndpoint(url: '', status: AuxCheckStatus.unknown),
-                              ];
+                              entries.value = [...entries.value, const AuxilaryEndpoint(url: '', status: .unknown)];
                             }
                           : null,
                     ),

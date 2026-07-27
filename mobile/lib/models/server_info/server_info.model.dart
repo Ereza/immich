@@ -11,10 +11,10 @@ enum VersionStatus {
   error;
 
   String get message => switch (this) {
-    VersionStatus.upToDate => "",
-    VersionStatus.clientOutOfDate => "app_update_available".tr(),
-    VersionStatus.serverOutOfDate => "server_update_available".tr(),
-    VersionStatus.error => "unable_to_check_version".tr(),
+    .upToDate => "",
+    .clientOutOfDate => "app_update_available".tr(),
+    .serverOutOfDate => "server_update_available".tr(),
+    .error => "unable_to_check_version".tr(),
   };
 }
 

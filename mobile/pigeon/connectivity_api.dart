@@ -15,6 +15,6 @@ enum NetworkCapability { cellular, wifi, vpn, unmetered }
 
 @HostApi()
 abstract class ConnectivityApi {
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
+  @TaskQueue(type: .serialBackgroundThread)
   List<NetworkCapability> getCapabilities();
 }

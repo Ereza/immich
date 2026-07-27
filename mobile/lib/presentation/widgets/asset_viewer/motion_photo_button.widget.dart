@@ -26,7 +26,7 @@ class MotionPhotoPlayButton extends ConsumerWidget {
         duration: Durations.short2,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 60),
+            padding: const .only(top: 60),
             child: Center(
               child: _MotionButton(
                 isPlaying: isPlaying,
@@ -50,14 +50,14 @@ class _MotionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.grey[900]!.withValues(alpha: 0.4),
-      borderRadius: const BorderRadius.all(Radius.circular(24)),
+      borderRadius: const .all(.circular(24)),
       child: InkWell(
         onTap: onPressed,
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
+        borderRadius: const .all(.circular(24)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          padding: const .symmetric(horizontal: 8, vertical: 6),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               Icon(
                 isPlaying ? Icons.motion_photos_pause_outlined : Icons.play_circle_outline_rounded,
@@ -67,7 +67,7 @@ class _MotionButton extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 CurrentPlatform.isAndroid ? 'motion'.t(context: context) : 'live'.t(context: context),
-                style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: .w500),
               ),
             ],
           ),

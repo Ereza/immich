@@ -19,13 +19,13 @@ class DelayedLoadingIndicator extends StatelessWidget {
       future: Future.delayed(delay),
       builder: (context, snapshot) {
         late Widget c;
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.connectionState == .done) {
           c = child ?? const ImmichLoadingIndicator(key: ValueKey('loading'));
         } else {
           c = Container(key: const ValueKey('hiding'));
         }
 
-        return AnimatedSwitcher(duration: fadeInDuration ?? Duration.zero, child: c);
+        return AnimatedSwitcher(duration: fadeInDuration ?? .zero, child: c);
       },
     );
   }

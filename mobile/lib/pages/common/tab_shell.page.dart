@@ -29,7 +29,7 @@ class TabShellPage extends ConsumerStatefulWidget {
 class _TabShellPageState extends ConsumerState<TabShellPage> {
   @override
   Widget build(BuildContext context) {
-    final isScreenLandscape = context.orientation == Orientation.landscape;
+    final isScreenLandscape = context.orientation == .landscape;
     final isReadonlyModeEnabled = ref.watch(readonlyModeProvider);
 
     final navigationDestinations = [
@@ -72,7 +72,7 @@ class _TabShellPageState extends ConsumerState<TabShellPage> {
             .toList(),
         onDestinationSelected: (index) => _onNavigationSelected(tabsRouter, index, ref),
         selectedIndex: tabsRouter.activeIndex,
-        labelType: NavigationRailLabelType.all,
+        labelType: .all,
         groupAlignment: 0.0,
       );
     }
@@ -137,7 +137,7 @@ void _onNavigationSelected(TabsRouter router, int index, WidgetRef ref) {
 
   ref.read(hapticFeedbackProvider.notifier).selectionClick();
   router.setActiveIndex(index);
-  ref.read(tabProvider.notifier).state = TabEnum.values[index];
+  ref.read(tabProvider.notifier).state = .values[index];
 }
 
 class _BottomNavigationBar extends ConsumerStatefulWidget {
@@ -174,7 +174,7 @@ class _BottomNavigationBarState extends ConsumerState<_BottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final isScreenLandscape = context.orientation == Orientation.landscape;
+    final isScreenLandscape = context.orientation == .landscape;
 
     if (isScreenLandscape || hideNavigationBar) {
       return const SizedBox.shrink();

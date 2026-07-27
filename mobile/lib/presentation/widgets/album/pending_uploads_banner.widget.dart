@@ -99,15 +99,15 @@ class _PendingUploadsBannerContent extends StatelessWidget {
       child: InkWell(
         onTap: () => PendingUploadsBanner._openSheet(context, albumId),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const .symmetric(horizontal: 16),
                 child: Row(
                   children: [
                     ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      borderRadius: const .all(.circular(4)),
                       child: SizedBox(width: 32, height: 32, child: Thumbnail.fromAsset(asset: previewAsset)),
                     ),
                     const SizedBox(width: 12),
@@ -115,13 +115,13 @@ class _PendingUploadsBannerContent extends StatelessWidget {
                       child: Text(
                         '${'uploading'.t(context: context)} $count$percentLabel',
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+                        overflow: .ellipsis,
+                        style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w500),
                       ),
                     ),
                     if (hasFailures)
                       Padding(
-                        padding: const EdgeInsets.only(left: 8),
+                        padding: const .only(left: 8),
                         child: Icon(Icons.error_outline, color: context.colorScheme.error, size: 20),
                       ),
                     Icon(Icons.chevron_right_rounded, color: context.colorScheme.onSurfaceVariant),
@@ -171,13 +171,13 @@ class _PendingUploadsSheet extends ConsumerWidget {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        padding: const .fromLTRB(16, 0, 16, 16),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 12),
+              padding: const .only(bottom: 12),
               child: Row(
                 children: [
                   Expanded(
@@ -213,7 +213,7 @@ class _PendingUploadsSheet extends ConsumerWidget {
             SizedBox(
               height: 96,
               child: ListView.separated(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: .horizontal,
                 itemCount: pending.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (_, index) => _PendingUploadTile(entry: pending[index]),
@@ -234,12 +234,12 @@ class _PendingUploadTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      borderRadius: const .all(.circular(8)),
       child: SizedBox(
         width: 96,
         height: 96,
         child: Stack(
-          fit: StackFit.expand,
+          fit: .expand,
           children: [
             Thumbnail.fromAsset(asset: entry.asset),
             Positioned.fill(

@@ -18,7 +18,7 @@ class ImageViewerQualitySetting extends HookConsumerWidget {
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingGroupTitle(
           title: "photos".t(context: context),

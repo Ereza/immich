@@ -87,33 +87,33 @@ class BackupToggleButtonState extends ConsumerState<BackupToggleButton> with Sin
         ];
 
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+          margin: const .symmetric(horizontal: 4, vertical: 4),
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const .all(.circular(20)),
             gradient: LinearGradient(
               colors: gradientColors,
               stops: const [0.0, 0.5, 1.0],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: .topLeft,
+              end: .bottomRight,
             ),
             boxShadow: [
               BoxShadow(color: context.primaryColor.withValues(alpha: 0.1), blurRadius: 12, offset: const Offset(0, 2)),
             ],
           ),
           child: Container(
-            margin: const EdgeInsets.all(1.5),
+            margin: const .all(1.5),
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(18.5)),
+              borderRadius: const .all(.circular(18.5)),
               color: context.colorScheme.surfaceContainerLow,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding: const .symmetric(horizontal: 20, vertical: 16),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const .all(8),
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+                      shape: .circle,
                       gradient: LinearGradient(
                         colors: [
                           context.primaryColor.withValues(alpha: 0.2),
@@ -128,16 +128,16 @@ class BackupToggleButtonState extends ConsumerState<BackupToggleButton> with Sin
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: .start,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: .center,
                           children: [
                             Flexible(
                               child: Text(
                                 "enable_backup".t(context: context),
                                 style: context.textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: .w600,
                                   color: context.primaryColor,
                                 ),
                               ),
@@ -146,7 +146,7 @@ class BackupToggleButtonState extends ConsumerState<BackupToggleButton> with Sin
                         ),
                         if (errorCount > 0)
                           Padding(
-                            padding: const EdgeInsets.only(top: 2),
+                            padding: const .only(top: 2),
                             child: Text(
                               "upload_error_with_count".t(context: context, args: {'count': '$errorCount'}),
                               style: context.textTheme.labelMedium?.copyWith(color: context.colorScheme.error),

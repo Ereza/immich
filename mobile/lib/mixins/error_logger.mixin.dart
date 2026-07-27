@@ -12,7 +12,7 @@ mixin ErrorLoggerMixin {
   AsyncFuture<T> guardError<T>(
     Future<T> Function() fn, {
     required String errorMessage,
-    Level logLevel = Level.SEVERE,
+    Level logLevel = .SEVERE,
   }) async {
     try {
       final result = await fn();
@@ -29,7 +29,7 @@ mixin ErrorLoggerMixin {
     Future<T> Function() fn, {
     required T defaultValue,
     required String errorMessage,
-    Level logLevel = Level.SEVERE,
+    Level logLevel = .SEVERE,
   }) async {
     try {
       return await fn();

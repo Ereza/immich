@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/domain/models/config/app_config.dart';
 import 'package:immich_mobile/domain/models/settings_key.dart';
 import 'package:immich_mobile/domain/services/sync_linked_album.service.dart';
@@ -89,9 +88,7 @@ class _AlbumSyncActionButtonState extends ConsumerState<_AlbumSyncActionButton> 
       return;
     }
     final localAlbums = ref.read(backupAlbumProvider);
-    final selectedBackupAlbums = localAlbums
-        .where((album) => album.backupSelection == BackupSelection.selected)
-        .toList();
+    final selectedBackupAlbums = localAlbums.where((album) => album.backupSelection == .selected).toList();
 
     await ref.read(syncLinkedAlbumServiceProvider).manageLinkedAlbums(selectedBackupAlbums, currentUser.id);
   }
@@ -100,7 +97,7 @@ class _AlbumSyncActionButtonState extends ConsumerState<_AlbumSyncActionButton> 
   Widget build(BuildContext context) {
     final albumSyncEnable = ref.watch(appConfigProvider.select((c) => c.backup.syncAlbums));
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const .only(left: 8.0),
       child: ListView(
         shrinkWrap: true,
         children: [
@@ -129,7 +126,7 @@ class _AlbumSyncActionButtonState extends ConsumerState<_AlbumSyncActionButton> 
                   child: albumSyncEnable
                       ? SettingListTile(
                           onTap: _manualSyncAlbums,
-                          contentPadding: const EdgeInsets.only(left: 32, right: 16),
+                          contentPadding: const .only(left: 32, right: 16),
                           title: "organize_into_albums".t(context: context),
                           subtitle: "organize_into_albums_description".t(context: context),
                           trailing: isAlbumSyncInProgress
@@ -176,7 +173,7 @@ class _BackupSwitchTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(appConfigProvider.select(selector));
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const .only(left: 8.0),
       child: SettingListTile(
         title: titleKey.t(context: context),
         subtitle: subtitleKey.t(context: context),
@@ -198,7 +195,7 @@ class _UseCellularForVideosButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BackupSwitchTile(
-      metadataKey: SettingsKey.backupUseCellularForVideos,
+      metadataKey: .backupUseCellularForVideos,
       selector: (c) => c.backup.useCellularForVideos,
       titleKey: "videos",
       subtitleKey: "network_requirement_videos_upload",
@@ -212,7 +209,7 @@ class _UseCellularForPhotosButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BackupSwitchTile(
-      metadataKey: SettingsKey.backupUseCellularForPhotos,
+      metadataKey: .backupUseCellularForPhotos,
       selector: (c) => c.backup.useCellularForPhotos,
       titleKey: "photos",
       subtitleKey: "network_requirement_photos_upload",
@@ -227,7 +224,7 @@ class _BackupOnlyWhenChargingButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final fgService = ref.read(backgroundWorkerFgServiceProvider);
     return _BackupSwitchTile(
-      metadataKey: SettingsKey.backupRequireCharging,
+      metadataKey: .backupRequireCharging,
       selector: (c) => c.backup.requireCharging,
       titleKey: "charging",
       subtitleKey: "charging_requirement_mobile_backup",
@@ -267,26 +264,26 @@ class _BackupDelaySlider extends ConsumerWidget {
     final triggerDelay = ref.watch(appConfigProvider.select((c) => c.backup.triggerDelay));
     final currentValue = backupDelayToSliderValue(triggerDelay);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 24.0, top: 8.0),
+          padding: const .only(left: 24.0, top: 8.0),
           child: Text(
             context.t.backup_controller_page_background_delay(
               duration: formatBackupDelaySliderValue(context, currentValue),
             ),
-            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+            style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500),
           ),
         ),
         Slider(
           value: currentValue.toDouble(),
           onChanged: (double v) async {
             final seconds = backupDelayToSeconds(v.toInt());
-            await ref.read(settingsProvider).write(SettingsKey.backupTriggerDelay, seconds);
+            await ref.read(settingsProvider).write(.backupTriggerDelay, seconds);
           },
           onChangeEnd: (double v) async {
             final seconds = backupDelayToSeconds(v.toInt());
-            await ref.read(settingsProvider).write(SettingsKey.backupTriggerDelay, seconds);
+            await ref.read(settingsProvider).write(.backupTriggerDelay, seconds);
           },
           max: 3.0,
           min: 0.0,

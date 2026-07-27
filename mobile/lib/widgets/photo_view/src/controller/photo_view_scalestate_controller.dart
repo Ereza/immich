@@ -23,7 +23,7 @@ class PhotoViewScaleStateController {
     PhotoViewScaleState.initial,
   )..addListener(_scaleStateChangeListener);
   final StreamController<PhotoViewScaleState> _outputScaleStateCtrl = StreamController<PhotoViewScaleState>.broadcast()
-    ..sink.add(PhotoViewScaleState.initial);
+    ..sink.add(.initial);
 
   bool _hasZoomedOutManually = false;
 
@@ -31,7 +31,7 @@ class PhotoViewScaleStateController {
   Stream<PhotoViewScaleState> get outputScaleStateStream => _outputScaleStateCtrl.stream;
 
   /// The state value before the last change or the initial state if the state has not been changed.
-  PhotoViewScaleState prevScaleState = PhotoViewScaleState.initial;
+  PhotoViewScaleState prevScaleState = .initial;
 
   /// The actual state value
   PhotoViewScaleState get scaleState => _scaleStateNotifier.value;
@@ -42,11 +42,11 @@ class PhotoViewScaleStateController {
       return;
     }
 
-    if (newValue == PhotoViewScaleState.zoomedOut) {
+    if (newValue == .zoomedOut) {
       _hasZoomedOutManually = true;
     }
 
-    if (newValue == PhotoViewScaleState.initial) {
+    if (newValue == .initial) {
       _hasZoomedOutManually = false;
     }
 
@@ -60,12 +60,12 @@ class PhotoViewScaleStateController {
   bool get hasChanged => prevScaleState != scaleState;
 
   /// Check if is `zoomedIn` & `zoomedOut`
-  bool get isZooming => scaleState == PhotoViewScaleState.zoomedIn || scaleState == PhotoViewScaleState.zoomedOut;
+  bool get isZooming => scaleState == .zoomedIn || scaleState == .zoomedOut;
 
   /// Resets the state to the initial value;
   void reset() {
     prevScaleState = scaleState;
-    scaleState = PhotoViewScaleState.initial;
+    scaleState = .initial;
   }
 
   /// Closes streams and removes eventual listeners
@@ -80,11 +80,11 @@ class PhotoViewScaleStateController {
       return;
     }
 
-    if (newValue == PhotoViewScaleState.zoomedOut) {
+    if (newValue == .zoomedOut) {
       _hasZoomedOutManually = true;
     }
 
-    if (newValue == PhotoViewScaleState.initial) {
+    if (newValue == .initial) {
       _hasZoomedOutManually = false;
     }
 

@@ -146,7 +146,7 @@ class _OcrBoxes extends StatelessWidget {
     final scale =
         controllerValue?.scale ??
         math.min(viewportSize.width / resolvedImageSize.width, viewportSize.height / resolvedImageSize.height);
-    final position = controllerValue?.position ?? Offset.zero;
+    final position = controllerValue?.position ?? .zero;
 
     final imageWidth = resolvedImageSize.width;
     final imageHeight = resolvedImageSize.height;
@@ -207,7 +207,7 @@ class _OcrBoxes extends StatelessWidget {
     }
 
     return GestureDetector(
-      behavior: HitTestBehavior.translucent,
+      behavior: .translucent,
       onTap: () => onSelectionChanged(null),
       child: ClipRect(
         child: Stack(
@@ -265,7 +265,7 @@ class _OcrBoxItem extends StatelessWidget {
       top: top,
       child: GestureDetector(
         onTap: () => onSelectionChanged(isSelected ? null : index),
-        behavior: HitTestBehavior.translucent,
+        behavior: .translucent,
         child: SizedBox(
           width: width,
           height: height,
@@ -287,26 +287,26 @@ class _OcrBoxItem extends StatelessWidget {
                     translation: const Offset(-0.5, -0.5),
                     child: Transform.rotate(
                       angle: angle,
-                      alignment: Alignment.center,
+                      alignment: .center,
                       child: Container(
-                        margin: const EdgeInsets.all(2),
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        margin: const .all(2),
+                        padding: const .symmetric(horizontal: 4, vertical: 2),
                         decoration: BoxDecoration(
                           color: Colors.grey[800]?.withValues(alpha: 0.4),
-                          borderRadius: const BorderRadius.all(Radius.circular(4)),
+                          borderRadius: const .all(.circular(4)),
                         ),
                         child: ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: math.max(50, width), maxHeight: math.max(20, height)),
                           child: FittedBox(
-                            fit: BoxFit.scaleDown,
+                            fit: .scaleDown,
                             child: SelectableText(
                               ocr.text,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: math.max(12, height * 0.6),
-                                fontWeight: FontWeight.bold,
+                                fontWeight: .bold,
                               ),
-                              textAlign: TextAlign.center,
+                              textAlign: .center,
                             ),
                           ),
                         ),
@@ -332,7 +332,7 @@ class _OcrScrimPainter extends CustomPainter {
     // Fill the whole viewport, then subtract each text quad using the even-odd
     // rule so the original image shows through the boxes.
     final path = Path()
-      ..fillType = PathFillType.evenOdd
+      ..fillType = .evenOdd
       ..addRect(Offset.zero & size);
 
     for (final quad in quads) {
@@ -362,12 +362,12 @@ class _OcrBoxPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = isSelected ? colorScheme.primary : colorScheme.secondary
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = 2.0;
 
     final fillPaint = Paint()
       ..color = isSelected ? colorScheme.primary.withValues(alpha: 0.45) : Colors.transparent
-      ..style = PaintingStyle.fill;
+      ..style = .fill;
 
     final path = Path()
       ..moveTo(points[0].dx, points[0].dy)

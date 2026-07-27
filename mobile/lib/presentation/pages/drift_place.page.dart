@@ -53,7 +53,7 @@ class _PlaceSliverAppBar extends HookWidget {
       pinned: true,
       snap: false,
       backgroundColor: context.colorScheme.surfaceContainer,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(5))),
       automaticallyImplyLeading: search.value == null,
       centerTitle: true,
       title: search.value != null
@@ -88,7 +88,7 @@ class _Map extends StatelessWidget {
   Widget build(BuildContext context) {
     return search.value == null
         ? SliverPadding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const .all(16.0),
             sliver: SliverToBoxAdapter(
               child: SizedBox(
                 height: 200,
@@ -98,7 +98,7 @@ class _Map extends StatelessWidget {
                   zoom: 8,
                   centre: currentLocation ?? const LatLng(21.44950, -157.91959),
                   showAttribution: false,
-                  themeMode: context.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+                  themeMode: context.isDarkTheme ? .dark : .light,
                 ),
               ),
             ),
@@ -119,13 +119,13 @@ class _PlaceList extends ConsumerWidget {
     return places.when(
       loading: () => const SliverToBoxAdapter(
         child: Center(
-          child: Padding(padding: EdgeInsets.all(20.0), child: CircularProgressIndicator()),
+          child: Padding(padding: .all(20.0), child: CircularProgressIndicator()),
         ),
       ),
       error: (error, stack) => SliverToBoxAdapter(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const .all(20.0),
             child: Text(
               'Error loading places: $error, stack: $stack',
               style: TextStyle(color: context.colorScheme.error),
@@ -161,13 +161,13 @@ class _PlaceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return LargeLeadingTile(
       onTap: () => context.pushRoute(DriftPlaceDetailRoute(place: place.$1)),
-      title: Text(place.$1, style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500)),
+      title: Text(place.$1, style: context.textTheme.titleMedium?.copyWith(fontWeight: .w500)),
       leading: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        borderRadius: const .all(.circular(20)),
         child: SizedBox(
           width: 80,
           height: 80,
-          child: Thumbnail.remote(remoteId: place.$2, fit: BoxFit.cover, thumbhash: ""),
+          child: Thumbnail.remote(remoteId: place.$2, fit: .cover, thumbhash: ""),
         ),
       ),
     );

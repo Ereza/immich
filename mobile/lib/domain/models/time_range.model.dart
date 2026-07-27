@@ -10,6 +10,6 @@ class TimeRange {
     return TimeRange(from: from.patch(this.from), to: to.patch(this.to));
   }
 
-  TimeRange clearFrom() => TimeRange(to: to);
-  TimeRange clearTo() => TimeRange(from: from);
+  TimeRange clearFrom() => .new(to: to);
+  TimeRange clearTo() => .new(from: from);
 }

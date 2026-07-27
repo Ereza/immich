@@ -36,7 +36,6 @@ class _AbortCallbackWrapper {
 
 class _MockAbortCallbackWrapper extends Mock implements _AbortCallbackWrapper {}
 
-
 void main() {
   late SyncStreamService sut;
   late SyncStreamRepository mockSyncStreamRepo;
@@ -56,7 +55,7 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    debugDefaultTargetPlatformOverride = .android;
     registerFallbackValue(LocalAssetStub.image1);
     registerFallbackValue(const SemVer(major: 2, minor: 5, patch: 0));
 
@@ -561,22 +560,17 @@ void main() {
 
       verifyInOrder([
         () => mockSyncApiRepo.deleteSyncAck([
-          SyncEntityType.assetExifV1,
-          SyncEntityType.partnerAssetExifV1,
-          SyncEntityType.albumAssetExifCreateV1,
-          SyncEntityType.albumAssetExifUpdateV1,
+          .assetExifV1,
+          .partnerAssetExifV1,
+          .albumAssetExifCreateV1,
+          .albumAssetExifUpdateV1,
         ]),
         () => mockSyncMigrationRepo.v20260128CopyExifWidthHeightToAsset(),
       ]);
 
       // should only run on server >2.5.0
       verifyNever(
-        () => mockSyncApiRepo.deleteSyncAck([
-          SyncEntityType.assetV1,
-          SyncEntityType.partnerAssetV1,
-          SyncEntityType.albumAssetCreateV1,
-          SyncEntityType.albumAssetUpdateV1,
-        ]),
+        () => mockSyncApiRepo.deleteSyncAck([.assetV1, .partnerAssetV1, .albumAssetCreateV1, .albumAssetUpdateV1]),
       );
     });
     test('ensure that >=2.5.0 migrations run', () async {
@@ -588,17 +582,12 @@ void main() {
 
       verifyInOrder([
         () => mockSyncApiRepo.deleteSyncAck([
-          SyncEntityType.assetExifV1,
-          SyncEntityType.partnerAssetExifV1,
-          SyncEntityType.albumAssetExifCreateV1,
-          SyncEntityType.albumAssetExifUpdateV1,
+          .assetExifV1,
+          .partnerAssetExifV1,
+          .albumAssetExifCreateV1,
+          .albumAssetExifUpdateV1,
         ]),
-        () => mockSyncApiRepo.deleteSyncAck([
-          SyncEntityType.assetV1,
-          SyncEntityType.partnerAssetV1,
-          SyncEntityType.albumAssetCreateV1,
-          SyncEntityType.albumAssetUpdateV1,
-        ]),
+        () => mockSyncApiRepo.deleteSyncAck([.assetV1, .partnerAssetV1, .albumAssetCreateV1, .albumAssetUpdateV1]),
       ]);
 
       // v20260128_ResetAssetV1 writes that v20260128_CopyExifWidthHeightToAsset has been completed

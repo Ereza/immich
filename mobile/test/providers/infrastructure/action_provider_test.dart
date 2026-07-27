@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/user.model.dart';
 import 'package:immich_mobile/domain/services/asset.service.dart';
@@ -32,7 +31,7 @@ final _asset = RemoteAsset(
   name: 'photo.jpg',
   ownerId: 'user-1',
   checksum: 'checksum-1',
-  type: AssetType.image,
+  type: .image,
   createdAt: DateTime(2026, 6, 10, 10, 27),
   updatedAt: DateTime(2026, 6, 10, 10, 27),
   isEdited: false,
@@ -77,7 +76,7 @@ void main() {
       container.listen(assetExifProvider(_asset), (_, __) {});
       await container.read(assetExifProvider(_asset).future);
 
-      final result = await container.read(actionProvider.notifier).editDateTime(ActionSource.viewer, FakeBuildContext());
+      final result = await container.read(actionProvider.notifier).editDateTime(.viewer, FakeBuildContext());
 
       expect(result?.success, isTrue);
       await container.read(assetExifProvider(_asset).future);
@@ -89,7 +88,7 @@ void main() {
       container.listen(assetExifProvider(_asset), (_, __) {});
       await container.read(assetExifProvider(_asset).future);
 
-      final result = await container.read(actionProvider.notifier).editDateTime(ActionSource.timeline, FakeBuildContext());
+      final result = await container.read(actionProvider.notifier).editDateTime(.timeline, FakeBuildContext());
 
       expect(result?.success, isTrue);
       await container.read(assetExifProvider(_asset).future);
@@ -102,7 +101,7 @@ void main() {
       container.listen(assetExifProvider(_asset), (_, __) {});
       await container.read(assetExifProvider(_asset).future);
 
-      final result = await container.read(actionProvider.notifier).editDateTime(ActionSource.viewer, FakeBuildContext());
+      final result = await container.read(actionProvider.notifier).editDateTime(.viewer, FakeBuildContext());
 
       expect(result, isNull);
       await container.read(assetExifProvider(_asset).future);

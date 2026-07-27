@@ -14,8 +14,7 @@ class LocalAlbumEntity extends Table with DriftDefaultsMixin {
   BoolColumn get isIosSharedAlbum => boolean().withDefault(const Constant(false))();
 
   // // Linked album for putting assets to the remote album after finished uploading
-  TextColumn get linkedRemoteAlbumId =>
-      text().references(RemoteAlbumEntity, #id, onDelete: KeyAction.setNull).nullable()();
+  TextColumn get linkedRemoteAlbumId => text().references(RemoteAlbumEntity, #id, onDelete: .setNull).nullable()();
 
   // Used for mark & sweep
   BoolColumn get marker_ => boolean().nullable()();

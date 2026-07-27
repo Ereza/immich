@@ -8,7 +8,7 @@ abstract final class LocalAlbumStub {
     name: "Recent",
     updatedAt: DateTime(2023),
     assetCount: 1000,
-    backupSelection: BackupSelection.none,
+    backupSelection: .none,
     isIosSharedAlbum: false,
   );
 }

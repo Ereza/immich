@@ -73,8 +73,8 @@ class _BaseDraggableScrollableSheetState extends ConsumerState<BaseBottomSheet> 
         return Card(
           color: widget.backgroundColor ?? context.colorScheme.surfaceContainer,
           elevation: 3.0,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(18))),
-          margin: const EdgeInsets.symmetric(horizontal: 0),
+          shape: const RoundedRectangleBorder(borderRadius: .vertical(top: .circular(18))),
+          margin: const .symmetric(horizontal: 0),
           child: Column(
             children: [
               Expanded(
@@ -87,8 +87,8 @@ class _BaseDraggableScrollableSheetState extends ConsumerState<BaseBottomSheet> 
                         child: Column(
                           children: [
                             SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: widget.actions),
+                              scrollDirection: .horizontal,
+                              child: Row(crossAxisAlignment: .start, children: widget.actions),
                             ),
                             const Divider(indent: 16, endIndent: 16),
                             const SizedBox(height: 16),
@@ -121,7 +121,7 @@ class _DragHandle extends StatelessWidget {
           height: 6,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const .all(.circular(20)),
               color: context.themeData.dividerColor.lighten(amount: 0.6),
             ),
           ),

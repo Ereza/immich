@@ -64,7 +64,7 @@ class _Executor extends Mixinable<_Executor> with _ExecutorLogger {
   var _isolatesCount = numberOfProcessors;
 
   @visibleForTesting
-  UnmodifiableListView<IsolateWorker> get pool => UnmodifiableListView(_pool);
+  UnmodifiableListView<IsolateWorker> get pool => .new(_pool);
 
   @override
   Future<void> init({int? isolatesCount, bool? dynamicSpawning}) async {
@@ -95,7 +95,7 @@ class _Executor extends Mixinable<_Executor> with _ExecutorLogger {
 
   /// Runs [execution] on a worker isolate; its [Completer] completes when the
   /// returned [Cancelable] is cancelled.
-  Cancelable<R> executeGentle<R>(GentleExecution<R> execution, {WorkPriority priority = WorkPriority.immediately}) {
+  Cancelable<R> executeGentle<R>(GentleExecution<R> execution, {WorkPriority priority = .immediately}) {
     if (_nextTaskId + 1 == _maxId) {
       _nextTaskId = _minId;
     }

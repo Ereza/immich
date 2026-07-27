@@ -23,7 +23,7 @@ class DriftLogger extends $DriftLogger {
   }
 
   @override
-  MigrationStrategy get migration => MigrationStrategy(
+  MigrationStrategy get migration => .new(
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
       await customStatement('PRAGMA synchronous = NORMAL');

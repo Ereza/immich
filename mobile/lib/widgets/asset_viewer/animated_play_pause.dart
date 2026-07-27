@@ -51,7 +51,7 @@ class AnimatedPlayPauseState extends State<AnimatedPlayPause> with SingleTickerP
 
     return Center(
       child: Stack(
-        alignment: Alignment.center,
+        alignment: .center,
         children: [
           for (final shadow in widget.shadows ?? const <Shadow>[])
             Transform.translate(

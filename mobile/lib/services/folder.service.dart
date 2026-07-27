@@ -47,9 +47,7 @@ class FolderService {
             RecursiveFolder(path: parentPath == '_root_' ? '' : parentPath, name: segments[i], subfolders: []),
           );
           // Sort folders based on order parameter
-          folderMap[parentPath]!.sort(
-            (a, b) => order == SortOrder.desc ? b.name.compareTo(a.name) : a.name.compareTo(b.name),
-          );
+          folderMap[parentPath]!.sort((a, b) => order == .desc ? b.name.compareTo(a.name) : a.name.compareTo(b.name));
         }
       }
     }
@@ -60,7 +58,7 @@ class FolderService {
       if (folderMap.containsKey(fullPath)) {
         folder.subfolders.addAll(folderMap[fullPath]!);
         // Sort subfolders based on order parameter
-        folder.subfolders.sort((a, b) => order == SortOrder.desc ? b.name.compareTo(a.name) : a.name.compareTo(b.name));
+        folder.subfolders.sort((a, b) => order == .desc ? b.name.compareTo(a.name) : a.name.compareTo(b.name));
         for (var subfolder in folder.subfolders) {
           attachSubfolders(subfolder);
         }
@@ -69,7 +67,7 @@ class FolderService {
 
     List<RecursiveFolder> rootSubfolders = folderMap['_root_'] ?? [];
     // Sort root subfolders based on order parameter
-    rootSubfolders.sort((a, b) => order == SortOrder.desc ? b.name.compareTo(a.name) : a.name.compareTo(b.name));
+    rootSubfolders.sort((a, b) => order == .desc ? b.name.compareTo(a.name) : a.name.compareTo(b.name));
 
     for (var folder in rootSubfolders) {
       attachSubfolders(folder);
@@ -85,7 +83,7 @@ class FolderService {
         fullPath = fullPath[0] == '/' ? fullPath.substring(1) : fullPath;
         var result = await _folderApiRepository.getAssetsForPath(fullPath);
 
-        if (order == SortOrder.desc) {
+        if (order == .desc) {
           result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
         } else {
           result.sort((a, b) => a.createdAt.compareTo(b.createdAt));

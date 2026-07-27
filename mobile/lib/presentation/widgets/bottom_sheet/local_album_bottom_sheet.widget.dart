@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/delete_local_action_button.widget.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/share_action_button.widget.dart';
@@ -36,14 +35,14 @@ class _LocalAlbumBottomSheetState extends ConsumerState<LocalAlbumBottomSheet> {
   @override
   Widget build(BuildContext context) {
     Future<void> addToAlbum(RemoteAlbum album) async {
-      final result = await ref.read(actionProvider.notifier).addToAlbum(ActionSource.timeline, album);
+      final result = await ref.read(actionProvider.notifier).addToAlbum(.timeline, album);
 
       if (!context.mounted) {
         return;
       }
 
       if (!result.success) {
-        ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: ToastType.error);
+        ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: .error);
         return;
       }
 
@@ -65,9 +64,9 @@ class _LocalAlbumBottomSheetState extends ConsumerState<LocalAlbumBottomSheet> {
       maxChildSize: 0.85,
       shouldCloseOnMinExtent: false,
       actions: const [
-        ShareActionButton(source: ActionSource.timeline),
-        DeleteLocalActionButton(source: ActionSource.timeline),
-        UploadActionButton(source: ActionSource.timeline),
+        ShareActionButton(source: .timeline),
+        DeleteLocalActionButton(source: .timeline),
+        UploadActionButton(source: .timeline),
       ],
       slivers: [
         const AddToAlbumHeader(),

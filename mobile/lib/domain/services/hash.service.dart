@@ -112,7 +112,7 @@ class HashService {
     final hashed = <String, String>{};
     final hashResults = await _nativeSyncApi.hashAssets(
       toHash.keys.toList(),
-      allowNetworkAccess: album.backupSelection == BackupSelection.selected,
+      allowNetworkAccess: album.backupSelection == .selected,
     );
     assert(
       hashResults.length == toHash.length,

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
-import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/theme_extensions.dart';
 import 'package:immich_mobile/models/folder/recursive_folder.model.dart';
@@ -70,7 +69,7 @@ class FolderPage extends HookConsumerWidget {
     }, [folderState]);
 
     void onToggleSortOrder() {
-      final newOrder = sortOrder.value == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
+      final newOrder = sortOrder.value == .asc ? SortOrder.desc : SortOrder.asc;
 
       ref.read(folderStructureProvider.notifier).fetchFolders(newOrder);
 
@@ -94,7 +93,7 @@ class FolderPage extends HookConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) {
-          ImmichToast.show(context: context, msg: "failed_to_load_folder".tr(), toastType: ToastType.error);
+          ImmichToast.show(context: context, msg: "failed_to_load_folder".tr(), toastType: .error);
           return Center(child: const Text("failed_to_load_folder").tr());
         },
       ),
@@ -157,8 +156,8 @@ class FolderContent extends HookConsumerWidget {
                         title: Text(
                           subfolder.name,
                           softWrap: false,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+                          overflow: .ellipsis,
+                          style: context.textTheme.titleSmall?.copyWith(fontWeight: .w600),
                         ),
                         subtitle: subfolder.subfolders.isNotEmpty
                             ? Text(
@@ -179,22 +178,20 @@ class FolderContent extends HookConsumerWidget {
                           context.pushRoute(
                             AssetViewerRoute(
                               initialIndex: index,
-                              timelineService: ref
-                                  .read(timelineFactoryProvider)
-                                  .fromAssets(folderAssets, TimelineOrigin.folder),
+                              timelineService: ref.read(timelineFactoryProvider).fromAssets(folderAssets, .folder),
                             ),
                           );
                         },
                         leading: ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          borderRadius: const .all(.circular(15)),
                           child: SizedBox(width: 80, height: 80, child: ThumbnailTile(asset)),
                         ),
                         title: Text(
                           asset.name,
                           maxLines: 2,
                           softWrap: false,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+                          overflow: .ellipsis,
+                          style: context.textTheme.titleSmall?.copyWith(fontWeight: .w600),
                         ),
                         subtitle: Text(
                           "${asset.exifInfo.fileSize != null ? "${formatBytes(asset.exifInfo.fileSize ?? 0)} • " : ""}${DateFormat.yMMMd().format(asset.createdAt.toLocal())}",
@@ -207,7 +204,7 @@ class FolderContent extends HookConsumerWidget {
             },
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, stack) {
-              ImmichToast.show(context: context, msg: "failed_to_load_assets".tr(), toastType: ToastType.error);
+              ImmichToast.show(context: context, msg: "failed_to_load_assets".tr(), toastType: .error);
               return Center(child: const Text("failed_to_load_assets").tr());
             },
           ),
@@ -230,20 +227,20 @@ class FolderPath extends StatelessWidget {
     }
 
     return Container(
-      width: double.infinity,
-      alignment: Alignment.centerLeft,
+      width: .infinity,
+      alignment: .centerLeft,
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: .horizontal,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const .symmetric(horizontal: 16, vertical: 8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: .start,
             children: [
               Text(
                 currentFolder.path,
                 style: TextStyle(
                   fontFamily: 'GoogleSansCode',
-                  fontWeight: FontWeight.bold,
+                  fontWeight: .bold,
                   fontSize: 14,
                   color: context.colorScheme.onSurface.withAlpha(175),
                 ),

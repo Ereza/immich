@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -47,8 +46,8 @@ class DeleteTrashActionButton extends ConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: result.success ? ToastType.success : ToastType.error,
+        gravity: .BOTTOM,
+        toastType: result.success ? .success : .error,
       );
     }
   }
@@ -59,7 +58,7 @@ class DeleteTrashActionButton extends ConsumerWidget {
       icon: Icon(Icons.delete_forever, color: Colors.red[400]),
       label: Text(
         "delete".t(context: context),
-        style: TextStyle(fontSize: 14, color: Colors.red[400], fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 14, color: Colors.red[400], fontWeight: .bold),
       ),
       onPressed: () => _onTap(context, ref),
     );

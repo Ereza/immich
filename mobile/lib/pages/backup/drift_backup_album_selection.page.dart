@@ -60,10 +60,7 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
     }
 
     final enableSyncUploadAlbum = ref.read(appConfigProvider).backup.syncAlbums;
-    final selectedAlbums = ref
-        .read(backupAlbumProvider)
-        .where((a) => a.backupSelection == BackupSelection.selected)
-        .toList();
+    final selectedAlbums = ref.read(backupAlbumProvider).where((a) => a.backupSelection == .selected).toList();
 
     if (enableSyncUploadAlbum && selectedAlbums.isNotEmpty) {
       setState(() {
@@ -94,8 +91,8 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
       return album.name.toLowerCase().contains(_searchQuery.toLowerCase());
     }).toList();
 
-    final selectedBackupAlbums = albums.where((album) => album.backupSelection == BackupSelection.selected).toList();
-    final excludedBackupAlbums = albums.where((album) => album.backupSelection == BackupSelection.excluded).toList();
+    final selectedBackupAlbums = albums.where((album) => album.backupSelection == .selected).toList();
+    final excludedBackupAlbums = albums.where((album) => album.backupSelection == .excluded).toList();
 
     return PopScope(
       canPop: false,
@@ -178,10 +175,10 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
               slivers: [
                 SliverToBoxAdapter(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                        padding: const .symmetric(vertical: 8.0, horizontal: 16.0),
                         child: Text(
                           "backup_album_selection_page_selection_info",
                           style: context.textTheme.titleSmall,
@@ -190,7 +187,7 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
 
                       // Selected Album Chips
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const .symmetric(horizontal: 16.0),
                         child: Wrap(
                           children: [
                             _SelectedAlbumNameChips(selectedBackupAlbums: selectedBackupAlbums),
@@ -204,7 +201,7 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
                           style: context.textTheme.titleSmall,
                         ),
                         subtitle: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const .symmetric(vertical: 8.0),
                           child: Text(
                             "backup_album_selection_page_albums_tap",
                             style: context.textTheme.labelLarge?.copyWith(color: context.primaryColor),
@@ -218,17 +215,11 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  ),
+                                  shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
                                   elevation: 5,
                                   title: Text(
                                     'backup_album_selection_page_selection_info',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: context.primaryColor,
-                                    ),
+                                    style: TextStyle(fontSize: 16, fontWeight: .bold, color: context.primaryColor),
                                   ).t(context: context),
                                   content: SingleChildScrollView(
                                     child: ListBody(
@@ -256,13 +247,13 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
                     child: Center(
                       child: _searchQuery.isNotEmpty
                           ? Padding(
-                              padding: const EdgeInsets.all(24.0),
+                              padding: const .all(24.0),
                               child: Text('album_search_not_found'.t(context: context)),
                             )
                           : isLoading
                           ? const CircularProgressIndicator()
                           : Padding(
-                              padding: const EdgeInsets.all(24.0),
+                              padding: const .all(24.0),
                               child: Text('no_albums_found'.t(context: context)),
                             ),
                     ),
@@ -284,16 +275,16 @@ class _DriftBackupAlbumSelectionPageState extends ConsumerState<DriftBackupAlbum
                 future: _handleLinkedAlbumFuture,
                 builder: (context, snapshot) {
                   return SizedBox(
-                    height: double.infinity,
-                    width: double.infinity,
+                    height: .infinity,
+                    width: .infinity,
                     child: Container(
                       color: context.scaffoldBackgroundColor.withValues(alpha: 0.8),
                       child: Center(
                         child: Column(
                           spacing: 16,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: .center,
+                          mainAxisAlignment: .center,
+                          mainAxisSize: .max,
                           children: [
                             const CircularProgressIndicator(strokeWidth: 4),
                             Text('creating_linked_albums'.tr(), style: context.textTheme.labelLarge),
@@ -319,7 +310,7 @@ class _AlbumSelectionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      padding: const .symmetric(vertical: 12.0),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(((context, index) {
           return DriftAlbumInfoListTile(album: filteredAlbums[index]);
@@ -337,7 +328,7 @@ class _AlbumSelectionGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const .all(12.0),
       sliver: SliverGrid.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 300,
@@ -369,7 +360,7 @@ class _SelectedAlbumNameChips extends ConsumerWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.only(right: 8.0),
+          padding: const .only(right: 8.0),
           child: GestureDetector(
             onTap: removeSelection,
             child: AnimatedContainer(
@@ -381,7 +372,7 @@ class _SelectedAlbumNameChips extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 12,
                     color: context.isDarkTheme ? Colors.black : Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: .bold,
                   ),
                 ),
                 backgroundColor: context.primaryColor,
@@ -415,14 +406,14 @@ class _ExcludedAlbumNameChips extends ConsumerWidget {
         return GestureDetector(
           onTap: removeSelection,
           child: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const .only(right: 8.0),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
               child: Chip(
                 label: Text(
                   album.name,
-                  style: TextStyle(fontSize: 12, color: context.scaffoldBackgroundColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 12, color: context.scaffoldBackgroundColor, fontWeight: .bold),
                 ),
                 backgroundColor: Colors.red[300],
                 deleteIconColor: context.scaffoldBackgroundColor,
@@ -445,10 +436,10 @@ class _SelectAllButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final canSelectAll = filteredAlbums.where((album) => album.backupSelection != BackupSelection.selected).isNotEmpty;
+    final canSelectAll = filteredAlbums.where((album) => album.backupSelection != .selected).isNotEmpty;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const .symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         children: [
           Expanded(
@@ -456,7 +447,7 @@ class _SelectAllButton extends ConsumerWidget {
               onPressed: canSelectAll
                   ? () {
                       for (final album in filteredAlbums) {
-                        if (album.backupSelection != BackupSelection.selected) {
+                        if (album.backupSelection != .selected) {
                           ref.read(backupAlbumProvider.notifier).selectAlbum(album);
                         }
                       }
@@ -467,7 +458,7 @@ class _SelectAllButton extends ConsumerWidget {
                 duration: const Duration(milliseconds: 200),
                 child: Text("select_all".t(context: context)),
               ),
-              style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 12.0)),
+              style: ElevatedButton.styleFrom(padding: const .symmetric(vertical: 12.0)),
             ),
           ),
           const SizedBox(width: 8.0),
@@ -476,7 +467,7 @@ class _SelectAllButton extends ConsumerWidget {
               onPressed: selectedBackupAlbums.isNotEmpty
                   ? () {
                       for (final album in filteredAlbums) {
-                        if (album.backupSelection == BackupSelection.selected) {
+                        if (album.backupSelection == .selected) {
                           ref.read(backupAlbumProvider.notifier).deselectAlbum(album);
                         }
                       }
@@ -484,7 +475,7 @@ class _SelectAllButton extends ConsumerWidget {
                   : null,
               icon: const Icon(Icons.deselect),
               label: Text('deselect_all'.t(context: context)),
-              style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 12.0)),
+              style: OutlinedButton.styleFrom(padding: const .symmetric(vertical: 12.0)),
             ),
           ),
         ],

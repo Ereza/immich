@@ -22,8 +22,8 @@ void main() {
     sut = UserService(userApiRepository: mockUserApiRepo, storeService: mockStoreService);
 
     registerFallbackValue(UserStub.admin);
-    when(() => mockStoreService.get(StoreKey.currentUser)).thenReturn(UserStub.admin);
-    when(() => mockStoreService.tryGet(StoreKey.currentUser)).thenReturn(UserStub.admin);
+    when(() => mockStoreService.get(.currentUser)).thenReturn(UserStub.admin);
+    when(() => mockStoreService.tryGet(.currentUser)).thenReturn(UserStub.admin);
   });
 
   group('getMyUser', () {
@@ -33,7 +33,7 @@ void main() {
     });
 
     test('should handle user not found scenario', () {
-      when(() => mockStoreService.get(StoreKey.currentUser)).thenThrow(Exception('User not found'));
+      when(() => mockStoreService.get(.currentUser)).thenThrow(Exception('User not found'));
 
       expect(() => sut.getMyUser(), throwsA(isA<Exception>()));
     });
@@ -46,7 +46,7 @@ void main() {
     });
 
     test('should return null if user not found', () {
-      when(() => mockStoreService.tryGet(StoreKey.currentUser)).thenReturn(null);
+      when(() => mockStoreService.tryGet(.currentUser)).thenReturn(null);
       final result = sut.tryGetMyUser();
       expect(result, isNull);
     });
@@ -54,13 +54,13 @@ void main() {
 
   group('watchMyUser', () {
     test('should return user stream from store', () {
-      when(() => mockStoreService.watch(StoreKey.currentUser)).thenAnswer((_) => Stream.value(UserStub.admin));
+      when(() => mockStoreService.watch(.currentUser)).thenAnswer((_) => Stream.value(UserStub.admin));
       final result = sut.watchMyUser();
       expect(result, emits(UserStub.admin));
     });
 
     test('should return an empty stream if user not found', () {
-      when(() => mockStoreService.watch(StoreKey.currentUser)).thenAnswer((_) => const Stream.empty());
+      when(() => mockStoreService.watch(.currentUser)).thenAnswer((_) => const Stream.empty());
       final result = sut.watchMyUser();
       expect(result, emitsInOrder([]));
     });

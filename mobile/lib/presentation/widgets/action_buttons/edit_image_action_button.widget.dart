@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset_edit.model.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
 import 'package:immich_mobile/presentation/pages/edit/editor.provider.dart';
@@ -26,7 +25,7 @@ class EditImageActionButton extends ConsumerWidget {
         return;
       }
 
-      await ref.read(actionProvider.notifier).applyEdits(ActionSource.viewer, edits);
+      await ref.read(actionProvider.notifier).applyEdits(.viewer, edits);
     }
 
     Future<void> onPress() async {

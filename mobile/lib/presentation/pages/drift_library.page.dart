@@ -47,7 +47,7 @@ class _ActionButtonGrid extends ConsumerWidget {
     final isTrashEnable = ref.watch(serverInfoProvider.select((state) => state.serverFeatures.trash));
 
     return SliverPadding(
-      padding: const EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 12),
+      padding: const .only(left: 16, top: 16, right: 16, bottom: 12),
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [
@@ -104,16 +104,16 @@ class _ActionButton extends StatelessWidget {
       child: FilledButton.icon(
         onPressed: onTap,
         label: Padding(
-          padding: const EdgeInsets.only(left: 4.0),
+          padding: const .only(left: 4.0),
           child: Text(label, style: TextStyle(color: context.colorScheme.onSurface, fontSize: 15)),
         ),
         style: FilledButton.styleFrom(
           elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const .symmetric(horizontal: 20, vertical: 16),
           backgroundColor: context.colorScheme.surfaceContainerLow,
-          alignment: Alignment.centerLeft,
+          alignment: .centerLeft,
           shape: RoundedRectangleBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            borderRadius: const .all(.circular(25)),
             side: BorderSide(color: context.colorScheme.onSurface.withAlpha(10), width: 1),
           ),
         ),
@@ -129,7 +129,7 @@ class _CollectionCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: .symmetric(horizontal: 16),
       sliver: SliverToBoxAdapter(
         child: Wrap(
           spacing: 8,
@@ -157,17 +157,17 @@ class _PeopleCollectionCard extends ConsumerWidget {
         return GestureDetector(
           onTap: () => context.pushRoute(const DriftPeopleCollectionRoute()),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Container(
                 height: size,
                 width: size,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const .all(.circular(20)),
                   gradient: LinearGradient(
                     colors: [context.colorScheme.primary.withAlpha(30), context.colorScheme.primary.withAlpha(25)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+                    begin: .topCenter,
+                    end: .bottomCenter,
                   ),
                 ),
                 child: people.widgetWhen(
@@ -175,7 +175,7 @@ class _PeopleCollectionCard extends ConsumerWidget {
                   onData: (people) {
                     return GridView.count(
                       crossAxisCount: 2,
-                      padding: const EdgeInsets.all(12),
+                      padding: const .all(12),
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,
                       physics: const NeverScrollableScrollPhysics(),
@@ -187,12 +187,12 @@ class _PeopleCollectionCard extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: Text(
                   'people'.t(context: context),
                   style: context.textTheme.titleSmall?.copyWith(
                     color: context.colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: .w500,
                   ),
                 ),
               ),
@@ -218,14 +218,14 @@ class _PlacesCollectionCard extends StatelessWidget {
         return GestureDetector(
           onTap: () => context.pushRoute(DriftPlaceRoute(currentLocation: null)),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               SizedBox(
                 height: size,
                 width: size,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    borderRadius: const .all(.circular(20)),
                     color: context.colorScheme.secondaryContainer.withAlpha(100),
                   ),
                   child: IgnorePointer(
@@ -233,18 +233,18 @@ class _PlacesCollectionCard extends StatelessWidget {
                       zoom: 8,
                       centre: const LatLng(21.44950, -157.91959),
                       showAttribution: false,
-                      themeMode: context.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+                      themeMode: context.isDarkTheme ? .dark : .light,
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: Text(
                   'places'.t(),
                   style: context.textTheme.titleSmall?.copyWith(
                     color: context.colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: .w500,
                   ),
                 ),
               ),
@@ -272,23 +272,23 @@ class _LocalAlbumsCollectionCard extends ConsumerWidget {
         return GestureDetector(
           onTap: () => context.pushRoute(const DriftLocalAlbumsRoute()),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               SizedBox(
                 height: size,
                 width: size,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    borderRadius: const .all(.circular(20)),
                     gradient: LinearGradient(
                       colors: [context.colorScheme.primary.withAlpha(30), context.colorScheme.primary.withAlpha(25)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                      begin: .topCenter,
+                      end: .bottomCenter,
                     ),
                   ),
                   child: GridView.count(
                     crossAxisCount: 2,
-                    padding: const EdgeInsets.all(12),
+                    padding: const .all(12),
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                     physics: const NeverScrollableScrollPhysics(),
@@ -311,12 +311,12 @@ class _LocalAlbumsCollectionCard extends ConsumerWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: Text(
                   'on_this_device'.t(context: context),
                   style: context.textTheme.titleSmall?.copyWith(
                     color: context.colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: .w500,
                   ),
                 ),
               ),
@@ -348,40 +348,40 @@ class _QuickAccessButtonList extends ConsumerWidget {
     final partners = partnerSharedWithAsync.valueOrNull ?? [];
 
     return SliverPadding(
-      padding: const EdgeInsets.only(left: 16, top: 12, right: 16, bottom: 32),
+      padding: const .only(left: 16, top: 12, right: 16, bottom: 32),
       sliver: SliverToBoxAdapter(
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: context.colorScheme.onSurface.withAlpha(10), width: 1),
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            border: .all(color: context.colorScheme.onSurface.withAlpha(10), width: 1),
+            borderRadius: const .all(.circular(20)),
             gradient: LinearGradient(
               colors: [
                 context.colorScheme.primary.withAlpha(10),
                 context.colorScheme.primary.withAlpha(15),
                 context.colorScheme.primary.withAlpha(20),
               ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: .topCenter,
+              end: .bottomCenter,
             ),
           ),
           child: ListView(
             shrinkWrap: true,
-            padding: const EdgeInsets.all(0),
+            padding: const .all(0),
             physics: const NeverScrollableScrollPhysics(),
             children: [
               ListTile(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(20),
-                    topRight: const Radius.circular(20),
-                    bottomLeft: Radius.circular(partners.isEmpty ? 20 : 0),
-                    bottomRight: Radius.circular(partners.isEmpty ? 20 : 0),
+                  borderRadius: .only(
+                    topLeft: const .circular(20),
+                    topRight: const .circular(20),
+                    bottomLeft: .circular(partners.isEmpty ? 20 : 0),
+                    bottomRight: .circular(partners.isEmpty ? 20 : 0),
                   ),
                 ),
                 leading: const Icon(Icons.folder_outlined, size: 26),
                 title: Text(
                   'folders'.t(context: context),
-                  style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w500),
+                  style: context.textTheme.titleSmall?.copyWith(fontWeight: .w500),
                 ),
                 onTap: () => context.pushRoute(FolderRoute()),
               ),
@@ -389,7 +389,7 @@ class _QuickAccessButtonList extends ConsumerWidget {
                 leading: const Icon(Icons.lock_outline_rounded, size: 26),
                 title: Text(
                   'locked_folder'.t(context: context),
-                  style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w500),
+                  style: context.textTheme.titleSmall?.copyWith(fontWeight: .w500),
                 ),
                 onTap: () => context.pushRoute(const DriftLockedFolderRoute()),
               ),
@@ -397,7 +397,7 @@ class _QuickAccessButtonList extends ConsumerWidget {
                 leading: const Icon(Icons.group_outlined, size: 26),
                 title: Text(
                   'partners'.t(context: context),
-                  style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w500),
+                  style: context.textTheme.titleSmall?.copyWith(fontWeight: .w500),
                 ),
                 onTap: () => context.pushRoute(const PartnerRoute()),
               ),
@@ -418,7 +418,7 @@ class _PartnerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(0),
+      padding: const .all(0),
       physics: const NeverScrollableScrollPhysics(),
       itemCount: partners.length,
       shrinkWrap: true,
@@ -427,16 +427,16 @@ class _PartnerList extends StatelessWidget {
         final isLastItem = index == partners.length - 1;
         return ListTile(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(isLastItem ? 20 : 0),
-              bottomRight: Radius.circular(isLastItem ? 20 : 0),
+            borderRadius: .only(
+              bottomLeft: .circular(isLastItem ? 20 : 0),
+              bottomRight: .circular(isLastItem ? 20 : 0),
             ),
           ),
-          contentPadding: const EdgeInsets.only(left: 12.0, right: 18.0),
+          contentPadding: const .only(left: 12.0, right: 18.0),
           leading: PartnerUserAvatar(userId: partner.id, name: partner.name),
           title: const Text(
             "partner_list_user_photos",
-            style: TextStyle(fontWeight: FontWeight.w500),
+            style: TextStyle(fontWeight: .w500),
           ).t(context: context, args: {'user': partner.name}),
           onTap: () => context.pushRoute(DriftPartnerDetailRoute(partner: partner)),
         );

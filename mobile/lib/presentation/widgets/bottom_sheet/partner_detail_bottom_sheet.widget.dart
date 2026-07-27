@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/download_action_button.widget.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/share_action_button.widget.dart';
@@ -35,14 +34,14 @@ class _PartnerDetailBottomSheetState extends ConsumerState<PartnerDetailBottomSh
   @override
   Widget build(BuildContext context) {
     Future<void> addToAlbum(RemoteAlbum album) async {
-      final result = await ref.read(actionProvider.notifier).addToAlbum(ActionSource.timeline, album);
+      final result = await ref.read(actionProvider.notifier).addToAlbum(.timeline, album);
 
       if (!context.mounted) {
         return;
       }
 
       if (!result.success) {
-        ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: ToastType.error);
+        ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: .error);
         return;
       }
 
@@ -64,8 +63,8 @@ class _PartnerDetailBottomSheetState extends ConsumerState<PartnerDetailBottomSh
       maxChildSize: 0.85,
       shouldCloseOnMinExtent: false,
       actions: const [
-        ShareActionButton(source: ActionSource.timeline),
-        DownloadActionButton(source: ActionSource.timeline),
+        ShareActionButton(source: .timeline),
+        DownloadActionButton(source: .timeline),
       ],
       slivers: [
         const AddToAlbumHeader(),

@@ -57,7 +57,7 @@ class MapState {
     );
   }
 
-  TimelineMapOptions toOptions() => TimelineMapOptions(
+  TimelineMapOptions toOptions() => .new(
     bounds: bounds,
     onlyFavorites: onlyFavorites,
     includeArchived: includeArchived,

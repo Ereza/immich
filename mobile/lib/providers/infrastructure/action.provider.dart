@@ -73,7 +73,7 @@ class ActionNotifier extends Notifier<void> {
     final List<String> localIds = [];
 
     for (final asset in assets) {
-      if (ignoreLocalOnly && asset.storage != AssetState.merged) {
+      if (ignoreLocalOnly && asset.storage != .merged) {
         continue;
       }
       if (asset is LocalAsset) {
@@ -108,8 +108,8 @@ class ActionNotifier extends Notifier<void> {
 
   Set<BaseAsset> _getAssets(ActionSource source) {
     return switch (source) {
-      ActionSource.timeline => ref.read(multiSelectProvider).selectedAssets,
-      ActionSource.viewer => switch (ref.read(assetViewerProvider).currentAsset) {
+      .timeline => ref.read(multiSelectProvider).selectedAssets,
+      .viewer => switch (ref.read(assetViewerProvider).currentAsset) {
         BaseAsset asset => {asset},
         null => const {},
       },
@@ -273,7 +273,7 @@ class ActionNotifier extends Notifier<void> {
 
   Future<ActionResult?> deleteLocal(ActionSource source, BuildContext context) async {
     final assets = _getAssets(source);
-    bool? backedUpOnly = assets.every((asset) => asset.storage == AssetState.merged)
+    bool? backedUpOnly = assets.every((asset) => asset.storage == .merged)
         ? true
         : await showDialog<bool>(
             context: context,
@@ -287,7 +287,7 @@ class ActionNotifier extends Notifier<void> {
 
     final List<String> ids;
     if (backedUpOnly) {
-      ids = assets.where((asset) => asset.storage == AssetState.merged).map((asset) => asset.localId!).toList();
+      ids = assets.where((asset) => asset.storage == .merged).map((asset) => asset.localId!).toList();
     } else {
       ids = _getLocalIdsForSource(source);
     }
@@ -312,7 +312,7 @@ class ActionNotifier extends Notifier<void> {
       // This must be called since editing location
       // does not update the currentAsset which means
       // the exif provider will not be refreshed automatically
-      if (source == ActionSource.viewer) {
+      if (source == .viewer) {
         final currentAsset = ref.read(assetViewerProvider).currentAsset;
         if (currentAsset != null) {
           ref.invalidate(assetExifProvider(currentAsset));
@@ -334,7 +334,7 @@ class ActionNotifier extends Notifier<void> {
         return null;
       }
 
-      if (source == ActionSource.viewer) {
+      if (source == .viewer) {
         ref.invalidate(assetExifProvider);
       }
 
@@ -388,7 +388,7 @@ class ActionNotifier extends Notifier<void> {
 
     // Keep the selection available for retry if the remote add fails. Once the
     // album mutation succeeds, clear timeline selection so upload overlays can render.
-    if (source == ActionSource.timeline) {
+    if (source == .timeline) {
       ref.read(multiSelectProvider.notifier).reset();
     }
 
@@ -486,7 +486,7 @@ class ActionNotifier extends Notifier<void> {
     final assets = _getOwnedRemoteAssetsForSource(source);
     try {
       await _service.unStack(assets.map((e) => e.stackId).nonNulls.toList());
-      if (source == ActionSource.viewer) {
+      if (source == .viewer) {
         final updatedParent = await _assetService.getRemoteAsset(assets.first.id);
         if (updatedParent != null) {
           ref.read(assetViewerProvider.notifier).setAsset(updatedParent);
@@ -503,7 +503,7 @@ class ActionNotifier extends Notifier<void> {
   Future<ActionResult> shareAssets(
     ActionSource source,
     BuildContext context, {
-    ShareAssetType fileType = ShareAssetType.original,
+    ShareAssetType fileType = .original,
     Completer<void>? cancelCompleter,
     void Function(double progress)? onAssetDownloadProgress,
   }) async {

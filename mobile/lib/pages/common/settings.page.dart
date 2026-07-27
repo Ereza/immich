@@ -34,16 +34,16 @@ enum SettingSection {
   final IconData icon;
 
   Widget get widget => switch (this) {
-    SettingSection.advanced => const AdvancedSettings(),
-    SettingSection.assetViewer => const AssetViewerSettings(),
-    SettingSection.backup => const DriftBackupSettings(),
-    SettingSection.freeUpSpace => const FreeUpSpaceSettings(),
-    SettingSection.languages => const LanguageSettings(),
-    SettingSection.networking => const NetworkingSettings(),
-    SettingSection.notifications => const NotificationSetting(),
-    SettingSection.preferences => const PreferenceSetting(),
-    SettingSection.timeline => const AssetListSettings(),
-    SettingSection.beta => const SyncStatusAndActions(),
+    .advanced => const AdvancedSettings(),
+    .assetViewer => const AssetViewerSettings(),
+    .backup => const DriftBackupSettings(),
+    .freeUpSpace => const FreeUpSpaceSettings(),
+    .languages => const LanguageSettings(),
+    .networking => const NetworkingSettings(),
+    .notifications => const NotificationSetting(),
+    .preferences => const PreferenceSetting(),
+    .timeline => const AssetListSettings(),
+    .beta => const SyncStatusAndActions(),
   };
 
   const SettingSection(this.title, this.icon, this.subtitle);
@@ -69,7 +69,7 @@ class _MobileLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> settings = SettingSection.values
         .expand(
-          (setting) => setting == SettingSection.beta
+          (setting) => setting == .beta
               ? [
                   SettingsCard(
                     icon: Icons.sync_outlined,
@@ -96,7 +96,7 @@ class _MobileLayout extends StatelessWidget {
         settingRoute: const WhatsNewRoute(),
       ),
     );
-    return ListView(padding: const EdgeInsets.only(top: 10.0, bottom: 60), children: [...settings]);
+    return ListView(padding: const .only(top: 10.0, bottom: 60), children: [...settings]);
   }
 }
 
@@ -107,7 +107,7 @@ class _TabletLayout extends HookWidget {
     final selectedSection = useState<SettingSection>(SettingSection.values.first);
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: .start,
       children: [
         Expanded(
           flex: 2,

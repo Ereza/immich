@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:immich_mobile/constants/constants.dart';
 import 'package:immich_mobile/domain/models/log.model.dart';
-import 'package:immich_mobile/domain/models/settings_key.dart';
 import 'package:immich_mobile/infrastructure/repositories/log.repository.dart';
 import 'package:immich_mobile/infrastructure/repositories/settings.repository.dart';
 import 'package:immich_mobile/utils/debug_print.dart';
@@ -57,7 +56,7 @@ class LogService {
     final instance = LogService._(logRepository, settingsRepository, shouldBuffer);
     await logRepository.truncate(limit: kLogTruncateLimit);
     final level = instance._settingsRepository.appConfig.logLevel;
-    Logger.root.level = Level.LEVELS.elementAtOrNull(level.index) ?? Level.INFO;
+    Logger.root.level = Level.LEVELS.elementAtOrNull(level.index) ?? .INFO;
     return instance;
   }
 
@@ -91,7 +90,7 @@ class LogService {
   }
 
   Future<void> setLogLevel(LogLevel level) async {
-    await _settingsRepository.write(SettingsKey.logLevel, level);
+    await _settingsRepository.write(.logLevel, level);
     Logger.root.level = level.toLevel();
   }
 
@@ -146,9 +145,9 @@ class LoggerUnInitializedException implements Exception {
 
 /// Log levels according to dart logging [Level]
 extension LevelDomainToInfraExtension on Level {
-  LogLevel toLogLevel() => LogLevel.values.elementAtOrNull(Level.LEVELS.indexOf(this)) ?? LogLevel.info;
+  LogLevel toLogLevel() => LogLevel.values.elementAtOrNull(Level.LEVELS.indexOf(this)) ?? .info;
 }
 
 extension on LogLevel {
-  Level toLevel() => Level.LEVELS.elementAtOrNull(index) ?? Level.INFO;
+  Level toLevel() => Level.LEVELS.elementAtOrNull(index) ?? .INFO;
 }

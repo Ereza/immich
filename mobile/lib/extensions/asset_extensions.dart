@@ -54,18 +54,18 @@ extension DTOToAsset on api.AssetResponseDto {
 
 extension on api.AssetVisibility {
   AssetVisibility toAssetVisibility() => switch (this) {
-    api.AssetVisibility.timeline => AssetVisibility.timeline,
-    api.AssetVisibility.hidden => AssetVisibility.hidden,
-    api.AssetVisibility.archive => AssetVisibility.archive,
-    api.AssetVisibility.locked => AssetVisibility.locked,
+    api.AssetVisibility.timeline => .timeline,
+    api.AssetVisibility.hidden => .hidden,
+    api.AssetVisibility.archive => .archive,
+    api.AssetVisibility.locked => .locked,
   };
 }
 
 extension on api.AssetTypeEnum {
   AssetType toAssetType() => switch (this) {
-    api.AssetTypeEnum.IMAGE => AssetType.image,
-    api.AssetTypeEnum.VIDEO => AssetType.video,
-    api.AssetTypeEnum.AUDIO => AssetType.audio,
-    api.AssetTypeEnum.OTHER => AssetType.other,
+    api.AssetTypeEnum.IMAGE => .image,
+    api.AssetTypeEnum.VIDEO => .video,
+    api.AssetTypeEnum.AUDIO => .audio,
+    api.AssetTypeEnum.OTHER => .other,
   };
 }

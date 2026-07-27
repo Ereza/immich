@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/domain/services/hash.service.dart';
 import 'package:immich_mobile/platform/native_sync_api.g.dart';
 import 'package:mocktail/mocktail.dart';
@@ -156,8 +155,8 @@ void main() {
       });
 
       test('uses allowNetworkAccess based on album backup selection', () async {
-        final selectedAlbum = LocalAlbumFactory.create(backupSelection: BackupSelection.selected);
-        final nonSelectedAlbum = LocalAlbumFactory.create(id: 'album2', backupSelection: BackupSelection.excluded);
+        final selectedAlbum = LocalAlbumFactory.create(backupSelection: .selected);
+        final nonSelectedAlbum = LocalAlbumFactory.create(id: 'album2', backupSelection: .excluded);
         final asset1 = LocalAssetFactory.create();
         final asset2 = LocalAssetFactory.create();
 

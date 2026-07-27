@@ -18,7 +18,7 @@ class ImmichThemeProvider extends StatelessWidget {
         colorScheme: colorScheme,
         brightness: colorScheme.brightness,
         inputDecorationTheme: InputDecorationTheme(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
+          floatingLabelBehavior: .always,
           border: WidgetStateInputBorder.resolveWith((states) {
             final color = states.contains(WidgetState.error)
                 ? colorScheme.error
@@ -27,15 +27,15 @@ class ImmichThemeProvider extends StatelessWidget {
                 : colorScheme.outline;
             return OutlineInputBorder(
               borderSide: BorderSide(color: color),
-              borderRadius: const BorderRadius.all(Radius.circular(ImmichRadius.md)),
+              borderRadius: const .all(.circular(ImmichRadius.md)),
             );
           }),
           labelStyle: WidgetStateTextStyle.resolveWith((states) {
             final color = states.contains(WidgetState.error) ? colorScheme.error : colorScheme.primary;
-            return TextStyle(color: color, fontWeight: FontWeight.w600);
+            return TextStyle(color: color, fontWeight: .w600);
           }),
           hintStyle: const TextStyle(fontSize: ImmichTextSize.body),
-          errorStyle: TextStyle(color: colorScheme.error, fontWeight: FontWeight.w600),
+          errorStyle: TextStyle(color: colorScheme.error, fontWeight: .w600),
         ),
       ),
       child: child,
@@ -106,7 +106,7 @@ extension on ColorScheme {
   (Color container, Color onContainer) harmonized(Color seed) {
     final hct = Hct.fromInt(Blend.harmonize(seed.toARGB32(), primary.toARGB32()));
     final tones = TonalPalette.of(hct.hue, hct.chroma);
-    final isDark = brightness == Brightness.dark;
+    final isDark = brightness == .dark;
     return (Color(tones.get(isDark ? 30 : 90)), Color(tones.get(isDark ? 90 : 10)));
   }
 }

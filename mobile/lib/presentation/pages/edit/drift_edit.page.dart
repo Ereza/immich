@@ -15,7 +15,7 @@ import 'package:immich_mobile/theme/theme_data.dart';
 import 'package:immich_mobile/utils/editor.utils.dart';
 import 'package:immich_mobile/widgets/common/immich_toast.dart';
 import 'package:immich_ui/immich_ui.dart';
-import 'package:openapi/api.dart' show RotateParameters, MirrorParameters, MirrorAxis;
+import 'package:openapi/api.dart' show RotateParameters, MirrorParameters;
 
 @RoutePage()
 class DriftEditImagePage extends ConsumerStatefulWidget {
@@ -45,11 +45,11 @@ class _DriftEditImagePageState extends ConsumerState<DriftEditImagePage> with Ti
     }
 
     if (editorState.flipHorizontal) {
-      edits.add(MirrorEdit(MirrorParameters(axis: MirrorAxis.horizontal)));
+      edits.add(MirrorEdit(MirrorParameters(axis: .horizontal)));
     }
 
     if (editorState.flipVertical) {
-      edits.add(MirrorEdit(MirrorParameters(axis: MirrorAxis.vertical)));
+      edits.add(MirrorEdit(MirrorParameters(axis: .vertical)));
     }
 
     final normalizedRotation = (editorState.rotationAngle % 360 + 360) % 360;
@@ -59,10 +59,10 @@ class _DriftEditImagePageState extends ConsumerState<DriftEditImagePage> with Ti
 
     try {
       await widget.applyEdits(edits);
-      ImmichToast.show(context: context, msg: 'success'.tr(), toastType: ToastType.success);
+      ImmichToast.show(context: context, msg: 'success'.tr(), toastType: .success);
       Navigator.of(context).pop();
     } catch (e) {
-      ImmichToast.show(context: context, msg: 'error_title'.tr(), toastType: ToastType.error);
+      ImmichToast.show(context: context, msg: 'error_title'.tr(), toastType: .error);
     } finally {
       ref.read(editorStateProvider.notifier).setIsEditing(false);
     }
@@ -121,23 +121,20 @@ class _DriftEditImagePageState extends ConsumerState<DriftEditImagePage> with Ti
                 AnimatedSize(
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeInOut,
-                  alignment: Alignment.bottomCenter,
-                  clipBehavior: Clip.none,
+                  alignment: .bottomCenter,
+                  clipBehavior: .none,
                   child: Container(
-                    width: double.infinity,
+                    width: .infinity,
                     decoration: BoxDecoration(
                       color: ref.watch(immichThemeProvider).dark.surface,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
+                      borderRadius: const .only(topLeft: .circular(20), topRight: .circular(20)),
                     ),
                     child: const Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: .min,
                       children: [
                         _TransformControls(),
                         Padding(
-                          padding: EdgeInsets.only(bottom: 36, left: 24, right: 24),
+                          padding: .only(bottom: 36, left: 24, right: 24),
                           child: Row(children: [Spacer(), _ResetEditsButton()]),
                         ),
                       ],
@@ -165,7 +162,7 @@ class _AspectRatioButton extends StatelessWidget {
     final color = isSelected ? context.primaryColor : context.themeData.iconTheme.color;
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: .max,
       children: [
         IconButton(
           iconSize: 36,
@@ -196,8 +193,8 @@ class _AspectRatioRect extends StatelessWidget {
           aspectRatio: ratio,
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: color ?? Colors.transparent, width: 3),
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
+              border: .all(color: color ?? Colors.transparent, width: 3),
+              borderRadius: const .all(.circular(4)),
             ),
           ),
         ),
@@ -215,11 +212,11 @@ class _AspectRatioSelector extends ConsumerWidget {
     final editorNotifier = ref.read(editorStateProvider.notifier);
 
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+      scrollDirection: .horizontal,
       child: Row(
         children: aspectRatioPresets.map((entry) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const .symmetric(horizontal: 8.0),
             child: _AspectRatioButton(
               ratio: entry,
               isSelected: editorState.aspectRatio == entry,
@@ -240,26 +237,26 @@ class _TransformControls extends ConsumerWidget {
     final editorNotifier = ref.read(editorStateProvider.notifier);
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+          padding: const .only(left: 20, right: 20, top: 20, bottom: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: .spaceBetween,
             children: [
               Row(
                 children: [
                   ImmichIconButton(
                     icon: Icons.rotate_left,
-                    variant: ImmichVariant.ghost,
-                    color: ImmichColor.secondary,
+                    variant: .ghost,
+                    color: .secondary,
                     onPressed: editorNotifier.rotateCCW,
                   ),
                   const SizedBox(width: 8),
                   ImmichIconButton(
                     icon: Icons.rotate_right,
-                    variant: ImmichVariant.ghost,
-                    color: ImmichColor.secondary,
+                    variant: .ghost,
+                    color: .secondary,
                     onPressed: editorNotifier.rotateCW,
                   ),
                 ],
@@ -268,8 +265,8 @@ class _TransformControls extends ConsumerWidget {
                 children: [
                   ImmichIconButton(
                     icon: Icons.flip,
-                    variant: ImmichVariant.ghost,
-                    color: ImmichColor.secondary,
+                    variant: .ghost,
+                    color: .secondary,
                     onPressed: editorNotifier.flipHorizontally,
                   ),
                   const SizedBox(width: 8),
@@ -277,8 +274,8 @@ class _TransformControls extends ConsumerWidget {
                     angle: pi / 2,
                     child: ImmichIconButton(
                       icon: Icons.flip,
-                      variant: ImmichVariant.ghost,
-                      color: ImmichColor.secondary,
+                      variant: .ghost,
+                      color: .secondary,
                       onPressed: editorNotifier.flipVertically,
                     ),
                   ),
@@ -306,13 +303,13 @@ class _SaveEditsButton extends ConsumerWidget {
 
     return isApplyingEdits
         ? const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: .all(8.0),
             child: SizedBox(width: 28, height: 28, child: CircularProgressIndicator(strokeWidth: 2.5)),
           )
         : ImmichIconButton(
             icon: Icons.done_rounded,
-            color: ImmichColor.primary,
-            variant: ImmichVariant.ghost,
+            color: .primary,
+            variant: .ghost,
             disabled: !hasUnsavedEdits,
             onPressed: onSave,
           );
@@ -330,7 +327,7 @@ class _ResetEditsButton extends ConsumerWidget {
     return ImmichTextButton(
       labelText: 'reset'.tr(),
       onPressed: editorNotifier.resetEdits,
-      variant: ImmichVariant.ghost,
+      variant: .ghost,
       expanded: false,
       disabled: !editorState.hasEdits || editorState.isApplyingEdits,
     );
@@ -384,7 +381,7 @@ class _EditorPreviewState extends ConsumerState<_EditorPreview> with TickerProvi
         double? ratio;
 
         ratio = switch (current.aspectRatio) {
-          CropAspectRatio.original => current.originalWidth / current.originalHeight,
+          .original => current.originalWidth / current.originalHeight,
           _ => current.aspectRatio.ratio,
         };
 
@@ -413,7 +410,7 @@ class _EditorPreviewState extends ConsumerState<_EditorPreview> with TickerProvi
             curve: Curves.easeInOut,
             onEnd: editorNotifier.normalizeRotation,
             child: Transform(
-              alignment: Alignment.center,
+              alignment: .center,
               transform: Matrix4.identity()
                 ..scaleByDouble(
                   editorState.flipHorizontal ? -1.0 : 1.0,
@@ -424,7 +421,7 @@ class _EditorPreviewState extends ConsumerState<_EditorPreview> with TickerProvi
               child: AnimatedContainer(
                 duration: editorState.animationDuration,
                 curve: Curves.easeInOut,
-                padding: const EdgeInsets.all(10),
+                padding: const .all(10),
                 width: (editorState.rotationAngle % 180 == 0) ? baseWidth : baseHeight,
                 height: (editorState.rotationAngle % 180 == 0) ? baseHeight : baseWidth,
                 child: CropImage(controller: cropController, image: widget.image, gridColor: Colors.white),

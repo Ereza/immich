@@ -27,13 +27,13 @@ class SettingsButtonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: const .symmetric(horizontal: 20),
       horizontalTitleGap: 20,
       isThreeLine: true,
       leading: Icon(icon, color: iconColor),
-      title: Text(title, style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500)),
+      title: Text(title, style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500)),
       subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           if (subtileText != null) const SizedBox(height: 4),
           if (subtileText != null)

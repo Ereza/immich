@@ -111,37 +111,34 @@ class _DateTimePicker extends HookWidget {
     }
 
     return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(vertical: 32, horizontal: 18),
+      contentPadding: const .symmetric(vertical: 32, horizontal: 18),
       actions: [
         TextButton(
           onPressed: () => context.pop(),
           child: Text(
             "cancel",
-            style: context.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colorScheme.error,
-            ),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.colorScheme.error),
           ).tr(),
         ),
         TextButton(
           onPressed: popWithDateTime,
           child: Text(
             "action_common_update",
-            style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: context.primaryColor),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.primaryColor),
           ).tr(),
         ),
       ],
       content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
         children: [
-          const Text("date_and_time", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)).tr(),
+          const Text("date_and_time", style: TextStyle(fontSize: 16, fontWeight: .w600)).tr(),
           const SizedBox(height: 32),
           ListTile(
             tileColor: context.colorScheme.surfaceContainerHighest,
             shape: ShapeBorder.lerp(
-              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+              const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
+              const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
               1,
             ),
             trailing: Icon(Icons.edit_outlined, size: 18, color: context.primaryColor),

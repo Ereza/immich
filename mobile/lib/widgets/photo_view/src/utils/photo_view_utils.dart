@@ -7,14 +7,9 @@ import 'package:immich_mobile/widgets/photo_view/src/photo_view_scale_state.dart
 /// Given a [PhotoViewScaleState], returns a scale value considering [scaleBoundaries].
 double getScaleForScaleState(PhotoViewScaleState scaleState, ScaleBoundaries scaleBoundaries) {
   return switch (scaleState) {
-    PhotoViewScaleState.initial ||
-    PhotoViewScaleState.zoomedIn ||
-    PhotoViewScaleState.zoomedOut => _clampSize(scaleBoundaries.initialScale, scaleBoundaries),
-    PhotoViewScaleState.covering => _clampSize(
-      _scaleForCovering(scaleBoundaries.outerSize, scaleBoundaries.childSize),
-      scaleBoundaries,
-    ),
-    PhotoViewScaleState.originalSize => _clampSize(1.0, scaleBoundaries),
+    .initial || .zoomedIn || .zoomedOut => _clampSize(scaleBoundaries.initialScale, scaleBoundaries),
+    .covering => _clampSize(_scaleForCovering(scaleBoundaries.outerSize, scaleBoundaries.childSize), scaleBoundaries),
+    .originalSize => _clampSize(1.0, scaleBoundaries),
   };
 }
 

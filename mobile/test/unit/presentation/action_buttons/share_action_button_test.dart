@@ -27,7 +27,7 @@ class _RecordingActionNotifier extends ActionNotifier {
   Future<ActionResult> shareAssets(
     ActionSource source,
     BuildContext context, {
-    ShareAssetType fileType = ShareAssetType.original,
+    ShareAssetType fileType = .original,
     Completer<void>? cancelCompleter,
     void Function(double progress)? onAssetDownloadProgress,
   }) async {
@@ -42,7 +42,7 @@ class _FakeAssetViewerNotifier extends AssetViewerStateNotifier {
   _FakeAssetViewerNotifier(this.asset);
 
   @override
-  AssetViewerState build() => AssetViewerState(currentAsset: asset);
+  AssetViewerState build() => .new(currentAsset: asset);
 }
 
 void main() {
@@ -68,7 +68,7 @@ void main() {
     final asset = RemoteAssetFactory.create(ownerId: context.currentUser.id);
     await tester.pumpTestWidget(
       context,
-      const ShareActionButton(source: ActionSource.viewer),
+      const ShareActionButton(source: .viewer),
       overrides: [
         actionProvider.overrideWith(() => actionNotifier),
         assetViewerProvider.overrideWith(() => _FakeAssetViewerNotifier(asset)),

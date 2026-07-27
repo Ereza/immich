@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/locales.dart';
 import 'package:immich_mobile/domain/models/config/app_config.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/generated/codegen_loader.g.dart';
 import 'package:immich_mobile/generated/translations.g.dart';
@@ -25,7 +24,7 @@ import 'package:immich_mobile/theme/theme_data.dart';
 import 'package:immich_mobile/widgets/common/immich_logo.dart';
 import 'package:immich_mobile/widgets/common/immich_title_text.dart';
 import 'package:logging/logging.dart';
-import 'package:url_launcher/url_launcher.dart' show launchUrl, LaunchMode;
+import 'package:url_launcher/url_launcher.dart' show launchUrl;
 
 class BootstrapErrorWidget extends StatelessWidget {
   final String error;
@@ -50,7 +49,7 @@ class BootstrapErrorWidget extends StatelessWidget {
           localizationsDelegates: lCtx.localizationDelegates,
           supportedLocales: lCtx.supportedLocales,
           locale: lCtx.locale,
-          themeMode: ThemeMode.system,
+          themeMode: .system,
           darkTheme: getThemeData(colorScheme: immichTheme.dark, locale: lCtx.locale),
           theme: getThemeData(colorScheme: immichTheme.light, locale: lCtx.locale),
           home: Builder(
@@ -60,23 +59,23 @@ class BootstrapErrorWidget extends StatelessWidget {
                   const SafeArea(
                     bottom: false,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      padding: .symmetric(horizontal: 24, vertical: 16),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: .center,
                         children: [ImmichLogo(size: 48), SizedBox(width: 12), ImmichTitleText(fontSize: 24)],
                       ),
                     ),
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.all(16),
+                      padding: const .all(16),
                       child: _ErrorCard(error: error, stack: stack),
                     ),
                   ),
                   const Divider(height: 1),
                   const SafeArea(
                     top: false,
-                    child: Padding(padding: EdgeInsets.fromLTRB(24, 16, 24, 16), child: _BottomPanel()),
+                    child: Padding(padding: .fromLTRB(24, 16, 24, 16), child: _BottomPanel()),
                   ),
                 ],
               ),
@@ -104,14 +103,14 @@ class _BottomPanelState extends State<_BottomPanel> {
       builder: (dialogCtx) => AlertDialog(
         title: Text(context.t.reset_sqlite_clear_app_data),
         content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Text(context.t.reset_sqlite_confirmation),
             const SizedBox(height: 12),
             Text(
               context.t.reset_sqlite_confirmation_note,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: .w600),
             ),
           ],
         ),
@@ -143,29 +142,27 @@ class _BottomPanelState extends State<_BottomPanel> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: .stretch,
       spacing: 8,
       children: [
         Text(
           _cleared ? context.t.reset_sqlite_done : context.t.scaffold_body_error_unrecoverable,
-          textAlign: TextAlign.center,
+          textAlign: .center,
           style: Theme.of(context).textTheme.bodySmall,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             _ActionLink(
               icon: Icons.chat_bubble_outline,
               label: context.t.discord,
-              onTap: () => launchUrl(Uri.parse('https://discord.immich.app/'), mode: LaunchMode.externalApplication),
+              onTap: () => launchUrl(Uri.parse('https://discord.immich.app/'), mode: .externalApplication),
             ),
             _ActionLink(
               icon: Icons.bug_report_outlined,
               label: context.t.profile_drawer_github,
-              onTap: () => launchUrl(
-                Uri.parse('https://github.com/immich-app/immich/issues'),
-                mode: LaunchMode.externalApplication,
-              ),
+              onTap: () =>
+                  launchUrl(Uri.parse('https://github.com/immich-app/immich/issues'), mode: .externalApplication),
             ),
             if (!_cleared)
               _ActionLink(
@@ -191,11 +188,11 @@ class _ActionLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      borderRadius: const .all(.circular(8)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const .symmetric(horizontal: 16, vertical: 8),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             Icon(icon, size: 24),
             const SizedBox(height: 4),
@@ -219,14 +216,14 @@ class _ErrorCard extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Card(
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: .antiAlias,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           ColoredBox(
             color: scheme.error,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
+              padding: const .fromLTRB(12, 8, 8, 8),
               child: Row(
                 children: [
                   Expanded(
@@ -237,7 +234,7 @@ class _ErrorCard extends StatelessWidget {
                   ),
                   IconButton(
                     tooltip: context.t.copy_error,
-                    padding: EdgeInsets.zero,
+                    padding: .zero,
                     constraints: const BoxConstraints(),
                     icon: Icon(Icons.copy_outlined, size: 16, color: scheme.onError),
                     onPressed: () => Clipboard.setData(ClipboardData(text: '$error\n\n$stack')),
@@ -247,14 +244,14 @@ class _ErrorCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const .all(12),
             child: Text(error, style: textTheme.bodyMedium),
           ),
           const Divider(height: 1),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const .all(12),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: .start,
               children: [
                 Text(context.t.stacktrace, style: textTheme.labelMedium),
                 const SizedBox(height: 4),
@@ -273,7 +270,7 @@ class SplashScreenPage extends StatefulHookConsumerWidget {
   const SplashScreenPage({super.key});
 
   @override
-  SplashScreenPageState createState() => SplashScreenPageState();
+  SplashScreenPageState createState() => .new();
 }
 
 class SplashScreenPageState extends ConsumerState<SplashScreenPage> {
@@ -298,9 +295,9 @@ class SplashScreenPageState extends ConsumerState<SplashScreenPage> {
   }
 
   void resumeSession() async {
-    final serverUrl = Store.tryGet(StoreKey.serverUrl);
-    final endpoint = Store.tryGet(StoreKey.serverEndpoint);
-    final accessToken = Store.tryGet(StoreKey.accessToken);
+    final serverUrl = Store.tryGet(.serverUrl);
+    final endpoint = Store.tryGet(.serverEndpoint);
+    final accessToken = Store.tryGet(.accessToken);
 
     if (accessToken != null && serverUrl != null && endpoint != null) {
       final infoProvider = ref.read(serverInfoProvider.notifier);
@@ -369,7 +366,7 @@ class SplashScreenPageState extends ConsumerState<SplashScreenPage> {
     final isEnableBackup = SettingsRepository.instance.appConfig.backup.enabled;
 
     if (isEnableBackup) {
-      final currentUser = Store.tryGet(StoreKey.currentUser);
+      final currentUser = Store.tryGet(.currentUser);
       if (currentUser != null) {
         unawaited(notifier.startForegroundBackup(currentUser.id));
       }
@@ -380,7 +377,7 @@ class SplashScreenPageState extends ConsumerState<SplashScreenPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Image(image: AssetImage('assets/immich-logo.png'), width: 80, filterQuality: FilterQuality.high),
+        child: Image(image: AssetImage('assets/immich-logo.png'), width: 80, filterQuality: .high),
       ),
     );
   }

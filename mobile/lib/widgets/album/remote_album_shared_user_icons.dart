@@ -29,10 +29,10 @@ class RemoteAlbumSharedUserIcons extends ConsumerWidget {
           child: SizedBox(
             height: 50,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: .horizontal,
               itemBuilder: ((context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(right: 4.0),
+                  padding: const .only(right: 4.0),
                   child: UserCircleAvatar(user: sharedUsers[index], size: 36, hasBorder: true),
                 );
               }),

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/infrastructure/repositories/network.repository.dart';
 import 'package:immich_mobile/models/server_info/server_version.model.dart';
@@ -68,7 +67,7 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
 
     if (authenticationState.isAuthenticated) {
       try {
-        final endpoint = Uri.parse(Store.get(StoreKey.serverEndpoint));
+        final endpoint = Uri.parse(Store.get(.serverEndpoint));
         dPrint(() => "Attempting to connect to websocket");
         // Configure socket transports must be specified
         Socket socket = io(

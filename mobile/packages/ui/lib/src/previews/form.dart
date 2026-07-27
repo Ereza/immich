@@ -30,7 +30,7 @@ class _PreviewLoginFormState extends State<_PreviewLoginForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         ImmichForm(
           submitText: 'Login',
@@ -50,7 +50,7 @@ class _PreviewLoginFormState extends State<_PreviewLoginForm> {
               ImmichTextInput(
                 label: 'Email',
                 controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: .emailAddress,
                 validator: (value) => value?.isEmpty ?? true ? 'Required' : null,
               ),
               ImmichPasswordInput(

@@ -46,7 +46,7 @@ class SharedLinkService {
     try {
       final type = albumId != null ? SharedLinkType.ALBUM : SharedLinkType.INDIVIDUAL;
       SharedLinkCreateDto? dto;
-      if (type == SharedLinkType.ALBUM) {
+      if (type == .ALBUM) {
         dto = SharedLinkCreateDto(
           type: type,
           albumId: albumId == null ? const Optional.absent() : Optional.present(albumId),

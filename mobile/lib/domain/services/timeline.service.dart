@@ -46,47 +46,44 @@ class TimelineFactory {
   GroupAssetsBy get groupBy {
     final group = _settingsRepository.appConfig.timeline.groupAssetsBy;
     // We do not support auto grouping in the new timeline yet, fallback to day grouping
-    return group == GroupAssetsBy.auto ? GroupAssetsBy.day : group;
+    return group == .auto ? .day : group;
   }
 
-  TimelineService main(List<String> timelineUsers) => TimelineService(_timelineRepository.main(timelineUsers, groupBy));
+  TimelineService main(List<String> timelineUsers) => .new(_timelineRepository.main(timelineUsers, groupBy));
 
-  TimelineService localAlbum({required String albumId}) =>
-      TimelineService(_timelineRepository.localAlbum(albumId, groupBy));
+  TimelineService localAlbum({required String albumId}) => .new(_timelineRepository.localAlbum(albumId, groupBy));
 
-  TimelineService remoteAlbum({required String albumId}) =>
-      TimelineService(_timelineRepository.remoteAlbum(albumId, groupBy));
+  TimelineService remoteAlbum({required String albumId}) => .new(_timelineRepository.remoteAlbum(albumId, groupBy));
 
-  TimelineService remoteAssets(String userId) => TimelineService(_timelineRepository.remote(userId, groupBy));
+  TimelineService remoteAssets(String userId) => .new(_timelineRepository.remote(userId, groupBy));
 
-  TimelineService recentlyAdded(String userId) => TimelineService(_timelineRepository.recentlyAdded(userId, groupBy));
+  TimelineService recentlyAdded(String userId) => .new(_timelineRepository.recentlyAdded(userId, groupBy));
 
-  TimelineService favorite(String userId) => TimelineService(_timelineRepository.favorite(userId, groupBy));
+  TimelineService favorite(String userId) => .new(_timelineRepository.favorite(userId, groupBy));
 
-  TimelineService trash(String userId) => TimelineService(_timelineRepository.trash(userId, groupBy));
+  TimelineService trash(String userId) => .new(_timelineRepository.trash(userId, groupBy));
 
-  TimelineService archive(String userId) => TimelineService(_timelineRepository.archived(userId, groupBy));
+  TimelineService archive(String userId) => .new(_timelineRepository.archived(userId, groupBy));
 
-  TimelineService lockedFolder(String userId) => TimelineService(_timelineRepository.locked(userId, groupBy));
+  TimelineService lockedFolder(String userId) => .new(_timelineRepository.locked(userId, groupBy));
 
-  TimelineService video(String userId) => TimelineService(_timelineRepository.video(userId, groupBy));
+  TimelineService video(String userId) => .new(_timelineRepository.video(userId, groupBy));
 
-  TimelineService place(String place) => TimelineService(_timelineRepository.place(place, groupBy));
+  TimelineService place(String place) => .new(_timelineRepository.place(place, groupBy));
 
-  TimelineService person(String userId, String personId) =>
-      TimelineService(_timelineRepository.person(userId, personId, groupBy));
+  TimelineService person(String userId, String personId) => .new(_timelineRepository.person(userId, personId, groupBy));
 
   TimelineService fromAssets(List<BaseAsset> assets, TimelineOrigin type) =>
-      TimelineService(_timelineRepository.fromAssets(assets, type));
+      .new(_timelineRepository.fromAssets(assets, type));
 
   TimelineService fromAssetStream(List<BaseAsset> Function() getAssets, Stream<int> assetCount, TimelineOrigin type) =>
-      TimelineService(_timelineRepository.fromAssetStream(getAssets, assetCount, type));
+      .new(_timelineRepository.fromAssetStream(getAssets, assetCount, type));
 
   TimelineService fromAssetsWithBuckets(List<BaseAsset> assets, TimelineOrigin type) =>
-      TimelineService(_timelineRepository.fromAssetsWithBuckets(assets, type));
+      .new(_timelineRepository.fromAssetsWithBuckets(assets, type));
 
   TimelineService map(List<String> userIds, TimelineMapOptions options) =>
-      TimelineService(_timelineRepository.map(userIds, options, groupBy));
+      .new(_timelineRepository.map(userIds, options, groupBy));
 }
 
 class TimelineService {

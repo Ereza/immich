@@ -60,8 +60,8 @@ class BatteryOptimizationNotifier extends AsyncNotifier<PermissionStatus> {
 
 extension on pm.PermissionStatus {
   PermissionStatus toStatus() => switch (this) {
-    pm.PermissionStatus.granted => PermissionStatus.granted,
-    pm.PermissionStatus.denied => PermissionStatus.denied,
-    pm.PermissionStatus.permanentlyDenied => PermissionStatus.permanentlyDenied,
+    pm.PermissionStatus.granted => .granted,
+    pm.PermissionStatus.denied => .denied,
+    pm.PermissionStatus.permanentlyDenied => .permanentlyDenied,
   };
 }

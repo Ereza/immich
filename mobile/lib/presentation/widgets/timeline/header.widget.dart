@@ -38,21 +38,21 @@ class TimelineHeader extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (bucket is! TimeBucket || header == HeaderType.none) {
+    if (bucket is! TimeBucket || header == .none) {
       return const SizedBox.shrink();
     }
 
     final date = (bucket as TimeBucket).date;
-    final isMonthHeader = header == HeaderType.month || header == HeaderType.monthAndDay;
-    final isDayHeader = header == HeaderType.day || header == HeaderType.monthAndDay;
+    final isMonthHeader = header == .month || header == .monthAndDay;
+    final isDayHeader = header == .day || header == .monthAndDay;
 
     return Padding(
-      padding: EdgeInsets.only(top: isMonthHeader ? 8.0 : 0.0, left: 12.0, right: 12.0),
+      padding: .only(top: isMonthHeader ? 8.0 : 0.0, left: 12.0, right: 12.0),
       child: SizedBox(
         height: height,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: .start,
+          mainAxisAlignment: .spaceEvenly,
           children: [
             if (isMonthHeader)
               Row(
@@ -62,7 +62,7 @@ class TimelineHeader extends HookConsumerWidget {
                     style: context.textTheme.labelLarge?.copyWith(fontSize: 24),
                   ),
                   const Spacer(),
-                  if (header != HeaderType.monthAndDay) _BulkSelectIconButton(bucket: bucket, assetOffset: assetOffset),
+                  if (header != .monthAndDay) _BulkSelectIconButton(bucket: bucket, assetOffset: assetOffset),
                 ],
               ),
             if (isDayHeader)

@@ -27,7 +27,7 @@ class ImmichTestHelper {
 
   static Future<IntegrationTestWidgetsFlutterBinding> initialize() async {
     final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-    binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
+    binding.framePolicy = .fullyLive;
 
     // Load hive, localization...
     await app.initApp();

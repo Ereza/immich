@@ -38,7 +38,7 @@ class DropdownSearchMenu<T> extends HookWidget {
         menuConstraints ?? const BoxConstraints(minWidth: 280, maxWidth: 280, minHeight: 0, maxHeight: 280);
 
     final inputDecoration = InputDecoration(
-      contentPadding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
+      contentPadding: const .fromLTRB(12, 4, 12, 4),
       border: const OutlineInputBorder(),
       suffixIcon: trailingIcon,
       label: label,
@@ -53,7 +53,7 @@ class DropdownSearchMenu<T> extends HookWidget {
           child: InputDecorator(
             decoration: inputDecoration,
             child: selectedItem.value != null
-                ? Text(selectedItem.value!.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: textStyle)
+                ? Text(selectedItem.value!.label, maxLines: 1, overflow: .ellipsis, style: textStyle)
                 : null,
           ),
         ),
@@ -96,13 +96,13 @@ class DropdownSearchMenu<T> extends HookWidget {
           // This widget is a copy of the default implementation.
           // We have only changed the `constraints` parameter.
           return Align(
-            alignment: Alignment.topLeft,
+            alignment: .topLeft,
             child: ConstrainedBox(
               constraints: effectiveConstraints,
               child: Material(
                 elevation: 4.0,
                 child: ListView.builder(
-                  padding: EdgeInsets.zero,
+                  padding: .zero,
                   shrinkWrap: true,
                   itemCount: options.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -119,7 +119,7 @@ class DropdownSearchMenu<T> extends HookWidget {
                           }
                           return Container(
                             color: highlight ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.12) : null,
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const .all(16.0),
                             child: Text(option.label, style: textStyle),
                           );
                         },

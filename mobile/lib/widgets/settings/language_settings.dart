@@ -82,7 +82,7 @@ class LanguageSettings extends HookConsumerWidget {
             child: filteredLocaleEntries.value.isEmpty
                 ? const _LanguageNotFound()
                 : ListView.builder(
-                    padding: const EdgeInsets.all(8),
+                    padding: const .all(8),
                     itemCount: filteredLocaleEntries.value.length,
                     itemExtent: 64.0,
                     scrollCacheExtent: const .pixels(100),
@@ -131,24 +131,24 @@ class _LanguageSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 16, bottom: 8, left: 50, right: 50),
+      padding: const .only(top: 16, bottom: 8, left: 50, right: 50),
       decoration: BoxDecoration(color: context.colorScheme.surface),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(24)),
+          borderRadius: const .all(.circular(24)),
           gradient: LinearGradient(
             colors: [
               context.colorScheme.primary.withValues(alpha: 0.075),
               context.colorScheme.primary.withValues(alpha: 0.09),
               context.colorScheme.primary.withValues(alpha: 0.075),
             ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: .topLeft,
+            end: .bottomRight,
           ),
         ),
         child: SearchField(
           autofocus: false,
-          contentPadding: const EdgeInsets.all(12),
+          contentPadding: const .all(12),
           hintText: 'language_search_hint'.t(context: context),
           prefixIcon: const Icon(Icons.search_rounded),
           suffixIcon: controller.text.isNotEmpty
@@ -171,7 +171,7 @@ class _LanguageNotFound extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           Icon(Icons.search_off_rounded, size: 64, color: context.colorScheme.onSurface.withValues(alpha: 0.4)),
           const SizedBox(height: 8),
@@ -202,9 +202,9 @@ class _LanguageApplyButton extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(color: context.colorScheme.surface),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const .all(16.0),
         child: SizedBox(
-          width: double.infinity,
+          width: .infinity,
           height: 48,
           child: ElevatedButton(
             onPressed: isDisabled ? null : onPressed,
@@ -212,7 +212,7 @@ class _LanguageApplyButton extends StatelessWidget {
                 ? const SizedBox.square(dimension: 24, child: CircularProgressIndicator(strokeWidth: 2))
                 : Text(
                     'setting_languages_apply'.t(context: context),
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                    style: const TextStyle(fontWeight: .w600, fontSize: 16.0),
                   ),
           ),
         ),
@@ -238,18 +238,18 @@ class _LanguageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+      padding: const .symmetric(vertical: 4.0, horizontal: 8.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: context.colorScheme.surfaceContainerLowest.withValues(alpha: .6),
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-          border: Border.all(color: context.colorScheme.outlineVariant.withValues(alpha: .4), width: 1.0),
+          borderRadius: const .all(.circular(16.0)),
+          border: .all(color: context.colorScheme.outlineVariant.withValues(alpha: .4), width: 1.0),
         ),
         child: ListTile(
           title: Text(
             countryName,
             style: context.textTheme.titleSmall?.copyWith(
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              fontWeight: isSelected ? .w600 : .normal,
               color: isSelected ? context.colorScheme.primary : context.colorScheme.onSurfaceVariant,
             ),
           ),
@@ -257,8 +257,8 @@ class _LanguageItem extends StatelessWidget {
           onTap: onTap,
           selected: isSelected,
           selectedTileColor: context.colorScheme.primary.withValues(alpha: .15),
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+          shape: const RoundedRectangleBorder(borderRadius: .all(.circular(16.0))),
+          contentPadding: const .symmetric(horizontal: 16.0),
         ),
       ),
     );

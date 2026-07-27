@@ -31,7 +31,7 @@ class RemoteAssetEntity extends Table with DriftDefaultsMixin, AssetEntityMixin 
 
   BoolColumn get isFavorite => boolean().withDefault(const Constant(false))();
 
-  TextColumn get ownerId => text().references(UserEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get ownerId => text().references(UserEntity, #id, onDelete: .cascade)();
 
   DateTimeColumn get localDateTime => dateTime().nullable()();
 
@@ -56,7 +56,7 @@ class RemoteAssetEntity extends Table with DriftDefaultsMixin, AssetEntityMixin 
 }
 
 extension RemoteAssetEntityDataDomainEx on RemoteAssetEntityData {
-  RemoteAsset toDto({String? localId}) => RemoteAsset(
+  RemoteAsset toDto({String? localId}) => .new(
     id: id,
     name: name,
     ownerId: ownerId,

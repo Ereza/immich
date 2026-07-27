@@ -36,12 +36,12 @@ class DriftLocalAlbumRepository extends DriftDatabaseRepository {
       final orderings = <OrderingTerm>[];
       for (final sort in sortBy) {
         orderings.add(switch (sort) {
-          SortLocalAlbumsBy.id => OrderingTerm.asc(_db.localAlbumEntity.id),
-          SortLocalAlbumsBy.backupSelection => OrderingTerm.asc(_db.localAlbumEntity.backupSelection),
-          SortLocalAlbumsBy.isIosSharedAlbum => OrderingTerm.asc(_db.localAlbumEntity.isIosSharedAlbum),
-          SortLocalAlbumsBy.name => OrderingTerm.asc(_db.localAlbumEntity.name),
-          SortLocalAlbumsBy.assetCount => OrderingTerm.desc(assetCount),
-          SortLocalAlbumsBy.newestAsset => OrderingTerm.desc(_db.localAlbumEntity.updatedAt),
+          .id => OrderingTerm.asc(_db.localAlbumEntity.id),
+          .backupSelection => OrderingTerm.asc(_db.localAlbumEntity.backupSelection),
+          .isIosSharedAlbum => OrderingTerm.asc(_db.localAlbumEntity.isIosSharedAlbum),
+          .name => OrderingTerm.asc(_db.localAlbumEntity.name),
+          .assetCount => OrderingTerm.desc(assetCount),
+          .newestAsset => OrderingTerm.desc(_db.localAlbumEntity.updatedAt),
         });
       }
       query.orderBy(orderings);
@@ -51,8 +51,7 @@ class DriftLocalAlbumRepository extends DriftDatabaseRepository {
   }
 
   Future<List<LocalAlbum>> getBackupAlbums() async {
-    final query = _db.localAlbumEntity.select()
-      ..where((row) => row.backupSelection.equalsValue(BackupSelection.selected));
+    final query = _db.localAlbumEntity.select()..where((row) => row.backupSelection.equalsValue(.selected));
 
     return query.map((row) => row.toDto()).get();
   }
@@ -64,9 +63,7 @@ class DriftLocalAlbumRepository extends DriftDatabaseRepository {
     final assetsToDelete = CurrentPlatform.isIOS ? await _getUniqueAssetsInAlbum(albumId) : await getAssetIds(albumId);
     await _deleteAssets(assetsToDelete);
 
-    await _db.managers.localAlbumEntity
-        .filter((a) => a.id.equals(albumId) & a.backupSelection.equals(BackupSelection.none))
-        .delete();
+    await _db.managers.localAlbumEntity.filter((a) => a.id.equals(albumId) & a.backupSelection.equals(.none)).delete();
   });
 
   Future<void> syncDeletes(String albumId, Iterable<String> assetIdsToKeep) async {
@@ -122,7 +119,7 @@ class DriftLocalAlbumRepository extends DriftDatabaseRepository {
         await _upsertAssets(toUpsert);
         await _db.localAlbumAssetEntity.insertAll(
           toUpsert.map((a) => LocalAlbumAssetEntityCompanion.insert(assetId: a.id, albumId: localAlbum.id)),
-          mode: InsertMode.insertOrIgnore,
+          mode: .insertOrIgnore,
         );
       }
       await _removeAssets(localAlbum.id, toDelete);
@@ -178,9 +175,7 @@ class DriftLocalAlbumRepository extends DriftDatabaseRepository {
       }
 
       // Only remove albums that are not explicitly selected or excluded from backups
-      await _db.localAlbumEntity.deleteWhere(
-        (f) => f.marker_.isNotNull() & f.backupSelection.equalsValue(BackupSelection.none),
-      );
+      await _db.localAlbumEntity.deleteWhere((f) => f.marker_.isNotNull() & f.backupSelection.equalsValue(.none));
     });
   }
 

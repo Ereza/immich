@@ -9,9 +9,9 @@ import 'package:immich_mobile/infrastructure/utils/drift_default.mixin.dart';
 class RemoteAlbumAssetEntity extends Table with DriftDefaultsMixin {
   const RemoteAlbumAssetEntity();
 
-  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: .cascade)();
 
-  TextColumn get albumId => text().references(RemoteAlbumEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get albumId => text().references(RemoteAlbumEntity, #id, onDelete: .cascade)();
 
   @override
   Set<Column> get primaryKey => {assetId, albumId};

@@ -26,7 +26,7 @@ class ConfirmDialog extends StatelessWidget {
     }
 
     return AlertDialog(
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
       title: Text(title).tr(),
       content: Text(content).tr(),
       actions: [
@@ -34,14 +34,14 @@ class ConfirmDialog extends StatelessWidget {
           onPressed: () => context.pop(false),
           child: Text(
             cancel,
-            style: TextStyle(color: context.primaryColor, fontWeight: FontWeight.bold),
+            style: TextStyle(color: context.primaryColor, fontWeight: .bold),
           ).tr(),
         ),
         TextButton(
           onPressed: onOkPressed,
           child: Text(
             ok,
-            style: TextStyle(color: context.colorScheme.error, fontWeight: FontWeight.bold),
+            style: TextStyle(color: context.colorScheme.error, fontWeight: .bold),
           ).tr(),
         ),
       ],

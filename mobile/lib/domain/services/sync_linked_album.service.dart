@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/album/local_album.model.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/services/store.service.dart';
 import 'package:immich_mobile/infrastructure/repositories/local_album.repository.dart';
 import 'package:immich_mobile/infrastructure/repositories/remote_album.repository.dart';
@@ -121,7 +120,7 @@ class SyncLinkedAlbumService {
     dPrint(() => "Creating new remote album for local album: ${localAlbum.name}");
     final newRemoteAlbum = await _albumApiRepository.createDriftAlbum(
       localAlbum.name,
-      _storeService.get(StoreKey.currentUser),
+      _storeService.get(.currentUser),
       assetIds: [],
     );
     await _remoteAlbumRepository.create(newRemoteAlbum, []);

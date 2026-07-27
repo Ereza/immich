@@ -12,7 +12,7 @@ class AssetEditEntity extends Table with DriftDefaultsMixin {
 
   TextColumn get id => text()();
 
-  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get assetId => text().references(RemoteAssetEntity, #id, onDelete: .cascade)();
 
   IntColumn get action => intEnum<AssetEditAction>()();
 
@@ -31,10 +31,10 @@ final JsonTypeConverter2<Map<String, Object?>, Uint8List, Object?> editParameter
 extension AssetEditEntityDataDomainEx on AssetEditEntityData {
   AssetEdit? toDto() {
     return switch (action) {
-      AssetEditAction.crop => CropParameters.fromJson(parameters)?.let(CropEdit.new),
-      AssetEditAction.rotate => RotateParameters.fromJson(parameters)?.let(RotateEdit.new),
-      AssetEditAction.mirror => MirrorParameters.fromJson(parameters)?.let(MirrorEdit.new),
-      AssetEditAction.other => null,
+      .crop => CropParameters.fromJson(parameters)?.let(CropEdit.new),
+      .rotate => RotateParameters.fromJson(parameters)?.let(RotateEdit.new),
+      .mirror => MirrorParameters.fromJson(parameters)?.let(MirrorEdit.new),
+      .other => null,
     };
   }
 }

@@ -16,19 +16,19 @@ class AppLogDetailPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     buildTextWithCopyButton(String header, String text) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const .all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: .spaceBetween,
+              crossAxisAlignment: .center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const .only(bottom: 8.0),
                   child: Text(
                     header,
-                    style: TextStyle(fontSize: 12.0, color: context.primaryColor, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 12.0, color: context.primaryColor, fontWeight: .bold),
                   ),
                 ),
                 IconButton(
@@ -51,13 +51,13 @@ class AppLogDetailPage extends HookConsumerWidget {
             Container(
               decoration: BoxDecoration(
                 color: context.colorScheme.surfaceContainerHigh,
-                borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                borderRadius: const .all(.circular(15.0)),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: SelectableText(
                   text,
-                  style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, fontFamily: "GoogleSansCode"),
+                  style: const TextStyle(fontSize: 12.0, fontWeight: .bold, fontFamily: "GoogleSansCode"),
                 ),
               ),
             ),
@@ -68,27 +68,27 @@ class AppLogDetailPage extends HookConsumerWidget {
 
     buildLogContext(String logger) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const .all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const .only(bottom: 8.0),
               child: Text(
                 "FROM",
-                style: TextStyle(fontSize: 12.0, color: context.primaryColor, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 12.0, color: context.primaryColor, fontWeight: .bold),
               ),
             ),
             Container(
               decoration: BoxDecoration(
                 color: context.colorScheme.surfaceContainerHigh,
-                borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                borderRadius: const .all(.circular(15.0)),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const .all(8.0),
                 child: SelectableText(
                   logger.toString(),
-                  style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, fontFamily: "GoogleSansCode"),
+                  style: const TextStyle(fontSize: 12.0, fontWeight: .bold, fontFamily: "GoogleSansCode"),
                 ),
               ),
             ),

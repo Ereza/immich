@@ -24,13 +24,13 @@ import 'package:immich_mobile/pages/common/splash_screen.page.dart';
 import 'package:immich_mobile/platform/background_worker_lock_api.g.dart';
 import 'package:immich_mobile/providers/app_life_cycle.provider.dart';
 import 'package:immich_mobile/providers/asset_viewer/share_intent_upload.provider.dart';
-import 'package:immich_mobile/providers/view_intent/view_intent_handler.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/db.provider.dart';
-import 'package:immich_mobile/providers/infrastructure/settings.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/platform.provider.dart';
+import 'package:immich_mobile/providers/infrastructure/settings.provider.dart';
 import 'package:immich_mobile/providers/locale_provider.dart';
 import 'package:immich_mobile/providers/routes.provider.dart';
 import 'package:immich_mobile/providers/theme.provider.dart';
+import 'package:immich_mobile/providers/view_intent/view_intent_handler.provider.dart';
 import 'package:immich_mobile/routing/app_navigation_observer.dart';
 import 'package:immich_mobile/routing/router.dart';
 import 'package:immich_mobile/services/deep_link.service.dart';
@@ -119,31 +119,31 @@ class ImmichApp extends ConsumerStatefulWidget {
   const ImmichApp({super.key});
 
   @override
-  ImmichAppState createState() => ImmichAppState();
+  ImmichAppState createState() => .new();
 }
 
 class ImmichAppState extends ConsumerState<ImmichApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
-      case AppLifecycleState.resumed:
+      case .resumed:
         dPrint(() => "[APP STATE] resumed");
         ref.read(appStateProvider.notifier).handleAppResume();
         unawaited(ref.read(viewIntentHandlerProvider).onAppResumed());
         break;
-      case AppLifecycleState.inactive:
+      case .inactive:
         dPrint(() => "[APP STATE] inactive");
         ref.read(appStateProvider.notifier).handleAppInactivity();
         break;
-      case AppLifecycleState.paused:
+      case .paused:
         dPrint(() => "[APP STATE] paused");
         ref.read(appStateProvider.notifier).handleAppPause();
         break;
-      case AppLifecycleState.detached:
+      case .detached:
         dPrint(() => "[APP STATE] detached");
         ref.read(appStateProvider.notifier).handleAppDetached();
         break;
-      case AppLifecycleState.hidden:
+      case .hidden:
         dPrint(() => "[APP STATE] hidden");
         ref.read(appStateProvider.notifier).handleAppHidden();
         break;
@@ -154,7 +154,7 @@ class ImmichAppState extends ConsumerState<ImmichApp> with WidgetsBindingObserve
     WidgetsBinding.instance.addObserver(this);
 
     // Draw the app from edge to edge
-    unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
+    unawaited(SystemChrome.setEnabledSystemUIMode(.edgeToEdge));
 
     // Sets the navigation bar color
     SystemUiOverlayStyle overlayStyle = const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent);
@@ -162,7 +162,7 @@ class ImmichAppState extends ConsumerState<ImmichApp> with WidgetsBindingObserve
       // Android 8 does not support transparent app bars
       final info = await DeviceInfoPlugin().androidInfo;
       if (info.version.sdkInt <= 26) {
-        overlayStyle = context.isDarkTheme ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light;
+        overlayStyle = context.isDarkTheme ? .dark : .light;
       }
     }
     SystemChrome.setSystemUIOverlayStyle(overlayStyle);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -22,17 +21,17 @@ class OpenInBrowserActionButton extends ConsumerWidget {
   });
 
   void _onTap() async {
-    final serverEndpoint = Store.get(StoreKey.serverEndpoint).replaceFirst('/api', '');
+    final serverEndpoint = Store.get(.serverEndpoint).replaceFirst('/api', '');
 
     String originPath = '';
     switch (origin) {
-      case TimelineOrigin.favorite:
+      case .favorite:
         originPath = '/favorites';
         break;
-      case TimelineOrigin.trash:
+      case .trash:
         originPath = '/trash';
         break;
-      case TimelineOrigin.archive:
+      case .archive:
         originPath = '/archive';
         break;
       default:
@@ -41,7 +40,7 @@ class OpenInBrowserActionButton extends ConsumerWidget {
 
     final url = '$serverEndpoint$originPath/photos/$remoteId';
     if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+      await launchUrl(Uri.parse(url), mode: .externalApplication);
     }
   }
 

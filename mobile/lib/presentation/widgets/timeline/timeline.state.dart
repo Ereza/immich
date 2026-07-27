@@ -80,7 +80,7 @@ class TimelineStateNotifier extends Notifier<TimelineState> {
   }
 
   @override
-  TimelineState build() => const TimelineState(isScrubbing: false, isScrolling: false);
+  TimelineState build() => const .new(isScrubbing: false, isScrolling: false);
 }
 
 // This provider watches the buckets from the timeline service & args and serves the segments.

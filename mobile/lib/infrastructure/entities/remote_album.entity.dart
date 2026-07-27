@@ -16,8 +16,7 @@ class RemoteAlbumEntity extends Table with DriftDefaultsMixin {
 
   DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
 
-  TextColumn get thumbnailAssetId =>
-      text().references(RemoteAssetEntity, #id, onDelete: KeyAction.setNull).nullable()();
+  TextColumn get thumbnailAssetId => text().references(RemoteAssetEntity, #id, onDelete: .setNull).nullable()();
 
   BoolColumn get isActivityEnabled => boolean().withDefault(const Constant(true))();
 

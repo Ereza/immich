@@ -121,7 +121,7 @@ class PhotoViewControllerValue {
 /// For details of fields and methods, check [PhotoViewControllerBase].
 ///
 class PhotoViewController implements PhotoViewControllerBase<PhotoViewControllerValue> {
-  PhotoViewController({Offset initialPosition = Offset.zero, double initialRotation = 0.0, double? initialScale})
+  PhotoViewController({Offset initialPosition = .zero, double initialRotation = 0.0, double? initialScale})
     : _valueNotifier = IgnorableValueNotifier(
         PhotoViewControllerValue(
           position: initialPosition,

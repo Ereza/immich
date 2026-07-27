@@ -5,7 +5,7 @@ class ImageConfig {
   const ImageConfig({this.preferRemote = false, this.loadOriginal = false});
 
   ImageConfig copyWith({bool? preferRemote, bool? loadOriginal}) =>
-      ImageConfig(preferRemote: preferRemote ?? this.preferRemote, loadOriginal: loadOriginal ?? this.loadOriginal);
+      .new(preferRemote: preferRemote ?? this.preferRemote, loadOriginal: loadOriginal ?? this.loadOriginal);
 
   @override
   bool operator ==(Object other) =>

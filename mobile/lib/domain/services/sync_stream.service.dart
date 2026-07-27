@@ -65,7 +65,7 @@ class SyncStreamService {
 
     final serverSemVer = SemVer(major: serverVersion.major, minor: serverVersion.minor, patch: serverVersion.patch_);
 
-    final value = Store.get(StoreKey.syncMigrationStatus, "[]");
+    final value = Store.get(.syncMigrationStatus, "[]");
     final migrations = (jsonDecode(value) as List).cast<String>();
     int previousLength = migrations.length;
     await _runPreSyncTasks(migrations, serverSemVer);
@@ -106,17 +106,17 @@ class SyncStreamService {
   Future<void> _runPreSyncTasks(List<String> migrations, SemVer semVer) async {
     if (!migrations.contains(SyncMigrationTask.v20260701_ResetAlbumsV1.name)) {
       _logger.info("Running pre-sync task: v20260701_ResetAlbumsV1");
-      await _syncApiRepository.deleteSyncAck([SyncEntityType.albumV1]);
+      await _syncApiRepository.deleteSyncAck([.albumV1]);
       migrations.add(SyncMigrationTask.v20260701_ResetAlbumsV1.name);
     }
 
     if (!migrations.contains(SyncMigrationTask.v20260128_ResetExifV1.name)) {
       _logger.info("Running pre-sync task: v20260128_ResetExifV1");
       await _syncApiRepository.deleteSyncAck([
-        SyncEntityType.assetExifV1,
-        SyncEntityType.partnerAssetExifV1,
-        SyncEntityType.albumAssetExifCreateV1,
-        SyncEntityType.albumAssetExifUpdateV1,
+        .assetExifV1,
+        .partnerAssetExifV1,
+        .albumAssetExifCreateV1,
+        .albumAssetExifUpdateV1,
       ]);
       migrations.add(SyncMigrationTask.v20260128_ResetExifV1.name);
     }
@@ -124,12 +124,7 @@ class SyncStreamService {
     if (!migrations.contains(SyncMigrationTask.v20260128_ResetAssetV1.name) &&
         semVer >= const SemVer(major: 2, minor: 5, patch: 0)) {
       _logger.info("Running pre-sync task: v20260128_ResetAssetV1");
-      await _syncApiRepository.deleteSyncAck([
-        SyncEntityType.assetV1,
-        SyncEntityType.partnerAssetV1,
-        SyncEntityType.albumAssetCreateV1,
-        SyncEntityType.albumAssetUpdateV1,
-      ]);
+      await _syncApiRepository.deleteSyncAck([.assetV1, .partnerAssetV1, .albumAssetCreateV1, .albumAssetUpdateV1]);
 
       migrations.add(SyncMigrationTask.v20260128_ResetAssetV1.name);
 
@@ -141,7 +136,7 @@ class SyncStreamService {
     if (!migrations.contains(SyncMigrationTask.v20260597_ResetAssetV1AssetV2.name) &&
         semVer > const SemVer(major: 2, minor: 7, patch: 5)) {
       _logger.info("Running pre-sync task: v20260597_ResetAssetV1AssetV2");
-      await _syncApiRepository.deleteSyncAck([SyncEntityType.assetV1, SyncEntityType.assetV2]);
+      await _syncApiRepository.deleteSyncAck([.assetV1, .assetV2]);
       migrations.add(SyncMigrationTask.v20260597_ResetAssetV1AssetV2.name);
     }
   }
@@ -167,7 +162,7 @@ class SyncStreamService {
         await _processBatch(items);
       }
 
-      if (event.type == SyncEntityType.syncResetV1) {
+      if (event.type == .syncResetV1) {
         reset();
       }
 
@@ -191,142 +186,142 @@ class SyncStreamService {
   Future<void> _handleSyncData(SyncEntityType type, Iterable<Object> data) async {
     _logger.fine("Processing sync data for $type of length ${data.length}");
     switch (type) {
-      case SyncEntityType.authUserV1:
+      case .authUserV1:
         return _syncStreamRepository.updateAuthUsersV1(data.cast());
-      case SyncEntityType.userV1:
+      case .userV1:
         return _syncStreamRepository.updateUsersV1(data.cast());
-      case SyncEntityType.userDeleteV1:
+      case .userDeleteV1:
         return _syncStreamRepository.deleteUsersV1(data.cast());
-      case SyncEntityType.partnerV1:
+      case .partnerV1:
         return _syncStreamRepository.updatePartnerV1(data.cast());
-      case SyncEntityType.partnerDeleteV1:
+      case .partnerDeleteV1:
         return _syncStreamRepository.deletePartnerV1(data.cast());
-      case SyncEntityType.assetV1:
+      case .assetV1:
         final remoteSyncAssets = data.cast<SyncAssetV1>();
         await _syncStreamRepository.updateAssetsV1(remoteSyncAssets);
-        if (CurrentPlatform.isAndroid && Store.get(StoreKey.manageLocalMediaAndroid, false)) {
+        if (CurrentPlatform.isAndroid && Store.get(.manageLocalMediaAndroid, false)) {
           await _syncAssetTrashStatus(remoteSyncAssets.where((e) => e.deletedAt != null).map((e) => e.id).toList());
         }
         return;
-      case SyncEntityType.assetV2:
+      case .assetV2:
         final remoteSyncAssets = data.cast<SyncAssetV2>();
         await _syncStreamRepository.updateAssetsV2(remoteSyncAssets);
-        if (CurrentPlatform.isAndroid && Store.get(StoreKey.manageLocalMediaAndroid, false)) {
+        if (CurrentPlatform.isAndroid && Store.get(.manageLocalMediaAndroid, false)) {
           await _syncAssetTrashStatus(remoteSyncAssets.where((e) => e.deletedAt != null).map((e) => e.id).toList());
         }
         return;
-      case SyncEntityType.assetDeleteV1:
+      case .assetDeleteV1:
         final remoteSyncAssets = data.cast<SyncAssetDeleteV1>();
-        if (CurrentPlatform.isAndroid && Store.get(StoreKey.manageLocalMediaAndroid, false)) {
+        if (CurrentPlatform.isAndroid && Store.get(.manageLocalMediaAndroid, false)) {
           await _syncAssetDeletion(remoteSyncAssets.map((e) => e.assetId).toList());
         }
         return _syncStreamRepository.deleteAssetsV1(remoteSyncAssets);
-      case SyncEntityType.assetExifV1:
+      case .assetExifV1:
         return _syncStreamRepository.updateAssetsExifV1(data.cast());
-      case SyncEntityType.assetEditV1:
+      case .assetEditV1:
         return _syncStreamRepository.updateAssetEditsV1(data.cast());
-      case SyncEntityType.assetEditDeleteV1:
+      case .assetEditDeleteV1:
         return _syncStreamRepository.deleteAssetEditsV1(data.cast());
-      case SyncEntityType.assetMetadataV1:
+      case .assetMetadataV1:
         return _syncStreamRepository.updateAssetsMetadataV1(data.cast());
-      case SyncEntityType.assetMetadataDeleteV1:
+      case .assetMetadataDeleteV1:
         return _syncStreamRepository.deleteAssetsMetadataV1(data.cast());
-      case SyncEntityType.partnerAssetV1:
+      case .partnerAssetV1:
         return _syncStreamRepository.updateAssetsV1(data.cast(), debugLabel: 'partner');
-      case SyncEntityType.partnerAssetV2:
+      case .partnerAssetV2:
         return _syncStreamRepository.updateAssetsV2(data.cast(), debugLabel: 'partner');
-      case SyncEntityType.partnerAssetBackfillV1:
+      case .partnerAssetBackfillV1:
         return _syncStreamRepository.updateAssetsV1(data.cast(), debugLabel: 'partner backfill');
-      case SyncEntityType.partnerAssetBackfillV2:
+      case .partnerAssetBackfillV2:
         return _syncStreamRepository.updateAssetsV2(data.cast(), debugLabel: 'partner backfill');
-      case SyncEntityType.partnerAssetDeleteV1:
+      case .partnerAssetDeleteV1:
         return _syncStreamRepository.deleteAssetsV1(data.cast(), debugLabel: "partner");
-      case SyncEntityType.partnerAssetExifV1:
+      case .partnerAssetExifV1:
         return _syncStreamRepository.updateAssetsExifV1(data.cast(), debugLabel: 'partner');
-      case SyncEntityType.partnerAssetExifBackfillV1:
+      case .partnerAssetExifBackfillV1:
         return _syncStreamRepository.updateAssetsExifV1(data.cast(), debugLabel: 'partner backfill');
-      case SyncEntityType.albumV1:
+      case .albumV1:
         return _syncStreamRepository.updateAlbumsV1(data.cast());
-      case SyncEntityType.albumV2:
+      case .albumV2:
         return _syncStreamRepository.updateAlbumsV2(data.cast());
-      case SyncEntityType.albumDeleteV1:
+      case .albumDeleteV1:
         return _syncStreamRepository.deleteAlbumsV1(data.cast());
-      case SyncEntityType.albumUserV1:
+      case .albumUserV1:
         return _syncStreamRepository.updateAlbumUsersV1(data.cast());
-      case SyncEntityType.albumUserBackfillV1:
+      case .albumUserBackfillV1:
         return _syncStreamRepository.updateAlbumUsersV1(data.cast(), debugLabel: 'backfill');
-      case SyncEntityType.albumUserDeleteV1:
+      case .albumUserDeleteV1:
         return _syncStreamRepository.deleteAlbumUsersV1(data.cast());
-      case SyncEntityType.albumAssetCreateV1:
+      case .albumAssetCreateV1:
         return _syncStreamRepository.updateAssetsV1(data.cast(), debugLabel: 'album asset create');
-      case SyncEntityType.albumAssetCreateV2:
+      case .albumAssetCreateV2:
         return _syncStreamRepository.updateAssetsV2(data.cast(), debugLabel: 'album asset create');
-      case SyncEntityType.albumAssetUpdateV1:
+      case .albumAssetUpdateV1:
         return _syncStreamRepository.updateAssetsV1(data.cast(), debugLabel: 'album asset update');
-      case SyncEntityType.albumAssetUpdateV2:
+      case .albumAssetUpdateV2:
         return _syncStreamRepository.updateAssetsV2(data.cast(), debugLabel: 'album asset update');
-      case SyncEntityType.albumAssetBackfillV1:
+      case .albumAssetBackfillV1:
         return _syncStreamRepository.updateAssetsV1(data.cast(), debugLabel: 'album asset backfill');
-      case SyncEntityType.albumAssetBackfillV2:
+      case .albumAssetBackfillV2:
         return _syncStreamRepository.updateAssetsV2(data.cast(), debugLabel: 'album asset backfill');
-      case SyncEntityType.albumAssetExifCreateV1:
+      case .albumAssetExifCreateV1:
         return _syncStreamRepository.updateAssetsExifV1(data.cast(), debugLabel: 'album asset exif create');
-      case SyncEntityType.albumAssetExifUpdateV1:
+      case .albumAssetExifUpdateV1:
         return _syncStreamRepository.updateAssetsExifV1(data.cast(), debugLabel: 'album asset exif update');
-      case SyncEntityType.albumAssetExifBackfillV1:
+      case .albumAssetExifBackfillV1:
         return _syncStreamRepository.updateAssetsExifV1(data.cast(), debugLabel: 'album asset exif backfill');
-      case SyncEntityType.albumToAssetV1:
+      case .albumToAssetV1:
         return _syncStreamRepository.updateAlbumToAssetsV1(data.cast());
-      case SyncEntityType.albumToAssetBackfillV1:
+      case .albumToAssetBackfillV1:
         return _syncStreamRepository.updateAlbumToAssetsV1(data.cast(), debugLabel: 'backfill');
-      case SyncEntityType.albumToAssetDeleteV1:
+      case .albumToAssetDeleteV1:
         return _syncStreamRepository.deleteAlbumToAssetsV1(data.cast());
       // No-op. SyncAckV1 entities are checkpoints in the sync stream
       // to acknowledge that the client has processed all the backfill events
-      case SyncEntityType.syncAckV1:
+      case .syncAckV1:
         return;
       // SyncCompleteV1 is used to signal the completion of the sync process. Cleanup stale assets and signal completion
-      case SyncEntityType.syncCompleteV1:
+      case .syncCompleteV1:
         return;
       // return _syncStreamRepository.pruneAssets();
       // Request to reset the client state. Clear everything related to remote entities
-      case SyncEntityType.syncResetV1:
+      case .syncResetV1:
         return _syncStreamRepository.reset();
-      case SyncEntityType.memoryV1:
+      case .memoryV1:
         return _syncStreamRepository.updateMemoriesV1(data.cast());
-      case SyncEntityType.memoryDeleteV1:
+      case .memoryDeleteV1:
         return _syncStreamRepository.deleteMemoriesV1(data.cast());
-      case SyncEntityType.memoryToAssetV1:
+      case .memoryToAssetV1:
         return _syncStreamRepository.updateMemoryAssetsV1(data.cast());
-      case SyncEntityType.memoryToAssetDeleteV1:
+      case .memoryToAssetDeleteV1:
         return _syncStreamRepository.deleteMemoryAssetsV1(data.cast());
-      case SyncEntityType.stackV1:
+      case .stackV1:
         return _syncStreamRepository.updateStacksV1(data.cast());
-      case SyncEntityType.stackDeleteV1:
+      case .stackDeleteV1:
         return _syncStreamRepository.deleteStacksV1(data.cast());
-      case SyncEntityType.partnerStackV1:
+      case .partnerStackV1:
         return _syncStreamRepository.updateStacksV1(data.cast(), debugLabel: 'partner');
-      case SyncEntityType.partnerStackBackfillV1:
+      case .partnerStackBackfillV1:
         return _syncStreamRepository.updateStacksV1(data.cast(), debugLabel: 'partner backfill');
-      case SyncEntityType.partnerStackDeleteV1:
+      case .partnerStackDeleteV1:
         return _syncStreamRepository.deleteStacksV1(data.cast(), debugLabel: 'partner');
-      case SyncEntityType.userMetadataV1:
+      case .userMetadataV1:
         return _syncStreamRepository.updateUserMetadatasV1(data.cast());
-      case SyncEntityType.userMetadataDeleteV1:
+      case .userMetadataDeleteV1:
         return _syncStreamRepository.deleteUserMetadatasV1(data.cast());
-      case SyncEntityType.personV1:
+      case .personV1:
         return _syncStreamRepository.updatePeopleV1(data.cast());
-      case SyncEntityType.personDeleteV1:
+      case .personDeleteV1:
         return _syncStreamRepository.deletePeopleV1(data.cast());
-      case SyncEntityType.assetFaceV1:
+      case .assetFaceV1:
         return _syncStreamRepository.updateAssetFacesV1(data.cast());
-      case SyncEntityType.assetFaceV2:
+      case .assetFaceV2:
         return _syncStreamRepository.updateAssetFacesV2(data.cast());
-      case SyncEntityType.assetFaceDeleteV1:
+      case .assetFaceDeleteV1:
         return _syncStreamRepository.deleteAssetFacesV1(data.cast());
-      case SyncEntityType.assetOcrV1:
+      case .assetOcrV1:
         return _syncStreamRepository.updateAssetOcrV1(data.cast());
-      case SyncEntityType.assetOcrDeleteV1:
+      case .assetOcrDeleteV1:
         return _syncStreamRepository.deleteAssetOcrV1(data.cast());
     }
   }

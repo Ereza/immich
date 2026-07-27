@@ -24,8 +24,8 @@ class BackupInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20), // if you need this
+        borderRadius: const .all(
+          .circular(20), // if you need this
         ),
         side: BorderSide(color: context.colorScheme.outlineVariant, width: 1),
       ),
@@ -38,14 +38,14 @@ class BackupInfoCard extends StatelessWidget {
             isThreeLine: true,
             title: Text(title, style: context.textTheme.titleMedium),
             subtitle: Padding(
-              padding: const EdgeInsets.only(top: 4.0, right: 18.0),
+              padding: const .only(top: 4.0, right: 18.0),
               child: Text(
                 subtitle,
                 style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceSecondary),
               ),
             ),
             trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 Stack(
                   children: [
@@ -59,7 +59,7 @@ class BackupInfoCard extends StatelessWidget {
                     if (isLoading)
                       Positioned.fill(
                         child: Align(
-                          alignment: Alignment.center,
+                          alignment: .center,
                           child: SizedBox(
                             width: 16,
                             height: 16,
@@ -86,10 +86,10 @@ class BackupInfoCard extends StatelessWidget {
             const Divider(height: 0),
             ListTile(
               enableFeedback: true,
-              visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
+              visualDensity: .compact,
+              contentPadding: const .symmetric(horizontal: 16.0, vertical: 0.0),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                borderRadius: .only(bottomLeft: .circular(20), bottomRight: .circular(20)),
               ),
               onTap: onTap,
               title: Text(

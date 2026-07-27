@@ -18,9 +18,10 @@ List<InlineSpan> _getContentSpans(WidgetTester tester) {
 
 TextSpan _findSpan(List<InlineSpan> spans, String text) {
   return spans.firstWhere(
-    (span) => span is TextSpan && span.text == text,
-    orElse: () => throw StateError('No span found with text: "$text"'),
-  ) as TextSpan;
+        (span) => span is TextSpan && span.text == text,
+        orElse: () => throw StateError('No span found with text: "$text"'),
+      )
+      as TextSpan;
 }
 
 String _concatenateText(List<InlineSpan> spans) {
@@ -37,9 +38,7 @@ void _triggerTap(TextSpan span) {
 void main() {
   group('ImmichFormattedText', () {
     testWidgets('renders plain text without HTML tags', (tester) async {
-      await tester.pumpTestWidget(
-        const ImmichFormattedText('This is plain text'),
-      );
+      await tester.pumpTestWidget(const ImmichFormattedText('This is plain text'));
 
       expect(find.text('This is plain text'), findsOneWidget);
     });
@@ -48,13 +47,10 @@ void main() {
       await tester.pumpTestWidget(
         const ImmichFormattedText(
           'Test text',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.purple,
-          ),
-          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16, color: Colors.purple),
+          textAlign: .center,
           maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          overflow: .ellipsis,
         ),
       );
 
@@ -69,9 +65,7 @@ void main() {
     });
 
     testWidgets('handles text with special characters', (tester) async {
-      await tester.pumpTestWidget(
-        const ImmichFormattedText('Text with & < > " \' characters'),
-      );
+      await tester.pumpTestWidget(const ImmichFormattedText('Text with & < > " \' characters'));
 
       expect(find.byType(RichText), findsOneWidget);
 
@@ -81,9 +75,7 @@ void main() {
 
     group('bold', () {
       testWidgets('renders bold text with <b> tag', (tester) async {
-        await tester.pumpTestWidget(
-          const ImmichFormattedText('This is <b>bold</b> text'),
-        );
+        await tester.pumpTestWidget(const ImmichFormattedText('This is <b>bold</b> text'));
 
         final spans = _getContentSpans(tester);
         final boldSpan = _findSpan(spans, 'bold');
@@ -98,7 +90,12 @@ void main() {
         await tester.pumpTestWidget(
           ImmichFormattedText(
             'This is a <link>custom link</link> text',
-            spanBuilder: (tag) => FormattedSpan(onTap: switch (tag) { 'link' => () {}, _ => null }),
+            spanBuilder: (tag) => FormattedSpan(
+              onTap: switch (tag) {
+                'link' => () {},
+                _ => null,
+              },
+            ),
           ),
         );
 
@@ -115,7 +112,12 @@ void main() {
         await tester.pumpTestWidget(
           ImmichFormattedText(
             'Tap <link>here</link>',
-            spanBuilder: (tag) => FormattedSpan(onTap: switch (tag) { 'link' => () => linkTapped = true, _ => null }),
+            spanBuilder: (tag) => FormattedSpan(
+              onTap: switch (tag) {
+                'link' => () => linkTapped = true,
+                _ => null,
+              },
+            ),
           ),
         );
 
@@ -131,11 +133,13 @@ void main() {
         await tester.pumpTestWidget(
           ImmichFormattedText(
             'Refer to <docs-link>docs</docs-link> and <other-link>other</other-link>',
-            spanBuilder: (tag) => FormattedSpan(onTap: switch (tag) {
-              'docs-link' => () {},
-              'other-link' => () {},
-              _ => null,
-            },),
+            spanBuilder: (tag) => FormattedSpan(
+              onTap: switch (tag) {
+                'docs-link' => () {},
+                'other-link' => () {},
+                _ => null,
+              },
+            ),
           ),
         );
 
@@ -148,10 +152,7 @@ void main() {
       });
 
       testWidgets('applies custom link style', (tester) async {
-        const customLinkStyle = TextStyle(
-          color: Colors.red,
-          decoration: TextDecoration.overline,
-        );
+        const customLinkStyle = TextStyle(color: Colors.red, decoration: .overline);
 
         await tester.pumpTestWidget(
           ImmichFormattedText(
@@ -171,7 +172,12 @@ void main() {
         await tester.pumpTestWidget(
           ImmichFormattedText(
             'Link without handler: <link>click me</link>',
-            spanBuilder: (tag) => FormattedSpan(onTap: switch (tag) { 'other-link' => () {}, _ => null }),
+            spanBuilder: (tag) => FormattedSpan(
+              onTap: switch (tag) {
+                'other-link' => () {},
+                _ => null,
+              },
+            ),
           ),
         );
 
@@ -189,11 +195,13 @@ void main() {
         await tester.pumpTestWidget(
           ImmichFormattedText(
             'Go to <docs-link>docs</docs-link> or <help-link>help</help-link>',
-            spanBuilder: (tag) => FormattedSpan(onTap: switch (tag) {
-              'docs-link' => () => firstLinkTapped = true,
-              'help-link' => () => secondLinkTapped = true,
-              _ => null,
-            },),
+            spanBuilder: (tag) => FormattedSpan(
+              onTap: switch (tag) {
+                'docs-link' => () => firstLinkTapped = true,
+                'help-link' => () => secondLinkTapped = true,
+                _ => null,
+              },
+            ),
           ),
         );
 

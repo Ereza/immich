@@ -19,7 +19,7 @@ class FadeInPlaceholderImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Stack(
-        fit: StackFit.expand,
+        fit: .expand,
         children: [
           placeholder,
           FadeInImage(fadeInDuration: duration, image: image, fit: fit, placeholder: MemoryImage(kTransparentImage)),

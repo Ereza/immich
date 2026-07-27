@@ -38,13 +38,13 @@ class _DriftLockedFolderPageState extends ConsumerState<DriftLockedFolderPage> w
     if (!mounted) {
       return;
     }
-    if (state == AppLifecycleState.paused) {
+    if (state == .paused) {
       ref.read(authProvider.notifier).lockPinCode();
       context.navigateTo(const TabShellRoute());
       return;
     }
     setState(() {
-      _showOverlay = state != AppLifecycleState.resumed;
+      _showOverlay = state != .resumed;
     });
   }
 

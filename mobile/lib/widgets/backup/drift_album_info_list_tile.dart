@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
@@ -17,8 +16,8 @@ class DriftAlbumInfoListTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isSelected = album.backupSelection == BackupSelection.selected;
-    final bool isExcluded = album.backupSelection == BackupSelection.excluded;
+    final bool isSelected = album.backupSelection == .selected;
+    final bool isExcluded = album.backupSelection == .excluded;
 
     buildTileColor() {
       if (isSelected) {
@@ -60,8 +59,8 @@ class DriftAlbumInfoListTile extends HookConsumerWidget {
             ImmichToast.show(
               context: context,
               msg: 'Cannot exclude album contains all assets',
-              toastType: ToastType.error,
-              gravity: ToastGravity.BOTTOM,
+              toastType: .error,
+              gravity: .BOTTOM,
             );
             return;
           }
@@ -71,7 +70,7 @@ class DriftAlbumInfoListTile extends HookConsumerWidget {
       },
       child: ListTile(
         tileColor: buildTileColor(),
-        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        contentPadding: const .symmetric(vertical: 8, horizontal: 16),
         onTap: () {
           ref.read(hapticFeedbackProvider.notifier).selectionClick();
           if (isSelected) {

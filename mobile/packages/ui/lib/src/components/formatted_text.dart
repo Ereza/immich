@@ -115,9 +115,9 @@ class _ImmichFormattedTextState extends State<ImmichFormattedText> {
   }
 
   TextStyle? _defaultTextStyle(String tag) => switch (tag) {
-    'b' => const TextStyle(fontWeight: FontWeight.bold),
-    'link' => const TextStyle(decoration: TextDecoration.underline),
-    _ when tag.endsWith('-link') => const TextStyle(decoration: TextDecoration.underline),
+    'b' => const .new(fontWeight: .bold),
+    'link' => const .new(decoration: .underline),
+    _ when tag.endsWith('-link') => const .new(decoration: .underline),
     _ => null,
   };
 

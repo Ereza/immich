@@ -20,17 +20,17 @@ class OcrToggleButton extends ConsumerWidget {
       child: !hasOcr
           ? const SizedBox.shrink()
           : Align(
-              alignment: Alignment.centerRight,
+              alignment: .centerRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 32, bottom: 8),
+                padding: const .only(right: 32, bottom: 8),
                 child: Material(
                   color: showingOcr ? context.primaryColor : Colors.black.withValues(alpha: 0.4),
                   shape: const CircleBorder(),
-                  clipBehavior: Clip.antiAlias,
+                  clipBehavior: .antiAlias,
                   child: InkWell(
                     onTap: ref.read(assetViewerProvider.notifier).toggleOcr,
                     child: const Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: .all(10.0),
                       child: Icon(Icons.text_fields_rounded, size: 22, color: Colors.white),
                     ),
                   ),

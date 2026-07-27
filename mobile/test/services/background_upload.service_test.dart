@@ -225,7 +225,7 @@ void main() {
 
   group('Server Info - cloudId and eTag metadata', () {
     test('should include cloudId and eTag metadata on iOS when server version is 2.4+', () async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      debugDefaultTargetPlatformOverride = .iOS;
       addTearDown(() => debugDefaultTargetPlatformOverride = null);
 
       final sutWithV24 = BackgroundUploadService(
@@ -240,14 +240,14 @@ void main() {
       final assetWithCloudId = LocalAsset(
         id: 'test-asset-id',
         name: 'test.jpg',
-        type: AssetType.image,
+        type: .image,
         createdAt: DateTime(2025, 1, 1),
         updatedAt: DateTime(2025, 1, 2),
         cloudId: 'cloud-id-123',
         latitude: 37.7749,
         longitude: -122.4194,
         adjustmentTime: DateTime(2026, 1, 2),
-        playbackStyle: AssetPlaybackStyle.image,
+        playbackStyle: .image,
         isEdited: false,
       );
 
@@ -275,7 +275,7 @@ void main() {
     });
 
     test('should NOT include metadata on Android regardless of server version', () async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      debugDefaultTargetPlatformOverride = .android;
       addTearDown(() => debugDefaultTargetPlatformOverride = null);
 
       final sutAndroid = BackgroundUploadService(
@@ -290,13 +290,13 @@ void main() {
       final assetWithCloudId = LocalAsset(
         id: 'test-asset-id',
         name: 'test.jpg',
-        type: AssetType.image,
+        type: .image,
         createdAt: DateTime(2025, 1, 1),
         updatedAt: DateTime(2025, 1, 2),
         cloudId: 'cloud-id-123',
         latitude: 37.7749,
         longitude: -122.4194,
-        playbackStyle: AssetPlaybackStyle.image,
+        playbackStyle: .image,
         isEdited: false,
       );
 
@@ -315,7 +315,7 @@ void main() {
     });
 
     test('should NOT include metadata when cloudId is null even on iOS with server 2.4+', () async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      debugDefaultTargetPlatformOverride = .iOS;
       addTearDown(() => debugDefaultTargetPlatformOverride = null);
 
       final sutWithV24 = BackgroundUploadService(
@@ -330,11 +330,11 @@ void main() {
       final assetWithoutCloudId = LocalAsset(
         id: 'test-asset-id',
         name: 'test.jpg',
-        type: AssetType.image,
+        type: .image,
         createdAt: DateTime(2025, 1, 1),
         updatedAt: DateTime(2025, 1, 2),
         cloudId: null, // No cloudId
-        playbackStyle: AssetPlaybackStyle.image,
+        playbackStyle: .image,
         isEdited: false,
       );
 
@@ -355,7 +355,7 @@ void main() {
     });
 
     test('should include metadata for live photos with cloudId on iOS 2.4+', () async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      debugDefaultTargetPlatformOverride = .iOS;
       addTearDown(() => debugDefaultTargetPlatformOverride = null);
 
       final sutWithV24 = BackgroundUploadService(
@@ -370,13 +370,13 @@ void main() {
       final assetWithCloudId = LocalAsset(
         id: 'test-livephoto-id',
         name: 'livephoto.heic',
-        type: AssetType.image,
+        type: .image,
         createdAt: DateTime(2025, 1, 1),
         updatedAt: DateTime(2025, 1, 2),
         cloudId: 'cloud-id-livephoto',
         latitude: 37.7749,
         longitude: -122.4194,
-        playbackStyle: AssetPlaybackStyle.image,
+        playbackStyle: .image,
         isEdited: false,
       );
 

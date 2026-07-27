@@ -12,7 +12,7 @@ class PersonEntity extends Table with DriftDefaultsMixin {
 
   DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
 
-  TextColumn get ownerId => text().references(UserEntity, #id, onDelete: KeyAction.cascade)();
+  TextColumn get ownerId => text().references(UserEntity, #id, onDelete: .cascade)();
 
   TextColumn get name => text()();
 

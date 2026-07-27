@@ -17,7 +17,7 @@ class ImageViewerTapToNavigateSetting extends HookConsumerWidget {
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingsSubTitle(title: "setting_image_navigation_title".tr()),
         SettingsSwitchListTile(

@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/infrastructure/repositories/remote_album.repository.dart';
 
 import '../repository_context.dart';
@@ -141,7 +140,7 @@ void main() {
     });
 
     test('returns empty list when albumIds is empty', () async {
-      final result = await sut.getSortedAlbumIds([], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([], aggregation: .start);
       expect(result, isEmpty);
     });
 
@@ -150,7 +149,7 @@ void main() {
       final asset = await ctx.newRemoteAsset(ownerId: userId, createdAt: DateTime(2024, 1, 1));
       await ctx.newRemoteAlbumAsset(albumId: album.id, assetId: asset.id);
 
-      final result = await sut.getSortedAlbumIds([album.id], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([album.id], aggregation: .start);
       expect(result, [album.id]);
     });
 
@@ -176,11 +175,7 @@ void main() {
       await ctx.newRemoteAlbumAsset(albumId: album3.id, assetId: asset5.id);
       await ctx.newRemoteAlbumAsset(albumId: album3.id, assetId: asset6.id);
 
-      final result = await sut.getSortedAlbumIds([
-        album1.id,
-        album2.id,
-        album3.id,
-      ], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([album1.id, album2.id, album3.id], aggregation: .start);
 
       // Expected order: album2 (Jan 5), album1 (Jan 10), album3 (Jan 25)
       expect(result, [album2.id, album1.id, album3.id]);
@@ -208,11 +203,7 @@ void main() {
       await ctx.newRemoteAlbumAsset(albumId: album3.id, assetId: asset5.id);
       await ctx.newRemoteAlbumAsset(albumId: album3.id, assetId: asset6.id);
 
-      final result = await sut.getSortedAlbumIds([
-        album1.id,
-        album2.id,
-        album3.id,
-      ], aggregation: AssetDateAggregation.end);
+      final result = await sut.getSortedAlbumIds([album1.id, album2.id, album3.id], aggregation: .end);
 
       // Expected order: album2 (Jan 15), album1 (Jan 20), album3 (Jan 30)
       expect(result, [album2.id, album1.id, album3.id]);
@@ -227,7 +218,7 @@ void main() {
       final asset2 = await ctx.newRemoteAsset(ownerId: userId, createdAt: DateTime(2024, 1, 10));
       await ctx.newRemoteAlbumAsset(albumId: album2.id, assetId: asset2.id);
 
-      final result = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: .start);
 
       expect(result, [album2.id, album1.id]);
     });
@@ -247,7 +238,7 @@ void main() {
       await ctx.newRemoteAlbumAsset(albumId: album3.id, assetId: asset3.id);
 
       // Only request album1 and album3
-      final result = await sut.getSortedAlbumIds([album1.id, album3.id], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([album1.id, album3.id], aggregation: .start);
 
       // Should only return album1 and album3, not album2
       expect(result, [album1.id, album3.id]);
@@ -264,7 +255,7 @@ void main() {
       final asset2 = await ctx.newRemoteAsset(ownerId: userId, createdAt: sameDate);
       await ctx.newRemoteAlbumAsset(albumId: album2.id, assetId: asset2.id);
 
-      final result = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: .start);
 
       // Both albums have the same date, so both should be returned
       expect(result, hasLength(2));
@@ -284,11 +275,7 @@ void main() {
       final asset3 = await ctx.newRemoteAsset(ownerId: userId, createdAt: DateTime(2025, 1, 1));
       await ctx.newRemoteAlbumAsset(albumId: album3.id, assetId: asset3.id);
 
-      final result = await sut.getSortedAlbumIds([
-        album1.id,
-        album2.id,
-        album3.id,
-      ], aggregation: AssetDateAggregation.start);
+      final result = await sut.getSortedAlbumIds([album1.id, album2.id, album3.id], aggregation: .start);
 
       expect(result, [album1.id, album2.id, album3.id]);
     });
@@ -311,12 +298,12 @@ void main() {
       final asset6 = await ctx.newRemoteAsset(ownerId: userId, createdAt: DateTime(2024, 1, 1));
       await ctx.newRemoteAlbumAsset(albumId: album2.id, assetId: asset6.id);
 
-      final resultStart = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: AssetDateAggregation.start);
+      final resultStart = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: .start);
 
       // album2 (Jan 1) should come before album1 (Jan 5)
       expect(resultStart, [album2.id, album1.id]);
 
-      final resultEnd = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: AssetDateAggregation.end);
+      final resultEnd = await sut.getSortedAlbumIds([album1.id, album2.id], aggregation: .end);
 
       // album2 (Jan 1) should come before album1 (Jan 25)
       expect(resultEnd, [album2.id, album1.id]);

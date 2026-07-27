@@ -22,7 +22,7 @@ class BackupConfig {
     bool? requireCharging,
     int? triggerDelay,
     bool? syncAlbums,
-  }) => BackupConfig(
+  }) => .new(
     enabled: enabled ?? this.enabled,
     useCellularForVideos: useCellularForVideos ?? this.useCellularForVideos,
     useCellularForPhotos: useCellularForPhotos ?? this.useCellularForPhotos,

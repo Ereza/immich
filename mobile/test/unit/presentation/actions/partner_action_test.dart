@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/user.model.dart';
@@ -45,7 +44,7 @@ void main() {
         const PartnerAddAction(),
         overrides: overrides(candidates: [UserFactory.create()]),
       );
-      await tester.sendKeyEvent(LogicalKeyboardKey.escape); // dismiss without selecting
+      await tester.sendKeyEvent(.escape); // dismiss without selecting
       await tester.pumpAndSettle();
 
       verifyNever(context.service.partner.create);

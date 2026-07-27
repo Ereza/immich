@@ -6,7 +6,6 @@ import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/models/search/search_filter.model.dart';
 import 'package:immich_mobile/providers/search/search_filter.provider.dart';
 import 'package:immich_mobile/widgets/search/search_filter/common/dropdown.dart';
-import 'package:openapi/api.dart';
 
 class CameraPicker extends HookConsumerWidget {
   const CameraPicker({super.key, required this.onSelect, this.filter});
@@ -21,12 +20,10 @@ class CameraPicker extends HookConsumerWidget {
     final selectedMake = useState<String?>(filter?.make);
     final selectedModel = useState<String?>(filter?.model);
 
-    final make = ref.watch(getSearchSuggestionsProvider(SearchSuggestionArgs(type: SearchSuggestionType.cameraMake)));
+    final make = ref.watch(getSearchSuggestionsProvider(SearchSuggestionArgs(type: .cameraMake)));
 
     final models = ref.watch(
-      getSearchSuggestionsProvider(
-        SearchSuggestionArgs(type: SearchSuggestionType.cameraModel, make: selectedMake.value),
-      ),
+      getSearchSuggestionsProvider(SearchSuggestionArgs(type: .cameraModel, make: selectedMake.value)),
     );
 
     final makeWidget = SearchDropdown(
@@ -43,7 +40,7 @@ class CameraPicker extends HookConsumerWidget {
           return;
         }
         selectedMake.value = value.toString();
-        modelTextController.value = TextEditingValue.empty;
+        modelTextController.value = .empty;
         onSelect({'make': selectedMake.value, 'model': null});
       },
     );
@@ -68,7 +65,7 @@ class CameraPicker extends HookConsumerWidget {
     }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: .spaceEvenly,
       children: [
         Expanded(child: makeWidget),
         const SizedBox(width: 16),

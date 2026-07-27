@@ -16,28 +16,28 @@ class FeatureMessagePlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = Theme.of(context).brightness == Brightness.dark;
+    final dark = Theme.of(context).brightness == .dark;
 
     final cardColor = dark ? const Color(0xFF232228) : const Color(0xFFEEEDF4);
     final tileColor = dark ? const Color(0xFF2B2A32) : const Color(0xFFFBFAFE);
     final inkColor = dark ? const Color(0xFFE7E7EC) : const Color(0xFF1A1A1E);
 
     return Container(
-      width: double.infinity,
-      height: double.infinity,
-      clipBehavior: Clip.antiAlias,
+      width: .infinity,
+      height: .infinity,
+      clipBehavior: .antiAlias,
       // Fill a plain rectangle — the parent's ClipRRect handles the corner rounding,
       // so the placeholder doesn't round its own corners inside that clip.
       decoration: BoxDecoration(color: cardColor),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           // ---- confetti motif (168 × 120 region) ----
           SizedBox(
             width: 168,
             height: 120,
             child: Stack(
-              clipBehavior: Clip.none,
+              clipBehavior: .none,
               children: [
                 // scattered confetti
                 Positioned(left: 6, top: 24, child: _dot(12, _SplatColors.primary)),
@@ -56,7 +56,7 @@ class FeatureMessagePlaceholder extends StatelessWidget {
                       height: 84,
                       decoration: BoxDecoration(
                         color: tileColor,
-                        borderRadius: const BorderRadius.all(Radius.circular(18)),
+                        borderRadius: const .all(.circular(18)),
                         boxShadow: [
                           BoxShadow(
                             color: const Color(0xFF0F122D).withValues(alpha: 0.22),
@@ -66,7 +66,7 @@ class FeatureMessagePlaceholder extends StatelessWidget {
                         ],
                       ),
                       child: Stack(
-                        alignment: Alignment.center,
+                        alignment: .center,
                         children: [
                           Positioned(left: 12, top: 12, child: _dot(12, _SplatColors.warning)),
                           const ImmichLogo(size: 40),
@@ -81,7 +81,7 @@ class FeatureMessagePlaceholder extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             context.t.new_feature,
-            style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: inkColor),
+            style: context.textTheme.titleMedium?.copyWith(fontWeight: .w600, color: inkColor),
           ),
         ],
       ),
@@ -91,7 +91,7 @@ class FeatureMessagePlaceholder extends StatelessWidget {
   static Widget _dot(double d, Color c) => Container(
     width: d,
     height: d,
-    decoration: BoxDecoration(color: c, shape: BoxShape.circle),
+    decoration: BoxDecoration(color: c, shape: .circle),
   );
 
   static Widget _bar(double w, double h, double angle, Color c) => Transform.rotate(
@@ -99,7 +99,7 @@ class FeatureMessagePlaceholder extends StatelessWidget {
     child: Container(
       width: w,
       height: h,
-      decoration: BoxDecoration(color: c, borderRadius: const BorderRadius.all(Radius.circular(99))),
+      decoration: BoxDecoration(color: c, borderRadius: const .all(.circular(99))),
     ),
   );
 }

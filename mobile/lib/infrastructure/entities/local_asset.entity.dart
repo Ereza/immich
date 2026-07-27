@@ -33,7 +33,7 @@ class LocalAssetEntity extends Table with DriftDefaultsMixin, AssetEntityMixin {
 }
 
 extension LocalAssetEntityDataDomainExtension on LocalAssetEntityData {
-  LocalAsset toDto({String? remoteId}) => LocalAsset(
+  LocalAsset toDto({String? remoteId}) => .new(
     id: id,
     name: name,
     checksum: checksum,

@@ -56,7 +56,7 @@ class PinRegistrationForm extends HookConsumerWidget {
             child: Text(
               'setup_pin_code'.tr(),
               style: context.textTheme.labelLarge!.copyWith(fontSize: 24),
-              textAlign: TextAlign.center,
+              textAlign: .center,
             ),
           ),
           SizedBox(
@@ -64,7 +64,7 @@ class PinRegistrationForm extends HookConsumerWidget {
             child: Text(
               'new_pin_code_subtitle'.tr(),
               style: context.textTheme.bodyLarge!.copyWith(fontSize: 16),
-              textAlign: TextAlign.center,
+              textAlign: .center,
             ),
           ),
           const SizedBox(height: 32),
@@ -94,7 +94,7 @@ class PinRegistrationForm extends HookConsumerWidget {
           ),
           const SizedBox(height: 48),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const .symmetric(horizontal: 24.0),
             child: Row(
               children: [
                 Expanded(

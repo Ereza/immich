@@ -13,7 +13,7 @@ class MapTimeRange extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       children: [
         ListTile(
           title: Text(context.t.date_after),

@@ -30,18 +30,18 @@ class SettingsActionTile extends StatelessWidget {
     return ListTile(
       isThreeLine: true,
       onTap: onActionTap,
-      titleAlignment: ListTileTitleAlignment.center,
+      titleAlignment: .center,
       title: Row(
         children: [
           Expanded(
             child: Text(
               title,
-              style: titleStyle ?? theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500, height: 1.5),
+              style: titleStyle ?? theme.textTheme.bodyLarge?.copyWith(fontWeight: .w500, height: 1.5),
             ),
           ),
           if (statusText != null)
             Padding(
-              padding: const EdgeInsets.only(left: 8),
+              padding: const .only(left: 8),
               child: Chip(
                 label: Text(
                   statusText!,
@@ -52,15 +52,15 @@ class SettingsActionTile extends StatelessWidget {
                 backgroundColor: theme.colorScheme.surface,
                 side: BorderSide(color: statusColor ?? theme.colorScheme.outlineVariant),
                 shape: StadiumBorder(side: BorderSide(color: statusColor ?? theme.colorScheme.outlineVariant)),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                visualDensity: VisualDensity.compact,
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                materialTapTargetSize: .shrinkWrap,
+                visualDensity: .compact,
+                padding: const .symmetric(horizontal: 8, vertical: 0),
               ),
             ),
         ],
       ),
       subtitle: Padding(
-        padding: const EdgeInsets.only(top: 4.0, right: 18.0),
+        padding: const .only(top: 4.0, right: 18.0),
         child: Text(
           subtitle,
           style: subtitleStyle ?? theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceSecondary),

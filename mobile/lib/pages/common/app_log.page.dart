@@ -22,34 +22,34 @@ class AppLogPage extends HookConsumerWidget {
 
     Widget colorStatusIndicator(Color color) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           Container(
             width: 10,
             height: 10,
-            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            decoration: BoxDecoration(color: color, shape: .circle),
           ),
         ],
       );
     }
 
     Widget buildLeadingIcon(LogLevel level) => switch (level) {
-      LogLevel.info => colorStatusIndicator(context.primaryColor),
-      LogLevel.severe => colorStatusIndicator(Colors.redAccent),
-      LogLevel.warning => colorStatusIndicator(Colors.orangeAccent),
+      .info => colorStatusIndicator(context.primaryColor),
+      .severe => colorStatusIndicator(Colors.redAccent),
+      .warning => colorStatusIndicator(Colors.orangeAccent),
       _ => colorStatusIndicator(Colors.grey),
     };
 
     Color getTileColor(LogLevel level) => switch (level) {
-      LogLevel.info => Colors.transparent,
-      LogLevel.severe => Colors.redAccent.withValues(alpha: 0.25),
-      LogLevel.warning => Colors.orangeAccent.withValues(alpha: 0.25),
+      .info => Colors.transparent,
+      .severe => Colors.redAccent.withValues(alpha: 0.25),
+      .warning => Colors.orangeAccent.withValues(alpha: 0.25),
       _ => context.primaryColor.withValues(alpha: 0.1),
     };
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('logs'.tr(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+        title: Text('logs'.tr(), style: const TextStyle(fontWeight: .bold, fontSize: 16.0)),
         scrolledUnderElevation: 1,
         elevation: 2,
         actions: [
@@ -94,7 +94,7 @@ class AppLogPage extends HookConsumerWidget {
           return ListTile(
             onTap: () => context.pushRoute(AppLogDetailRoute(logMessage: logMessage)),
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
-            visualDensity: VisualDensity.compact,
+            visualDensity: .compact,
             dense: true,
             tileColor: getTileColor(logMessage.level),
             minLeadingWidth: 10,

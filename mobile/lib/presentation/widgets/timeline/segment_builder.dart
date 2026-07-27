@@ -12,10 +12,10 @@ abstract class SegmentBuilder {
   const SegmentBuilder({required this.buckets, this.spacing = kTimelineSpacing, this.groupBy = GroupAssetsBy.day});
 
   static double headerExtent(HeaderType header) => switch (header) {
-    HeaderType.month => kTimelineHeaderExtent,
-    HeaderType.day => kTimelineHeaderExtent * 0.90,
-    HeaderType.monthAndDay => kTimelineHeaderExtent * 1.6,
-    HeaderType.none => 0.0,
+    .month => kTimelineHeaderExtent,
+    .day => kTimelineHeaderExtent * 0.90,
+    .monthAndDay => kTimelineHeaderExtent * 1.6,
+    .none => 0.0,
   };
 
   static Widget buildPlaceholder(

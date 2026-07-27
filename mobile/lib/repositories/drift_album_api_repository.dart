@@ -59,7 +59,7 @@ class DriftAlbumApiRepository extends ApiRepository {
     for (final dto in response) {
       if (dto.success) {
         added.add(dto.id);
-      } else if (dto.error.orElse(null) != BulkIdErrorReason.duplicate) {
+      } else if (dto.error.orElse(null) != .duplicate) {
         failed.add(dto.id);
       }
     }
@@ -78,7 +78,7 @@ class DriftAlbumApiRepository extends ApiRepository {
   }) async {
     AssetOrder? apiOrder;
     if (order != null) {
-      apiOrder = order == AlbumAssetOrder.asc ? AssetOrder.asc : AssetOrder.desc;
+      apiOrder = order == .asc ? .asc : .desc;
     }
 
     final responseDto = await checkNull(
@@ -132,7 +132,7 @@ extension on AlbumResponseDto {
       updatedAt: updatedAt,
       thumbnailAssetId: albumThumbnailAssetId,
       isActivityEnabled: isActivityEnabled,
-      order: order.orElse(null) == AssetOrder.asc ? AlbumAssetOrder.asc : AlbumAssetOrder.desc,
+      order: order.orElse(null) == .asc ? .asc : .desc,
       assetCount: assetCount,
       isShared: albumUsers.length > 2,
     );

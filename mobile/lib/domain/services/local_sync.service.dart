@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/platform_extensions.dart';
 import 'package:immich_mobile/infrastructure/repositories/local_album.repository.dart';
@@ -48,7 +47,7 @@ class LocalSyncService {
   Future<void> sync({bool full = false}) async {
     final Stopwatch stopwatch = Stopwatch()..start();
     try {
-      if (CurrentPlatform.isAndroid && Store.get(StoreKey.manageLocalMediaAndroid, false)) {
+      if (CurrentPlatform.isAndroid && Store.get(.manageLocalMediaAndroid, false)) {
         final hasPermission = await _permissionRepository.hasManageMediaPermission();
         if (hasPermission) {
           await _syncTrashedAssets();
@@ -138,7 +137,7 @@ class LocalSyncService {
       final Stopwatch stopwatch = Stopwatch()..start();
 
       final deviceAlbums = await _nativeSyncApi.getAlbums();
-      final dbAlbums = await _localAlbumRepository.getAll(sortBy: {SortLocalAlbumsBy.id});
+      final dbAlbums = await _localAlbumRepository.getAll(sortBy: {.id});
 
       await diffSortedLists(
         dbAlbums,
@@ -452,11 +451,11 @@ extension on Iterable<PlatformAsset> {
 }
 
 extension PlatformToLocalAsset on PlatformAsset {
-  LocalAsset toLocalAsset() => LocalAsset(
+  LocalAsset toLocalAsset() => .new(
     id: id,
     name: name,
     checksum: null,
-    type: AssetType.values.elementAtOrNull(type) ?? AssetType.other,
+    type: AssetType.values.elementAtOrNull(type) ?? .other,
     createdAt: tryFromSecondsSinceEpoch(createdAt, isUtc: true) ?? DateTime.timestamp(),
     updatedAt: tryFromSecondsSinceEpoch(updatedAt, isUtc: true) ?? DateTime.timestamp(),
     width: width,
@@ -473,10 +472,10 @@ extension PlatformToLocalAsset on PlatformAsset {
 }
 
 AssetPlaybackStyle _toPlaybackStyle(PlatformAssetPlaybackStyle style) => switch (style) {
-  PlatformAssetPlaybackStyle.unknown => AssetPlaybackStyle.unknown,
-  PlatformAssetPlaybackStyle.image => AssetPlaybackStyle.image,
-  PlatformAssetPlaybackStyle.video => AssetPlaybackStyle.video,
-  PlatformAssetPlaybackStyle.imageAnimated => AssetPlaybackStyle.imageAnimated,
-  PlatformAssetPlaybackStyle.livePhoto => AssetPlaybackStyle.livePhoto,
-  PlatformAssetPlaybackStyle.videoLooping => AssetPlaybackStyle.videoLooping,
+  .unknown => .unknown,
+  .image => .image,
+  .video => .video,
+  .imageAnimated => .imageAnimated,
+  .livePhoto => .livePhoto,
+  .videoLooping => .videoLooping,
 };

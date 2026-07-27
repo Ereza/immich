@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/presentation/actions/action.widget.dart';
 import 'package:immich_mobile/presentation/actions/asset_debug.action.dart';
@@ -61,14 +60,14 @@ class _GeneralBottomSheetState extends ConsumerState<GeneralBottomSheet> {
     );
 
     Future<void> addToAlbum(RemoteAlbum album) async {
-      final result = await ref.read(actionProvider.notifier).addToAlbum(ActionSource.timeline, album);
+      final result = await ref.read(actionProvider.notifier).addToAlbum(.timeline, album);
 
       if (!context.mounted) {
         return;
       }
 
       if (!result.success) {
-        ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: ToastType.error);
+        ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: .error);
         return;
       }
       ImmichToast.show(
@@ -94,26 +93,25 @@ class _GeneralBottomSheetState extends ConsumerState<GeneralBottomSheet> {
       shouldCloseOnMinExtent: false,
       actions: [
         ...actions.map((action) => ActionColumnButtonWidget(action: TimelineAction(action: action))),
-        const ShareActionButton(source: ActionSource.timeline),
+        const ShareActionButton(source: .timeline),
         if (multiselect.hasRemote) ...[
-          const ShareLinkActionButton(source: ActionSource.timeline),
-          if (multiselect.onlyRemote) const DownloadActionButton(source: ActionSource.timeline),
+          const ShareLinkActionButton(source: .timeline),
+          if (multiselect.onlyRemote) const DownloadActionButton(source: .timeline),
           isTrashEnable
-              ? const TrashActionButton(source: ActionSource.timeline)
-              : const DeletePermanentActionButton(source: ActionSource.timeline),
-          const FavoriteActionButton(source: ActionSource.timeline),
-          const ArchiveActionButton(source: ActionSource.timeline),
-          if (tagsEnabled) const BulkTagAssetsActionButton(source: ActionSource.timeline),
-          const EditDateTimeActionButton(source: ActionSource.timeline),
-          const EditLocationActionButton(source: ActionSource.timeline),
-          const MoveToLockFolderActionButton(source: ActionSource.timeline),
-          if (multiselect.selectedAssets.length > 1) const StackActionButton(source: ActionSource.timeline),
-          if (multiselect.hasStacked) const UnStackActionButton(source: ActionSource.timeline),
-          if (multiselect.onlyLocal || multiselect.hasMerged) const DeleteActionButton(source: ActionSource.timeline),
+              ? const TrashActionButton(source: .timeline)
+              : const DeletePermanentActionButton(source: .timeline),
+          const FavoriteActionButton(source: .timeline),
+          const ArchiveActionButton(source: .timeline),
+          if (tagsEnabled) const BulkTagAssetsActionButton(source: .timeline),
+          const EditDateTimeActionButton(source: .timeline),
+          const EditLocationActionButton(source: .timeline),
+          const MoveToLockFolderActionButton(source: .timeline),
+          if (multiselect.selectedAssets.length > 1) const StackActionButton(source: .timeline),
+          if (multiselect.hasStacked) const UnStackActionButton(source: .timeline),
+          if (multiselect.onlyLocal || multiselect.hasMerged) const DeleteActionButton(source: .timeline),
         ],
-        if (multiselect.onlyLocal || multiselect.hasMerged)
-          const DeleteLocalActionButton(source: ActionSource.timeline),
-        if (multiselect.onlyLocal) const UploadActionButton(source: ActionSource.timeline),
+        if (multiselect.onlyLocal || multiselect.hasMerged) const DeleteLocalActionButton(source: .timeline),
+        if (multiselect.onlyLocal) const UploadActionButton(source: .timeline),
       ],
       slivers: [
         const AddToAlbumHeader(),

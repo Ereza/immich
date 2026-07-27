@@ -45,9 +45,9 @@ class PinAuthPage extends HookConsumerWidget {
           return SimpleDialog(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const .all(16),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
                     PinVerificationForm(
                       description: 'enable_biometric_auth_description'.tr(),
@@ -74,7 +74,7 @@ class PinAuthPage extends HookConsumerWidget {
         shrinkWrap: true,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 36.0),
+            padding: const .only(top: 36.0),
             child: showPinRegistrationForm.value
                 ? Center(child: PinRegistrationForm(onDone: () => showPinRegistrationForm.value = false))
                 : Column(
@@ -90,7 +90,7 @@ class PinAuthPage extends HookConsumerWidget {
                       const SizedBox(height: 24),
                       if (localAuthState.canAuthenticate) ...[
                         Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
+                          padding: const .only(right: 16.0),
                           child: TextButton.icon(
                             icon: const Icon(Icons.fingerprint, size: 28),
                             onPressed: enableBiometricAuth,

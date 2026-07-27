@@ -16,10 +16,10 @@ class FileMediaRepository {
     return LocalAsset(
       id: entity.id,
       name: title,
-      type: AssetType.image,
+      type: .image,
       createdAt: entity.createDateTime,
       updatedAt: entity.modifiedDateTime,
-      playbackStyle: AssetPlaybackStyle.image,
+      playbackStyle: .image,
       isEdited: false,
     );
   }

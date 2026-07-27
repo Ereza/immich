@@ -9,7 +9,7 @@ class SettingsSubPageScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const .symmetric(vertical: 16),
       itemCount: settings.length,
       itemBuilder: (ctx, index) => settings[index],
       separatorBuilder: (context, index) => showDivider

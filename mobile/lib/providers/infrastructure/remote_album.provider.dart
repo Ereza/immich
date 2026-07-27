@@ -70,7 +70,7 @@ class RemoteAlbumNotifier extends Notifier<RemoteAlbumState> {
     List<RemoteAlbum> albums,
     String query,
     String? userId, [
-    QuickFilterMode filterMode = QuickFilterMode.all,
+    QuickFilterMode filterMode = .all,
   ]) {
     return _remoteAlbumService.searchAlbums(albums, query, userId, filterMode);
   }
@@ -184,7 +184,7 @@ class RemoteAlbumNotifier extends Notifier<RemoteAlbumState> {
   Future<RemoteAlbum?> toggleAlbumOrder(String albumId) async {
     final currentAlbum = state.albums.firstWhere((album) => album.id == albumId);
 
-    final newOrder = currentAlbum.order == AlbumAssetOrder.asc ? AlbumAssetOrder.desc : AlbumAssetOrder.asc;
+    final newOrder = currentAlbum.order == .asc ? AlbumAssetOrder.desc : AlbumAssetOrder.asc;
 
     return updateAlbum(albumId, order: newOrder);
   }

@@ -62,7 +62,7 @@ class PinVerificationForm extends HookConsumerWidget {
             child: Text(
               description ?? 'enter_your_pin_code_subtitle'.tr(),
               style: context.textTheme.labelLarge!.copyWith(fontSize: 18),
-              textAlign: TextAlign.center,
+              textAlign: .center,
             ),
           ),
           const SizedBox(height: 18),

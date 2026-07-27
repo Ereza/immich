@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart' as drift;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/infrastructure/entities/local_album.entity.drift.dart';
 import 'package:immich_mobile/infrastructure/entities/remote_album.entity.drift.dart';
@@ -33,14 +32,14 @@ SyncAssetV1 _createAsset({
     id: id,
     checksum: checksum,
     originalFileName: fileName,
-    type: AssetTypeEnum.IMAGE,
+    type: .IMAGE,
     ownerId: ownerId,
     isFavorite: false,
     fileCreatedAt: DateTime(2024, 1, 1),
     fileModifiedAt: DateTime(2024, 1, 1),
     createdAt: DateTime(2024, 1, 1),
     localDateTime: DateTime(2024, 1, 1),
-    visibility: AssetVisibility.timeline,
+    visibility: .timeline,
     width: width,
     height: height,
     deletedAt: null,
@@ -195,13 +194,13 @@ void main() {
       const remoteAlbumId = 'remote-1';
 
       await db.remoteAlbumEntity.insertOne(
-        RemoteAlbumEntityCompanion.insert(id: remoteAlbumId, name: 'Movies', order: AlbumAssetOrder.desc),
+        RemoteAlbumEntityCompanion.insert(id: remoteAlbumId, name: 'Movies', order: .desc),
       );
       await db.localAlbumEntity.insertOne(
         LocalAlbumEntityCompanion.insert(
           id: localAlbumId,
           name: 'Movies',
-          backupSelection: BackupSelection.selected,
+          backupSelection: .selected,
           linkedRemoteAlbumId: const drift.Value(remoteAlbumId),
         ),
       );
@@ -229,7 +228,7 @@ void main() {
     test('preserves localAlbumEntity rows that have no linkedRemoteAlbumId', () async {
       const localAlbumId = 'local-unlinked';
       await db.localAlbumEntity.insertOne(
-        LocalAlbumEntityCompanion.insert(id: localAlbumId, name: 'Camera', backupSelection: BackupSelection.none),
+        LocalAlbumEntityCompanion.insert(id: localAlbumId, name: 'Camera', backupSelection: .none),
       );
 
       await sut.reset();

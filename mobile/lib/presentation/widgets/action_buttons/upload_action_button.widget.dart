@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
@@ -29,14 +28,14 @@ class UploadActionButton extends ConsumerWidget {
       return;
     }
 
-    final isTimeline = source == ActionSource.timeline;
-    final viewerIntentFilePath = source == ActionSource.viewer ? ref.read(viewIntentFilePathProvider) : null;
+    final isTimeline = source == .timeline;
+    final viewerIntentFilePath = source == .viewer ? ref.read(viewIntentFilePathProvider) : null;
     List<LocalAsset>? assets;
     var isUploadDialogOpen = false;
     var wasUploadCancelled = false;
     Future<void>? uploadDialogFuture;
 
-    if (source == ActionSource.timeline) {
+    if (source == .timeline) {
       assets = ref.read(multiSelectProvider).selectedAssets.whereType<LocalAsset>().toList();
       if (assets.isEmpty) {
         return;
@@ -90,8 +89,8 @@ class UploadActionButton extends ConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: ToastType.error,
+        gravity: .BOTTOM,
+        toastType: .error,
       );
     }
   }
@@ -126,7 +125,7 @@ class _UploadProgressDialog extends ConsumerWidget {
     return AlertDialog(
       title: Text('uploading'.t(context: context)),
       content: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           if (hasError)
             const Icon(Icons.error_outline, color: Colors.red, size: 48)

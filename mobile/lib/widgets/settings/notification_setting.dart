@@ -13,7 +13,7 @@ class NotificationSetting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final permissionService = ref.watch(notificationPermissionProvider);
-    final hasPermission = permissionService == PermissionStatus.granted;
+    final hasPermission = permissionService == .granted;
 
     openAppNotificationSettings(BuildContext ctx) {
       ctx.pop();
@@ -44,7 +44,7 @@ class NotificationSetting extends HookConsumerWidget {
           buttonText: 'notification_permission_list_tile_enable_button'.tr(),
           onButtonTap: () =>
               ref.watch(notificationPermissionProvider.notifier).requestNotificationPermission().then((permission) {
-                if (permission == PermissionStatus.permanentlyDenied) {
+                if (permission == .permanentlyDenied) {
                   showPermissionsDialog();
                 }
               }),

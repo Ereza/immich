@@ -36,7 +36,7 @@ class _DriftPeopleCollectionPageState extends ConsumerState<DriftPeopleCollectio
     return LayoutBuilder(
       builder: (context, constraints) {
         final isTablet = constraints.maxWidth > 600;
-        final isPortrait = context.orientation == Orientation.portrait;
+        final isPortrait = context.orientation == .portrait;
 
         return Scaffold(
           appBar: AppBar(
@@ -76,7 +76,7 @@ class _DriftPeopleCollectionPageState extends ConsumerState<DriftPeopleCollectio
                     childAspectRatio: 0.85,
                     mainAxisSpacing: isPortrait && isTablet ? 36 : 0,
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  padding: const .symmetric(vertical: 32),
                   itemCount: people.length,
                   itemBuilder: (context, index) {
                     final person = people[index];
@@ -89,7 +89,7 @@ class _DriftPeopleCollectionPageState extends ConsumerState<DriftPeopleCollectio
                             context.pushRoute(DriftPersonRoute(person: person));
                           },
                           child: Material(
-                            shape: const CircleBorder(side: BorderSide.none),
+                            shape: const CircleBorder(side: .none),
                             elevation: 3,
                             child: CircleAvatar(
                               key: ValueKey(person.id),
@@ -105,16 +105,16 @@ class _DriftPeopleCollectionPageState extends ConsumerState<DriftPeopleCollectio
                               ? Text(
                                   'add_a_name'.tr(),
                                   style: context.textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: .w500,
                                     color: context.colorScheme.primary,
                                   ),
                                 )
                               : Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  padding: const .symmetric(horizontal: 16.0),
                                   child: Text(
                                     person.name,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w500),
+                                    overflow: .ellipsis,
+                                    style: context.textTheme.titleSmall?.copyWith(fontWeight: .w500),
                                   ),
                                 ),
                         ),

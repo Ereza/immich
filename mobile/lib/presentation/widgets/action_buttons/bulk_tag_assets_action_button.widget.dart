@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -30,8 +29,8 @@ class BulkTagAssetsActionButton extends ConsumerWidget {
       msg: result.success
           ? 'tagged_assets'.t(context: context, args: {'count': result.count.toString()})
           : 'errors.failed_to_tag_assets'.t(context: context),
-      gravity: ToastGravity.BOTTOM,
-      toastType: result.success ? ToastType.success : ToastType.error,
+      gravity: .BOTTOM,
+      toastType: result.success ? .success : .error,
     );
   }
 

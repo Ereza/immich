@@ -133,15 +133,9 @@ class _TimelineDragRegionState extends State<TimelineDragRegion> {
     final currentDy = event.localPosition.dy;
 
     if (currentDy > bottomScrollOffset!) {
-      scrollTimer ??= Timer.periodic(
-        const Duration(milliseconds: 50),
-        (_) => widget.onScroll?.call(ScrollDirection.forward),
-      );
+      scrollTimer ??= Timer.periodic(const Duration(milliseconds: 50), (_) => widget.onScroll?.call(.forward));
     } else if (currentDy < topScrollOffset!) {
-      scrollTimer ??= Timer.periodic(
-        const Duration(milliseconds: 50),
-        (_) => widget.onScroll?.call(ScrollDirection.reverse),
-      );
+      scrollTimer ??= Timer.periodic(const Duration(milliseconds: 50), (_) => widget.onScroll?.call(.reverse));
     } else {
       scrollTimer?.cancel();
       scrollTimer = null;

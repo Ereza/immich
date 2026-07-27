@@ -45,7 +45,7 @@ abstract final class ImmichLogger {
     await Share.shareXFiles(
       [XFile(filePath)],
       subject: "Immich logs $dateTime",
-      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+      sharePositionOrigin: box!.localToGlobal(.zero) & box.size,
     ).then((value) => logFile.delete());
   }
 }

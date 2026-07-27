@@ -29,13 +29,7 @@ void main() {
     apiService = MockApiService();
     networkService = MockNetworkService();
     backgroundSyncManager = MockBackgroundSyncManager();
-    sut = AuthService(
-      authApiRepository,
-      authRepository,
-      apiService,
-      networkService,
-      backgroundSyncManager,
-    );
+    sut = AuthService(authApiRepository, authRepository, apiService, networkService, backgroundSyncManager);
 
     registerFallbackValue(Uri());
   });
@@ -142,7 +136,7 @@ void main() {
       when(() => authRepository.getPreferredWifiName()).thenReturn('DifferentWifi');
       when(
         () => authRepository.getExternalEndpointList(),
-      ).thenReturn([const AuxilaryEndpoint(url: 'https://external.endpoint', status: AuxCheckStatus.valid)]);
+      ).thenReturn([const AuxilaryEndpoint(url: 'https://external.endpoint', status: .valid)]);
       when(
         () => apiService.resolveAndSetEndpoint('https://external.endpoint'),
       ).thenAnswer((_) async => 'https://external.endpoint/api');
@@ -161,8 +155,8 @@ void main() {
       when(() => authRepository.getEndpointSwitchingFeature()).thenReturn(true);
       when(() => authRepository.getPreferredWifiName()).thenReturn('DifferentWifi');
       when(() => authRepository.getExternalEndpointList()).thenReturn([
-        const AuxilaryEndpoint(url: 'https://external.endpoint', status: AuxCheckStatus.valid),
-        const AuxilaryEndpoint(url: 'https://external.endpoint2', status: AuxCheckStatus.valid),
+        const AuxilaryEndpoint(url: 'https://external.endpoint', status: .valid),
+        const AuxilaryEndpoint(url: 'https://external.endpoint2', status: .valid),
       ]);
 
       when(
@@ -186,8 +180,8 @@ void main() {
       when(() => authRepository.getEndpointSwitchingFeature()).thenReturn(true);
       when(() => authRepository.getPreferredWifiName()).thenReturn('DifferentWifi');
       when(() => authRepository.getExternalEndpointList()).thenReturn([
-        const AuxilaryEndpoint(url: 'https://external.endpoint', status: AuxCheckStatus.valid),
-        const AuxilaryEndpoint(url: 'https://external.endpoint2', status: AuxCheckStatus.valid),
+        const AuxilaryEndpoint(url: 'https://external.endpoint', status: .valid),
+        const AuxilaryEndpoint(url: 'https://external.endpoint2', status: .valid),
       ]);
 
       when(
@@ -230,7 +224,7 @@ void main() {
       when(() => authRepository.getPreferredWifiName()).thenReturn('DifferentWifi');
       when(
         () => authRepository.getExternalEndpointList(),
-      ).thenReturn([const AuxilaryEndpoint(url: 'https://external.endpoint', status: AuxCheckStatus.valid)]);
+      ).thenReturn([const AuxilaryEndpoint(url: 'https://external.endpoint', status: .valid)]);
       when(
         () => apiService.resolveAndSetEndpoint('https://external.endpoint'),
       ).thenThrow(Exception('External endpoint error'));

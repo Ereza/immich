@@ -47,7 +47,7 @@ class DriftMemoryPage extends HookConsumerWidget {
 
     useEffect(() {
       // Memories is an immersive activity
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+      SystemChrome.setEnabledSystemUIMode(.immersive);
       return () {
         // Clean up to normal edge to edge when we are done
         restoreEdgeToEdge();
@@ -210,7 +210,7 @@ class DriftMemoryPage extends HookConsumerWidget {
         body: SafeArea(
           child: PageView.builder(
             physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            scrollDirection: Axis.vertical,
+            scrollDirection: .vertical,
             controller: memoryPageController,
             onPageChanged: (pageNumber) {
               ref.read(hapticFeedbackProvider.notifier).mediumImpact();
@@ -252,7 +252,7 @@ class DriftMemoryPage extends HookConsumerWidget {
               return Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 8.0, bottom: 2.0),
+                    padding: const .only(left: 24.0, right: 24.0, top: 8.0, bottom: 2.0),
                     child: AnimatedBuilder(
                       animation: assetController,
                       builder: (context, child) {
@@ -275,7 +275,7 @@ class DriftMemoryPage extends HookConsumerWidget {
                           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                           controller: assetController,
                           onPageChanged: onAssetChanged,
-                          scrollDirection: Axis.horizontal,
+                          scrollDirection: .horizontal,
                           itemCount: memories[mIndex].assets.length,
                           itemBuilder: (context, index) {
                             final asset = memories[mIndex].assets[index];
@@ -296,7 +296,7 @@ class DriftMemoryPage extends HookConsumerWidget {
                                       // Left side of the screen
                                       Expanded(
                                         child: GestureDetector(
-                                          behavior: HitTestBehavior.translucent,
+                                          behavior: .translucent,
                                           onTap: () {
                                             toPreviousAsset(index);
                                           },
@@ -306,7 +306,7 @@ class DriftMemoryPage extends HookConsumerWidget {
                                       // Right side of the screen
                                       Expanded(
                                         child: GestureDetector(
-                                          behavior: HitTestBehavior.translucent,
+                                          behavior: .translucent,
                                           onTap: () {
                                             toNextAsset(index);
                                           },

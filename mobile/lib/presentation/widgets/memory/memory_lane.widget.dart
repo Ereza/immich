@@ -56,14 +56,14 @@ class DriftMemoryCard extends ConsumerWidget {
       child: Stack(
         children: [
           ColorFiltered(
-            colorFilter: ColorFilter.mode(Colors.black.withValues(alpha: 0.2), BlendMode.darken),
+            colorFilter: ColorFilter.mode(Colors.black.withValues(alpha: 0.2), .darken),
             child: SizedBox(
               width: 205,
               height: 200,
               child: Thumbnail.remote(
                 remoteId: memory.assets[0].id,
                 thumbhash: memory.assets[0].thumbHash ?? "",
-                fit: BoxFit.cover,
+                fit: .cover,
               ),
             ),
           ),
@@ -74,7 +74,7 @@ class DriftMemoryCard extends ConsumerWidget {
               constraints: const BoxConstraints(maxWidth: 114),
               child: Text(
                 title,
-                style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 15),
+                style: const TextStyle(fontWeight: .w600, color: Colors.white, fontSize: 15),
               ),
             ),
           ),

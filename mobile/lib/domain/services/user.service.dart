@@ -15,15 +15,15 @@ class UserService {
   UserService({required this._userApiRepository, required this._storeService});
 
   UserDto getMyUser() {
-    return _storeService.get(StoreKey.currentUser);
+    return _storeService.get(.currentUser);
   }
 
   UserDto? tryGetMyUser() {
-    return _storeService.tryGet(StoreKey.currentUser);
+    return _storeService.tryGet(.currentUser);
   }
 
   Stream<UserDto?> watchMyUser() {
-    return _storeService.watch(StoreKey.currentUser);
+    return _storeService.watch(.currentUser);
   }
 
   Future<UserDto?> refreshMyUser() async {

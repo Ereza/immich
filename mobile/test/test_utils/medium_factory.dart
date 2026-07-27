@@ -24,7 +24,7 @@ class MediumFactory {
       name: name ?? 'Album ${random.nextInt(1000000)}',
       updatedAt: updatedAt ?? DateTime.fromMillisecondsSinceEpoch(random.nextInt(1000000000)),
       assetCount: assetCount ?? random.nextInt(100),
-      backupSelection: backupSelection ?? BackupSelection.none,
+      backupSelection: backupSelection ?? .none,
       isIosSharedAlbum: isIosSharedAlbum ?? false,
     );
   }

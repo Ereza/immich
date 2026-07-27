@@ -50,7 +50,7 @@ class SettingsSwitchListTile extends StatelessWidget {
         style:
             titleStyle ??
             context.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w500,
+              fontWeight: .w500,
               color: enabled ? null : context.themeData.disabledColor,
               height: 1.5,
             ),

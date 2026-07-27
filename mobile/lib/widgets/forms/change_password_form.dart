@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/providers/auth.provider.dart';
@@ -14,8 +13,8 @@ class ChangePasswordForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final passwordController = useTextEditingController.fromValue(TextEditingValue.empty);
-    final confirmPasswordController = useTextEditingController.fromValue(TextEditingValue.empty);
+    final passwordController = useTextEditingController.fromValue(.empty);
+    final confirmPasswordController = useTextEditingController.fromValue(.empty);
     final authState = ref.watch(authProvider);
     final formKey = GlobalKey<FormState>();
 
@@ -26,17 +25,17 @@ class ChangePasswordForm extends HookConsumerWidget {
           child: Wrap(
             spacing: 16,
             runSpacing: 16,
-            alignment: WrapAlignment.start,
+            alignment: .start,
             children: [
               Text(
                 'change_password'.tr(),
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: context.primaryColor),
+                style: TextStyle(fontSize: 24, fontWeight: .bold, color: context.primaryColor),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24.0),
+                padding: const .symmetric(vertical: 24.0),
                 child: Text(
                   'change_password_form_description'.tr(namedArgs: {'name': authState.name}),
-                  style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 14, color: context.colorScheme.onSurface, fontWeight: .w600),
                 ),
               ),
               Form(
@@ -45,7 +44,7 @@ class ChangePasswordForm extends HookConsumerWidget {
                   children: [
                     PasswordInput(controller: passwordController),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding: const .symmetric(vertical: 16.0),
                       child: ConfirmPasswordInput(
                         originalController: passwordController,
                         confirmController: confirmPasswordController,
@@ -68,15 +67,15 @@ class ChangePasswordForm extends HookConsumerWidget {
                             ImmichToast.show(
                               context: context,
                               msg: "login_password_changed_success".tr(),
-                              toastType: ToastType.success,
-                              gravity: ToastGravity.TOP,
+                              toastType: .success,
+                              gravity: .TOP,
                             );
                           } else {
                             ImmichToast.show(
                               context: context,
                               msg: "login_password_changed_error".tr(),
-                              toastType: ToastType.error,
-                              gravity: ToastGravity.TOP,
+                              toastType: .error,
+                              gravity: .TOP,
                             );
                           }
                         }
@@ -141,7 +140,7 @@ class ConfirmPasswordInput extends StatelessWidget {
         border: const OutlineInputBorder(),
       ),
       validator: _validateInput,
-      autovalidateMode: AutovalidateMode.always,
+      autovalidateMode: .always,
     );
   }
 }
@@ -155,11 +154,11 @@ class ChangePasswordButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        visualDensity: VisualDensity.standard,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+        visualDensity: .standard,
+        padding: const .symmetric(vertical: 10, horizontal: 25),
       ),
       onPressed: onPressed,
-      child: Text('change_password'.tr(), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+      child: Text('change_password'.tr(), style: const TextStyle(fontSize: 14, fontWeight: .bold)),
     );
   }
 }

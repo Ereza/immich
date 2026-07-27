@@ -19,7 +19,7 @@ class AssetTroubleshootPage extends ConsumerWidget {
       appBar: AppBar(title: Text('asset_troubleshoot'.tr())),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const .all(16.0),
           child: _AssetDetailsView(asset: asset),
         ),
       ),
@@ -35,14 +35,11 @@ class _AssetDetailsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         _AssetPropertiesSection(asset: asset),
         const SizedBox(height: 16),
-        Text(
-          'matching_assets'.tr(),
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-        ),
+        Text('matching_assets'.tr(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: .bold)),
         if (asset.checksum != null) ...[
           _LocalAssetsSection(asset: asset),
           const SizedBox(height: 16),
@@ -213,7 +210,7 @@ class _LocalAssetsSection extends ConsumerWidget {
     return FutureBuilder<List<LocalAsset?>>(
       future: assetService.getLocalAssetsByChecksum(asset.checksum!),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == .waiting) {
           return const _PropertySectionCard(
             title: 'Local Assets',
             properties: [_PropertyItem(label: 'Status', value: 'Loading...')],
@@ -252,7 +249,7 @@ class _LocalAssetsSection extends ConsumerWidget {
               ),
             ...localAssets.map((localAsset) {
               return Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: const .only(top: 16),
                 child: _AssetPropertiesSection(asset: localAsset),
               );
             }),
@@ -279,7 +276,7 @@ class _RemoteAssetSection extends ConsumerWidget {
     return FutureBuilder<RemoteAsset?>(
       future: assetService.getRemoteAssetByChecksum(asset.checksum!),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == .waiting) {
           return const _PropertySectionCard(
             title: 'Remote Assets',
             properties: [_PropertyItem(label: 'Status', value: 'Loading...')],
@@ -317,13 +314,13 @@ class _PropertySectionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const .symmetric(vertical: 8),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const .all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
-            Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+            Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: .bold)),
             const SizedBox(height: 8),
             ...properties,
           ],
@@ -342,13 +339,13 @@ class _PropertyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const .symmetric(vertical: 4),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           SizedBox(
             width: 120,
-            child: Text('$label:', style: const TextStyle(fontWeight: FontWeight.w500)),
+            child: Text('$label:', style: const TextStyle(fontWeight: .w500)),
           ),
           Expanded(
             child: Text(

@@ -47,7 +47,7 @@ class Scrubber extends ConsumerStatefulWidget {
     this.snapToMonth = true,
     this.hasAppBar = true,
     required this.child,
-  }) : assert(child.scrollDirection == Axis.vertical);
+  }) : assert(child.scrollDirection == .vertical);
 
   @override
   ConsumerState createState() => ScrubberState();
@@ -176,10 +176,10 @@ class ScrubberState extends ConsumerState<Scrubber> with TickerProviderStateMixi
     setState(() {
       if (notification is ScrollUpdateNotification) {
         _thumbTopOffset = _currentOffset;
-        if (_labelAnimation.status != AnimationStatus.reverse) {
+        if (_labelAnimation.status != .reverse) {
           _labelAnimationController.reverse();
         }
-        if (_thumbAnimationController.status != AnimationStatus.forward) {
+        if (_thumbAnimationController.status != .forward) {
           _thumbAnimationController.forward();
         }
       }
@@ -225,7 +225,7 @@ class ScrubberState extends ConsumerState<Scrubber> with TickerProviderStateMixi
       return;
     }
 
-    if (_thumbAnimationController.status != AnimationStatus.forward) {
+    if (_thumbAnimationController.status != .forward) {
       _thumbAnimationController.forward();
     }
 
@@ -299,7 +299,7 @@ class ScrubberState extends ConsumerState<Scrubber> with TickerProviderStateMixi
   /// Find the segment closest to the given position
   _Segment? _findNearestMonthSegment(double position) {
     _Segment? nearestSegment;
-    double minDistance = double.infinity;
+    double minDistance = .infinity;
 
     for (final segment in _segments) {
       final distance = (segment.startOffset - position).abs();
@@ -371,7 +371,7 @@ class ScrubberState extends ConsumerState<Scrubber> with TickerProviderStateMixi
       label = labelText != null
           ? Text(
               labelText,
-              style: ctx.textTheme.bodyLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+              style: ctx.textTheme.bodyLarge?.copyWith(color: Colors.white, fontWeight: .bold),
             )
           : null;
     }
@@ -446,17 +446,17 @@ class _SegmentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IgnorePointer(
       child: Container(
-        margin: const EdgeInsets.only(right: 36.0),
+        margin: const .only(right: 36.0),
         child: Material(
           color: context.colorScheme.surface,
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const .all(.circular(16.0)),
           child: Container(
             constraints: const BoxConstraints(maxHeight: 28),
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            alignment: Alignment.center,
+            padding: const .symmetric(horizontal: 10.0),
+            alignment: .center,
             child: Text(
               _segment.date.year.toString(),
-              style: context.textTheme.labelMedium?.copyWith(fontFamily: "GoogleSansCode", fontWeight: FontWeight.w600),
+              style: context.textTheme.labelMedium?.copyWith(fontFamily: "GoogleSansCode", fontWeight: .w600),
             ),
           ),
         ),
@@ -478,15 +478,15 @@ class _ScrollLabel extends StatelessWidget {
       child: FadeTransition(
         opacity: animation,
         child: Container(
-          margin: const EdgeInsets.only(right: 12.0),
+          margin: const .only(right: 12.0),
           child: Material(
             elevation: 4.0,
             color: backgroundColor,
-            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            borderRadius: const .all(.circular(16.0)),
             child: Container(
               constraints: const BoxConstraints(maxHeight: 28),
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              alignment: Alignment.center,
+              padding: const .symmetric(horizontal: 10.0),
+              alignment: .center,
               child: label,
             ),
           ),
@@ -512,8 +512,8 @@ class _Scrubber extends StatelessWidget {
     return _SlideFadeTransition(
       animation: thumbAnimation,
       child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: .min,
+        mainAxisAlignment: .end,
         children: [
           if (label != null) _ScrollLabel(label: label!, backgroundColor: backgroundColor, animation: labelAnimation),
           _CircularThumb(backgroundColor),
@@ -535,11 +535,11 @@ class _CircularThumb extends StatelessWidget {
       child: Material(
         elevation: 4.0,
         color: backgroundColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(kScrubberThumbHeight),
-          bottomLeft: Radius.circular(kScrubberThumbHeight),
-          topRight: Radius.circular(4.0),
-          bottomRight: Radius.circular(4.0),
+        borderRadius: const .only(
+          topLeft: .circular(kScrubberThumbHeight),
+          bottomLeft: .circular(kScrubberThumbHeight),
+          topRight: .circular(4.0),
+          bottomRight: .circular(4.0),
         ),
         child: Container(
           constraints: BoxConstraints.tight(const Size(kScrubberThumbHeight * 0.6, kScrubberThumbHeight)),

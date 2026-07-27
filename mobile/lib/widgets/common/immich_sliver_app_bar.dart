@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/server_info/server_info.model.dart';
 import 'package:immich_mobile/providers/backup/drift_backup.provider.dart';
 import 'package:immich_mobile/providers/cast.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/settings.provider.dart';
@@ -61,7 +60,7 @@ class ImmichSliverAppBar extends ConsumerWidget {
           pinned: pinned,
           snap: snap,
           expandedHeight: expandedHeight,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(5))),
+          shape: const RoundedRectangleBorder(borderRadius: .vertical(bottom: .circular(5))),
           automaticallyImplyLeading: false,
           centerTitle: false,
           title: title ?? const _ImmichLogoWithText(),
@@ -109,7 +108,7 @@ class _ProfileIndicator extends ConsumerWidget {
     const widgetSize = 32.0;
 
     // TODO: remove this when update Flutter version newer than 3.35.7
-    final isIpad = defaultTargetPlatform == TargetPlatform.iOS && !context.isMobile;
+    final isIpad = defaultTargetPlatform == .iOS && !context.isMobile;
 
     void toggleReadonlyMode() {
       final isReadonlyModeEnabled = ref.watch(readonlyModeProvider);
@@ -138,15 +137,13 @@ class _ProfileIndicator extends ConsumerWidget {
         label: _BadgeLabel(
           Icon(
             Icons.info,
-            color: serverInfoState.versionStatus == VersionStatus.error
-                ? context.colorScheme.error
-                : context.primaryColor,
+            color: serverInfoState.versionStatus == .error ? context.colorScheme.error : context.primaryColor,
             size: widgetSize / 2 - 3,
             semanticLabel: 'new_version_available'.tr(),
           ),
         ),
         backgroundColor: Colors.transparent,
-        alignment: Alignment.bottomRight,
+        alignment: .bottomRight,
         isLabelVisible: versionWarningPresent,
         offset: const Offset(-2, -12),
         child: user == null
@@ -183,7 +180,7 @@ class _BackupIndicator extends ConsumerWidget {
       icon: Badge(
         label: indicatorIcon,
         backgroundColor: Colors.transparent,
-        alignment: Alignment.bottomRight,
+        alignment: .bottomRight,
         isLabelVisible: indicatorIcon != null,
         offset: const Offset(-2, -12),
         child: Icon(Icons.backup_rounded, size: _kBadgeWidgetSize, color: context.primaryColor),
@@ -193,7 +190,7 @@ class _BackupIndicator extends ConsumerWidget {
 
   Widget? _getBackupBadgeIcon(BuildContext context, WidgetRef ref) {
     final backupEnabled = ref.watch(appConfigProvider.select((c) => c.backup.enabled));
-    final hasError = ref.watch(driftBackupProvider.select((state) => state.error != BackupError.none));
+    final hasError = ref.watch(driftBackupProvider.select((state) => state.error != .none));
     final isDarkTheme = context.isDarkTheme;
     final iconColor = isDarkTheme ? Colors.white : Colors.black;
     final isUploading = ref.watch(driftBackupProvider.select((state) => state.uploadItems.isNotEmpty));
@@ -219,14 +216,14 @@ class _BackupIndicator extends ConsumerWidget {
     if (isUploading) {
       return _BadgeLabel(
         Container(
-          padding: const EdgeInsets.all(3.5),
+          padding: const .all(3.5),
           child: Theme(
             data: context.themeData.copyWith(
               progressIndicatorTheme: context.themeData.progressIndicatorTheme.copyWith(year2023: true),
             ),
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              strokeCap: StrokeCap.round,
+              strokeCap: .round,
               valueColor: AlwaysStoppedAnimation<Color>(iconColor),
               semanticsLabel: 'backup_controller_page_backup'.tr(),
             ),
@@ -256,8 +253,8 @@ class _BadgeLabel extends StatelessWidget {
       height: _kBadgeWidgetSize / 2,
       decoration: BoxDecoration(
         color: (backgroundColor ?? context.colorScheme.surfaceContainer).withValues(alpha: opacity),
-        border: Border.all(color: context.colorScheme.outline.withValues(alpha: .3 * opacity)),
-        borderRadius: BorderRadius.circular(_kBadgeWidgetSize / 2),
+        border: .all(color: context.colorScheme.outline.withValues(alpha: .3 * opacity)),
+        borderRadius: .circular(_kBadgeWidgetSize / 2),
       ),
       child: indicator,
     );
@@ -309,18 +306,18 @@ class _SyncStatusIndicatorState extends ConsumerState<_SyncStatusIndicator> with
       _dismissalController.reset();
     } else {
       _rotationController.stop();
-      if (_dismissalController.status == AnimationStatus.dismissed) {
+      if (_dismissalController.status == .dismissed) {
         _dismissalController.forward();
       }
     }
 
     // Don't show anything if not syncing and dismissal animation is complete
-    if (!isSyncing && _dismissalController.status == AnimationStatus.completed) {
+    if (!isSyncing && _dismissalController.status == .completed) {
       return const SizedBox.shrink();
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const .all(8),
       child: TweenAnimationBuilder<double>(
         tween: Tween(end: IconTheme.of(context).opacity ?? 1),
         duration: kThemeChangeDuration,
@@ -332,7 +329,7 @@ class _SyncStatusIndicatorState extends ConsumerState<_SyncStatusIndicator> with
               return IconTheme(
                 data: IconTheme.of(context).copyWith(opacity: opacity * dismissalValue),
                 child: Transform(
-                  alignment: Alignment.center,
+                  alignment: .center,
                   transform: Matrix4.identity()
                     ..scaleByDouble(dismissalValue, dismissalValue, dismissalValue, 1.0)
                     ..rotateZ(-_rotationAnimation.value * 2 * math.pi),

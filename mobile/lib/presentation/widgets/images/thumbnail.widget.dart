@@ -73,7 +73,7 @@ class _ThumbnailState extends State<Thumbnail> with SingleTickerProviderStateMix
   }
 
   void _onAnimationStatusChanged(AnimationStatus status) {
-    if (status == AnimationStatus.completed) {
+    if (status == .completed) {
       _previousImage?.dispose();
       _previousImage = null;
     }
@@ -86,7 +86,7 @@ class _ThumbnailState extends State<Thumbnail> with SingleTickerProviderStateMix
       return;
     }
 
-    final thumbhashStream = _thumbhashStream = thumbhashProvider.resolve(ImageConfiguration.empty);
+    final thumbhashStream = _thumbhashStream = thumbhashProvider.resolve(.empty);
     final thumbhashStreamListener = _thumbhashStreamListener = ImageStreamListener(
       (ImageInfo imageInfo, bool synchronousCall) {
         _stopListeningToThumbhashStream();
@@ -114,7 +114,7 @@ class _ThumbnailState extends State<Thumbnail> with SingleTickerProviderStateMix
       return;
     }
 
-    final imageStream = _imageStream = imageProvider.resolve(ImageConfiguration.empty);
+    final imageStream = _imageStream = imageProvider.resolve(.empty);
     final imageStreamListener = _imageStreamListener = ImageStreamListener(
       (ImageInfo imageInfo, bool synchronousCall) {
         _stopListeningToThumbhashStream();
@@ -209,7 +209,7 @@ class _ThumbnailState extends State<Thumbnail> with SingleTickerProviderStateMix
       return false;
     }
 
-    final topLeft = renderObject.localToGlobal(Offset.zero);
+    final topLeft = renderObject.localToGlobal(.zero);
     final bottomRight = renderObject.localToGlobal(Offset(renderObject.size.width, renderObject.size.height));
     return topLeft.dy < context.height && bottomRight.dy > 0;
   }
@@ -219,8 +219,8 @@ class _ThumbnailState extends State<Thumbnail> with SingleTickerProviderStateMix
     final colorScheme = context.colorScheme;
     final gradient = _gradientCache[colorScheme] ??= LinearGradient(
       colors: [colorScheme.surfaceContainer, colorScheme.surfaceContainer.darken(amount: .1)],
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
+      begin: .topCenter,
+      end: .bottomCenter,
     );
 
     return AnimatedBuilder(
@@ -309,28 +309,14 @@ class _ThumbnailRenderBox extends RenderBox {
     final canvas = context.canvas;
 
     if (_previousImage != null && _fadeValue < 1.0) {
-      paintImage(
-        canvas: canvas,
-        rect: rect,
-        image: _previousImage!,
-        fit: _fit,
-        filterQuality: FilterQuality.low,
-        opacity: 1.0,
-      );
+      paintImage(canvas: canvas, rect: rect, image: _previousImage!, fit: _fit, filterQuality: .low, opacity: 1.0);
     } else if (_image == null || _fadeValue < 1.0) {
       final paint = Paint()..shader = _placeholderGradient.createShader(rect);
       canvas.drawRect(rect, paint);
     }
 
     if (_image != null) {
-      paintImage(
-        canvas: canvas,
-        rect: rect,
-        image: _image!,
-        fit: _fit,
-        filterQuality: FilterQuality.low,
-        opacity: _fadeValue,
-      );
+      paintImage(canvas: canvas, rect: rect, image: _image!, fit: _fit, filterQuality: .low, opacity: _fadeValue);
     }
   }
 

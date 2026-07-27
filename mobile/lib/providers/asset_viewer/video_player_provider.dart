@@ -23,11 +23,7 @@ class VideoPlayerState {
   }
 }
 
-const _defaultState = VideoPlayerState(
-  position: Duration.zero,
-  duration: Duration.zero,
-  status: VideoPlaybackStatus.paused,
-);
+const _defaultState = VideoPlayerState(position: .zero, duration: .zero, status: .paused);
 
 final videoPlayerProvider = StateNotifierProvider.autoDispose.family<VideoPlayerNotifier, VideoPlayerState, String>((
   ref,
@@ -129,11 +125,11 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
     _holdStatus = null;
 
     switch (state.status) {
-      case VideoPlaybackStatus.paused:
+      case .paused:
         play();
-      case VideoPlaybackStatus.playing || VideoPlaybackStatus.buffering:
+      case .playing || .buffering:
         pause();
-      case VideoPlaybackStatus.completed:
+      case .completed:
         restart();
     }
   }
@@ -154,14 +150,14 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
     _holdStatus = null;
 
     switch (status) {
-      case VideoPlaybackStatus.playing || VideoPlaybackStatus.buffering:
+      case .playing || .buffering:
         play();
       default:
     }
   }
 
   Future<void> restart() async {
-    seekTo(Duration.zero);
+    seekTo(.zero);
     await play();
   }
 
@@ -215,14 +211,11 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
       return;
     }
 
-    if (state.status == VideoPlaybackStatus.playing) {
+    if (state.status == .playing) {
       _startBufferingTimer();
     }
 
-    state = state.copyWith(
-      position: position,
-      status: state.status == VideoPlaybackStatus.buffering ? VideoPlaybackStatus.playing : null,
-    );
+    state = state.copyWith(position: position, status: state.status == .buffering ? .playing : null);
   }
 
   void onNativeStatusChanged() {
@@ -237,7 +230,7 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
 
     final newStatus = _mapStatus(playbackInfo.status);
     switch (newStatus) {
-      case VideoPlaybackStatus.playing:
+      case .playing:
         WakelockPlus.enable();
         _startBufferingTimer();
       default:
@@ -257,15 +250,15 @@ class VideoPlayerNotifier extends StateNotifier<VideoPlayerState> {
   void _startBufferingTimer() {
     _bufferingTimer?.cancel();
     _bufferingTimer = Timer(const Duration(seconds: 1), () {
-      if (mounted && state.status != VideoPlaybackStatus.completed) {
-        state = state.copyWith(status: VideoPlaybackStatus.buffering);
+      if (mounted && state.status != .completed) {
+        state = state.copyWith(status: .buffering);
       }
     });
   }
 
   static VideoPlaybackStatus _mapStatus(PlaybackStatus status) => switch (status) {
-    PlaybackStatus.playing => VideoPlaybackStatus.playing,
-    PlaybackStatus.paused => VideoPlaybackStatus.paused,
-    PlaybackStatus.stopped => VideoPlaybackStatus.completed,
+    .playing => .playing,
+    .paused => .paused,
+    .stopped => .completed,
   };
 }

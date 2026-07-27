@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
-import 'package:immich_mobile/domain/models/settings_key.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/generated/translations.g.dart';
 import 'package:immich_mobile/providers/infrastructure/settings.provider.dart';
@@ -19,16 +18,16 @@ class ShareSetting extends HookConsumerWidget {
     void onChanged(ShareAssetType? value) {
       if (value != null) {
         fileType.value = value;
-        ref.read(settingsProvider).write(SettingsKey.shareFileType, value);
+        ref.read(settingsProvider).write(.shareFileType, value);
       }
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         SettingGroupTitle(title: context.t.default_share_quality, icon: Icons.ios_share_outlined),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const .symmetric(horizontal: 20),
           child: Text(
             context.t.default_quality_subtitle,
             style: context.textTheme.bodyMedium!.copyWith(color: context.textTheme.bodyMedium!.color!.withAlpha(215)),

@@ -4,7 +4,6 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/colors.dart';
-import 'package:immich_mobile/models/cast/cast_manager_state.dart';
 import 'package:immich_mobile/providers/asset_viewer/asset_viewer.provider.dart';
 import 'package:immich_mobile/providers/asset_viewer/video_player_provider.dart';
 import 'package:immich_mobile/providers/cast.provider.dart';
@@ -52,7 +51,7 @@ class _VideoControlsState extends ConsumerState<VideoControls> {
     if (!mounted) {
       return;
     }
-    if (ref.read(_provider).status == VideoPlaybackStatus.playing) {
+    if (ref.read(_provider).status == .playing) {
       ref.read(assetViewerProvider.notifier).setControls(false);
     }
   }
@@ -87,10 +86,8 @@ class _VideoControlsState extends ConsumerState<VideoControls> {
         : ref.watch(_provider.select((v) => (v.position, v.duration)));
 
     final videoStatus = ref.watch(_provider.select((v) => v.status));
-    final isPlaying = isCasting
-        ? cast.castState == CastState.playing
-        : videoStatus == VideoPlaybackStatus.playing || videoStatus == VideoPlaybackStatus.buffering;
-    final isFinished = !isCasting && videoStatus == VideoPlaybackStatus.completed;
+    final isPlaying = isCasting ? cast.castState == .playing : videoStatus == .playing || videoStatus == .buffering;
+    final isFinished = !isCasting && videoStatus == .completed;
 
     ref.listen(assetViewerProvider.select((v) => v.showingControls), (prev, showing) {
       if (showing && prev != showing) {
@@ -100,10 +97,10 @@ class _VideoControlsState extends ConsumerState<VideoControls> {
     ref.listen(_provider.select((v) => v.status), (_, __) => _hideTimer.reset());
 
     final notifier = ref.read(_provider.notifier);
-    final isLoaded = duration != Duration.zero;
+    final isLoaded = duration != .zero;
 
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+      padding: const .only(left: 16, right: 16, bottom: 12),
       child: Column(
         spacing: 4,
         children: [
@@ -111,7 +108,7 @@ class _VideoControlsState extends ConsumerState<VideoControls> {
             children: [
               IconButton(
                 iconSize: 32,
-                padding: const EdgeInsets.all(12),
+                padding: const .all(12),
                 constraints: const BoxConstraints(),
                 icon: isFinished
                     ? const Icon(Icons.replay, color: Colors.white, shadows: VideoControls._controlShadows)
@@ -128,7 +125,7 @@ class _VideoControlsState extends ConsumerState<VideoControls> {
                   "${position.format()} / ${duration.format()}",
                   style: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: .w500,
                     fontFeatures: [FontFeature.tabularFigures()],
                     shadows: VideoControls._controlShadows,
                   ),
@@ -144,7 +141,7 @@ class _VideoControlsState extends ConsumerState<VideoControls> {
             thumbColor: Colors.white,
             activeColor: Colors.white,
             inactiveColor: whiteOpacity75,
-            padding: EdgeInsets.zero,
+            padding: .zero,
             onChangeStart: (_) => notifier.hold(),
             onChangeEnd: (_) => notifier.release(),
             onChanged: isLoaded ? (value) => _onSeek(isCasting, value) : null,

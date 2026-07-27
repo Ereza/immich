@@ -19,7 +19,7 @@ class LivePhotosMetadata {
   }
 
   factory LivePhotosMetadata.fromMap(Map<String, dynamic> map) {
-    return LivePhotosMetadata(part: LivePhotosPart.values[map['part'] as int], id: map['id'] as String);
+    return LivePhotosMetadata(part: .values[map['part'] as int], id: map['id'] as String);
   }
 
   String toJson() => json.encode(toMap());

@@ -25,7 +25,7 @@ class CommentBubble extends ConsumerWidget {
     final isOwn = activity.user.id == user?.id;
     final canDelete = isOwn || album.ownerId == user?.id;
     final showThumbnail = !isAssetActivity && activity.assetId != null && activity.assetId!.isNotEmpty;
-    final isLike = activity.type == ActivityType.like;
+    final isLike = activity.type == .like;
     final bgColor = isOwn ? context.colorScheme.primaryContainer : context.colorScheme.surfaceContainer;
 
     final activityNotifier = ref.read(
@@ -56,10 +56,10 @@ class CommentBubble extends ConsumerWidget {
             GestureDetector(
               onTap: openAssetViewer,
               child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                borderRadius: const .all(.circular(10)),
                 child: Image(
                   image: RemoteImageProvider.thumbnail(assetId: activity.assetId!, thumbhash: ""),
-                  fit: BoxFit.cover,
+                  fit: .cover,
                 ),
               ),
             ),
@@ -68,8 +68,8 @@ class CommentBubble extends ConsumerWidget {
                 right: 6,
                 bottom: 6,
                 child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(color: context.colorScheme.surfaceContainer, shape: BoxShape.circle),
+                  padding: const .all(4),
+                  decoration: BoxDecoration(color: context.colorScheme.surfaceContainer, shape: .circle),
                   child: Icon(Icons.thumb_up, color: context.primaryColor, size: 18),
                 ),
               ),
@@ -82,8 +82,8 @@ class CommentBubble extends ConsumerWidget {
     Widget? likes;
     if (isLike && !showThumbnail) {
       likes = Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(color: context.colorScheme.surfaceContainer, shape: BoxShape.circle),
+        padding: const .all(8),
+        decoration: BoxDecoration(color: context.colorScheme.surfaceContainer, shape: .circle),
         child: Icon(Icons.thumb_up, color: context.primaryColor, size: 18),
       );
     }
@@ -94,8 +94,8 @@ class CommentBubble extends ConsumerWidget {
       commentBubble = ConstrainedBox(
         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.5),
         child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(color: bgColor, borderRadius: const BorderRadius.all(Radius.circular(12))),
+          padding: const .all(10),
+          decoration: BoxDecoration(color: bgColor, borderRadius: const .all(.circular(12))),
           child: Text(
             activity.comment ?? '',
             style: context.textTheme.bodyLarge?.copyWith(color: context.colorScheme.onSurface),
@@ -115,17 +115,17 @@ class CommentBubble extends ConsumerWidget {
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.86),
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+            margin: const .symmetric(vertical: 6, horizontal: 10),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
               children: [
                 if (!isOwn) ...[avatar, const SizedBox(width: 8)],
                 // Content column
                 Column(
-                  crossAxisAlignment: isOwn ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                  crossAxisAlignment: isOwn ? .end : .start,
                   children: [
-                    ...contentChildren.map((w) => Padding(padding: const EdgeInsets.only(bottom: 8.0), child: w)),
+                    ...contentChildren.map((w) => Padding(padding: const .only(bottom: 8.0), child: w)),
                     Text(
                       '${activity.user.name} • ${activity.createdAt.timeAgo()}',
                       style: context.textTheme.labelMedium?.copyWith(

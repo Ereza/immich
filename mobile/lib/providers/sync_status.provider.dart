@@ -9,10 +9,10 @@ enum SyncStatus {
 
   localized() {
     return switch (this) {
-      SyncStatus.idle => "idle".tr(),
-      SyncStatus.syncing => "running".tr(),
-      SyncStatus.success => "success".tr(),
-      SyncStatus.error => "error".tr(),
+      .idle => "idle".tr(),
+      .syncing => "running".tr(),
+      .success => "success".tr(),
+      .error => "error".tr(),
     };
   }
 }
@@ -49,10 +49,10 @@ class SyncStatusState {
     );
   }
 
-  bool get isRemoteSyncing => remoteSyncStatus == SyncStatus.syncing;
-  bool get isLocalSyncing => localSyncStatus == SyncStatus.syncing;
-  bool get isHashing => hashJobStatus == SyncStatus.syncing;
-  bool get isCloudIdSyncing => cloudIdSyncStatus == SyncStatus.syncing;
+  bool get isRemoteSyncing => remoteSyncStatus == .syncing;
+  bool get isLocalSyncing => localSyncStatus == .syncing;
+  bool get isHashing => hashJobStatus == .syncing;
+  bool get isCloudIdSyncing => cloudIdSyncStatus == .syncing;
 
   @override
   bool operator ==(Object other) {
@@ -76,10 +76,10 @@ class SyncStatusNotifier extends Notifier<SyncStatusState> {
   SyncStatusState build() {
     return const SyncStatusState(
       errorMessage: null,
-      remoteSyncStatus: SyncStatus.idle,
-      localSyncStatus: SyncStatus.idle,
-      hashJobStatus: SyncStatus.idle,
-      cloudIdSyncStatus: SyncStatus.idle,
+      remoteSyncStatus: .idle,
+      localSyncStatus: .idle,
+      hashJobStatus: .idle,
+      cloudIdSyncStatus: .idle,
     );
   }
 
@@ -88,48 +88,48 @@ class SyncStatusNotifier extends Notifier<SyncStatusState> {
   ///
 
   void setRemoteSyncStatus(SyncStatus status, [String? errorMessage]) {
-    state = state.copyWith(remoteSyncStatus: status, errorMessage: status == SyncStatus.error ? errorMessage : null);
+    state = state.copyWith(remoteSyncStatus: status, errorMessage: status == .error ? errorMessage : null);
   }
 
-  void startRemoteSync() => setRemoteSyncStatus(SyncStatus.syncing);
-  void completeRemoteSync() => setRemoteSyncStatus(SyncStatus.success);
-  void errorRemoteSync(String error) => setRemoteSyncStatus(SyncStatus.error, error);
+  void startRemoteSync() => setRemoteSyncStatus(.syncing);
+  void completeRemoteSync() => setRemoteSyncStatus(.success);
+  void errorRemoteSync(String error) => setRemoteSyncStatus(.error, error);
 
   ///
   /// Local Sync
   ///
 
   void setLocalSyncStatus(SyncStatus status, [String? errorMessage]) {
-    state = state.copyWith(localSyncStatus: status, errorMessage: status == SyncStatus.error ? errorMessage : null);
+    state = state.copyWith(localSyncStatus: status, errorMessage: status == .error ? errorMessage : null);
   }
 
-  void startLocalSync() => setLocalSyncStatus(SyncStatus.syncing);
-  void completeLocalSync() => setLocalSyncStatus(SyncStatus.success);
-  void errorLocalSync(String error) => setLocalSyncStatus(SyncStatus.error, error);
+  void startLocalSync() => setLocalSyncStatus(.syncing);
+  void completeLocalSync() => setLocalSyncStatus(.success);
+  void errorLocalSync(String error) => setLocalSyncStatus(.error, error);
 
   ///
   /// Hash Job
   ///
 
   void setHashJobStatus(SyncStatus status, [String? errorMessage]) {
-    state = state.copyWith(hashJobStatus: status, errorMessage: status == SyncStatus.error ? errorMessage : null);
+    state = state.copyWith(hashJobStatus: status, errorMessage: status == .error ? errorMessage : null);
   }
 
-  void startHashJob() => setHashJobStatus(SyncStatus.syncing);
-  void completeHashJob() => setHashJobStatus(SyncStatus.success);
-  void errorHashJob(String error) => setHashJobStatus(SyncStatus.error, error);
+  void startHashJob() => setHashJobStatus(.syncing);
+  void completeHashJob() => setHashJobStatus(.success);
+  void errorHashJob(String error) => setHashJobStatus(.error, error);
 
   ///
   /// Cloud ID Sync Job
   ///
 
   void setCloudIdSyncStatus(SyncStatus status, [String? errorMessage]) {
-    state = state.copyWith(cloudIdSyncStatus: status, errorMessage: status == SyncStatus.error ? errorMessage : null);
+    state = state.copyWith(cloudIdSyncStatus: status, errorMessage: status == .error ? errorMessage : null);
   }
 
-  void startCloudIdSync() => setCloudIdSyncStatus(SyncStatus.syncing);
-  void completeCloudIdSync() => setCloudIdSyncStatus(SyncStatus.success);
-  void errorCloudIdSync(String error) => setCloudIdSyncStatus(SyncStatus.error, error);
+  void startCloudIdSync() => setCloudIdSyncStatus(.syncing);
+  void completeCloudIdSync() => setCloudIdSyncStatus(.success);
+  void errorCloudIdSync(String error) => setCloudIdSyncStatus(.error, error);
 }
 
 final syncStatusProvider = NotifierProvider<SyncStatusNotifier, SyncStatusState>(SyncStatusNotifier.new);

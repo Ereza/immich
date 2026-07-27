@@ -36,7 +36,7 @@ class SettingsRepository extends CachedKeyValueRepository<SettingsKey, AppConfig
   Object decodeValue(SettingsKey key, String raw) => key.decode(raw);
 
   @override
-  AppConfig buildSnapshot(Map<SettingsKey, Object?> overrides) => AppConfig.fromEntries(overrides);
+  AppConfig buildSnapshot(Map<SettingsKey, Object?> overrides) => .fromEntries(overrides);
 
   @override
   Selectable<({String key, String? value})> selectable() =>

@@ -71,15 +71,15 @@ class _PinPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint primaryBrush = Paint()
       ..color = primaryColor
-      ..style = PaintingStyle.fill;
+      ..style = .fill;
 
     Paint secondaryBrush = Paint()
       ..color = secondaryColor
-      ..style = PaintingStyle.fill;
+      ..style = .fill;
 
     Paint lineBrush = Paint()
       ..color = primaryColor
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = 2;
 
     canvas.drawCircle(Offset(size.width / 2, size.height), primaryRadius, primaryBrush);

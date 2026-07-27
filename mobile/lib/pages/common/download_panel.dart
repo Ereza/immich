@@ -65,22 +65,22 @@ class DownloadTaskTile extends StatelessWidget {
     final progressPercent = (progress * 100).round();
 
     String getStatusText() => switch (status) {
-      TaskStatus.running => 'downloading'.tr(),
-      TaskStatus.complete => 'download_complete'.tr(),
-      TaskStatus.failed => 'download_failed'.tr(),
-      TaskStatus.canceled => 'download_canceled'.tr(),
-      TaskStatus.paused => 'download_paused'.tr(),
-      TaskStatus.enqueued => 'download_enqueue'.tr(),
-      TaskStatus.notFound => 'download_notfound'.tr(),
-      TaskStatus.waitingToRetry => 'download_waiting_to_retry'.tr(),
+      .running => 'downloading'.tr(),
+      .complete => 'download_complete'.tr(),
+      .failed => 'download_failed'.tr(),
+      .canceled => 'download_canceled'.tr(),
+      .paused => 'download_paused'.tr(),
+      .enqueued => 'download_enqueue'.tr(),
+      .notFound => 'download_notfound'.tr(),
+      .waitingToRetry => 'download_waiting_to_retry'.tr(),
     };
 
     return SizedBox(
       key: const ValueKey('download_progress'),
       width: context.width - 32,
       child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+        clipBehavior: .antiAlias,
+        shape: const RoundedRectangleBorder(borderRadius: .all(.circular(16))),
         child: ListTile(
           minVerticalPadding: 18,
           leading: const Icon(Icons.video_file_outlined),
@@ -91,7 +91,7 @@ class DownloadTaskTile extends StatelessWidget {
             style: ElevatedButton.styleFrom(backgroundColor: context.colorScheme.error.withAlpha(200)),
           ),
           subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Text(fileName, style: context.textTheme.labelMedium),
               Row(
@@ -100,7 +100,7 @@ class DownloadTaskTile extends StatelessWidget {
                     child: LinearProgressIndicator(
                       minHeight: 8.0,
                       value: progress,
-                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                      borderRadius: const .all(.circular(10.0)),
                     ),
                   ),
                   const SizedBox(width: 8),

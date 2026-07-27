@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/asset_edit.model.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/domain/services/tag.service.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/platform_extensions.dart';
@@ -80,17 +79,17 @@ class ActionService {
 
   Future<void> archive(List<String> remoteIds) async {
     await _assetApiRepository.updateVisibility(remoteIds, .archive);
-    await _remoteAssetRepository.updateVisibility(remoteIds, AssetVisibility.archive);
+    await _remoteAssetRepository.updateVisibility(remoteIds, .archive);
   }
 
   Future<void> unArchive(List<String> remoteIds) async {
     await _assetApiRepository.updateVisibility(remoteIds, .timeline);
-    await _remoteAssetRepository.updateVisibility(remoteIds, AssetVisibility.timeline);
+    await _remoteAssetRepository.updateVisibility(remoteIds, .timeline);
   }
 
   Future<void> moveToLockFolder(List<String> remoteIds, List<String> localIds) async {
     await _assetApiRepository.updateVisibility(remoteIds, .locked);
-    await _remoteAssetRepository.updateVisibility(remoteIds, AssetVisibility.locked);
+    await _remoteAssetRepository.updateVisibility(remoteIds, .locked);
 
     // Ask user if they want to delete local copies
     if (localIds.isNotEmpty) {
@@ -100,7 +99,7 @@ class ActionService {
 
   Future<void> removeFromLockFolder(List<String> remoteIds) async {
     await _assetApiRepository.updateVisibility(remoteIds, .timeline);
-    await _remoteAssetRepository.updateVisibility(remoteIds, AssetVisibility.timeline);
+    await _remoteAssetRepository.updateVisibility(remoteIds, .timeline);
   }
 
   Future<void> trash(List<String> remoteIds) async {
@@ -281,7 +280,7 @@ class ActionService {
   Future<int> shareAssets(
     List<BaseAsset> assets,
     BuildContext context, {
-    ShareAssetType fileType = ShareAssetType.original,
+    ShareAssetType fileType = .original,
     Completer<void>? cancelCompleter,
     void Function(double progress)? onAssetDownloadProgress,
   }) {
@@ -318,7 +317,7 @@ class ActionService {
     if (deletedIds.isEmpty) {
       return 0;
     }
-    if (CurrentPlatform.isAndroid && Store.get(StoreKey.manageLocalMediaAndroid, false)) {
+    if (CurrentPlatform.isAndroid && Store.get(.manageLocalMediaAndroid, false)) {
       await _trashedLocalAssetRepository.applyTrashedAssets(deletedIds);
     } else {
       await _localAssetRepository.delete(deletedIds);

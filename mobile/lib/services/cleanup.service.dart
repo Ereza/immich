@@ -20,7 +20,7 @@ class CleanupService {
   Future<RemovalCandidatesResult> getRemovalCandidates(
     String userId,
     DateTime cutoffDate, {
-    AssetKeepType keepMediaType = AssetKeepType.none,
+    AssetKeepType keepMediaType = .none,
     bool keepFavorites = true,
     Set<String> keepAlbumIds = const {},
   }) {

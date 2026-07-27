@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/domain/models/album/local_album.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/infrastructure/repositories/db.repository.dart';
 import 'package:immich_mobile/infrastructure/repositories/local_album.repository.dart';
@@ -20,15 +19,13 @@ void main() {
   group('getAll', () {
     test('sorts albums by backupSelection & isIosSharedAlbum', () async {
       final localAlbumRepo = mediumFactory.getRepository<DriftLocalAlbumRepository>();
-      await localAlbumRepo.upsert(mediumFactory.localAlbum(id: '1', backupSelection: BackupSelection.none));
-      await localAlbumRepo.upsert(mediumFactory.localAlbum(id: '2', backupSelection: BackupSelection.excluded));
+      await localAlbumRepo.upsert(mediumFactory.localAlbum(id: '1', backupSelection: .none));
+      await localAlbumRepo.upsert(mediumFactory.localAlbum(id: '2', backupSelection: .excluded));
       await localAlbumRepo.upsert(
-        mediumFactory.localAlbum(id: '3', backupSelection: BackupSelection.selected, isIosSharedAlbum: true),
+        mediumFactory.localAlbum(id: '3', backupSelection: .selected, isIosSharedAlbum: true),
       );
-      await localAlbumRepo.upsert(mediumFactory.localAlbum(id: '4', backupSelection: BackupSelection.selected));
-      final albums = await localAlbumRepo.getAll(
-        sortBy: {SortLocalAlbumsBy.backupSelection, SortLocalAlbumsBy.isIosSharedAlbum},
-      );
+      await localAlbumRepo.upsert(mediumFactory.localAlbum(id: '4', backupSelection: .selected));
+      final albums = await localAlbumRepo.getAll(sortBy: {.backupSelection, .isIosSharedAlbum});
       expect(albums.length, 4);
       expect(albums[0].id, '4'); // selected
       expect(albums[1].id, '3'); // selected & isIosSharedAlbum
@@ -47,12 +44,12 @@ void main() {
       final moved = _localAsset('moved');
       final other = _localAsset('other');
       await localAlbumRepo.upsert(
-        mediumFactory.localAlbum(id: 'src', backupSelection: BackupSelection.none),
+        mediumFactory.localAlbum(id: 'src', backupSelection: .none),
         toUpsert: [moved, other],
       );
       final anchor = _localAsset('anchor');
       await localAlbumRepo.upsert(
-        mediumFactory.localAlbum(id: 'dst', backupSelection: BackupSelection.selected),
+        mediumFactory.localAlbum(id: 'dst', backupSelection: .selected),
         toUpsert: [anchor],
       );
 
@@ -99,12 +96,12 @@ void main() {
   });
 }
 
-LocalAsset _localAsset(String id) => LocalAsset(
+LocalAsset _localAsset(String id) => .new(
   id: id,
   name: '$id.jpg',
-  type: AssetType.image,
+  type: .image,
   createdAt: DateTime(2024),
   updatedAt: DateTime(2024),
-  playbackStyle: AssetPlaybackStyle.image,
+  playbackStyle: .image,
   isEdited: false,
 );

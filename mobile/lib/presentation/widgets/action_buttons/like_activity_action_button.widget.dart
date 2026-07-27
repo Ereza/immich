@@ -41,9 +41,7 @@ class LikeActivityActionButton extends ConsumerWidget {
 
     return activities.when(
       data: (data) {
-        final liked = data.firstWhereOrNull(
-          (a) => a.type == ActivityType.like && a.user.id == user?.id && a.assetId == asset?.id,
-        );
+        final liked = data.firstWhereOrNull((a) => a.type == .like && a.user.id == user?.id && a.assetId == asset?.id);
 
         return BaseActionButton(
           maxWidth: 60,

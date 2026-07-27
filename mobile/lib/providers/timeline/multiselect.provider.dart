@@ -19,16 +19,15 @@ class MultiSelectState {
   bool get isEnabled => selectedAssets.isNotEmpty;
 
   /// Cloud only
-  bool get hasRemote =>
-      selectedAssets.any((asset) => asset.storage == AssetState.remote || asset.storage == AssetState.merged);
+  bool get hasRemote => selectedAssets.any((asset) => asset.storage == .remote || asset.storage == .merged);
 
   bool get hasStacked => selectedAssets.any((asset) => asset is RemoteAsset && asset.stackId != null);
 
-  bool get hasMerged => selectedAssets.any((asset) => asset.storage == AssetState.merged);
+  bool get hasMerged => selectedAssets.any((asset) => asset.storage == .merged);
 
-  bool get onlyLocal => selectedAssets.any((asset) => asset.storage == AssetState.local);
+  bool get onlyLocal => selectedAssets.any((asset) => asset.storage == .local);
 
-  bool get onlyRemote => selectedAssets.any((asset) => asset.storage == AssetState.remote);
+  bool get onlyRemote => selectedAssets.any((asset) => asset.storage == .remote);
 
   MultiSelectState copyWith({
     Set<BaseAsset>? selectedAssets,

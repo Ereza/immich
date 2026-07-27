@@ -7,7 +7,6 @@ import 'package:flutter_hooks/flutter_hooks.dart' hide Store;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/models/server_info/server_disk_info.model.dart';
-import 'package:immich_mobile/pages/common/settings.page.dart';
 import 'package:immich_mobile/providers/auth.provider.dart';
 import 'package:immich_mobile/providers/backup/backup.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/readonly_mode.provider.dart';
@@ -47,16 +46,16 @@ class ImmichAppBarDialog extends HookConsumerWidget {
       return SizedBox(
         height: 56,
         child: Stack(
-          alignment: Alignment.centerLeft,
+          alignment: .centerLeft,
           children: [
             IconButton(
               onPressed: () => ContextHelper(context).pop(),
               icon: Icon(Icons.close, size: 20, color: context.colorScheme.onSurfaceVariant),
             ),
             Align(
-              alignment: Alignment.center,
+              alignment: .center,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
+                padding: const .only(bottom: 4),
                 child: Image.asset(
                   context.isDarkTheme ? 'assets/immich-text-dark.png' : 'assets/immich-text-light.png',
                   height: 16,
@@ -71,8 +70,8 @@ class ImmichAppBarDialog extends HookConsumerWidget {
     buildActionButton(IconData icon, String text, Function() onTap, {Widget? trailing}) {
       return ListTile(
         dense: true,
-        visualDensity: VisualDensity.standard,
-        contentPadding: const EdgeInsets.only(left: 30, right: 30),
+        visualDensity: .standard,
+        contentPadding: const .only(left: 30, right: 30),
         minLeadingWidth: 40,
         leading: SizedBox(child: Icon(icon, color: theme.textTheme.labelLarge?.color?.withAlpha(250), size: 20)),
         title: Text(
@@ -92,7 +91,7 @@ class ImmichAppBarDialog extends HookConsumerWidget {
       return buildActionButton(
         Icons.cleaning_services_outlined,
         "free_up_space",
-        () => context.pushRoute(SettingsSubRoute(section: SettingSection.freeUpSpace)),
+        () => context.pushRoute(SettingsSubRoute(section: .freeUpSpace)),
       );
     }
 
@@ -151,17 +150,13 @@ class ImmichAppBarDialog extends HookConsumerWidget {
       }
 
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        padding: const .symmetric(horizontal: 16, vertical: 4),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           spacing: 12,
           children: [
             Text("backup_controller_page_server_storage".tr(), style: context.textTheme.labelLarge),
-            LinearProgressIndicator(
-              minHeight: 10.0,
-              value: percentage,
-              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            ),
+            LinearProgressIndicator(minHeight: 10.0, value: percentage, borderRadius: const .all(.circular(10.0))),
             Text(
               'backup_controller_page_storage_format',
               style: context.textTheme.bodySmall,
@@ -173,26 +168,26 @@ class ImmichAppBarDialog extends HookConsumerWidget {
 
     buildFooter() {
       return Padding(
-        padding: const EdgeInsets.only(top: 10, bottom: 20),
+        padding: const .only(top: 10, bottom: 20),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             InkWell(
               onTap: () {
                 ContextHelper(context).pop();
-                launchUrl(Uri.parse('https://docs.immich.app'), mode: LaunchMode.externalApplication);
+                launchUrl(Uri.parse('https://docs.immich.app'), mode: .externalApplication);
               },
               child: Text("documentation", style: context.textTheme.bodySmall).tr(),
             ),
-            const SizedBox(width: 20, child: Text("•", textAlign: TextAlign.center)),
+            const SizedBox(width: 20, child: Text("•", textAlign: .center)),
             InkWell(
               onTap: () {
                 ContextHelper(context).pop();
-                launchUrl(Uri.parse('https://github.com/immich-app/immich'), mode: LaunchMode.externalApplication);
+                launchUrl(Uri.parse('https://github.com/immich-app/immich'), mode: .externalApplication);
               },
               child: Text("profile_drawer_github", style: context.textTheme.bodySmall).tr(),
             ),
-            const SizedBox(width: 20, child: Text("•", textAlign: TextAlign.center)),
+            const SizedBox(width: 20, child: Text("•", textAlign: .center)),
             InkWell(
               onTap: () async {
                 ContextHelper(context).pop();
@@ -215,50 +210,50 @@ class ImmichAppBarDialog extends HookConsumerWidget {
 
     buildReadonlyMessage() {
       return Padding(
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+        padding: const .only(left: 10.0, right: 10.0),
         child: ListTile(
           dense: true,
-          visualDensity: VisualDensity.standard,
-          contentPadding: const EdgeInsets.only(left: 20, right: 20),
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+          visualDensity: .standard,
+          contentPadding: const .only(left: 20, right: 20),
+          shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
           minLeadingWidth: 20,
           tileColor: theme.primaryColor.withAlpha(80),
           title: Text(
             "profile_drawer_readonly_mode",
             style: theme.textTheme.labelLarge?.copyWith(color: theme.textTheme.labelLarge?.color?.withAlpha(250)),
-            textAlign: TextAlign.center,
+            textAlign: .center,
           ).tr(),
         ),
       );
     }
 
     return Dismissible(
-      behavior: HitTestBehavior.translucent,
-      direction: DismissDirection.down,
+      behavior: .translucent,
+      direction: .down,
       onDismissed: (_) => ContextHelper(context).pop(),
       key: const Key('app_bar_dialog'),
       child: Dialog(
-        clipBehavior: Clip.hardEdge,
-        alignment: Alignment.topCenter,
-        insetPadding: EdgeInsets.only(
+        clipBehavior: .hardEdge,
+        alignment: .topCenter,
+        insetPadding: .only(
           top: isHorizontal ? 20 : 40,
           left: horizontalPadding,
           right: horizontalPadding,
           bottom: isHorizontal ? 20 : 100,
         ),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+        shape: const RoundedRectangleBorder(borderRadius: .all(.circular(20))),
         child: SizedBox(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
-                Container(padding: const EdgeInsets.symmetric(horizontal: 8), child: buildTopRow()),
+                Container(padding: const .symmetric(horizontal: 8), child: buildTopRow()),
                 Container(
                   decoration: BoxDecoration(
                     color: context.colorScheme.surface,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    borderRadius: const .all(.circular(10)),
                   ),
-                  margin: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
+                  margin: const .only(left: 12, right: 12, bottom: 8),
                   child: Column(
                     children: [
                       const AppBarProfileInfoBox(),

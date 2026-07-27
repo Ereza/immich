@@ -16,7 +16,7 @@ void main() {
   late MockDriftMemoryService memoryService;
   late MockUserService userService;
 
-  UserDto user({bool memoryEnabled = true}) => UserDto(
+  UserDto user({bool memoryEnabled = true}) => .new(
     id: 'user-1',
     email: 'user@test.dev',
     name: 'user',

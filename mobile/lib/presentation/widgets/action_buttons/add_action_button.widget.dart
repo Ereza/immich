@@ -16,7 +16,6 @@ import 'package:immich_mobile/providers/user.provider.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/archive_action_button.widget.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/move_to_lock_folder_action_button.widget.dart';
 import 'package:immich_mobile/presentation/widgets/bottom_sheet/base_bottom_sheet.widget.dart';
@@ -35,17 +34,17 @@ class AddActionButton extends ConsumerStatefulWidget {
 class _AddActionButtonState extends ConsumerState<AddActionButton> {
   void _handleMenuSelection(AddToMenuItem selected) {
     switch (selected) {
-      case AddToMenuItem.album:
+      case .album:
         _openAlbumSelector();
         break;
-      case AddToMenuItem.archive:
-        performArchiveAction(context, ref, source: ActionSource.viewer);
+      case .archive:
+        performArchiveAction(context, ref, source: .viewer);
         break;
-      case AddToMenuItem.unarchive:
-        performUnArchiveAction(context, ref, source: ActionSource.viewer);
+      case .unarchive:
+        performUnArchiveAction(context, ref, source: .viewer);
         break;
-      case AddToMenuItem.lockedFolder:
-        performMoveToLockFolderAction(context, ref, source: ActionSource.viewer);
+      case .lockedFolder:
+        performMoveToLockFolderAction(context, ref, source: .viewer);
         break;
     }
   }
@@ -59,27 +58,27 @@ class _AddActionButtonState extends ConsumerState<AddActionButton> {
     final user = ref.read(currentUserProvider);
     final isOwner = asset is RemoteAsset && asset.ownerId == user?.id;
     final isInLockedView = ref.watch(inLockedViewProvider);
-    final isArchived = asset is RemoteAsset && asset.visibility == AssetVisibility.archive;
+    final isArchived = asset is RemoteAsset && asset.visibility == .archive;
     final hasRemote = asset is RemoteAsset;
     final showArchive = isOwner && !isInLockedView && hasRemote && !isArchived;
     final showUnarchive = isOwner && !isInLockedView && hasRemote && isArchived;
 
     return [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const .symmetric(horizontal: 16, vertical: 8),
         child: Text("add_to_bottom_bar".tr(), style: context.textTheme.labelMedium),
       ),
       BaseActionButton(
         iconData: Icons.photo_album_outlined,
         label: "album".tr(),
         menuItem: true,
-        onPressed: () => _handleMenuSelection(AddToMenuItem.album),
+        onPressed: () => _handleMenuSelection(.album),
       ),
 
       if (isOwner) ...[
         const Divider(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const .symmetric(horizontal: 16, vertical: 8),
           child: Text("move_to".tr(), style: context.textTheme.labelMedium),
         ),
         if (showArchive)
@@ -87,20 +86,20 @@ class _AddActionButtonState extends ConsumerState<AddActionButton> {
             iconData: Icons.archive_outlined,
             label: "archive".tr(),
             menuItem: true,
-            onPressed: () => _handleMenuSelection(AddToMenuItem.archive),
+            onPressed: () => _handleMenuSelection(.archive),
           ),
         if (showUnarchive)
           BaseActionButton(
             iconData: Icons.unarchive_outlined,
             label: "unarchive".tr(),
             menuItem: true,
-            onPressed: () => _handleMenuSelection(AddToMenuItem.unarchive),
+            onPressed: () => _handleMenuSelection(.unarchive),
           ),
         BaseActionButton(
           iconData: Icons.lock_outline,
           label: "locked_folder".tr(),
           menuItem: true,
-          onPressed: () => _handleMenuSelection(AddToMenuItem.lockedFolder),
+          onPressed: () => _handleMenuSelection(.lockedFolder),
         ),
       ],
     ];
@@ -109,7 +108,7 @@ class _AddActionButtonState extends ConsumerState<AddActionButton> {
   void _openAlbumSelector() {
     final currentAsset = ref.read(assetViewerProvider).currentAsset;
     if (currentAsset == null) {
-      ImmichToast.show(context: context, msg: "Cannot load asset information.", toastType: ToastType.error);
+      ImmichToast.show(context: context, msg: "Cannot load asset information.", toastType: .error);
       return;
     }
 
@@ -140,18 +139,18 @@ class _AddActionButtonState extends ConsumerState<AddActionButton> {
     final latest = ref.read(assetViewerProvider).currentAsset;
 
     if (latest == null) {
-      ImmichToast.show(context: context, msg: "Cannot load asset information.", toastType: ToastType.error);
+      ImmichToast.show(context: context, msg: "Cannot load asset information.", toastType: .error);
       return;
     }
 
-    final result = await ref.read(actionProvider.notifier).addToAlbum(ActionSource.viewer, album);
+    final result = await ref.read(actionProvider.notifier).addToAlbum(.viewer, album);
 
     if (!context.mounted) {
       return;
     }
 
     if (!result.success) {
-      ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: ToastType.error);
+      ImmichToast.show(context: context, msg: 'scaffold_body_error_occurred'.tr(), toastType: .error);
       return;
     }
 
@@ -168,7 +167,7 @@ class _AddActionButtonState extends ConsumerState<AddActionButton> {
       ImmichToast.show(
         context: context,
         msg: 'assets_cannot_be_added_to_album_count'.t(context: context, args: {'count': result.failedCount}),
-        toastType: ToastType.error,
+        toastType: .error,
       );
     } else {
       ImmichToast.show(
@@ -198,16 +197,14 @@ class _AddActionButtonState extends ConsumerState<AddActionButton> {
         backgroundColor: WidgetStatePropertyAll(themeData.scaffoldBackgroundColor),
         surfaceTintColor: const WidgetStatePropertyAll(Colors.grey),
         elevation: const WidgetStatePropertyAll(4),
-        shape: const WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-        ),
+        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: .all(.circular(12)))),
         padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 6)),
       ),
       menuChildren: widget.originalTheme != null
           ? [
               Theme(
                 data: widget.originalTheme!,
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: _buildMenuChildren()),
+                child: Column(crossAxisAlignment: .start, children: _buildMenuChildren()),
               ),
             ]
           : _buildMenuChildren(),

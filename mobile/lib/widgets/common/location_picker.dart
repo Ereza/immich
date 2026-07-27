@@ -66,16 +66,16 @@ class _LocationPicker extends HookWidget {
     }
 
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(30),
-      alignment: Alignment.center,
+      contentPadding: const .all(30),
+      alignment: .center,
       content: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Text("edit_location_dialog_title", style: context.textTheme.titleMedium).tr(),
             Align(
-              alignment: Alignment.center,
+              alignment: .center,
               child: TextButton.icon(
                 icon: const Text("location_picker_choose_on_map").tr(),
                 label: const Icon(Icons.map_outlined, size: 16),
@@ -110,17 +110,14 @@ class _LocationPicker extends HookWidget {
           onPressed: () => ContextHelper(context).pop(),
           child: Text(
             "cancel",
-            style: context.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: context.colorScheme.error,
-            ),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.colorScheme.error),
           ).tr(),
         ),
         TextButton(
           onPressed: () => context.maybePop(latlng),
           child: Text(
             "action_common_update",
-            style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: context.primaryColor),
+            style: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.primaryColor),
           ).tr(),
         ),
       ],
@@ -160,15 +157,15 @@ class _ManualPickerInput extends HookWidget {
     return TextField(
       controller: controller,
       focusNode: focusNode,
-      textInputAction: TextInputAction.done,
+      textInputAction: .done,
       autofocus: false,
       decoration: InputDecoration(
         labelText: decorationText.tr(),
-        labelStyle: TextStyle(fontWeight: FontWeight.bold, color: context.primaryColor),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        labelStyle: TextStyle(fontWeight: .bold, color: context.primaryColor),
+        floatingLabelBehavior: .auto,
         border: const OutlineInputBorder(),
         hintText: hintText.tr(),
-        hintStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
+        hintStyle: const TextStyle(fontWeight: .normal, fontSize: 14),
         errorText: isValid.value ? null : errorText.tr(),
       ),
       onEditingComplete: onEditingComplete,

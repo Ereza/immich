@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/timeline.model.dart';
 import 'package:immich_mobile/infrastructure/entities/remote_asset.entity.drift.dart';
 import 'package:immich_mobile/infrastructure/entities/user.entity.drift.dart';
@@ -32,10 +31,10 @@ void main() {
           RemoteAssetEntityCompanion.insert(
             id: 'asset-1',
             name: 'asset-1.jpg',
-            type: AssetType.image,
+            type: .image,
             checksum: 'checksum-1',
             ownerId: userId,
-            visibility: AssetVisibility.timeline,
+            visibility: .timeline,
             createdAt: Value(createdAt),
             updatedAt: Value(createdAt),
             uploadedAt: Value(createdAt),

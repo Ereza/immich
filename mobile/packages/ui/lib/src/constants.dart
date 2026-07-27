@@ -50,7 +50,7 @@ abstract class ImmichRadius {
   static const double xxl = 24.0;
 
   /// Full circular radius: infinity
-  static const double full = double.infinity;
+  static const double full = .infinity;
 }
 
 /// Icon size constants for consistent icon sizing

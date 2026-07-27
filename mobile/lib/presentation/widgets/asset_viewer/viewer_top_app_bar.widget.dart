@@ -82,8 +82,8 @@ class ViewerTopAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     gradient: showingDetails
                         ? null
                         : const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
+                            begin: .topCenter,
+                            end: .bottomCenter,
                             colors: [Colors.black45, Colors.black12, Colors.transparent],
                             stops: [0.0, 0.7, 1.0],
                           ),
@@ -104,10 +104,7 @@ class ViewerTopAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     trailing: !showingDetails && !isReadonlyModeEnabled
                         ? ImmichColorOverride(
                             color: Colors.white,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: isInLockedView ? lockedViewActions : actions,
-                            ),
+                            child: Row(mainAxisSize: .min, children: isInLockedView ? lockedViewActions : actions),
                           )
                         : null,
                   ),
@@ -121,7 +118,7 @@ class ViewerTopAppBar extends ConsumerWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(60.0);
+  Size get preferredSize => const .fromHeight(60.0);
 }
 
 class _AppBarBackButton extends ConsumerWidget {
@@ -136,7 +133,7 @@ class _AppBarBackButton extends ConsumerWidget {
         shape: const CircleBorder(),
         iconSize: 22,
         iconColor: showingDetails ? context.colorScheme.onSurface : Colors.white,
-        padding: const EdgeInsets.all(10.0),
+        padding: const .all(10.0),
         elevation: showingDetails ? 4 : 0,
       ),
       onPressed: context.maybePop,
@@ -165,7 +162,7 @@ class _AssetInfoTitle extends ConsumerWidget {
     final timeFormatted = DateFormat.jm().format(dateTime);
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       children: [
         Text(dateFormatted, style: context.textTheme.labelLarge?.copyWith(color: Colors.white)),
         Text(timeFormatted, style: context.textTheme.labelMedium?.copyWith(color: Colors.white70)),

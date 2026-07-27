@@ -70,7 +70,7 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
         child: SizedBox(
           height: 200,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: .start,
             children: [
               buildTitleInputField(),
               buildDescriptionInputField(),
@@ -92,28 +92,28 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
 
   Widget _buildEmptyState() {
     return Padding(
-      padding: const EdgeInsets.only(top: 0, left: 18),
+      padding: const .only(top: 0, left: 18),
       child: Text('create_shared_album_page_share_add_assets', style: context.textTheme.labelLarge).t(),
     );
   }
 
   Widget _buildSelectPhotosButton() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const .all(16.0),
       child: FilledButton.icon(
         style: FilledButton.styleFrom(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          alignment: .centerLeft,
+          padding: const .symmetric(vertical: 24.0, horizontal: 16.0),
+          shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10.0))),
           backgroundColor: context.colorScheme.surfaceContainerHigh,
         ),
         onPressed: onSelectPhotos,
         icon: Icon(Icons.add_rounded, color: context.primaryColor),
         label: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const .only(left: 8.0),
           child: Text(
             'create_shared_album_page_share_select_photos',
-            style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: context.primaryColor),
+            style: context.textTheme.titleMedium?.copyWith(fontWeight: .w600, color: context.primaryColor),
           ).t(),
         ),
       ),
@@ -122,7 +122,7 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
 
   Widget _buildSelectedImageGrid() {
     return SliverPadding(
-      padding: const EdgeInsets.only(top: 16.0),
+      padding: const .only(top: 16.0),
       sliver: SliverGrid(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
@@ -191,7 +191,7 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
       }
     } catch (_) {
       if (context.mounted) {
-        ImmichToast.show(context: context, toastType: ToastType.error, msg: 'errors.failed_to_create_album'.t());
+        ImmichToast.show(context: context, toastType: .error, msg: 'errors.failed_to_create_album'.t());
       }
     } finally {
       if (mounted) {
@@ -202,7 +202,7 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
 
   Widget buildTitleInputField() {
     return Padding(
-      padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+      padding: const .only(right: 10.0, left: 10.0),
       child: _AlbumTitleTextField(
         focusNode: albumTitleTextFieldFocusNode,
         textController: albumTitleController,
@@ -218,7 +218,7 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
 
   Widget buildDescriptionInputField() {
     return Padding(
-      padding: const EdgeInsets.only(right: 10.0, left: 10.0, top: 8),
+      padding: const .only(right: 10.0, left: 10.0, top: 8),
       child: _AlbumViewerEditableDescription(
         textController: albumDescriptionController,
         focusNode: albumDescriptionTextFieldFocusNode,
@@ -228,11 +228,11 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
 
   Widget buildControlButton() {
     return Padding(
-      padding: const EdgeInsets.only(left: 12.0, top: 8.0, bottom: 8.0),
+      padding: const .only(left: 12.0, top: 8.0, bottom: 8.0),
       child: SizedBox(
         height: 42.0,
         child: ListView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: .horizontal,
           children: [
             AlbumActionFilledButton(
               iconData: Icons.add_photo_alternate_outlined,
@@ -260,7 +260,7 @@ class _DriftCreateAlbumPageState extends ConsumerState<DriftCreateAlbumPage> {
             child: Text(
               'create'.t(),
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: .bold,
                 color: _canCreateAlbum ? context.primaryColor : context.themeData.disabledColor,
               ),
             ),
@@ -313,7 +313,7 @@ class _AlbumTitleTextFieldState extends State<_AlbumTitleTextField> {
   Widget build(BuildContext context) {
     return TextField(
       focusNode: widget.focusNode,
-      style: TextStyle(fontSize: 28.0, color: context.colorScheme.onSurface, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 28.0, color: context.colorScheme.onSurface, fontWeight: .bold),
       controller: widget.textController,
       onTap: () {
         if (widget.textController.text == 'create_album_page_untitled'.t(context: context)) {
@@ -321,7 +321,7 @@ class _AlbumTitleTextFieldState extends State<_AlbumTitleTextField> {
         }
       },
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+        contentPadding: const .symmetric(horizontal: 8.0, vertical: 16.0),
         suffixIcon: widget.textController.text.isNotEmpty && widget.isFocus
             ? IconButton(
                 onPressed: () {
@@ -333,16 +333,16 @@ class _AlbumTitleTextFieldState extends State<_AlbumTitleTextField> {
             : null,
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.transparent),
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: .all(.circular(16.0)),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: context.primaryColor.withValues(alpha: 0.3)),
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const .all(.circular(16.0)),
         ),
         hintText: 'add_a_title'.t(),
         hintStyle: context.themeData.inputDecorationTheme.hintStyle?.copyWith(
           fontSize: 28.0,
-          fontWeight: FontWeight.bold,
+          fontWeight: .bold,
           height: 1.2,
         ),
         focusColor: Colors.grey[300],
@@ -401,7 +401,7 @@ class _AlbumViewerEditableDescriptionState extends State<_AlbumViewerEditableDes
         minLines: 1,
         controller: widget.textController,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
+          contentPadding: const .symmetric(horizontal: 12.0, vertical: 16.0),
           suffixIcon: widget.focusNode.hasFocus && widget.textController.text.isNotEmpty
               ? IconButton(
                   onPressed: () {
@@ -413,11 +413,11 @@ class _AlbumViewerEditableDescriptionState extends State<_AlbumViewerEditableDes
               : null,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: context.colorScheme.outline.withValues(alpha: 0.3)),
-            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            borderRadius: const .all(.circular(16.0)),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: context.primaryColor.withValues(alpha: 0.3)),
-            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            borderRadius: const .all(.circular(16.0)),
           ),
           hintStyle: context.themeData.inputDecorationTheme.hintStyle?.copyWith(
             fontSize: 16.0,

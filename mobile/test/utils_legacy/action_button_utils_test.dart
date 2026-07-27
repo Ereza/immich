@@ -3,14 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/album/album.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
-import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/utils/action_button.utils.dart';
 
 LocalAsset createLocalAsset({
   String? remoteId,
   String name = 'test.jpg',
   String? checksum = 'test-checksum',
-  AssetType type = AssetType.image,
+  AssetType type = .image,
   DateTime? createdAt,
   DateTime? updatedAt,
   bool isFavorite = false,
@@ -24,7 +23,7 @@ LocalAsset createLocalAsset({
     createdAt: createdAt ?? DateTime.now(),
     updatedAt: updatedAt ?? DateTime.now(),
     isFavorite: isFavorite,
-    playbackStyle: AssetPlaybackStyle.image,
+    playbackStyle: .image,
     isEdited: false,
   );
 }
@@ -33,7 +32,7 @@ RemoteAsset createRemoteAsset({
   String? localId,
   String name = 'test.jpg',
   String checksum = 'test-checksum',
-  AssetType type = AssetType.image,
+  AssetType type = .image,
   DateTime? createdAt,
   DateTime? updatedAt,
   DateTime? uploadedAt,
@@ -71,7 +70,7 @@ RemoteAlbum createRemoteAlbum({
     updatedAt: DateTime.now(),
     isActivityEnabled: isActivityEnabled,
     isShared: isShared,
-    order: AlbumAssetOrder.asc,
+    order: .asc,
     assetCount: 0,
     ownerName: 'Test Owner',
   );
@@ -91,7 +90,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       expect(context.asset, isA<BaseAsset>());
@@ -122,7 +121,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.share.shouldShow(context), isTrue);
@@ -138,7 +137,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.share.shouldShow(context), isTrue);
@@ -157,7 +156,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.shareLink.shouldShow(context), isTrue);
@@ -174,7 +173,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.shareLink.shouldShow(context), isFalse);
@@ -191,7 +190,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.shareLink.shouldShow(context), isFalse);
@@ -210,7 +209,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.archive.shouldShow(context), isTrue);
@@ -227,7 +226,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.archive.shouldShow(context), isFalse);
@@ -244,7 +243,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.archive.shouldShow(context), isFalse);
@@ -261,7 +260,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.archive.shouldShow(context), isFalse);
@@ -278,7 +277,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.archive.shouldShow(context), isFalse);
@@ -297,7 +296,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.unarchive.shouldShow(context), isTrue);
@@ -314,7 +313,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.unarchive.shouldShow(context), isFalse);
@@ -331,7 +330,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.unarchive.shouldShow(context), isFalse);
@@ -350,7 +349,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.download.shouldShow(context), isTrue);
@@ -367,7 +366,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.download.shouldShow(context), isFalse);
@@ -384,7 +383,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.download.shouldShow(context), isFalse);
@@ -403,7 +402,7 @@ void main() {
           isStacked: false,
           currentAlbum: null,
           advancedTroubleshooting: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.similarPhotos.shouldShow(context), isTrue);
@@ -420,7 +419,7 @@ void main() {
           currentAlbum: null,
           isStacked: false,
           advancedTroubleshooting: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.similarPhotos.shouldShow(context), isFalse);
@@ -439,7 +438,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.trash.shouldShow(context), isTrue);
@@ -456,7 +455,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.trash.shouldShow(context), isFalse);
@@ -473,8 +472,8 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.viewer,
-          timelineOrigin: TimelineOrigin.trash,
+          source: .viewer,
+          timelineOrigin: .trash,
         );
 
         expect(ActionButtonType.trash.shouldShow(context), isFalse);
@@ -493,8 +492,8 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
-          timelineOrigin: TimelineOrigin.trash,
+          source: .timeline,
+          timelineOrigin: .trash,
         );
 
         expect(ActionButtonType.restoreTrash.shouldShow(context), isTrue);
@@ -511,8 +510,8 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
-          timelineOrigin: TimelineOrigin.main,
+          source: .timeline,
+          timelineOrigin: .main,
         );
 
         expect(ActionButtonType.restoreTrash.shouldShow(context), isFalse);
@@ -531,7 +530,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.deletePermanent.shouldShow(context), isTrue);
@@ -548,7 +547,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.deletePermanent.shouldShow(context), isFalse);
@@ -565,8 +564,8 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.viewer,
-          timelineOrigin: TimelineOrigin.trash,
+          source: .viewer,
+          timelineOrigin: .trash,
         );
 
         expect(ActionButtonType.deletePermanent.shouldShow(context), isTrue);
@@ -585,7 +584,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.delete.shouldShow(context), isTrue);
@@ -604,7 +603,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.moveToLockFolder.shouldShow(context), isTrue);
@@ -623,7 +622,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.deleteLocal.shouldShow(context), isTrue);
@@ -640,7 +639,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.deleteLocal.shouldShow(context), isFalse);
@@ -656,7 +655,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.deleteLocal.shouldShow(context), isTrue);
@@ -675,7 +674,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.upload.shouldShow(context), isTrue);
@@ -694,7 +693,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.removeFromAlbum.shouldShow(context), isTrue);
@@ -710,7 +709,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.removeFromAlbum.shouldShow(context), isFalse);
@@ -729,7 +728,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.setProfilePicture.shouldShow(context), isTrue);
@@ -746,7 +745,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.setProfilePicture.shouldShow(context), isFalse);
@@ -763,7 +762,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.setProfilePicture.shouldShow(context), isFalse);
@@ -780,7 +779,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.setProfilePicture.shouldShow(context), isFalse);
@@ -799,7 +798,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
           selectedCount: 1,
         );
 
@@ -817,7 +816,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
           selectedCount: 1,
         );
 
@@ -835,7 +834,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
           selectedCount: 1,
         );
 
@@ -852,7 +851,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
           selectedCount: 1,
         );
 
@@ -870,7 +869,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
           selectedCount: 0,
         );
 
@@ -888,7 +887,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
           selectedCount: 2,
         );
 
@@ -908,7 +907,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.likeActivity.shouldShow(context), isTrue);
@@ -925,7 +924,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.likeActivity.shouldShow(context), isFalse);
@@ -942,7 +941,7 @@ void main() {
           currentAlbum: album,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.likeActivity.shouldShow(context), isFalse);
@@ -958,7 +957,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.likeActivity.shouldShow(context), isFalse);
@@ -976,7 +975,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: true,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.advancedInfo.shouldShow(context), isTrue);
@@ -992,7 +991,7 @@ void main() {
           currentAlbum: null,
           advancedTroubleshooting: false,
           isStacked: false,
-          source: ActionSource.timeline,
+          source: .timeline,
         );
 
         expect(ActionButtonType.advancedInfo.shouldShow(context), isFalse);
@@ -1012,7 +1011,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: true,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       expect(ActionButtonType.unstack.shouldShow(context), isTrue);
@@ -1029,7 +1028,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       expect(ActionButtonType.unstack.shouldShow(context), isFalse);
@@ -1046,7 +1045,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       expect(ActionButtonType.unstack.shouldShow(context), isFalse);
@@ -1068,7 +1067,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
     });
 
@@ -1076,7 +1075,7 @@ void main() {
       for (final buttonType in ActionButtonType.values) {
         var buttonContext = context;
 
-        if (buttonType == ActionButtonType.removeFromAlbum) {
+        if (buttonType == .removeFromAlbum) {
           final album = createRemoteAlbum();
           final contextWithAlbum = ActionButtonContext(
             asset: asset,
@@ -1087,11 +1086,11 @@ void main() {
             currentAlbum: album,
             advancedTroubleshooting: false,
             isStacked: false,
-            source: ActionSource.timeline,
+            source: .timeline,
           );
           final widget = buttonType.buildButton(contextWithAlbum);
           expect(widget, isA<Widget>());
-        } else if (buttonType == ActionButtonType.similarPhotos) {
+        } else if (buttonType == .similarPhotos) {
           final contextWithAlbum = ActionButtonContext(
             asset: createRemoteAsset(),
             isOwner: true,
@@ -1101,11 +1100,11 @@ void main() {
             currentAlbum: null,
             advancedTroubleshooting: false,
             isStacked: false,
-            source: ActionSource.timeline,
+            source: .timeline,
           );
           final widget = buttonType.buildButton(contextWithAlbum);
           expect(widget, isA<Widget>());
-        } else if (buttonType == ActionButtonType.setAlbumCover) {
+        } else if (buttonType == .setAlbumCover) {
           final album = createRemoteAlbum();
           final contextWithAlbum = ActionButtonContext(
             asset: asset,
@@ -1116,11 +1115,11 @@ void main() {
             currentAlbum: album,
             advancedTroubleshooting: false,
             isStacked: false,
-            source: ActionSource.timeline,
+            source: .timeline,
           );
           final widget = buttonType.buildButton(contextWithAlbum);
           expect(widget, isA<Widget>());
-        } else if (buttonType == ActionButtonType.unstack) {
+        } else if (buttonType == .unstack) {
           final album = createRemoteAlbum();
           final contextWithAlbum = ActionButtonContext(
             asset: asset,
@@ -1131,7 +1130,7 @@ void main() {
             currentAlbum: album,
             advancedTroubleshooting: false,
             isStacked: true,
-            source: ActionSource.timeline,
+            source: .timeline,
           );
           final widget = buttonType.buildButton(contextWithAlbum);
           expect(widget, isA<Widget>());
@@ -1155,7 +1154,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       final widgets = ActionButtonBuilder.build(context);
@@ -1176,7 +1175,7 @@ void main() {
         currentAlbum: album,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       final widgets = ActionButtonBuilder.build(context);
@@ -1195,7 +1194,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       final widgets = ActionButtonBuilder.build(context);
@@ -1215,7 +1214,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       final archivedWidgets = ActionButtonBuilder.build(archivedContext);
@@ -1229,7 +1228,7 @@ void main() {
         currentAlbum: null,
         advancedTroubleshooting: false,
         isStacked: false,
-        source: ActionSource.timeline,
+        source: .timeline,
       );
 
       final nonArchivedWidgets = ActionButtonBuilder.build(nonArchivedContext);

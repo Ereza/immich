@@ -11,13 +11,12 @@ class ViewerConfig {
     this.tapToNavigate = false,
   });
 
-  ViewerConfig copyWith({bool? loopVideo, bool? loadOriginalVideo, bool? autoPlayVideo, bool? tapToNavigate}) =>
-      ViewerConfig(
-        loopVideo: loopVideo ?? this.loopVideo,
-        loadOriginalVideo: loadOriginalVideo ?? this.loadOriginalVideo,
-        autoPlayVideo: autoPlayVideo ?? this.autoPlayVideo,
-        tapToNavigate: tapToNavigate ?? this.tapToNavigate,
-      );
+  ViewerConfig copyWith({bool? loopVideo, bool? loadOriginalVideo, bool? autoPlayVideo, bool? tapToNavigate}) => .new(
+    loopVideo: loopVideo ?? this.loopVideo,
+    loadOriginalVideo: loadOriginalVideo ?? this.loadOriginalVideo,
+    autoPlayVideo: autoPlayVideo ?? this.autoPlayVideo,
+    tapToNavigate: tapToNavigate ?? this.tapToNavigate,
+  );
 
   @override
   bool operator ==(Object other) =>

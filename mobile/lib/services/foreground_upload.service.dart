@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/domain/models/asset/asset_metadata.model.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart' hide AssetVisibility;
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/network_capability_extensions.dart';
 import 'package:immich_mobile/extensions/platform_extensions.dart';
@@ -313,7 +312,7 @@ class ForegroundUploadService {
       // Some apps (e.g. DJI/Fusion) return names without an extension; fall back to the asset name for those.
       final extension = p.extension(file.path).isNotEmpty ? p.extension(file.path) : p.extension(asset.name);
       final originalFileName = p.setExtension(fileName, extension);
-      final deviceId = Store.get(StoreKey.deviceId);
+      final deviceId = Store.get(.deviceId);
 
       final fields = {
         // deviceAssetId/deviceId required by server v2.7.5 and below (drop in v4.0 per #27818).
@@ -356,7 +355,7 @@ class ForegroundUploadService {
       if (CurrentPlatform.isIOS && asset.cloudId != null) {
         fields['metadata'] = jsonEncode([
           RemoteAssetMetadataItem(
-            key: RemoteAssetMetadataKey.mobileApp,
+            key: .mobileApp,
             value: RemoteAssetMobileAppMetadata(
               cloudId: asset.cloudId,
               createdAt: asset.createdAt.toIso8601String(),
@@ -427,7 +426,7 @@ class ForegroundUploadService {
       final fields = {
         // deviceAssetId/deviceId required by server v2.7.5 and below (drop in v4.0 per #27818).
         'deviceAssetId': deviceAssetId,
-        'deviceId': Store.get(StoreKey.deviceId),
+        'deviceId': Store.get(.deviceId),
         'fileCreatedAt': fileCreatedAt.toUtc().toIso8601String(),
         'fileModifiedAt': fileModifiedAt.toUtc().toIso8601String(),
         'isFavorite': 'false',

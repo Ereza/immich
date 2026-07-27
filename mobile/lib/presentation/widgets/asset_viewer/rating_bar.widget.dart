@@ -87,22 +87,22 @@ class _RatingBarState extends State<RatingBar> {
 
   @override
   Widget build(BuildContext context) {
-    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final isRTL = Directionality.of(context) == .rtl;
     final double visualAlignmentOffset = 5.0;
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: .min,
+      crossAxisAlignment: .start,
       children: [
         Transform.translate(
           offset: Offset(isRTL ? visualAlignmentOffset : -visualAlignmentOffset, 0),
           child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
+            behavior: .opaque,
             onTapDown: (details) => _updateRating(details.localPosition, isRTL, isTap: true),
             onPanUpdate: (details) => _updateRating(details.localPosition, isRTL, isTap: false),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
+              mainAxisSize: .min,
+              textDirection: isRTL ? .rtl : .ltr,
               children: List.generate(widget.itemCount * 2 - 1, (i) {
                 if (i.isOdd) {
                   return SizedBox(width: widget.starPadding);
@@ -121,7 +121,7 @@ class _RatingBarState extends State<RatingBar> {
         ),
         if (_currentRating > 0)
           Padding(
-            padding: const EdgeInsets.only(top: 12.0),
+            padding: const .only(top: 12.0),
             child: GestureDetector(
               onTap: () {
                 setState(() {

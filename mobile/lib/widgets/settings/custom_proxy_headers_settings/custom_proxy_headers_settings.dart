@@ -11,11 +11,11 @@ class CustomProxyHeaderSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: const .symmetric(horizontal: 20),
       dense: true,
       title: Text(
         context.t.advanced_settings_proxy_headers_title,
-        style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+        style: context.textTheme.bodyLarge?.copyWith(fontWeight: .w500),
       ),
       subtitle: Text(
         context.t.advanced_settings_proxy_headers_subtitle,

@@ -91,13 +91,13 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
               _showSelectionContainer = false;
             }
           },
-          padding: EdgeInsets.all(isSelected || widget.lockSelection ? 6 : 0),
+          padding: .all(isSelected || widget.lockSelection ? 6 : 0),
           child: TweenAnimationBuilder<double>(
             tween: Tween<double>(begin: 0.0, end: (isSelected || widget.lockSelection) ? 15.0 : 0.0),
             duration: Durations.short4,
             curve: Curves.decelerate,
             builder: (context, value, child) {
-              return ClipRRect(borderRadius: BorderRadius.all(Radius.circular(value)), child: child);
+              return ClipRRect(borderRadius: .all(.circular(value)), child: child);
             },
             child: Stack(
               children: [
@@ -123,17 +123,17 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
                         if (!mounted) {
                           return;
                         }
-                        final heroInFlight = status == AnimationStatus.forward || status == AnimationStatus.reverse;
+                        final heroInFlight = status == .forward || status == .reverse;
                         if (_hideIndicators != heroInFlight) {
                           setState(() => _hideIndicators = heroInFlight);
                         }
-                        if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+                        if (status == .completed || status == .dismissed) {
                           animation.removeStatusListener(animationStatusListener);
                         }
                       }
 
                       animation.addStatusListener(animationStatusListener);
-                      return direction == HeroFlightDirection.push ? from.widget : to.widget;
+                      return direction == .push ? from.widget : to.widget;
                     },
                   ),
                 ),
@@ -142,10 +142,10 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
                     opacity: _hideIndicators ? 0.0 : 1.0,
                     duration: Durations.short4,
                     child: Align(
-                      alignment: Alignment.topRight,
+                      alignment: .topRight,
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisSize: .min,
+                        crossAxisAlignment: .end,
                         children: [
                           _AssetTypeIcons(asset: asset),
                           if (widget.showStackIndicator) _StackIndicator(asset: asset),
@@ -158,24 +158,24 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
                     opacity: _hideIndicators ? 0.0 : 1.0,
                     duration: Durations.short4,
                     child: switch (asset.storage) {
-                      AssetState.local => const Align(
-                        alignment: Alignment.bottomRight,
+                      .local => const Align(
+                        alignment: .bottomRight,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 10.0, bottom: 6.0),
+                          padding: .only(right: 10.0, bottom: 6.0),
                           child: _TileOverlayIcon(Icons.cloud_off_outlined),
                         ),
                       ),
-                      AssetState.remote => const Align(
-                        alignment: Alignment.bottomRight,
+                      .remote => const Align(
+                        alignment: .bottomRight,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 10.0, bottom: 6.0),
+                          padding: .only(right: 10.0, bottom: 6.0),
                           child: _TileOverlayIcon(Icons.cloud_outlined),
                         ),
                       ),
-                      AssetState.merged => const Align(
-                        alignment: Alignment.bottomRight,
+                      .merged => const Align(
+                        alignment: .bottomRight,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 10.0, bottom: 6.0),
+                          padding: .only(right: 10.0, bottom: 6.0),
                           child: _TileOverlayIcon(Icons.cloud_done_outlined),
                         ),
                       ),
@@ -187,9 +187,9 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
                     duration: Durations.short4,
                     opacity: _hideIndicators ? 0.0 : 1.0,
                     child: const Align(
-                      alignment: Alignment.bottomLeft,
+                      alignment: .bottomLeft,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10.0, bottom: 6.0),
+                        padding: .only(left: 10.0, bottom: 6.0),
                         child: _TileOverlayIcon(Icons.favorite_rounded),
                       ),
                     ),
@@ -205,9 +205,9 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
           curve: Curves.decelerate,
           builder: (context, value, child) {
             return Padding(
-              padding: EdgeInsets.all((isSelected || widget.lockSelection) ? value * 3.0 : 3.0),
+              padding: .all((isSelected || widget.lockSelection) ? value * 3.0 : 3.0),
               child: Align(
-                alignment: Alignment.topLeft,
+                alignment: .topLeft,
                 child: Opacity(
                   opacity: (isSelected || widget.lockSelection) ? 1 : value,
                   child: _SelectionIndicator(
@@ -234,12 +234,12 @@ class _SelectionIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isLocked) {
       return DecoratedBox(
-        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+        decoration: BoxDecoration(shape: .circle, color: color),
         child: const Icon(Icons.check_circle_rounded, color: Colors.grey),
       );
     } else {
       return DecoratedBox(
-        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+        decoration: BoxDecoration(shape: .circle, color: color),
         child: Icon(Icons.check_circle_rounded, color: context.primaryColor),
       );
     }
@@ -254,17 +254,17 @@ class _VideoIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       spacing: 3,
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: .min,
+      mainAxisAlignment: .end,
       // CrossAxisAlignment.start looks more centered vertically than CrossAxisAlignment.center
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         Text(
           duration.format(),
           style: const TextStyle(
             color: Colors.white,
             fontSize: 12,
-            fontWeight: FontWeight.bold,
+            fontWeight: .bold,
             shadows: [Shadow(blurRadius: 5.0, color: Color.fromRGBO(0, 0, 0, 0.6))],
           ),
         ),
@@ -300,18 +300,14 @@ class _AssetTypeIcons extends StatelessWidget {
     final isLivePhoto = asset.isMotionPhoto;
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisSize: .min,
+      crossAxisAlignment: .end,
       children: [
-        if (asset.isVideo)
-          Padding(padding: const EdgeInsets.only(right: 10.0, top: 6.0), child: _VideoIndicator(asset.duration)),
+        if (asset.isVideo) Padding(padding: const .only(right: 10.0, top: 6.0), child: _VideoIndicator(asset.duration)),
         if (isLivePhoto)
-          const Padding(
-            padding: EdgeInsets.only(right: 10.0, top: 6.0),
-            child: _TileOverlayIcon(Icons.motion_photos_on_rounded),
-          ),
+          const Padding(padding: .only(right: 10.0, top: 6.0), child: _TileOverlayIcon(Icons.motion_photos_on_rounded)),
         if (asset.isAnimatedImage)
-          const Padding(padding: EdgeInsets.only(right: 10.0, top: 6.0), child: _TileOverlayIcon(Icons.gif_rounded)),
+          const Padding(padding: .only(right: 10.0, top: 6.0), child: _TileOverlayIcon(Icons.gif_rounded)),
       ],
     );
   }
@@ -328,10 +324,7 @@ class _StackIndicator extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return const Padding(
-      padding: EdgeInsets.only(right: 10.0, top: 6.0),
-      child: _TileOverlayIcon(Icons.burst_mode_rounded),
-    );
+    return const Padding(padding: .only(right: 10.0, top: 6.0), child: _TileOverlayIcon(Icons.burst_mode_rounded));
   }
 }
 
@@ -350,7 +343,7 @@ class _UploadProgressOverlay extends StatelessWidget {
         color: isError ? Colors.red.withValues(alpha: 0.6) : Colors.black54,
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               if (isError)
                 const Icon(Icons.error_outline, color: Colors.white, size: 36)
@@ -368,7 +361,7 @@ class _UploadProgressOverlay extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 isError ? 'Error' : '$percentage%',
-                style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: .bold),
               ),
             ],
           ),

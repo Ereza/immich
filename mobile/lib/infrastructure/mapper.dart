@@ -2,7 +2,7 @@ import 'package:immich_mobile/domain/models/user.model.dart';
 import 'package:immich_mobile/infrastructure/entities/partner.entity.drift.dart';
 import 'package:immich_mobile/infrastructure/entities/user.entity.drift.dart';
 
-User mapToUser(UserEntityData data) => User(
+User mapToUser(UserEntityData data) => .new(
   id: data.id,
   name: data.name,
   email: data.email,
@@ -12,4 +12,4 @@ User mapToUser(UserEntityData data) => User(
 );
 
 Partner mapToPartner(UserEntityData user, PartnerEntityData partner) =>
-    Partner.fromUser(mapToUser(user), inTimeline: partner.inTimeline);
+    .fromUser(mapToUser(user), inTimeline: partner.inTimeline);

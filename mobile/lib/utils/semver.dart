@@ -101,16 +101,16 @@ class SemVer {
 
   SemVerType? differenceType(SemVer other) {
     if (major != other.major) {
-      return SemVerType.major;
+      return .major;
     }
     if (minor != other.minor) {
-      return SemVerType.minor;
+      return .minor;
     }
     if (patch != other.patch) {
-      return SemVerType.patch;
+      return .patch;
     }
     if (prerelease != other.prerelease) {
-      return SemVerType.prerelease;
+      return .prerelease;
     }
 
     return null;

@@ -11,14 +11,14 @@ final backgroundSyncProvider = Provider<BackgroundSyncManager>((ref) {
       syncStatusNotifier.startRemoteSync();
       final backupProvider = ref.read(driftBackupProvider.notifier);
       if (backupProvider.mounted) {
-        backupProvider.updateError(BackupError.none);
+        backupProvider.updateError(.none);
       }
     },
     onRemoteSyncComplete: (isSuccess) {
       syncStatusNotifier.completeRemoteSync();
       final backupProvider = ref.read(driftBackupProvider.notifier);
       if (backupProvider.mounted) {
-        backupProvider.updateError(isSuccess == true ? BackupError.none : BackupError.syncFailed);
+        backupProvider.updateError(isSuccess == true ? .none : .syncFailed);
       }
     },
     onRemoteSyncError: syncStatusNotifier.errorRemoteSync,

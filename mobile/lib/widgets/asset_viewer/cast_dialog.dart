@@ -23,7 +23,7 @@ class CastDialog extends ConsumerWidget {
     }
 
     return AlertDialog(
-      title: const Text("cast", style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+      title: const Text("cast", style: TextStyle(fontWeight: .bold)).tr(),
       content: SizedBox(
         width: 250,
         height: 250,
@@ -65,8 +65,8 @@ class CastDialog extends ConsumerWidget {
                 if (item is String) {
                   // It's a section header
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(item, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)).tr(),
+                    padding: const .symmetric(vertical: 8.0),
+                    child: Text(item, style: const TextStyle(fontWeight: .bold, fontSize: 16)).tr(),
                   );
                 } else {
                   final (deviceName, type, deviceObj) = item as (String, CastDestinationType, dynamic);
@@ -77,7 +77,7 @@ class CastDialog extends ConsumerWidget {
                       style: TextStyle(color: isCurrentDevice(deviceName) ? context.colorScheme.primary : null),
                     ),
                     leading: Icon(
-                      type == CastDestinationType.googleCast ? Icons.cast : Icons.cast_connected,
+                      type == .googleCast ? Icons.cast : Icons.cast_connected,
                       color: isCurrentDevice(deviceName) ? context.colorScheme.primary : null,
                     ),
                     trailing: isCurrentDevice(deviceName)
@@ -111,14 +111,14 @@ class CastDialog extends ConsumerWidget {
             onPressed: () => ref.read(castProvider.notifier).disconnect(),
             child: Text(
               "stop_casting",
-              style: TextStyle(color: context.colorScheme.secondary, fontWeight: FontWeight.bold),
+              style: TextStyle(color: context.colorScheme.secondary, fontWeight: .bold),
             ).tr(),
           ),
         TextButton(
           onPressed: () => context.pop(),
           child: Text(
             "close",
-            style: TextStyle(color: context.colorScheme.primary, fontWeight: FontWeight.bold),
+            style: TextStyle(color: context.colorScheme.primary, fontWeight: .bold),
           ).tr(),
         ),
       ],

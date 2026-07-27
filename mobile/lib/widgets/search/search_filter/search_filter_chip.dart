@@ -19,7 +19,7 @@ class SearchFilterChip extends StatelessWidget {
           color: context.colorScheme.secondaryContainer,
           shape: StadiumBorder(side: BorderSide(color: context.colorScheme.secondaryContainer)),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 14.0),
+            padding: const .symmetric(vertical: 2.0, horizontal: 14.0),
             child: Row(children: [Icon(icon, size: 18), const SizedBox(width: 4.0), currentFilter!]),
           ),
         ),
@@ -31,7 +31,7 @@ class SearchFilterChip extends StatelessWidget {
         elevation: 0,
         shape: StadiumBorder(side: BorderSide(color: context.colorScheme.outline.withAlpha(15))),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 14.0),
+          padding: const .symmetric(vertical: 2.0, horizontal: 14.0),
           child: Row(
             children: [
               Icon(icon, size: 18),

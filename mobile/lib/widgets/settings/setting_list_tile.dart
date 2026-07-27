@@ -22,7 +22,7 @@ class SettingListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title, style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, height: 1.5)),
+      title: Text(title, style: context.textTheme.bodyLarge!.copyWith(fontWeight: .w500, height: 1.5)),
       subtitle: subtitle != null
           ? Text(
               subtitle!,

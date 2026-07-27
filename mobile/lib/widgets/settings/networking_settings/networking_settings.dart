@@ -89,7 +89,7 @@ class NetworkingSettings extends HookConsumerWidget {
     }, [featureEnabled.value]);
 
     return ListView(
-      padding: const EdgeInsets.only(bottom: 96),
+      padding: const .only(bottom: 96),
       children: <Widget>[
         const SizedBox(height: 8),
         SettingGroupTitle(
@@ -97,11 +97,11 @@ class NetworkingSettings extends HookConsumerWidget {
           icon: (currentEndpoint?.startsWith('https') ?? false) ? Icons.https_outlined : Icons.http_outlined,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const .symmetric(horizontal: 8),
           child: Card(
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderRadius: const .all(.circular(16)),
               side: BorderSide(color: context.colorScheme.surfaceContainerHighest, width: 1),
             ),
             child: ListTile(
@@ -116,7 +116,7 @@ class NetworkingSettings extends HookConsumerWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10.0),
+          padding: const .only(top: 10.0),
           child: Divider(color: context.colorScheme.surfaceContainerHighest),
         ),
         SettingsSwitchListTile(
@@ -154,15 +154,15 @@ class NetworkStatusIcon extends StatelessWidget {
   }
 
   Widget buildIcon(BuildContext context) => switch (status) {
-    AuxCheckStatus.loading => Padding(
-      padding: const EdgeInsets.only(left: 4.0),
+    .loading => Padding(
+      padding: const .only(left: 4.0),
       child: SizedBox(
         width: 18,
         height: 18,
         child: CircularProgressIndicator(color: context.primaryColor, strokeWidth: 2, key: const ValueKey('loading')),
       ),
     ),
-    AuxCheckStatus.valid =>
+    .valid =>
       enabled
           ? const Icon(Icons.check_circle_rounded, color: Colors.green, key: ValueKey('success'))
           : Icon(
@@ -170,7 +170,7 @@ class NetworkStatusIcon extends StatelessWidget {
               color: context.colorScheme.onSurface.withAlpha(100),
               key: const ValueKey('success'),
             ),
-    AuxCheckStatus.error =>
+    .error =>
       enabled
           ? const Icon(Icons.error_rounded, color: Colors.red, key: ValueKey('error'))
           : const Icon(Icons.error_rounded, color: Colors.grey, key: ValueKey('error')),

@@ -21,7 +21,7 @@ class LocalImageRequest extends ImageRequest {
       requestId: requestId,
       width: width,
       height: height,
-      isVideo: assetType == AssetType.video,
+      isVideo: assetType == .video,
       preferEncoded: false,
     );
     if (info == null) {
@@ -43,7 +43,7 @@ class LocalImageRequest extends ImageRequest {
       requestId: requestId,
       width: width,
       height: height,
-      isVideo: assetType == AssetType.video,
+      isVideo: assetType == .video,
       preferEncoded: true,
     );
     if (info == null) {

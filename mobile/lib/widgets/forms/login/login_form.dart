@@ -9,9 +9,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' hide Store;
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -63,9 +61,9 @@ class LoginForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final emailController = useTextEditingController.fromValue(TextEditingValue.empty);
-    final passwordController = useTextEditingController.fromValue(TextEditingValue.empty);
-    final serverEndpointController = useTextEditingController.fromValue(TextEditingValue.empty);
+    final emailController = useTextEditingController.fromValue(.empty);
+    final passwordController = useTextEditingController.fromValue(.empty);
+    final serverEndpointController = useTextEditingController.fromValue(.empty);
     final passwordFocusNode = useFocusNode();
     final isOauthEnable = useState<bool>(false);
     final isPasswordLoginEnable = useState<bool>(false);
@@ -95,7 +93,7 @@ class LoginForm extends HookConsumerWidget {
 
       // Guard empty URL
       if (serverUrl.isEmpty) {
-        ImmichToast.show(context: context, msg: "login_form_server_empty".tr(), toastType: ToastType.error);
+        ImmichToast.show(context: context, msg: "login_form_server_empty".tr(), toastType: .error);
       }
 
       try {
@@ -117,8 +115,8 @@ class LoginForm extends HookConsumerWidget {
         ImmichToast.show(
           context: context,
           msg: e.message ?? 'login_form_api_exception'.tr(),
-          toastType: ToastType.error,
-          gravity: ToastGravity.TOP,
+          toastType: .error,
+          gravity: .TOP,
         );
         isOauthEnable.value = false;
         isPasswordLoginEnable.value = true;
@@ -126,18 +124,13 @@ class LoginForm extends HookConsumerWidget {
         ImmichToast.show(
           context: context,
           msg: 'login_form_handshake_exception'.tr(),
-          toastType: ToastType.error,
-          gravity: ToastGravity.TOP,
+          toastType: .error,
+          gravity: .TOP,
         );
         isOauthEnable.value = false;
         isPasswordLoginEnable.value = true;
       } catch (e) {
-        ImmichToast.show(
-          context: context,
-          msg: 'login_form_server_error'.tr(),
-          toastType: ToastType.error,
-          gravity: ToastGravity.TOP,
-        );
+        ImmichToast.show(context: context, msg: 'login_form_server_error'.tr(), toastType: .error, gravity: .TOP);
         isOauthEnable.value = false;
         isPasswordLoginEnable.value = true;
       }
@@ -184,11 +177,11 @@ class LoginForm extends HookConsumerWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+              shape: const RoundedRectangleBorder(borderRadius: .all(.circular(10))),
               elevation: 5,
               title: Text(
                 'manage_media_access_title',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: context.primaryColor),
+                style: TextStyle(fontSize: 16, fontWeight: .bold, color: context.primaryColor),
               ).tr(),
               content: SingleChildScrollView(
                 child: ListBody(
@@ -204,7 +197,7 @@ class LoginForm extends HookConsumerWidget {
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text(
                     'cancel'.tr(),
-                    style: TextStyle(fontWeight: FontWeight.w600, color: context.primaryColor),
+                    style: TextStyle(fontWeight: .w600, color: context.primaryColor),
                   ),
                 ),
                 TextButton(
@@ -214,7 +207,7 @@ class LoginForm extends HookConsumerWidget {
                   },
                   child: Text(
                     'manage_media_access_settings'.tr(),
-                    style: TextStyle(fontWeight: FontWeight.w600, color: context.primaryColor),
+                    style: TextStyle(fontWeight: .w600, color: context.primaryColor),
                   ),
                 ),
               ],
@@ -224,7 +217,7 @@ class LoginForm extends HookConsumerWidget {
       }
     }
 
-    bool isSyncRemoteDeletionsMode() => Platform.isAndroid && Store.get(StoreKey.manageLocalMediaAndroid, false);
+    bool isSyncRemoteDeletionsMode() => Platform.isAndroid && Store.get(.manageLocalMediaAndroid, false);
 
     login() async {
       TextInput.finishAutofillContext();
@@ -249,12 +242,7 @@ class LoginForm extends HookConsumerWidget {
           return;
         }
       } catch (error) {
-        ImmichToast.show(
-          context: context,
-          msg: "login_form_failed_login".tr(),
-          toastType: ToastType.error,
-          gravity: ToastGravity.TOP,
-        );
+        ImmichToast.show(context: context, msg: "login_form_failed_login".tr(), toastType: .error, gravity: .TOP);
       }
     }
 
@@ -306,8 +294,8 @@ class LoginForm extends HookConsumerWidget {
         ImmichToast.show(
           context: context,
           msg: "login_form_failed_get_oauth_server_config".tr(),
-          toastType: ToastType.error,
-          gravity: ToastGravity.TOP,
+          toastType: .error,
+          gravity: .TOP,
         );
         return;
       }
@@ -339,19 +327,14 @@ class LoginForm extends HookConsumerWidget {
         } catch (error, stack) {
           log.severe('Error logging in with OAuth: $error', stack);
 
-          ImmichToast.show(
-            context: context,
-            msg: error.toString(),
-            toastType: ToastType.error,
-            gravity: ToastGravity.TOP,
-          );
+          ImmichToast.show(context: context, msg: error.toString(), toastType: .error, gravity: .TOP);
         } finally {}
       } else {
         ImmichToast.show(
           context: context,
           msg: "login_form_failed_get_oauth_server_disable".tr(),
-          toastType: ToastType.info,
-          gravity: ToastGravity.TOP,
+          toastType: .info,
+          gravity: .TOP,
         );
         return;
       }
@@ -365,22 +348,22 @@ class LoginForm extends HookConsumerWidget {
       }
 
       return Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: const .only(bottom: 8.0),
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const .all(16),
           decoration: BoxDecoration(
             color: context.isDarkTheme ? Colors.amber.shade700 : Colors.amber.shade100,
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            border: Border.all(color: context.isDarkTheme ? Colors.amber.shade800 : Colors.amber[200]!, width: 2),
+            borderRadius: const .all(.circular(12)),
+            border: .all(color: context.isDarkTheme ? Colors.amber.shade800 : Colors.amber[200]!, width: 2),
           ),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: .min,
+            crossAxisAlignment: .start,
             children: [
               Icon(Icons.warning_amber_rounded, color: Colors.amber.shade800),
               const SizedBox(width: 8),
               Expanded(
-                child: Padding(padding: const EdgeInsets.only(top: 2), child: Text(warningMessage.value!)),
+                child: Padding(padding: const .only(top: 2), child: Text(warningMessage.value!)),
               ),
             ],
           ),
@@ -390,9 +373,9 @@ class LoginForm extends HookConsumerWidget {
 
     final serverSelectionOrLogin = serverEndpoint.value == null
         ? Padding(
-            padding: const EdgeInsets.only(top: ImmichSpacing.md),
+            padding: const .only(top: ImmichSpacing.md),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: .max,
               children: [
                 ImmichForm(
                   onSubmit: getServerAuthSettings,
@@ -410,7 +393,7 @@ class LoginForm extends HookConsumerWidget {
                 ImmichTextButton(
                   labelText: 'settings'.t(context: context),
                   icon: Icons.settings,
-                  variant: ImmichVariant.ghost,
+                  variant: .ghost,
                   onPressed: () => context.pushRoute(const SettingsRoute()),
                 ),
               ],
@@ -418,16 +401,16 @@ class LoginForm extends HookConsumerWidget {
           )
         : AutofillGroup(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: .stretch,
+              mainAxisSize: .max,
               children: [
                 buildVersionCompatWarning(),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: ImmichSpacing.md),
+                  padding: const .only(bottom: ImmichSpacing.md),
                   child: Text(
                     normalizeServerUrl(serverEndpointController.text),
                     style: context.textTheme.displaySmall,
-                    textAlign: TextAlign.center,
+                    textAlign: .center,
                   ),
                 ),
                 if (isPasswordLoginEnable.value)
@@ -443,8 +426,8 @@ class LoginForm extends HookConsumerWidget {
                           label: 'email'.t(context: context),
                           hintText: 'login_form_email_hint'.t(context: context),
                           validator: _validateEmail,
-                          keyboardAction: TextInputAction.next,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardAction: .next,
+                          keyboardType: .emailAddress,
                           autofillHints: const [AutofillHints.email],
                           onSubmit: (_) => passwordFocusNode.requestFocus(),
                         ),
@@ -453,7 +436,7 @@ class LoginForm extends HookConsumerWidget {
                           focusNode: passwordFocusNode,
                           label: 'password'.t(context: context),
                           hintText: 'login_form_password_hint'.t(context: context),
-                          keyboardAction: TextInputAction.go,
+                          keyboardAction: .go,
                           onSubmit: (_) => form.submit(),
                         ),
                       ],
@@ -466,7 +449,7 @@ class LoginForm extends HookConsumerWidget {
                     submitIcon: Icons.pin_outlined,
                     builder: (context, _) => isPasswordLoginEnable.value
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 12.0),
+                            padding: const .only(left: 18.0, right: 18.0, top: 12.0),
                             child: Divider(color: context.isDarkTheme ? Colors.white : Colors.black, height: 5),
                           )
                         : const SizedBox.shrink(),
@@ -476,7 +459,7 @@ class LoginForm extends HookConsumerWidget {
                 ImmichTextButton(
                   labelText: 'back'.t(context: context),
                   icon: Icons.arrow_back,
-                  variant: ImmichVariant.ghost,
+                  variant: .ghost,
                   onPressed: () => serverEndpoint.value = null,
                 ),
               ],
@@ -490,13 +473,13 @@ class LoginForm extends HookConsumerWidget {
             child: Container(
               constraints: const BoxConstraints(maxWidth: 300),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: .stretch,
+                mainAxisAlignment: .center,
                 children: [
                   SizedBox(height: constraints.maxHeight / 5),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: .center,
+                    mainAxisAlignment: .end,
                     children: [
                       GestureDetector(
                         onDoubleTap: () => populateTestLoginInfo(),
@@ -506,7 +489,7 @@ class LoginForm extends HookConsumerWidget {
                           child: const ImmichLogo(heroTag: 'logo'),
                         ),
                       ),
-                      const Padding(padding: EdgeInsets.only(top: 8.0, bottom: 16), child: ImmichTitleText()),
+                      const Padding(padding: .only(top: 8.0, bottom: 16), child: ImmichTitleText()),
                     ],
                   ),
 

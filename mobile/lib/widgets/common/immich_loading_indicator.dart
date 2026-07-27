@@ -20,8 +20,8 @@ class ImmichLoadingIndicator extends HookWidget {
       width: 80,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(borderRadius ?? 50),
-        backgroundBlendMode: BlendMode.luminosity,
+        borderRadius: .circular(borderRadius ?? 50),
+        backgroundBlendMode: .luminosity,
       ),
       child: AnimatedBuilder(
         animation: borderAnimationController,
@@ -32,7 +32,7 @@ class ImmichLoadingIndicator extends HookWidget {
           );
         },
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const .all(15),
           child: RotationTransition(
             turns: logoAnimationController,
             child: const ImmichLogo(heroTag: 'logo'),
@@ -67,7 +67,7 @@ class GradientBorderPainter extends CustomPainter {
 
     // Create a paint with the gradient
     final paint = Paint()
-      ..style = PaintingStyle.stroke
+      ..style = .stroke
       ..strokeWidth = strokeWidth;
 
     // Create a gradient that smoothly transitions between colors
@@ -82,7 +82,7 @@ class GradientBorderPainter extends CustomPainter {
       ],
       // Add evenly distributed stops
       stops: List.generate(colors.length + 1, (index) => index / colors.length),
-      tileMode: TileMode.clamp,
+      tileMode: .clamp,
       // Use transformations to rotate the gradient
       transform: GradientRotation(-animation * 2 * 3.14159),
     ).createShader(rect);

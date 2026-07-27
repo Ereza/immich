@@ -26,7 +26,7 @@ class DriftBackupAssetDetailPage extends ConsumerWidget {
       body: result.when(
         data: (List<LocalAsset> candidates) {
           return ListView.separated(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: const .only(top: 16.0),
             separatorBuilder: (context, index) => Divider(color: context.colorScheme.outlineVariant),
             itemCount: candidates.length,
             itemBuilder: (context, index) {
@@ -40,10 +40,10 @@ class DriftBackupAssetDetailPage extends ConsumerWidget {
                   return LargeLeadingTile(
                     title: Text(
                       displayName,
-                      style: context.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w500, fontSize: 16),
+                      style: context.textTheme.labelLarge?.copyWith(fontWeight: .w500, fontSize: 16),
                     ),
                     subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: .start,
                       children: [
                         Text(
                           asset.createdAt.toString(),
@@ -52,7 +52,7 @@ class DriftBackupAssetDetailPage extends ConsumerWidget {
                         Text(
                           asset.checksum ?? "N/A",
                           style: TextStyle(fontSize: 13.0, color: context.colorScheme.onSurfaceSecondary),
-                          overflow: TextOverflow.ellipsis,
+                          overflow: .ellipsis,
                         ),
                         albumsAsyncValue.when(
                           data: (albums) {
@@ -62,7 +62,7 @@ class DriftBackupAssetDetailPage extends ConsumerWidget {
                             return Text(
                               albums.map((a) => a.name).join(', '),
                               style: context.textTheme.labelLarge?.copyWith(color: context.primaryColor),
-                              overflow: TextOverflow.ellipsis,
+                              overflow: .ellipsis,
                             );
                           },
                           error: (error, stackTrace) => Text(
@@ -75,17 +75,14 @@ class DriftBackupAssetDetailPage extends ConsumerWidget {
                       ],
                     ),
                     leading: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      borderRadius: const .all(.circular(12)),
                       child: SizedBox(
                         width: 64,
                         height: 64,
-                        child: Thumbnail.fromAsset(asset: asset, size: const Size(64, 64), fit: BoxFit.cover),
+                        child: Thumbnail.fromAsset(asset: asset, size: const Size(64, 64), fit: .cover),
                       ),
                     ),
-                    trailing: const Padding(
-                      padding: EdgeInsets.only(right: 24, left: 8),
-                      child: Icon(Icons.image_search),
-                    ),
+                    trailing: const Padding(padding: .only(right: 24, left: 8), child: Icon(Icons.image_search)),
                     onTap: () async {
                       await context.maybePop();
                       await context.navigateTo(const TabShellRoute(children: [MainTimelineRoute()]));

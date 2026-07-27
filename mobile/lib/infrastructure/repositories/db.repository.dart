@@ -123,7 +123,7 @@ class Drift extends $Drift {
   int get schemaVersion => 31;
 
   @override
-  MigrationStrategy get migration => MigrationStrategy(
+  MigrationStrategy get migration => .new(
     onUpgrade: (m, from, to) async {
       // Run migration steps without foreign keys and re-enable them later
       await customStatement('PRAGMA foreign_keys = OFF');
@@ -407,8 +407,8 @@ SqliteDatabase _openImmichDatabase(File file) {
     ImmichSqliteOpenFactory(
       path: file.path,
       sqliteOptions: const SqliteOptions(
-        journalMode: SqliteJournalMode.wal, // PRAGMA journal_mode (writer only)
-        synchronous: SqliteSynchronous.normal, // PRAGMA synchronous
+        journalMode: .wal, // PRAGMA journal_mode (writer only)
+        synchronous: .normal, // PRAGMA synchronous
         lockTimeout: Duration(seconds: 30), // -> PRAGMA busy_timeout = 30000
       ),
     ),

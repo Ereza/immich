@@ -279,7 +279,7 @@ class SearchFilter {
         display.isArchive == false &&
         display.isFavorite == false &&
         rating.rating.isNone &&
-        mediaType == AssetType.other;
+        mediaType == .other;
   }
 
   SearchFilter copyWith({

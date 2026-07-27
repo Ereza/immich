@@ -30,7 +30,7 @@ class _PreviewTextInputBasicState extends State<_PreviewTextInputBasic> {
       label: 'Email',
       hintText: 'Enter your email',
       controller: _controller,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: .emailAddress,
     );
   }
 }
@@ -56,7 +56,7 @@ class _PreviewTextInputValidatorState extends State<_PreviewTextInputValidator> 
     return ImmichTextInput(
       label: 'Username',
       controller: _controller,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: .onUserInteraction,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Username is required';

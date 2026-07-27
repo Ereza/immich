@@ -26,9 +26,9 @@ void main() {
     timelineFactory = MockTimelineFactory();
     createdTimelineServices = [];
 
-    when(() => timelineFactory.fromAssets(any(), TimelineOrigin.deepLink)).thenAnswer((invocation) {
+    when(() => timelineFactory.fromAssets(any(), .deepLink)).thenAnswer((invocation) {
       final assets = List<BaseAsset>.from(invocation.positionalArguments[0] as List<BaseAsset>);
-      final timelineService = _timelineServiceFromAssets(assets, TimelineOrigin.deepLink);
+      final timelineService = _timelineServiceFromAssets(assets, .deepLink);
       createdTimelineServices.add(timelineService);
       return timelineService;
     });
@@ -86,10 +86,7 @@ void main() {
   });
 
   test('throws when neither localAssetId nor path is provided', () async {
-    await expectLater(
-      _resolve(container, _payload(localAssetId: null, path: null)),
-      throwsA(isA<StateError>()),
-    );
+    await expectLater(_resolve(container, _payload(localAssetId: null, path: null)), throwsA(isA<StateError>()));
   });
 }
 
@@ -106,10 +103,10 @@ LocalAsset _localAsset({required String id, String? checksum}) {
     id: id,
     name: '$id.jpg',
     checksum: checksum,
-    type: AssetType.image,
+    type: .image,
     createdAt: DateTime(2026, 4, 20),
     updatedAt: DateTime(2026, 4, 20),
-    playbackStyle: AssetPlaybackStyle.image,
+    playbackStyle: .image,
     isEdited: false,
   );
 }

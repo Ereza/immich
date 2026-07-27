@@ -3,7 +3,7 @@ enum SortOrder {
   desc;
 
   SortOrder reverse() {
-    return this == SortOrder.asc ? SortOrder.desc : SortOrder.asc;
+    return this == .asc ? .desc : .asc;
   }
 }
 

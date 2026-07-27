@@ -80,7 +80,7 @@ class MapUtils {
       LocationPermission permission = await Geolocator.checkPermission();
       bool shouldRequestPermission = false;
 
-      if (permission == LocationPermission.denied && !silent) {
+      if (permission == .denied && !silent) {
         shouldRequestPermission = await showDialog(
           context: context,
           builder: (context) => _LocationPermissionDisabledDialog(context),
@@ -90,20 +90,16 @@ class MapUtils {
         }
       }
 
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      if (permission == .denied || permission == .deniedForever) {
         // Open app settings only if you did not request for permission before
-        if (permission == LocationPermission.deniedForever && !shouldRequestPermission && !silent) {
+        if (permission == .deniedForever && !shouldRequestPermission && !silent) {
           await Geolocator.openAppSettings();
         }
         return (null, LocationPermission.deniedForever);
       }
 
       Position currentUserLocation = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.high,
-          distanceFilter: 0,
-          timeLimit: Duration(seconds: 5),
-        ),
+        locationSettings: const LocationSettings(accuracy: .high, distanceFilter: 0, timeLimit: Duration(seconds: 5)),
       );
       return (currentUserLocation, null);
     } catch (error, stack) {

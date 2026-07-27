@@ -126,7 +126,7 @@ class _FixedSegmentRow extends ConsumerWidget {
     return FutureBuilder<List<BaseAsset>>(
       future: timelineService.loadAssets(assetIndex, assetCount),
       builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
+        if (snapshot.connectionState != .done) {
           return _buildPlaceholder(context);
         }
         return _buildAssetRow(context, snapshot.requireData, timelineService, isDynamicLayout);
@@ -257,7 +257,7 @@ class _AssetTileWidget extends ConsumerWidget {
     final lockSelection = _getLockSelectionStatus(ref);
     final showStorageIndicator = ref.watch(timelineArgsProvider.select((args) => args.showStorageIndicator));
     final isReadonlyModeEnabled = ref.watch(readonlyModeProvider);
-    final showStackIndicator = ref.read(timelineServiceProvider).origin != TimelineOrigin.trash;
+    final showStackIndicator = ref.read(timelineServiceProvider).origin != .trash;
 
     return RepaintBoundary(
       child: GestureDetector(

@@ -25,9 +25,7 @@ class SearchDropdown<T> extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     final maxMenuHeight = mediaQuery.size.height * 0.5 - mediaQuery.viewPadding.bottom;
     const menuStyle = MenuStyle(
-      shape: WidgetStatePropertyAll<OutlinedBorder>(
-        RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-      ),
+      shape: WidgetStatePropertyAll<OutlinedBorder>(RoundedRectangleBorder(borderRadius: .all(.circular(15)))),
     );
 
     return LayoutBuilder(

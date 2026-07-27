@@ -29,17 +29,17 @@ class FilterBottomSheetScaffold extends StatelessWidget {
 
     return SafeArea(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const .all(16.0),
             child: Text(title, style: context.textTheme.headlineSmall),
           ),
           buildChildWidget(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const .all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: .end,
               children: [
                 OutlinedButton(
                   onPressed: () {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
-import 'package:immich_mobile/domain/services/timeline.service.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/add_action_button.widget.dart';
 import 'package:immich_mobile/presentation/widgets/action_buttons/delete_action_button.widget.dart';
@@ -38,19 +36,19 @@ class ViewerBottomBar extends ConsumerWidget {
     final showingDetails = ref.watch(assetViewerProvider.select((s) => s.showingDetails));
     final isInLockedView = ref.watch(inLockedViewProvider);
     final serverInfo = ref.watch(serverInfoProvider);
-    final isInTrash = ref.read(timelineServiceProvider).origin == TimelineOrigin.trash;
+    final isInTrash = ref.read(timelineServiceProvider).origin == .trash;
 
     final originalTheme = context.themeData;
 
     final actions = <Widget>[
       if (isInTrash && isOwner && asset.hasRemote)
-        const RestoreActionButton(source: ActionSource.viewer)
+        const RestoreActionButton(source: .viewer)
       else
-        const ShareActionButton(source: ActionSource.viewer),
+        const ShareActionButton(source: .viewer),
 
       if (!isInLockedView) ...[
         if (!isInTrash) ...[
-          if (asset.isLocalOnly) const UploadActionButton(source: ActionSource.viewer),
+          if (asset.isLocalOnly) const UploadActionButton(source: .viewer),
           // edit sync was added in 2.6.0
           if (asset.isEditable && serverInfo.serverVersion >= const SemVer(major: 2, minor: 6, patch: 0))
             const EditImageActionButton(),
@@ -58,11 +56,11 @@ class ViewerBottomBar extends ConsumerWidget {
         ],
         if (isOwner) ...[
           if (asset.isLocalOnly)
-            const DeleteLocalActionButton(source: ActionSource.viewer)
+            const DeleteLocalActionButton(source: .viewer)
           else if (asset.isTrashed)
-            const DeletePermanentActionButton(source: ActionSource.viewer, useShortLabel: true)
+            const DeletePermanentActionButton(source: .viewer, useShortLabel: true)
           else
-            const DeleteActionButton(source: ActionSource.viewer, showConfirmation: true),
+            const DeleteActionButton(source: .viewer, showConfirmation: true),
         ],
       ],
     ];
@@ -85,8 +83,8 @@ class ViewerBottomBar extends ConsumerWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
+                            begin: .bottomCenter,
+                            end: .topCenter,
                             colors: [Colors.black45, Colors.black12, Colors.transparent],
                             stops: [0.0, 0.7, 1.0],
                           ),
@@ -97,14 +95,13 @@ class ViewerBottomBar extends ConsumerWidget {
                   SafeArea(
                     top: false,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 16),
+                      padding: const .only(top: 16),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: .min,
                         children: [
                           if (asset.isImage) OcrToggleButton(asset: asset),
                           if (asset.isVideo) VideoControls(videoPlayerName: asset.heroTag),
-                          if (!isReadonlyModeEnabled)
-                            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: actions),
+                          if (!isReadonlyModeEnabled) Row(mainAxisAlignment: .spaceEvenly, children: actions),
                         ],
                       ),
                     ),

@@ -8,11 +8,7 @@ class DownloadStateNotifier extends StateNotifier<DownloadState> {
 
   DownloadStateNotifier(this._downloadService)
     : super(
-        const DownloadState(
-          downloadStatus: TaskStatus.complete,
-          showProgress: false,
-          taskProgress: <String, DownloadInfo>{},
-        ),
+        const DownloadState(downloadStatus: .complete, showProgress: false, taskProgress: <String, DownloadInfo>{}),
       ) {
     _downloadService.onTaskProgress = _taskProgressCallback;
   }
@@ -28,11 +24,7 @@ class DownloadStateNotifier extends StateNotifier<DownloadState> {
       taskProgress: <String, DownloadInfo>{}
         ..addAll(state.taskProgress)
         ..addAll({
-          update.task.taskId: DownloadInfo(
-            progress: update.progress,
-            fileName: update.task.filename,
-            status: TaskStatus.running,
-          ),
+          update.task.taskId: DownloadInfo(progress: update.progress, fileName: update.task.filename, status: .running),
         }),
     );
   }

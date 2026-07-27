@@ -5,7 +5,7 @@ class ShareConfig {
 
   const ShareConfig({this.fileType = ShareAssetType.original});
 
-  ShareConfig copyWith({ShareAssetType? fileType}) => ShareConfig(fileType: fileType ?? this.fileType);
+  ShareConfig copyWith({ShareAssetType? fileType}) => .new(fileType: fileType ?? this.fileType);
 
   @override
   bool operator ==(Object other) => identical(this, other) || (other is ShareConfig && other.fileType == fileType);

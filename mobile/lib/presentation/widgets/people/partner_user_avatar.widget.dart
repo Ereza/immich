@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/presentation/widgets/images/remote_image_provider.dart';
@@ -12,7 +11,7 @@ class PartnerUserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final url = "${Store.get(StoreKey.serverEndpoint)}/users/$userId/profile-image";
+    final url = "${Store.get(.serverEndpoint)}/users/$userId/profile-image";
     final nameFirstLetter = name.isNotEmpty ? name[0] : "";
     return CircleAvatar(
       radius: 16,

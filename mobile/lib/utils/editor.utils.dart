@@ -33,8 +33,7 @@ AffineMatrix buildAffineFromEdits(List<AssetEdit> edits) {
     edits.map<AffineMatrix>((edit) {
       return switch (edit) {
         RotateEdit(:final parameters) => AffineMatrix.rotate(parameters.angle * pi / 180),
-        MirrorEdit(:final parameters) =>
-          parameters.axis == MirrorAxis.horizontal ? AffineMatrix.flipY() : AffineMatrix.flipX(),
+        MirrorEdit(:final parameters) => parameters.axis == .horizontal ? AffineMatrix.flipY() : AffineMatrix.flipX(),
         CropEdit() => AffineMatrix.identity(),
       };
     }).toList(),

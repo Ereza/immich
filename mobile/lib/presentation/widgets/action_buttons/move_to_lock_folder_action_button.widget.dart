@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/events.model.dart';
@@ -16,7 +15,7 @@ Future<void> performMoveToLockFolderAction(BuildContext context, WidgetRef ref, 
     return;
   }
 
-  if (source == ActionSource.viewer) {
+  if (source == .viewer) {
     EventStream.shared.emit(const ViewerReloadAssetEvent());
   }
 
@@ -32,8 +31,8 @@ Future<void> performMoveToLockFolderAction(BuildContext context, WidgetRef ref, 
     ImmichToast.show(
       context: context,
       msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-      gravity: ToastGravity.BOTTOM,
-      toastType: result.success ? ToastType.success : ToastType.error,
+      gravity: .BOTTOM,
+      toastType: result.success ? .success : .error,
     );
   }
 }

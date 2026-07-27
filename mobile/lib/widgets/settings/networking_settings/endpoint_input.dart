@@ -23,7 +23,7 @@ class EndpointInput extends StatefulHookConsumerWidget {
   final bool enabled;
 
   @override
-  EndpointInputState createState() => EndpointInputState();
+  EndpointInputState createState() => .new();
 }
 
 class EndpointInputState extends ConsumerState<EndpointInput> {
@@ -59,13 +59,13 @@ class EndpointInputState extends ConsumerState<EndpointInput> {
 
   Future<void> validateAuxilaryServerUrl() async {
     final url = controller.text;
-    setState(() => auxCheckStatus = AuxCheckStatus.loading);
+    setState(() => auxCheckStatus = .loading);
 
     final isValid = await ref.read(authProvider.notifier).validateAuxilaryServerUrl(url);
 
     setState(() {
       if (mounted) {
-        auxCheckStatus = isValid ? AuxCheckStatus.valid : AuxCheckStatus.error;
+        auxCheckStatus = isValid ? .valid : .error;
       }
     });
 
@@ -91,16 +91,16 @@ class EndpointInputState extends ConsumerState<EndpointInput> {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(widget.index.toString()),
-      direction: DismissDirection.endToStart,
+      direction: .endToStart,
       onDismissed: (_) => widget.onDismissed(widget.index),
       background: Container(
         color: Colors.red,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 16),
+        alignment: .centerRight,
+        padding: const .only(right: 16),
         child: const Icon(Icons.delete, color: Colors.white),
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+        contentPadding: const .symmetric(horizontal: 24),
         trailing: ReorderableDragStartListener(
           enabled: widget.enabled,
           index: widget.index,

@@ -22,7 +22,7 @@ class MockHttpOverrides extends HttpOverrides {
 
     // Response mocks
     when(() => response.statusCode).thenReturn(HttpStatus.ok);
-    when(() => response.compressionState).thenReturn(HttpClientResponseCompressionState.decompressed);
+    when(() => response.compressionState).thenReturn(.decompressed);
     when(() => response.contentLength).thenAnswer((_) => kTransparentImage.length);
     when(
       () => response.listen(

@@ -70,10 +70,10 @@ class DriftUserSelectionPage extends HookConsumerWidget {
       for (var user in sharedUsersList.value) {
         usersChip.add(
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const .symmetric(horizontal: 8.0),
             child: Chip(
               backgroundColor: context.primaryColor.withValues(alpha: 0.15),
-              label: Text(user.name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              label: Text(user.name, style: const TextStyle(fontSize: 12, fontWeight: .bold)),
             ),
           ),
         );
@@ -82,10 +82,10 @@ class DriftUserSelectionPage extends HookConsumerWidget {
         children: [
           Wrap(children: [...usersChip]),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const .all(16.0),
             child: Text(
               'suggestions'.tr(),
-              style: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: .bold),
             ),
           ),
           ListView.builder(
@@ -95,7 +95,7 @@ class DriftUserSelectionPage extends HookConsumerWidget {
               return ListTile(
                 leading: buildTileIcon(users[index]),
                 dense: true,
-                title: Text(users[index].name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                title: Text(users[index].name, style: const TextStyle(fontSize: 14, fontWeight: .bold)),
                 subtitle: Text(users[index].email, style: const TextStyle(fontSize: 12)),
                 onTap: () {
                   if (sharedUsersList.value.contains(users[index])) {
@@ -128,7 +128,7 @@ class DriftUserSelectionPage extends HookConsumerWidget {
         actions: [
           TextButton(
             onPressed: sharedUsersList.value.isEmpty ? null : addNewUsersHandler,
-            child: const Text("add", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)).tr(),
+            child: const Text("add", style: TextStyle(fontSize: 14, fontWeight: .bold)).tr(),
           ),
         ],
       ),

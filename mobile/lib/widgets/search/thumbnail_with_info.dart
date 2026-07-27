@@ -29,7 +29,7 @@ class ThumbnailWithInfo extends StatelessWidget {
       label: textInfo,
       child: imageUrl != null
           ? ClipRRect(
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: .circular(borderRadius),
               child: Thumbnail(imageProvider: RemoteImageProvider(url: imageUrl!)),
             )
           : Center(child: Icon(noImageIcon ?? Icons.not_listed_location, color: textAndIconColor)),

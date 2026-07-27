@@ -93,7 +93,7 @@ class SyncStreamRepository extends DriftDatabaseRepository {
             email: Value(user.email),
             hasProfileImage: Value(user.hasProfileImage),
             profileChangedAt: Value(user.profileChangedAt),
-            avatarColor: Value(user.avatarColor.orElse(null)?.toAvatarColor() ?? AvatarColor.primary),
+            avatarColor: Value(user.avatarColor.orElse(null)?.toAvatarColor() ?? .primary),
             isAdmin: Value(user.isAdmin),
             pinCode: Value(user.pinCode),
             quotaSizeInBytes: Value(user.quotaSizeInBytes ?? 0),
@@ -135,7 +135,7 @@ class SyncStreamRepository extends DriftDatabaseRepository {
             email: Value(user.email),
             hasProfileImage: Value(user.hasProfileImage),
             profileChangedAt: Value(user.profileChangedAt),
-            avatarColor: Value(user.avatarColor.orElse(null)?.toAvatarColor() ?? AvatarColor.primary),
+            avatarColor: Value(user.avatarColor.orElse(null)?.toAvatarColor() ?? .primary),
           );
 
           batch.insert(_db.userEntity, companion.copyWith(id: Value(user.id)), onConflict: DoUpdate((_) => companion));
@@ -933,48 +933,48 @@ class SyncStreamRepository extends DriftDatabaseRepository {
 
 extension on AssetTypeEnum {
   AssetType toAssetType() => switch (this) {
-    AssetTypeEnum.IMAGE => AssetType.image,
-    AssetTypeEnum.VIDEO => AssetType.video,
-    AssetTypeEnum.AUDIO => AssetType.audio,
-    AssetTypeEnum.OTHER => AssetType.other,
+    .IMAGE => .image,
+    .VIDEO => .video,
+    .AUDIO => .audio,
+    .OTHER => .other,
   };
 }
 
 extension on AssetOrder {
   AlbumAssetOrder toAlbumAssetOrder() => switch (this) {
-    AssetOrder.asc => AlbumAssetOrder.asc,
-    AssetOrder.desc => AlbumAssetOrder.desc,
+    .asc => .asc,
+    .desc => .desc,
   };
 }
 
 extension on MemoryType {
   MemoryTypeEnum toMemoryType() => switch (this) {
-    MemoryType.onThisDay => MemoryTypeEnum.onThisDay,
+    .onThisDay => .onThisDay,
   };
 }
 
 extension on api.AlbumUserRole {
   AlbumUserRole toAlbumUserRole() => switch (this) {
-    api.AlbumUserRole.editor => AlbumUserRole.editor,
-    api.AlbumUserRole.viewer => AlbumUserRole.viewer,
-    api.AlbumUserRole.owner => AlbumUserRole.owner,
+    api.AlbumUserRole.editor => .editor,
+    api.AlbumUserRole.viewer => .viewer,
+    api.AlbumUserRole.owner => .owner,
   };
 }
 
 extension on api.AssetVisibility {
   AssetVisibility toAssetVisibility() => switch (this) {
-    api.AssetVisibility.timeline => AssetVisibility.timeline,
-    api.AssetVisibility.hidden => AssetVisibility.hidden,
-    api.AssetVisibility.archive => AssetVisibility.archive,
-    api.AssetVisibility.locked => AssetVisibility.locked,
+    api.AssetVisibility.timeline => .timeline,
+    api.AssetVisibility.hidden => .hidden,
+    api.AssetVisibility.archive => .archive,
+    api.AssetVisibility.locked => .locked,
   };
 }
 
 extension on api.UserMetadataKey {
   UserMetadataKey toUserMetadataKey() => switch (this) {
-    api.UserMetadataKey.onboarding => UserMetadataKey.onboarding,
-    api.UserMetadataKey.preferences => UserMetadataKey.preferences,
-    api.UserMetadataKey.license => UserMetadataKey.license,
+    api.UserMetadataKey.onboarding => .onboarding,
+    api.UserMetadataKey.preferences => .preferences,
+    api.UserMetadataKey.license => .license,
   };
 }
 
@@ -984,8 +984,8 @@ extension on UserAvatarColor {
 
 extension on api.AssetEditAction {
   AssetEditAction toAssetEditAction() => switch (this) {
-    api.AssetEditAction.crop => AssetEditAction.crop,
-    api.AssetEditAction.rotate => AssetEditAction.rotate,
-    api.AssetEditAction.mirror => AssetEditAction.mirror,
+    api.AssetEditAction.crop => .crop,
+    api.AssetEditAction.rotate => .rotate,
+    api.AssetEditAction.mirror => .mirror,
   };
 }

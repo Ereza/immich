@@ -12,9 +12,9 @@ class SearchApiRepository extends ApiRepository {
   Future<SearchResponseDto?> search(SearchFilter filter, int page) {
     AssetTypeEnum? type;
     if (filter.mediaType.index == AssetType.image.index) {
-      type = AssetTypeEnum.IMAGE;
+      type = .IMAGE;
     } else if (filter.mediaType.index == AssetType.video.index) {
-      type = AssetTypeEnum.VIDEO;
+      type = .VIDEO;
     }
 
     if ((filter.context != null && filter.context!.isNotEmpty) ||

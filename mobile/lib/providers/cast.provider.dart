@@ -17,10 +17,10 @@ class CastNotifier extends StateNotifier<CastManagerState> {
     : super(
         const CastManagerState(
           isCasting: false,
-          currentTime: Duration.zero,
-          duration: Duration.zero,
+          currentTime: .zero,
+          duration: .zero,
           receiverName: '',
-          castState: CastState.idle,
+          castState: .idle,
         ),
       ) {
     _gCastService.onConnectionState = _onConnectionState;
@@ -56,7 +56,7 @@ class CastNotifier extends StateNotifier<CastManagerState> {
 
   Future<void> connect(CastDestinationType type, dynamic device) async {
     switch (type) {
-      case CastDestinationType.googleCast:
+      case .googleCast:
         await _gCastService.connect(device);
         break;
     }
@@ -72,9 +72,9 @@ class CastNotifier extends StateNotifier<CastManagerState> {
 
   void toggle() {
     switch (state.castState) {
-      case CastState.playing:
+      case .playing:
         pause();
-      case CastState.paused:
+      case .paused:
         play();
       default:
     }

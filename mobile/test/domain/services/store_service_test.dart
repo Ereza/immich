@@ -27,9 +27,9 @@ void main() {
 
     when(() => mockDriftStoreRepo.getAll()).thenAnswer(
       (_) async => [
-        const StoreDto(StoreKey.accessToken, _kAccessToken),
-        const StoreDto(StoreKey.advancedTroubleshooting, _kAdvancedTroubleshooting),
-        const StoreDto(StoreKey.version, _kVersion),
+        const StoreDto(.accessToken, _kAccessToken),
+        const StoreDto(.advancedTroubleshooting, _kAdvancedTroubleshooting),
+        const StoreDto(.version, _kVersion),
       ],
     );
     when(() => mockDriftStoreRepo.watchAll()).thenAnswer((_) => controller.stream);
@@ -45,35 +45,35 @@ void main() {
   group("Store Service Init:", () {
     test('Populates the internal cache on init', () {
       verify(() => mockDriftStoreRepo.getAll()).called(1);
-      expect(sut.tryGet(StoreKey.accessToken), _kAccessToken);
-      expect(sut.tryGet(StoreKey.advancedTroubleshooting), _kAdvancedTroubleshooting);
-      expect(sut.tryGet(StoreKey.version), _kVersion);
+      expect(sut.tryGet(.accessToken), _kAccessToken);
+      expect(sut.tryGet(.advancedTroubleshooting), _kAdvancedTroubleshooting);
+      expect(sut.tryGet(.version), _kVersion);
       // Other keys should be null
-      expect(sut.tryGet(StoreKey.currentUser), isNull);
+      expect(sut.tryGet(.currentUser), isNull);
     });
 
     test('Listens to stream of store updates', () async {
-      final event = StoreDto(StoreKey.accessToken, _kAccessToken.toUpperCase());
+      final event = StoreDto(.accessToken, _kAccessToken.toUpperCase());
       controller.add([event]);
 
       await pumpEventQueue();
 
       verify(() => mockDriftStoreRepo.watchAll()).called(1);
-      expect(sut.tryGet(StoreKey.accessToken), _kAccessToken.toUpperCase());
+      expect(sut.tryGet(.accessToken), _kAccessToken.toUpperCase());
     });
   });
 
   group('Store Service get:', () {
     test('Returns the stored value for the given key', () {
-      expect(sut.get(StoreKey.accessToken), _kAccessToken);
+      expect(sut.get(.accessToken), _kAccessToken);
     });
 
     test('Throws StoreKeyNotFoundException for nonexistent keys', () {
-      expect(() => sut.get(StoreKey.currentUser), throwsA(isA<StoreKeyNotFoundException>()));
+      expect(() => sut.get(.currentUser), throwsA(isA<StoreKeyNotFoundException>()));
     });
 
     test('Returns the stored value for the given key or the defaultValue', () {
-      expect(sut.get(StoreKey.currentUser, 5), 5);
+      expect(sut.get(.currentUser, 5), 5);
     });
   });
 
@@ -84,14 +84,14 @@ void main() {
 
     test('Skip insert when value is not modified', () async {
       await sut.put(StoreKey.accessToken, _kAccessToken);
-      verifyNever(() => mockDriftStoreRepo.upsert<String>(StoreKey.accessToken, any()));
+      verifyNever(() => mockDriftStoreRepo.upsert<String>(.accessToken, any()));
     });
 
     test('Insert value when modified', () async {
       final newAccessToken = _kAccessToken.toUpperCase();
       await sut.put(StoreKey.accessToken, newAccessToken);
-      verify(() => mockDriftStoreRepo.upsert<String>(StoreKey.accessToken, newAccessToken)).called(1);
-      expect(sut.tryGet(StoreKey.accessToken), newAccessToken);
+      verify(() => mockDriftStoreRepo.upsert<String>(.accessToken, newAccessToken)).called(1);
+      expect(sut.tryGet(.accessToken), newAccessToken);
     });
   });
 
@@ -108,7 +108,7 @@ void main() {
     });
 
     test('Watches a specific key for changes', () async {
-      final stream = sut.watch(StoreKey.accessToken);
+      final stream = sut.watch(.accessToken);
       final events = <String?>[_kAccessToken, _kAccessToken.toUpperCase(), null, _kAccessToken.toLowerCase()];
 
       unawaited(expectLater(stream, emitsInOrder(events)));
@@ -118,7 +118,7 @@ void main() {
       }
 
       await pumpEventQueue();
-      verify(() => mockDriftStoreRepo.watch<String>(StoreKey.accessToken)).called(1);
+      verify(() => mockDriftStoreRepo.watch<String>(.accessToken)).called(1);
     });
   });
 
@@ -128,13 +128,13 @@ void main() {
     });
 
     test('Removes the value from the DB', () async {
-      await sut.delete(StoreKey.accessToken);
-      verify(() => mockDriftStoreRepo.delete<String>(StoreKey.accessToken)).called(1);
+      await sut.delete(.accessToken);
+      verify(() => mockDriftStoreRepo.delete<String>(.accessToken)).called(1);
     });
 
     test('Removes the value from the cache', () async {
-      await sut.delete(StoreKey.accessToken);
-      expect(sut.tryGet(StoreKey.accessToken), isNull);
+      await sut.delete(.accessToken);
+      expect(sut.tryGet(.accessToken), isNull);
     });
   });
 
@@ -146,9 +146,9 @@ void main() {
     test('Clears all values from the store', () async {
       await sut.clear();
       verify(() => mockDriftStoreRepo.deleteAll()).called(1);
-      expect(sut.tryGet(StoreKey.accessToken), isNull);
-      expect(sut.tryGet(StoreKey.advancedTroubleshooting), isNull);
-      expect(sut.tryGet(StoreKey.version), isNull);
+      expect(sut.tryGet(.accessToken), isNull);
+      expect(sut.tryGet(.advancedTroubleshooting), isNull);
+      expect(sut.tryGet(.version), isNull);
     });
   });
 }

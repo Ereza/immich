@@ -6,7 +6,7 @@ void _previewNoop() {}
 
 @ImmichPreview(group: 'MenuItem', name: 'Default')
 Widget previewMenuItemDefault() => const Column(
-  mainAxisSize: MainAxisSize.min,
+  mainAxisSize: .min,
   children: [
     ImmichMenuItem(onPressed: _previewNoop, icon: Icons.info_outline, label: 'Info'),
     ImmichMenuItem(onPressed: _previewNoop, icon: Icons.help_outline_rounded, label: 'Troubleshoot'),

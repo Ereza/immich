@@ -83,9 +83,9 @@ class AssetViewer extends ConsumerStatefulWidget {
 
 class _AssetViewerState extends ConsumerState<AssetViewer> {
   static const _viewerOverlayStyle = SystemUiOverlayStyle(
-    statusBarIconBrightness: Brightness.light,
-    statusBarBrightness: Brightness.dark,
-    systemNavigationBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: .light,
+    statusBarBrightness: .dark,
+    systemNavigationBarIconBrightness: .light,
   );
 
   late final _heroOffset = widget.heroOffset ?? TabsRouterScope.of(context)?.controller.activeIndex ?? 0;
@@ -300,7 +300,7 @@ class _AssetViewerState extends ConsumerState<AssetViewer> {
 
   void _setSystemUIMode(bool controls, bool details) {
     final immersive = !controls || (CurrentPlatform.isIOS && details);
-    unawaited(immersive ? SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky) : restoreEdgeToEdge());
+    unawaited(immersive ? SystemChrome.setEnabledSystemUIMode(.immersiveSticky) : restoreEdgeToEdge());
   }
 
   @override
@@ -349,7 +349,7 @@ class _AssetViewerState extends ConsumerState<AssetViewer> {
             NotificationListener<ScrollEndNotification>(
               onNotification: _onScrollEnd,
               child: PhotoViewGestureDetectorScope(
-                axis: Axis.horizontal,
+                axis: .horizontal,
                 child: PageView.builder(
                   controller: _pageController,
                   physics: isZoomed

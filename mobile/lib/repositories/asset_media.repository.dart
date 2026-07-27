@@ -17,7 +17,6 @@ import 'package:immich_mobile/providers/infrastructure/storage.provider.dart';
 import 'package:immich_mobile/services/api.service.dart';
 import 'package:immich_mobile/utils/image_url_builder.dart';
 import 'package:logging/logging.dart';
-import 'package:openapi/api.dart';
 import 'package:path/path.dart' as p;
 import 'package:photo_manager/photo_manager.dart';
 import 'package:share_plus/share_plus.dart';
@@ -150,9 +149,9 @@ class AssetMediaRepository {
       url: url,
       headers: ApiService.getRequestHeaders(),
       filename: '$taskId-$displayName',
-      baseDirectory: BaseDirectory.temporary,
+      baseDirectory: .temporary,
       group: kShareDownloadGroup,
-      updates: Updates.statusAndProgress,
+      updates: .statusAndProgress,
     );
     final downloader = FileDownloader();
     final statusUpdate = await downloader.download(
@@ -170,7 +169,7 @@ class AssetMediaRepository {
       return null;
     }
 
-    if (statusUpdate.status == TaskStatus.complete) {
+    if (statusUpdate.status == .complete) {
       return (file: File(await task.filePath()), cleanup: true, displayName: displayName);
     }
 
@@ -201,7 +200,7 @@ class AssetMediaRepository {
   }) {
     return _downloadRemoteShareFile(
       taskId: 'share-preview-$remoteId-${DateTime.now().microsecondsSinceEpoch}',
-      url: getThumbnailUrlForRemoteId(remoteId, type: AssetMediaSize.preview, edited: asset.isEdited),
+      url: getThumbnailUrlForRemoteId(remoteId, type: .preview, edited: asset.isEdited),
       displayName: _getPreviewFilename(asset),
       cancelCompleter: cancelCompleter,
       onProgress: onProgress,
@@ -257,7 +256,7 @@ class AssetMediaRepository {
   Future<int> shareAssets(
     List<BaseAsset> assets,
     BuildContext context, {
-    ShareAssetType fileType = ShareAssetType.original,
+    ShareAssetType fileType = .original,
     Completer<void>? cancelCompleter,
     void Function(double progress)? onAssetDownloadProgress,
   }) async {
@@ -288,16 +287,8 @@ class AssetMediaRepository {
       final effectiveFileType = asset.isVideo ? ShareAssetType.original : fileType;
 
       final shareFile = switch (effectiveFileType) {
-        ShareAssetType.original => await _getOriginalShareFile(
-          asset,
-          cancelCompleter: cancelCompleter,
-          onProgress: updateProgress,
-        ),
-        ShareAssetType.preview => await _getPreviewShareFile(
-          asset,
-          cancelCompleter: cancelCompleter,
-          onProgress: updateProgress,
-        ),
+        .original => await _getOriginalShareFile(asset, cancelCompleter: cancelCompleter, onProgress: updateProgress),
+        .preview => await _getPreviewShareFile(asset, cancelCompleter: cancelCompleter, onProgress: updateProgress),
       };
 
       if (_isCancelled(cancelCompleter)) {
@@ -335,7 +326,7 @@ class AssetMediaRepository {
     unawaited(
       Share.shareXFiles(
         downloadedXFiles,
-        sharePositionOrigin: Rect.fromPoints(Offset.zero, Offset(size.width / 3, size.height)),
+        sharePositionOrigin: Rect.fromPoints(.zero, Offset(size.width / 3, size.height)),
       ).then((result) async {
         await _cleanupTempFiles(tempFiles);
       }),

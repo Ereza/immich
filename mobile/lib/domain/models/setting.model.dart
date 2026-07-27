@@ -1,7 +1,7 @@
 import 'package:immich_mobile/domain/models/store.model.dart';
 
 enum Setting<T> {
-  advancedTroubleshooting<bool>(StoreKey.advancedTroubleshooting, false);
+  advancedTroubleshooting<bool>(.advancedTroubleshooting, false);
 
   const Setting(this.storeKey, this.defaultValue);
 

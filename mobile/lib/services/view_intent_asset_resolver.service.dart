@@ -45,7 +45,7 @@ class ViewIntentAssetResolver {
 
     return ViewIntentResolvedAsset(
       asset: asset,
-      timelineService: _timelineFactory.fromAssets([asset], TimelineOrigin.deepLink),
+      timelineService: _timelineFactory.fromAssets([asset], .deepLink),
       viewIntentFilePath: localAsset == null ? path : null,
     );
   }
@@ -55,7 +55,7 @@ class ViewIntentAssetResolver {
     return LocalAsset(
       id: attachment.localAssetId ?? '-${attachment.path!.hashCode.abs()}',
       name: attachment.fileName,
-      type: attachment.isVideo ? AssetType.video : AssetType.image,
+      type: attachment.isVideo ? .video : .image,
       createdAt: now,
       updatedAt: now,
       isEdited: false,

@@ -11,7 +11,7 @@ class LocalAssetFactory {
     return LocalAsset(
       id: id,
       name: name ?? 'local_$id.jpg',
-      type: AssetType.image,
+      type: .image,
       createdAt: TestUtils.yesterday(),
       updatedAt: TestUtils.now(),
       playbackStyle: .image,

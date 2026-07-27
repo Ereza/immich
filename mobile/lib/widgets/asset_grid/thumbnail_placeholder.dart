@@ -21,7 +21,7 @@ class ThumbnailPlaceholder extends StatelessWidget {
       height: height,
       margin: margin,
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: gradientColors, begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        gradient: LinearGradient(colors: gradientColors, begin: .topCenter, end: .bottomCenter),
       ),
     );
   }

@@ -1,7 +1,6 @@
 // dart
 // File: `lib/presentation/widgets/action_buttons/unarchive_action_button.widget.dart`
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/extensions/translate_extensions.dart';
@@ -18,7 +17,7 @@ Future<void> performUnArchiveAction(BuildContext context, WidgetRef ref, {requir
     return;
   }
 
-  if (source == ActionSource.viewer) {
+  if (source == .viewer) {
     EventStream.shared.emit(const ViewerReloadAssetEvent());
   }
 
@@ -31,8 +30,8 @@ Future<void> performUnArchiveAction(BuildContext context, WidgetRef ref, {requir
     ImmichToast.show(
       context: context,
       msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-      gravity: ToastGravity.BOTTOM,
-      toastType: result.success ? ToastType.success : ToastType.error,
+      gravity: .BOTTOM,
+      toastType: result.success ? .success : .error,
     );
   }
 }

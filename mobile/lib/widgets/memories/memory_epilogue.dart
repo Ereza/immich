@@ -36,7 +36,7 @@ class _MemoryEpilogueState extends State<MemoryEpilogue> with TickerProviderStat
         children: [
           Positioned.fill(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 Icon(
                   Icons.check_circle_outline_sharp,
@@ -71,7 +71,7 @@ class _MemoryEpilogueState extends State<MemoryEpilogue> with TickerProviderStat
             left: 0,
             right: 0,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+              padding: const .only(bottom: 16.0),
               child: Column(
                 children: [
                   SizedBox(

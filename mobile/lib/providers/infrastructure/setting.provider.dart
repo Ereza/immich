@@ -5,7 +5,7 @@ import 'package:immich_mobile/providers/infrastructure/store.provider.dart';
 
 class SettingsNotifier extends Notifier<SettingsService> {
   @override
-  SettingsService build() => SettingsService(storeService: ref.read(storeServiceProvider));
+  SettingsService build() => .new(storeService: ref.read(storeServiceProvider));
 
   T get<T>(Setting<T> setting) => state.get(setting);
 

@@ -30,7 +30,7 @@ class SheetTile extends ConsumerWidget {
     ImmichToast.show(
       context: context,
       msg: 'copied_to_clipboard'.t(context: context),
-      toastType: ToastType.info,
+      toastType: .info,
     );
     ref.read(hapticFeedbackProvider.notifier).selectionClick();
   }
@@ -40,13 +40,13 @@ class SheetTile extends ConsumerWidget {
     final Widget titleWidget;
     if (leading == null) {
       titleWidget = LimitedBox(
-        maxWidth: double.infinity,
+        maxWidth: .infinity,
         child: Text(title, style: titleStyle),
       );
     } else {
       titleWidget = Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(left: 15, right: 15),
+        width: .infinity,
+        padding: const .only(left: 15, right: 15),
         child: Text(title, style: titleStyle),
       );
     }
@@ -56,7 +56,7 @@ class SheetTile extends ConsumerWidget {
       subtitleWidget = Text(subtitle!, style: subtitleStyle);
     } else if (leading != null && subtitle != null) {
       subtitleWidget = Padding(
-        padding: const EdgeInsets.only(left: 15),
+        padding: const .only(left: 15),
         child: Text(subtitle!, style: subtitleStyle),
       );
     } else {
@@ -64,12 +64,12 @@ class SheetTile extends ConsumerWidget {
     }
 
     return Material(
-      type: MaterialType.transparency,
+      type: .transparency,
       child: ListTile(
         dense: true,
-        visualDensity: VisualDensity.compact,
+        visualDensity: .compact,
         title: GestureDetector(onLongPress: () => copyTitle(context, ref), child: titleWidget),
-        titleAlignment: ListTileTitleAlignment.center,
+        titleAlignment: .center,
         leading: leading,
         trailing: trailing,
         contentPadding: leading == null ? null : const EdgeInsets.only(left: 25),

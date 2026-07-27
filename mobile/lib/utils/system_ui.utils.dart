@@ -9,6 +9,6 @@ import 'package:flutter/services.dart';
 /// mode (immersive / immersiveSticky) previously hid. Explicitly request all
 /// overlays first, then return to edge-to-edge layout.
 Future<void> restoreEdgeToEdge() async {
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await SystemChrome.setEnabledSystemUIMode(.manual, overlays: SystemUiOverlay.values);
+  await SystemChrome.setEnabledSystemUIMode(.edgeToEdge);
 }

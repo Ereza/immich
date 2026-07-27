@@ -4,7 +4,7 @@ import 'package:openapi/api.dart';
 // TODO: Move to repository once all classes are refactored
 abstract final class UserConverter {
   /// Base user dto used where the complete user object is not required
-  static UserDto fromSimpleUserDto(UserResponseDto dto) => UserDto(
+  static UserDto fromSimpleUserDto(UserResponseDto dto) => .new(
     id: dto.id,
     email: dto.email,
     name: dto.name,
@@ -15,7 +15,7 @@ abstract final class UserConverter {
     avatarColor: dto.avatarColor.toAvatarColor(),
   );
 
-  static UserDto fromAdminDto(UserAdminResponseDto adminDto, [UserPreferencesResponseDto? preferenceDto]) => UserDto(
+  static UserDto fromAdminDto(UserAdminResponseDto adminDto, [UserPreferencesResponseDto? preferenceDto]) => .new(
     id: adminDto.id,
     email: adminDto.email,
     name: adminDto.name,
@@ -32,7 +32,7 @@ abstract final class UserConverter {
     quotaUsageInBytes: adminDto.quotaUsageInBytes ?? 0,
   );
 
-  static UserDto fromPartnerDto(PartnerResponseDto dto) => UserDto(
+  static UserDto fromPartnerDto(PartnerResponseDto dto) => .new(
     id: dto.id,
     email: dto.email,
     name: dto.name,
@@ -50,15 +50,15 @@ abstract final class UserConverter {
 
 extension on UserAvatarColor {
   AvatarColor toAvatarColor() => switch (this) {
-    UserAvatarColor.red => AvatarColor.red,
-    UserAvatarColor.green => AvatarColor.green,
-    UserAvatarColor.blue => AvatarColor.blue,
-    UserAvatarColor.purple => AvatarColor.purple,
-    UserAvatarColor.orange => AvatarColor.orange,
-    UserAvatarColor.pink => AvatarColor.pink,
-    UserAvatarColor.amber => AvatarColor.amber,
-    UserAvatarColor.yellow => AvatarColor.yellow,
-    UserAvatarColor.gray => AvatarColor.gray,
-    UserAvatarColor.primary || _ => AvatarColor.primary,
+    .red => .red,
+    .green => .green,
+    .blue => .blue,
+    .purple => .purple,
+    .orange => .orange,
+    .pink => .pink,
+    .amber => .amber,
+    .yellow => .yellow,
+    .gray => .gray,
+    .primary || _ => .primary,
   };
 }

@@ -22,10 +22,10 @@ class _MapThemeOverrideState extends ConsumerState<MapThemeOverride> with Widget
   late ThemeMode _theme;
   bool _isDarkTheme = false;
 
-  bool get _isSystemDark => WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark;
+  bool get _isSystemDark => WidgetsBinding.instance.platformDispatcher.platformBrightness == .dark;
 
   bool checkDarkTheme() {
-    return _theme == ThemeMode.dark || _theme == ThemeMode.system && _isSystemDark;
+    return _theme == .dark || _theme == .system && _isSystemDark;
   }
 
   @override
@@ -35,7 +35,7 @@ class _MapThemeOverrideState extends ConsumerState<MapThemeOverride> with Widget
     setState(() {
       _isDarkTheme = checkDarkTheme();
     });
-    if (_theme == ThemeMode.system) {
+    if (_theme == .system) {
       WidgetsBinding.instance.addObserver(this);
     }
   }
@@ -43,7 +43,7 @@ class _MapThemeOverrideState extends ConsumerState<MapThemeOverride> with Widget
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_theme != ThemeMode.system) {
+    if (_theme != .system) {
       WidgetsBinding.instance.removeObserver(this);
     }
   }
@@ -58,7 +58,7 @@ class _MapThemeOverrideState extends ConsumerState<MapThemeOverride> with Widget
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
 
-    if (_theme == ThemeMode.system) {
+    if (_theme == .system) {
       setState(() => _isDarkTheme = _isSystemDark);
     }
   }
@@ -70,7 +70,7 @@ class _MapThemeOverrideState extends ConsumerState<MapThemeOverride> with Widget
     final locale = ref.watch(localeProvider);
 
     useValueChanged<ThemeMode, void>(_theme, (_, __) {
-      if (_theme == ThemeMode.system) {
+      if (_theme == .system) {
         WidgetsBinding.instance.addObserver(this);
       } else {
         WidgetsBinding.instance.removeObserver(this);

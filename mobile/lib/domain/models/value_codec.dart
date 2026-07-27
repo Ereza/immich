@@ -62,7 +62,7 @@ final class SemVerCodec extends ValueCodec<SemVer> {
   String encode(SemVer value) => value.toString();
 
   @override
-  SemVer decode(String raw) => SemVer.fromString(raw);
+  SemVer decode(String raw) => .fromString(raw);
 }
 
 final class MapCodec<K extends Object, V extends Object> extends ValueCodec<Map<K, V>> {

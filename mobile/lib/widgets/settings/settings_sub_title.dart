@@ -9,10 +9,10 @@ class SettingsSubTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20),
+      padding: const .only(left: 20),
       child: Text(
         title,
-        style: context.textTheme.bodyLarge?.copyWith(color: context.primaryColor, fontWeight: FontWeight.w700),
+        style: context.textTheme.bodyLarge?.copyWith(color: context.primaryColor, fontWeight: .w700),
       ),
     );
   }

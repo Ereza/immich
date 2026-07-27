@@ -121,26 +121,26 @@ abstract class NativeSyncApi {
   @async
   List<PlatformAlbum> getAlbums();
 
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
+  @TaskQueue(type: .serialBackgroundThread)
   int getAssetsCountSince(String albumId, int timestamp);
 
   @async
   List<PlatformAsset> getAssetsForAlbum(String albumId, {int? updatedTimeCond});
 
   @async
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
+  @TaskQueue(type: .serialBackgroundThread)
   List<HashResult> hashAssets(List<String> assetIds, {bool allowNetworkAccess = false});
 
   void cancelHashing();
 
   void cancelSync();
 
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
+  @TaskQueue(type: .serialBackgroundThread)
   Map<String, List<PlatformAsset>> getTrashedAssets();
 
   @async
   bool restoreFromTrashById(String mediaId, int type);
 
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
+  @TaskQueue(type: .serialBackgroundThread)
   List<CloudIdResult> getCloudIdForAssetIds(List<String> assetIds);
 }

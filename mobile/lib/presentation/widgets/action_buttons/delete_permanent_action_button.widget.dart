@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/events.model.dart';
@@ -33,7 +32,7 @@ class DeletePermanentActionButton extends ConsumerWidget {
       return;
     }
 
-    final count = source == ActionSource.viewer ? 1 : ref.read(multiSelectProvider).selectedAssets.length;
+    final count = source == .viewer ? 1 : ref.read(multiSelectProvider).selectedAssets.length;
     final confirm =
         await showDialog<bool>(
           context: context,
@@ -44,7 +43,7 @@ class DeletePermanentActionButton extends ConsumerWidget {
       return;
     }
 
-    if (source == ActionSource.viewer) {
+    if (source == .viewer) {
       EventStream.shared.emit(const ViewerReloadAssetEvent());
     }
 
@@ -60,8 +59,8 @@ class DeletePermanentActionButton extends ConsumerWidget {
       ImmichToast.show(
         context: context,
         msg: result.success ? successMessage : 'scaffold_body_error_occurred'.t(context: context),
-        gravity: ToastGravity.BOTTOM,
-        toastType: result.success ? ToastType.success : ToastType.error,
+        gravity: .BOTTOM,
+        toastType: result.success ? .success : .error,
       );
     }
   }

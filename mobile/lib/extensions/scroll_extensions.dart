@@ -10,7 +10,7 @@ class FastScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  SpringDescription get spring => const SpringDescription(mass: 1, stiffness: 402.49984375, damping: 40);
+  SpringDescription get spring => const .new(mass: 1, stiffness: 402.49984375, damping: 40);
 }
 
 class FastClampingScrollPhysics extends ClampingScrollPhysics {
@@ -22,7 +22,7 @@ class FastClampingScrollPhysics extends ClampingScrollPhysics {
   }
 
   @override
-  SpringDescription get spring => const SpringDescription(
+  SpringDescription get spring => const .new(
     // When swiping between videos on Android, the placeholder of the first opened video
     // can briefly be seen and cause a flicker effect if the video begins to initialize
     // before the animation finishes - probably a bug in PhotoViewGallery's animation handling
@@ -76,7 +76,7 @@ class SnapScrollPhysics extends ScrollPhysics {
 
     if (position.pixels >= snapOffset) {
       final simulation = super.createBallisticSimulation(position, velocity);
-      if (simulation == null || simulation.x(double.infinity) >= snapOffset) {
+      if (simulation == null || simulation.x(.infinity) >= snapOffset) {
         return simulation;
       }
     }
@@ -85,7 +85,7 @@ class SnapScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  SpringDescription get spring => SpringDescription.withDampingRatio(mass: .5, stiffness: 300);
+  SpringDescription get spring => .withDampingRatio(mass: .5, stiffness: 300);
 
   @override
   bool get allowImplicitScrolling => false;

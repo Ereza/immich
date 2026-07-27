@@ -54,8 +54,8 @@ class BaseActionButton extends ConsumerWidget {
       return MenuItemButton(
         closeOnActivate: false,
         style: MenuItemButton.styleFrom(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          alignment: .centerLeft,
+          padding: const .symmetric(horizontal: 16, vertical: 14),
         ),
         leadingIcon: Icon(iconData, color: iconColor, size: 20),
         onPressed: onPressed == null
@@ -73,23 +73,23 @@ class BaseActionButton extends ConsumerWidget {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: maxWidth),
       child: MaterialButton(
-        padding: const EdgeInsets.all(10),
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+        padding: const .all(10),
+        shape: const RoundedRectangleBorder(borderRadius: .all(.circular(20))),
         textColor: textColor,
         onPressed: onPressed,
         onLongPress: onLongPressed,
         minWidth: miniWidth,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: .start,
+          crossAxisAlignment: .center,
           children: [
             Icon(iconData, size: iconSize, color: iconColor),
             const SizedBox(height: 8),
             Text(
               label,
-              style: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 14.0, fontWeight: .w400),
               maxLines: 3,
-              textAlign: TextAlign.center,
+              textAlign: .center,
               softWrap: true,
             ),
           ],

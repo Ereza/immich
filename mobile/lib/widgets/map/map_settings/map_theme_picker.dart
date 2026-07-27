@@ -15,34 +15,34 @@ class MapThemePicker extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: const .only(bottom: 20),
           child: Center(
             child: Text(
               "map_settings_theme_settings".t(context: context),
-              style: context.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, height: 1.5),
+              style: context.textTheme.bodyLarge!.copyWith(fontWeight: .w500, height: 1.5),
             ),
           ),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: .spaceEvenly,
+          crossAxisAlignment: .start,
           children: [
             _BorderedMapThumbnail(
               name: "Light",
-              mode: ThemeMode.light,
-              shouldHighlight: themeMode == ThemeMode.light,
+              mode: .light,
+              shouldHighlight: themeMode == .light,
               onThemeChange: onThemeChange,
             ),
             _BorderedMapThumbnail(
               name: "Dark",
-              mode: ThemeMode.dark,
-              shouldHighlight: themeMode == ThemeMode.dark,
+              mode: .dark,
+              shouldHighlight: themeMode == .dark,
               onThemeChange: onThemeChange,
             ),
             _BorderedMapThumbnail(
               name: "System",
-              mode: ThemeMode.system,
-              shouldHighlight: themeMode == ThemeMode.system,
+              mode: .system,
+              shouldHighlight: themeMode == .system,
               onThemeChange: onThemeChange,
             ),
           ],
@@ -71,10 +71,10 @@ class _BorderedMapThumbnail extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.fromBorderSide(
+            border: .fromBorderSide(
               BorderSide(width: 4, color: shouldHighlight ? context.colorScheme.onSurface : Colors.transparent),
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const .all(.circular(20)),
           ),
           child: MapThumbnail(
             zoom: 2,
@@ -85,11 +85,8 @@ class _BorderedMapThumbnail extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Text(
-            name,
-            style: context.textTheme.bodyMedium?.copyWith(fontWeight: shouldHighlight ? FontWeight.bold : null),
-          ),
+          padding: const .only(top: 10),
+          child: Text(name, style: context.textTheme.bodyMedium?.copyWith(fontWeight: shouldHighlight ? .bold : null)),
         ),
       ],
     );

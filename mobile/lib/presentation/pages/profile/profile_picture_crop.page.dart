@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:crop_image/crop_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
@@ -87,12 +86,7 @@ class _ProfilePictureCropPageState extends ConsumerState<ProfilePictureCropPage>
         }
         unawaited(ref.read(backupProvider.notifier).updateDiskInfo());
 
-        ImmichToast.show(
-          context: context,
-          msg: 'profile_picture_set'.tr(),
-          gravity: ToastGravity.BOTTOM,
-          toastType: ToastType.success,
-        );
+        ImmichToast.show(context: context, msg: 'profile_picture_set'.tr(), gravity: .BOTTOM, toastType: .success);
 
         if (context.mounted) {
           unawaited(context.maybePop());
@@ -101,8 +95,8 @@ class _ProfilePictureCropPageState extends ConsumerState<ProfilePictureCropPage>
         ImmichToast.show(
           context: context,
           msg: 'errors.unable_to_set_profile_picture'.tr(),
-          toastType: ToastType.error,
-          gravity: ToastGravity.BOTTOM,
+          toastType: .error,
+          gravity: .BOTTOM,
         );
       }
     } catch (e) {
@@ -113,8 +107,8 @@ class _ProfilePictureCropPageState extends ConsumerState<ProfilePictureCropPage>
       ImmichToast.show(
         context: context,
         msg: 'errors.unable_to_set_profile_picture'.tr(),
-        toastType: ToastType.error,
-        gravity: ToastGravity.BOTTOM,
+        toastType: .error,
+        gravity: .BOTTOM,
       );
     } finally {
       if (mounted) {
@@ -138,16 +132,11 @@ class _ProfilePictureCropPageState extends ConsumerState<ProfilePictureCropPage>
         actions: [
           if (_isLoading)
             const Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: .all(16.0),
               child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)),
             )
           else
-            ImmichIconButton(
-              icon: Icons.done_rounded,
-              color: ImmichColor.primary,
-              variant: ImmichVariant.ghost,
-              onPressed: _handleDone,
-            ),
+            ImmichIconButton(icon: Icons.done_rounded, color: .primary, variant: .ghost, onPressed: _handleDone),
         ],
       ),
       backgroundColor: context.scaffoldBackgroundColor,
@@ -159,7 +148,7 @@ class _ProfilePictureCropPageState extends ConsumerState<ProfilePictureCropPage>
                 constraints: BoxConstraints(maxHeight: context.height * 0.7, maxWidth: context.width * 0.9),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(7)),
+                    borderRadius: const .all(.circular(7)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.2),

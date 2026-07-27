@@ -38,9 +38,9 @@ class AppBarServerInfo extends HookConsumerWidget {
     const divider = Divider(thickness: 1);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const .symmetric(horizontal: 16.0, vertical: 8),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: .center,
         children: [
           if (showVersionWarning) ...[const ServerUpdateNotification(), divider],
           _ServerInfoItem(
@@ -60,7 +60,7 @@ class AppBarServerInfo extends HookConsumerWidget {
               label: "latest_version".tr(),
               text: serverInfoState.latestVersion!.major > 0 ? "${serverInfoState.latestVersion!}" : "--",
               tooltip: true,
-              icon: serverInfoState.versionStatus == VersionStatus.serverOutOfDate
+              icon: serverInfoState.versionStatus == .serverOutOfDate
                   ? const Icon(Icons.info, color: Color.fromARGB(255, 243, 188, 106), size: 12)
                   : null,
             ),
@@ -85,16 +85,12 @@ class _ServerInfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: .spaceBetween,
       children: [
         if (icon != null) ...[icon as Widget, const SizedBox(width: 8)],
         Text(
           label,
-          style: TextStyle(
-            fontSize: titleFontSize,
-            color: context.textTheme.labelSmall?.color,
-            fontWeight: FontWeight.w500,
-          ),
+          style: TextStyle(fontSize: titleFontSize, color: context.textTheme.labelSmall?.color, fontWeight: .w500),
         ),
         const SizedBox(width: 8),
         Expanded(
@@ -105,10 +101,10 @@ class _ServerInfoItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: contentFontSize,
                 color: context.colorScheme.onSurfaceSecondary,
-                fontWeight: FontWeight.w500,
-                overflow: TextOverflow.ellipsis,
+                fontWeight: .w500,
+                overflow: .ellipsis,
               ),
-              textAlign: TextAlign.end,
+              textAlign: .end,
             ),
           ),
         ),
@@ -121,12 +117,12 @@ class _ServerInfoItem extends StatelessWidget {
           verticalOffset: 0,
           decoration: BoxDecoration(
             color: context.primaryColor.withValues(alpha: 0.9),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: const .all(.circular(10)),
           ),
-          textStyle: TextStyle(color: context.colorScheme.onPrimary, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(color: context.colorScheme.onPrimary, fontWeight: .bold),
           message: text,
           preferBelow: false,
-          triggerMode: TooltipTriggerMode.tap,
+          triggerMode: .tap,
           child: child,
         )
       : child;

@@ -23,22 +23,22 @@ class AlbumTile extends ConsumerWidget {
       title: Text(
         album.name,
         maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+        overflow: .ellipsis,
+        style: context.textTheme.titleSmall?.copyWith(fontWeight: .w600),
       ),
       subtitle: Text(
         '${'items_count'.t(context: context, args: {'count': album.assetCount})} • ${isOwner ? 'owned'.t(context: context) : 'shared_by_user'.t(context: context, args: {'user': album.ownerName})}',
-        overflow: TextOverflow.ellipsis,
+        overflow: .ellipsis,
         style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceSecondary),
       ),
       onTap: () => onAlbumSelected?.call(album),
-      leadingPadding: const EdgeInsets.only(right: 16),
+      leadingPadding: const .only(right: 16),
       leading: FutureBuilder(
         future: albumThumbnailAsset,
         builder: (context, snapshot) {
           return snapshot.hasData && snapshot.data != null
               ? ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  borderRadius: const .all(.circular(15)),
                   child: SizedBox(
                     width: 80,
                     height: 80,
@@ -54,8 +54,8 @@ class AlbumTile extends ConsumerWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       color: context.colorScheme.surfaceContainer,
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
-                      border: Border.all(color: context.colorScheme.outline.withAlpha(50), width: 1),
+                      borderRadius: const .all(.circular(16)),
+                      border: .all(color: context.colorScheme.outline.withAlpha(50), width: 1),
                     ),
                     child: const Icon(Icons.photo_album_rounded, size: 24, color: Colors.grey),
                   ),

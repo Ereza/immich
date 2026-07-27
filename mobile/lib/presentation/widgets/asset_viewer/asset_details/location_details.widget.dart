@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/enums.dart';
 import 'package:immich_mobile/domain/models/asset/base_asset.model.dart';
 import 'package:immich_mobile/domain/models/exif.model.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
@@ -54,7 +53,7 @@ class _LocationDetailsState extends ConsumerState<LocationDetails> {
   }
 
   void editLocation() async {
-    await ref.read(actionProvider.notifier).editLocation(ActionSource.viewer, context);
+    await ref.read(actionProvider.notifier).editLocation(.viewer, context);
   }
 
   @override
@@ -72,9 +71,9 @@ class _LocationDetailsState extends ConsumerState<LocationDetails> {
     final coordinates = "${exifInfo?.latitude?.toStringAsFixed(4)}, ${exifInfo?.longitude?.toStringAsFixed(4)}";
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const .only(bottom: 12),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           SheetTile(
             title: 'location'.t(context: context),
@@ -84,9 +83,9 @@ class _LocationDetailsState extends ConsumerState<LocationDetails> {
           ),
           if (hasCoordinates)
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.isMobile ? 16.0 : 56.0),
+              padding: .symmetric(horizontal: context.isMobile ? 16.0 : 56.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   ExifMap(
                     exifInfo: exifInfo!,
@@ -97,7 +96,7 @@ class _LocationDetailsState extends ConsumerState<LocationDetails> {
                   const SizedBox(height: 16),
                   if (locationName != null)
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 4.0),
+                      padding: const .only(bottom: 4.0),
                       child: Text(locationName, style: context.textTheme.labelLarge),
                     ),
                   Text(
@@ -110,10 +109,7 @@ class _LocationDetailsState extends ConsumerState<LocationDetails> {
           if (!hasCoordinates)
             SheetTile(
               title: "add_a_location".t(context: context),
-              titleStyle: context.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: context.primaryColor,
-              ),
+              titleStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: .w600, color: context.primaryColor),
               leading: const Icon(Icons.location_off),
               onTap: editLocation,
             ),

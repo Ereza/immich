@@ -42,39 +42,28 @@ class SyncApiRepository {
     request.body = jsonEncode(
       SyncStreamDto(
         types: [
-          SyncRequestType.authUsersV1,
-          SyncRequestType.usersV1,
-          serverVersion >= const SemVer(major: 3, minor: 0, patch: 0)
-              ? SyncRequestType.assetsV2
-              : SyncRequestType.assetsV1,
-          SyncRequestType.assetExifsV1,
-          if (serverVersion >= const SemVer(major: 2, minor: 6, patch: 0)) SyncRequestType.assetEditsV1,
-          SyncRequestType.assetMetadataV1,
-          SyncRequestType.partnersV1,
-          serverVersion >= const SemVer(major: 3, minor: 0, patch: 0)
-              ? SyncRequestType.partnerAssetsV2
-              : SyncRequestType.partnerAssetsV1,
-          SyncRequestType.partnerAssetExifsV1,
-          if (serverVersion < const SemVer(major: 3, minor: 0, patch: 0))
-            SyncRequestType.albumsV1
-          else
-            SyncRequestType.albumsV2,
-          SyncRequestType.albumUsersV1,
-          serverVersion >= const SemVer(major: 3, minor: 0, patch: 0)
-              ? SyncRequestType.albumAssetsV2
-              : SyncRequestType.albumAssetsV1,
-          SyncRequestType.albumAssetExifsV1,
-          SyncRequestType.albumToAssetsV1,
-          SyncRequestType.memoriesV1,
-          SyncRequestType.memoryToAssetsV1,
-          SyncRequestType.stacksV1,
-          SyncRequestType.partnerStacksV1,
-          SyncRequestType.userMetadataV1,
-          SyncRequestType.peopleV1,
-          serverVersion >= const SemVer(major: 2, minor: 6, patch: 0)
-              ? SyncRequestType.assetFacesV2
-              : SyncRequestType.assetFacesV1,
-          if (serverVersion >= const SemVer(major: 3, minor: 0, patch: 0)) SyncRequestType.assetOcrV1,
+          .authUsersV1,
+          .usersV1,
+          serverVersion >= const SemVer(major: 3, minor: 0, patch: 0) ? .assetsV2 : .assetsV1,
+          .assetExifsV1,
+          if (serverVersion >= const SemVer(major: 2, minor: 6, patch: 0)) .assetEditsV1,
+          .assetMetadataV1,
+          .partnersV1,
+          serverVersion >= const SemVer(major: 3, minor: 0, patch: 0) ? .partnerAssetsV2 : .partnerAssetsV1,
+          .partnerAssetExifsV1,
+          if (serverVersion < const SemVer(major: 3, minor: 0, patch: 0)) .albumsV1 else .albumsV2,
+          .albumUsersV1,
+          serverVersion >= const SemVer(major: 3, minor: 0, patch: 0) ? .albumAssetsV2 : .albumAssetsV1,
+          .albumAssetExifsV1,
+          .albumToAssetsV1,
+          .memoriesV1,
+          .memoryToAssetsV1,
+          .stacksV1,
+          .partnerStacksV1,
+          .userMetadataV1,
+          .peopleV1,
+          serverVersion >= const SemVer(major: 2, minor: 6, patch: 0) ? .assetFacesV2 : .assetFacesV1,
+          if (serverVersion >= const SemVer(major: 3, minor: 0, patch: 0)) .assetOcrV1,
         ],
       ).toJson(),
     );
@@ -211,5 +200,5 @@ const _kResponseMap = <SyncEntityType, Function(Object)>{
 };
 
 class _SyncEmptyDto {
-  static _SyncEmptyDto? fromJson(dynamic _) => _SyncEmptyDto();
+  static _SyncEmptyDto? fromJson(dynamic _) => .new();
 }

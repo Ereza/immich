@@ -31,7 +31,7 @@ class _Summary extends StatelessWidget {
       builder: (ctx, snapshot) {
         final Widget subtitle;
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == .waiting) {
           subtitle = const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           subtitle = const Icon(Icons.error_rounded);
@@ -74,11 +74,11 @@ class LocalMediaSummaryPage extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: .stretch,
                   children: [
                     const Divider(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const .only(left: 15),
                       child: Text("album_summary".tr(), style: ctx.textTheme.titleMedium),
                     ),
                   ],
@@ -154,11 +154,11 @@ class RemoteMediaSummaryPage extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: .stretch,
                   children: [
                     const Divider(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const .only(left: 15),
                       child: Text("album_summary".tr(), style: ctx.textTheme.titleMedium),
                     ),
                   ],

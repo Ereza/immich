@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:immich_mobile/constants/constants.dart';
 import 'package:immich_mobile/domain/models/config/app_config.dart';
 import 'package:immich_mobile/domain/models/log.model.dart';
-import 'package:immich_mobile/domain/models/settings_key.dart';
 import 'package:immich_mobile/domain/services/log.service.dart';
 import 'package:immich_mobile/infrastructure/repositories/log.repository.dart';
 import 'package:logging/logging.dart';
@@ -14,14 +13,14 @@ import '../../test_utils.dart';
 
 final _kInfoLog = LogMessage(
   message: '#Info Message',
-  level: LogLevel.info,
+  level: .info,
   createdAt: DateTime(2025, 2, 26),
   logger: 'Info Logger',
 );
 
 final _kWarnLog = LogMessage(
   message: '#Warn Message',
-  level: LogLevel.warning,
+  level: .warning,
   createdAt: DateTime(2025, 2, 27),
   logger: 'Warn Logger',
 );
@@ -39,8 +38,8 @@ void main() {
     registerFallbackValue(LogLevel.info);
 
     when(() => mockLogRepo.truncate(limit: any(named: 'limit'))).thenAnswer((_) async => {});
-    when(() => mockSettingsRepository.appConfig).thenReturn(const AppConfig(logLevel: LogLevel.fine));
-    when(() => mockSettingsRepository.write<LogLevel, LogLevel>(SettingsKey.logLevel, any())).thenAnswer((_) async {});
+    when(() => mockSettingsRepository.appConfig).thenReturn(const AppConfig(logLevel: .fine));
+    when(() => mockSettingsRepository.write<LogLevel, LogLevel>(.logLevel, any())).thenAnswer((_) async {});
     when(() => mockLogRepo.getAll()).thenAnswer((_) async => []);
     when(() => mockLogRepo.insert(any())).thenAnswer((_) async => true);
     when(() => mockLogRepo.insertAll(any())).thenAnswer((_) async => true);
@@ -66,12 +65,12 @@ void main() {
 
   group("Log Service Set Level:", () {
     setUp(() async {
-      await sut.setLogLevel(LogLevel.shout);
+      await sut.setLogLevel(.shout);
     });
 
     test('Updates the log level via metadata repository', () {
       final captured = verify(
-        () => mockSettingsRepository.write<LogLevel, LogLevel>(SettingsKey.logLevel, captureAny()),
+        () => mockSettingsRepository.write<LogLevel, LogLevel>(.logLevel, captureAny()),
       ).captured.firstOrNull;
       expect(captured, LogLevel.shout);
     });

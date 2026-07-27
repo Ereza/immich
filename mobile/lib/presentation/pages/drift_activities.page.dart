@@ -39,14 +39,14 @@ class DriftActivitiesPage extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Text(album.name),
               if (assetName != null) Text(assetName!, style: context.textTheme.bodySmall),
             ],
           ),
           actions: [const LikeActivityActionButton(iconOnly: true)],
-          actionsPadding: const EdgeInsets.only(right: 8),
+          actionsPadding: const .only(right: 8),
         ),
         body: activities.widgetWhen(
           onData: (data) {
@@ -54,7 +54,7 @@ class DriftActivitiesPage extends HookConsumerWidget {
             for (final activity in data.reversed) {
               activityWidgets.add(
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  padding: const .symmetric(horizontal: 8, vertical: 6),
                   child: CommentBubble(activity: activity, isAssetActivity: assetId != null),
                 ),
               );
@@ -65,12 +65,12 @@ class DriftActivitiesPage extends HookConsumerWidget {
                 children: [
                   ListView(
                     controller: listViewScrollController,
-                    padding: const EdgeInsets.only(top: 8, bottom: 80),
+                    padding: const .only(top: 8, bottom: 80),
                     reverse: true,
                     children: activityWidgets,
                   ),
                   Align(
-                    alignment: Alignment.bottomCenter,
+                    alignment: .bottomCenter,
                     child: Container(
                       decoration: BoxDecoration(
                         color: context.scaffoldBackgroundColor,

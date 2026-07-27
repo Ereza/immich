@@ -4,8 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/domain/models/album/local_album.model.dart';
-import 'package:immich_mobile/domain/models/store.model.dart';
 import 'package:immich_mobile/entities/store.entity.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/extensions/platform_extensions.dart';
@@ -74,10 +72,7 @@ class _DriftBackupPageState extends ConsumerState<DriftBackupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final selectedAlbum = ref
-        .watch(backupAlbumProvider)
-        .where((album) => album.backupSelection == BackupSelection.selected)
-        .toList();
+    final selectedAlbum = ref.watch(backupAlbumProvider).where((album) => album.backupSelection == .selected).toList();
 
     final error = ref.watch(driftBackupProvider.select((p) => p.error));
 
@@ -85,7 +80,7 @@ class _DriftBackupPageState extends ConsumerState<DriftBackupPage> {
     final backupSyncManager = ref.read(backgroundSyncProvider);
 
     Future<void> startBackup() async {
-      final currentUser = Store.tryGet(StoreKey.currentUser);
+      final currentUser = Store.tryGet(.currentUser);
       if (currentUser == null) {
         return;
       }
@@ -129,7 +124,7 @@ class _DriftBackupPageState extends ConsumerState<DriftBackupPage> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 32),
+            padding: const .only(left: 16.0, right: 16, bottom: 32),
             child: ListView(
               children: [
                 const SizedBox(height: 8),
@@ -147,13 +142,13 @@ class _DriftBackupPageState extends ConsumerState<DriftBackupPage> {
                     },
                   ),
                   switch (error) {
-                    BackupError.none => const SizedBox.shrink(),
-                    BackupError.syncFailed => Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                    .none => const SizedBox.shrink(),
+                    .syncFailed => Padding(
+                      padding: const .only(top: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: .center,
+                        crossAxisAlignment: .center,
+                        mainAxisSize: .max,
                         children: [
                           Icon(Icons.warning_rounded, color: context.colorScheme.error, fill: 1),
                           const SizedBox(width: 8),
@@ -161,7 +156,7 @@ class _DriftBackupPageState extends ConsumerState<DriftBackupPage> {
                             child: Text(
                               context.t.backup_error_sync_failed,
                               style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.error),
-                              textAlign: TextAlign.center,
+                              textAlign: .center,
                             ),
                           ),
                         ],
@@ -201,7 +196,7 @@ class _BackupFooterState extends ConsumerState<_BackupFooter> with WidgetsBindin
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (CurrentPlatform.isAndroid && state == AppLifecycleState.resumed && mounted) {
+    if (CurrentPlatform.isAndroid && state == .resumed && mounted) {
       unawaited(ref.read(notificationPermissionProvider.notifier).getNotificationPermission());
       unawaited(ref.read(batteryOptimizationProvider.notifier).getBatteryOptimizationPermission());
     }
@@ -246,7 +241,7 @@ class _BackupFooterState extends ConsumerState<_BackupFooter> with WidgetsBindin
               labelText: context.t.backup_controller_page_background_battery_info_link,
               variant: .ghost,
               expanded: false,
-              onPressed: () => launchUrl(Uri.parse('https://dontkillmyapp.com'), mode: LaunchMode.externalApplication),
+              onPressed: () => launchUrl(Uri.parse('https://dontkillmyapp.com'), mode: .externalApplication),
             ),
             ImmichTextButton(
               labelText: context.t.backup_controller_page_background_battery_info_ok,
@@ -269,32 +264,32 @@ class _BackupFooterState extends ConsumerState<_BackupFooter> with WidgetsBindin
     return Column(
       children: [
         if (CurrentPlatform.isAndroid && isBackupEnabled) ...[
-          if (notificationStatus != PermissionStatus.granted)
+          if (notificationStatus != .granted)
             TextButton.icon(
               iconAlignment: .end,
               icon: Icon(Icons.open_in_new_outlined, color: context.colorScheme.onSurfaceSecondary),
               label: Text(
                 context.t.notification_backup_reliability,
-                textAlign: TextAlign.left,
+                textAlign: .left,
                 style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceSecondary),
               ),
               onPressed: () {
                 ref.read(notificationPermissionProvider.notifier).requestNotificationPermission().then((p) {
-                  if (p == PermissionStatus.permanentlyDenied) {
+                  if (p == .permanentlyDenied) {
                     showPermissionsDialog();
                   }
                 });
               },
             ),
-          if (notificationStatus != PermissionStatus.granted && batteryOptimizationStatus != PermissionStatus.granted)
+          if (notificationStatus != .granted && batteryOptimizationStatus != .granted)
             const Divider(indent: 32, endIndent: 32),
-          if (batteryOptimizationStatus != PermissionStatus.granted)
+          if (batteryOptimizationStatus != .granted)
             TextButton.icon(
               iconAlignment: .end,
               icon: Icon(Icons.open_in_new_outlined, color: context.colorScheme.onSurfaceSecondary),
               label: Text(
                 context.t.battery_optimization_backup_reliability,
-                textAlign: TextAlign.left,
+                textAlign: .left,
                 style: context.textTheme.bodySmall?.copyWith(color: context.colorScheme.onSurfaceSecondary),
               ),
               onPressed: showBatteryOptimizationInfo,
@@ -317,10 +312,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Widget buildSelectedAlbumName() {
       String text = "backup_controller_page_backup_selected".tr();
-      final albums = ref
-          .watch(backupAlbumProvider)
-          .where((album) => album.backupSelection == BackupSelection.selected)
-          .toList();
+      final albums = ref.watch(backupAlbumProvider).where((album) => album.backupSelection == .selected).toList();
 
       if (albums.isNotEmpty) {
         for (var album in albums) {
@@ -332,7 +324,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const .only(top: 8.0),
           child: Text(
             text.trim().substring(0, text.length - 2),
             style: context.textTheme.labelLarge?.copyWith(color: context.primaryColor),
@@ -340,7 +332,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
         );
       } else {
         return Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const .only(top: 8.0),
           child: Text(
             "backup_controller_page_none_selected".tr(),
             style: context.textTheme.labelLarge?.copyWith(color: context.primaryColor),
@@ -351,10 +343,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
 
     Widget buildExcludedAlbumName() {
       String text = "backup_controller_page_excluded".tr();
-      final albums = ref
-          .watch(backupAlbumProvider)
-          .where((album) => album.backupSelection == BackupSelection.excluded)
-          .toList();
+      final albums = ref.watch(backupAlbumProvider).where((album) => album.backupSelection == .excluded).toList();
 
       if (albums.isNotEmpty) {
         for (var album in albums) {
@@ -362,7 +351,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const .only(top: 8.0),
           child: Text(
             text.trim().substring(0, text.length - 2),
             style: context.textTheme.labelLarge?.copyWith(color: Colors.red[300]),
@@ -375,7 +364,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
 
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        borderRadius: const .all(.circular(20)),
         side: BorderSide(color: context.colorScheme.outlineVariant, width: 1),
       ),
       elevation: 0,
@@ -384,9 +373,9 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
         minVerticalPadding: 18,
         title: Text("backup_controller_page_albums", style: context.textTheme.titleMedium).tr(),
         subtitle: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const .only(top: 8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Text(
                 "backup_controller_page_to_backup",
@@ -406,7 +395,7 @@ class _BackupAlbumSelectionCard extends ConsumerWidget {
             }
             unawaited(ref.read(driftBackupProvider.notifier).getBackupStatus(currentUser.id));
           },
-          child: const Text("select", style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+          child: const Text("select", style: TextStyle(fontWeight: .bold)).tr(),
         ),
       ),
     );
@@ -455,7 +444,7 @@ class _RemainderCard extends ConsumerWidget {
 
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        borderRadius: const .all(.circular(20)),
         side: BorderSide(color: context.colorScheme.outlineVariant, width: 1),
       ),
       elevation: 0,
@@ -467,14 +456,14 @@ class _RemainderCard extends ConsumerWidget {
             isThreeLine: true,
             title: Text("backup_controller_page_remainder".t(context: context), style: context.textTheme.titleMedium),
             subtitle: Padding(
-              padding: const EdgeInsets.only(top: 4.0, right: 18.0),
+              padding: const .only(top: 4.0, right: 18.0),
               child: Text(
                 "backup_controller_page_remainder_sub".t(context: context),
                 style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceSecondary),
               ),
             ),
             trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 Stack(
                   children: [
@@ -488,7 +477,7 @@ class _RemainderCard extends ConsumerWidget {
                     if (syncStatus.isRemoteSyncing)
                       Positioned.fill(
                         child: Align(
-                          alignment: Alignment.center,
+                          alignment: .center,
                           child: SizedBox(
                             width: 16,
                             height: 16,
@@ -516,10 +505,10 @@ class _RemainderCard extends ConsumerWidget {
 
           ListTile(
             enableFeedback: true,
-            visualDensity: VisualDensity.compact,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
+            visualDensity: .compact,
+            contentPadding: const .symmetric(horizontal: 16.0, vertical: 0.0),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+              borderRadius: .only(bottomLeft: .circular(20), bottomRight: .circular(20)),
             ),
             onTap: () => context.pushRoute(const DriftBackupAssetDetailRoute()),
             title: Text(
@@ -538,7 +527,7 @@ class _PreparingStatus extends ConsumerStatefulWidget {
   const _PreparingStatus();
 
   @override
-  _PreparingStatusState createState() => _PreparingStatusState();
+  _PreparingStatusState createState() => .new();
 }
 
 class _PreparingStatusState extends ConsumerState {
@@ -597,15 +586,15 @@ class _PreparingStatusState extends ConsumerState {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(left: 1.0),
+            padding: const .only(left: 1.0),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              padding: const .symmetric(horizontal: 16.0, vertical: 8),
               decoration: BoxDecoration(
                 color: context.colorScheme.surfaceContainerHigh.withValues(alpha: 0.5),
-                shape: BoxShape.rectangle,
+                shape: .rectangle,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   Row(
                     children: [
@@ -623,7 +612,7 @@ class _PreparingStatusState extends ConsumerState {
                     processingCount.toString(),
                     style: context.textTheme.titleMedium?.copyWith(
                       color: context.colorScheme.primary,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: .w600,
                       fontFeatures: [const FontFeature.tabularFigures()],
                     ),
                   ),
@@ -634,10 +623,10 @@ class _PreparingStatusState extends ConsumerState {
         ),
         Expanded(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+            padding: const .symmetric(horizontal: 16.0, vertical: 8),
             decoration: BoxDecoration(color: context.colorScheme.primary.withValues(alpha: 0.1)),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: .end,
               children: [
                 Text(
                   "ready_for_upload".t(context: context),
@@ -648,7 +637,7 @@ class _PreparingStatusState extends ConsumerState {
                   readyForUploadCount.toString(),
                   style: context.textTheme.titleMedium?.copyWith(
                     color: context.primaryColor,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: .w600,
                     fontFeatures: [const FontFeature.tabularFigures()],
                   ),
                 ),

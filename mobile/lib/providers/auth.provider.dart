@@ -128,13 +128,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await Store.put(StoreKey.accessToken, accessToken);
     await _apiService.updateHeaders();
 
-    final serverEndpoint = Store.get(StoreKey.serverEndpoint);
+    final serverEndpoint = Store.get(.serverEndpoint);
     final headerMap = _ref.read(appConfigProvider).network.customHeaders;
     final customHeaders = headerMap.isEmpty ? null : jsonEncode(headerMap);
     await _widgetService.writeCredentials(serverEndpoint, accessToken, customHeaders);
 
     // Get the deviceid from the store if it exists, otherwise generate a new one
-    String deviceId = Store.tryGet(StoreKey.deviceId) ?? await FlutterUdid.consistentUdid;
+    String deviceId = Store.tryGet(.deviceId) ?? await FlutterUdid.consistentUdid;
 
     UserDto? user = _userService.tryGetMyUser();
 
@@ -196,7 +196,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// Returns the current server endpoint (with /api) URL from the store
   String? getServerEndpoint() {
-    return Store.tryGet(StoreKey.serverEndpoint);
+    return Store.tryGet(.serverEndpoint);
   }
 
   Future<String?> setOpenApiServiceEndpoint() {

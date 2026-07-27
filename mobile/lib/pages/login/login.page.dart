@@ -30,17 +30,17 @@ class LoginPage extends HookConsumerWidget {
       body: LoginForm(),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          padding: const .only(bottom: 16.0),
           child: SizedBox(
             height: 50,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 Text(
                   'v${appVersion.value}',
                   style: TextStyle(
                     color: context.colorScheme.onSurfaceSecondary,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: .bold,
                     fontFamily: "GoogleSansCode",
                   ),
                 ),
@@ -48,11 +48,7 @@ class LoginPage extends HookConsumerWidget {
                 GestureDetector(
                   child: Text(
                     'Logs',
-                    style: TextStyle(
-                      color: context.primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "GoogleSansCode",
-                    ),
+                    style: TextStyle(color: context.primaryColor, fontWeight: .bold, fontFamily: "GoogleSansCode"),
                   ),
                   onTap: () {
                     context.pushRoute(const AppLogRoute());

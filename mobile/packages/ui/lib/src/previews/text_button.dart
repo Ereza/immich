@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:immich_ui/src/components/text_button.dart';
 import 'package:immich_ui/src/previews.dart';
-import 'package:immich_ui/src/types.dart';
 
 void _previewNoop() {}
 
@@ -11,7 +10,7 @@ Widget previewTextButtonVariants() => const Wrap(
   runSpacing: 12,
   children: [
     ImmichTextButton(onPressed: _previewNoop, labelText: 'Filled', expanded: false),
-    ImmichTextButton(onPressed: _previewNoop, labelText: 'Ghost', variant: ImmichVariant.ghost, expanded: false),
+    ImmichTextButton(onPressed: _previewNoop, labelText: 'Ghost', variant: .ghost, expanded: false),
   ],
 );
 
@@ -25,7 +24,7 @@ Widget previewTextButtonWithIcons() => const Wrap(
       onPressed: _previewNoop,
       labelText: 'Download',
       icon: Icons.download,
-      variant: ImmichVariant.ghost,
+      variant: .ghost,
       expanded: false,
     ),
   ],
@@ -47,7 +46,7 @@ Widget previewTextButtonDisabled() => const Wrap(
     ImmichTextButton(
       onPressed: _previewNoop,
       labelText: 'Disabled Ghost',
-      variant: ImmichVariant.ghost,
+      variant: .ghost,
       disabled: true,
       expanded: false,
     ),

@@ -62,18 +62,18 @@ void main() {
 
   group('null values', () {
     test('writing null to a nullable key clears the row and reverts the cache to null', () async {
-      await sut.write(SettingsKey.networkPreferredWifiName, 'home-wifi');
+      await sut.write(.networkPreferredWifiName, 'home-wifi');
       expect(sut.appConfig.network.preferredWifiName, 'home-wifi');
       expect(await ctx.db.select(ctx.db.settingsEntity).get(), hasLength(1));
 
-      await sut.write(SettingsKey.networkPreferredWifiName, null);
+      await sut.write(.networkPreferredWifiName, null);
 
       expect(await ctx.db.select(ctx.db.settingsEntity).get(), isEmpty);
       expect(sut.appConfig.network.preferredWifiName, isNull);
     });
 
     test('writing null to an already-null key is a no-op', () async {
-      await sut.write(SettingsKey.networkPreferredWifiName, null);
+      await sut.write(.networkPreferredWifiName, null);
       expect(await ctx.db.select(ctx.db.settingsEntity).get(), isEmpty);
     });
 
@@ -143,13 +143,13 @@ void main() {
   group('watch', () {
     test('watchAppConfig emits the new value after a write', () async {
       final expectation = expectLater(sut.watchConfig().map((c) => c.theme.mode), emitsThrough(ThemeMode.dark));
-      await sut.write(SettingsKey.themeMode, ThemeMode.dark);
+      await sut.write(.themeMode, ThemeMode.dark);
       await expectation;
     });
 
     test('watchConfig emits the new value after a write', () async {
       final expectation = expectLater(sut.watchConfig().map((c) => c.logLevel), emitsThrough(LogLevel.warning));
-      await sut.write(SettingsKey.logLevel, LogLevel.warning);
+      await sut.write(.logLevel, LogLevel.warning);
       await expectation;
     });
   });

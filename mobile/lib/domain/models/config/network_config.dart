@@ -22,7 +22,7 @@ class NetworkConfig {
     Option<String>? localEndpoint,
     List<String>? externalEndpointList,
     Map<String, String>? customHeaders,
-  }) => NetworkConfig(
+  }) => .new(
     autoEndpointSwitching: autoEndpointSwitching ?? this.autoEndpointSwitching,
     preferredWifiName: preferredWifiName.patch(this.preferredWifiName),
     localEndpoint: localEndpoint.patch(this.localEndpoint),

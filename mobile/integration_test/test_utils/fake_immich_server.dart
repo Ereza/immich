@@ -58,7 +58,8 @@ class FakeImmichServer {
     request.response
       ..statusCode = HttpStatus.ok
       ..headers.contentType = ContentType('application', 'jsonlines+json')
-      ..contentLength = -1 // chunked: stays open to stream incrementally
+      ..contentLength =
+          -1 // chunked: stays open to stream incrementally
       ..bufferOutput = false;
     // Flush headers so the client's send() resolves and enters its read loop.
     await request.response.flush();
@@ -71,7 +72,7 @@ class FakeImmichServer {
     await request.drain<void>();
     request.response
       ..statusCode = HttpStatus.ok
-      ..headers.contentType = ContentType.json
+      ..headers.contentType = .json
       ..write(jsonEncode(body));
     await request.response.close();
   }

@@ -10,7 +10,7 @@ OctoPlaceholderBuilder blurHashPlaceholderBuilder(Uint8List? blurhash, {BoxFit? 
       : FadeInPlaceholderImage(
           placeholder: const ThumbnailPlaceholder(),
           image: MemoryImage(blurhash),
-          fit: fit ?? BoxFit.cover,
+          fit: fit ?? .cover,
         );
 }
 
